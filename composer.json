@@ -1,0 +1,59 @@
+{
+    "name":                 "splash/shippingbo",
+    "description":          "Splash ShippingBo OpenAPI Connector (Embedded)",
+
+    "type":                 "symfony-bundle",
+    "license":              "MIT",
+    "minimum-stability":    "dev",
+    "prefer-stable":        true,
+
+    "authors": [
+        {
+            "name":"Splash Sync",
+            "email":"contact@splashsync.com"
+        },
+        {
+            "name": "BadPixxel",
+            "email": "eshop.bpaquier@gmail.com"
+        }
+    ],
+
+    "autoload": {
+        "psr-4": { 
+            "Splash\\Connectors\\ShippingBo\\":     "src/"
+        }
+    },
+    
+    "autoload-dev": {
+        "classmap": [ "tests/Kernel.php" ],
+        "files":    [ 
+            "vendor/splash/phpcore/inc/Splash.Inc.php",
+            "vendor/splash/php-bundle/src/Tests/KernelTestCase.php"
+        ],
+        "psr-4": { 
+            "Splash\\Connectors\\ShippingBo\\Test\\":     "tests/"
+        }        
+    },
+
+    "require": {
+        "php":                                          "^7.4|^8.0",
+        "ext-json":                                     "*",
+        "splash/php-bundle":                            "dev-master",
+        "splash/openapi":                               "dev-master"
+    },
+    
+    "require-dev": {
+        "splash/console":                               "dev-master",
+        "badpixxel/php-sdk":                            "dev-main",
+
+        "symfony/symfony":                              "^3.4|^4.4",
+        "symfony/monolog-bundle":                       "*",
+        "symfony/phpunit-bridge":                       "*",
+        "monolog/monolog":                              "^1.0",
+
+        "doctrine/doctrine-bundle":                     "^2.6",
+        "doctrine/orm":                                 "^2.6",
+
+        "fzaninotto/faker":                             "^1.8"
+    }
+}
