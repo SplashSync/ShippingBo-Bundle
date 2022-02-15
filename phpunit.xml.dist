@@ -28,6 +28,7 @@
 
     <filter>
         <whitelist>
+            <file>tests/Controller/S00MinimalObjectsTest.php</file>
             <directory>vendor/splash/phpcore</directory>
             <directory>tests</directory>
             <exclude>
