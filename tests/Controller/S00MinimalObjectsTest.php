@@ -53,8 +53,6 @@ class S00MinimalObjectsTest extends ObjectsCase
     /**
      * Ensure at least Two Addresses are Created
      *
-     * @dataProvider orderDataProvider
-     *
      * @throws Exception
      */
     public function testAtLeastTwoAddress(): void
