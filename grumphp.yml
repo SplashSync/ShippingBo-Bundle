@@ -1,0 +1,40 @@
+################################################################################
+#
+# * This file is part of SplashSync Project.
+# *
+# * Copyright (C) Splash Sync <www.splashsync.com>
+# *
+# * This program is distributed in the hope that it will be useful,
+# * but WITHOUT ANY WARRANTY; without even the implied warranty of
+# * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# *
+# * For the full copyright and license information, please view the LICENSE
+# * file that was distributed with this source code.
+# *
+# * @author Bernard Paquier <contact@splashsync.com>
+#
+################################################################################
+
+#############################################        
+#   Local Config 
+parameters:
+
+    mode:           "splashsync"
+
+    # For Building Splash Documentation
+    doc-enable:     true
+    doc-target:     '/public'
+    doc-contents:   ["php-composer", "php-docker", "splash-faq"]
+    
+    # For Building Splash Manifest
+    yml-enable:     false
+
+    # For Building Splash Module
+    mod-enable:     false
+
+#############################################        
+# Import Config. from Generic Bundle
+imports:
+    - { resource: "./vendor/badpixxel/php-sdk/grumphp/generic.yml" }
+    - { resource: "./vendor/badpixxel/php-sdk/grumphp/extras.yml" }
+    - { resource: "./vendor/splash/console/src/Resources/grumphp/*.yml" }

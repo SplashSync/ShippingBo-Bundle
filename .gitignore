@@ -1,0 +1,5 @@
+/vendor/
+/.gh-pages/
+/public/
+/.php-cs-fixer.cache
+/.idea/

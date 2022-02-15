@@ -1,12 +1,132 @@
-# You can override the included template(s) by including variable overrides
-# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
-# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
-# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
-# Note that environment variables can be set in several places
-# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+################################################################################
+#
+#  This file is part of SplashSync Project.
+#
+#  Copyright (C) Splash Sync <www.splashsync.com>
+#
+#  This program is distributed in the hope that it will be useful,
+#  but WITHOUT ANY WARRANTY; without even the implied warranty of
+#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+#
+#  For the full copyright and license information, please view the LICENSE
+#  file that was distributed with this source code.
+#
+#  @author Bernard Paquier <contact@splashsync.com>
+#
+################################################################################
+
+################################################################
+# Set any variables we need
+variables:
+  # Configure mysql environment variables (https://hub.docker.com/r/_/mysql/)
+  MYSQL_DATABASE:               symfony
+  MYSQL_ROOT_PASSWORD:          ReCommerce-Bundle
+  COMPOSER_MEMORY_LIMIT:        -1
+  SYMFONY_DEPRECATIONS_HELPER:  disabled
+
+################################################################
+# Defined Pipeline Stages
 stages:
-- test
-sast:
-  stage: test
-include:
-- template: Security/SAST.gitlab-ci.yml
+  - quality
+  - functional
+  - deploy
+
+################################################################
+# Functional Tests
+################################################################
+
+.quality:    &quality
+    stage:      quality
+    tags:
+        - Dedicated
+    services:
+        - mysql:5.7
+    ################################################################################
+    # Install & Configure Environment
+    before_script:
+        # Setup Travis
+        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/ci/configure.sh  | sh
+        # Deploy Symfony Files
+        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/symfony/deploy.sh | sh
+        # Setup Symfony Version & Create Database
+        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/symfony/configure.sh | sh
+        # Install Symfony
+        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/symfony/install.sh | sh
+
+    ################################################################################
+    # Run Test Script
+    script:
+        # Execute Grumphp Testsuite
+        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/ci/grumphp.sh  | sh
+
+    ################################################################################
+    # Run After Script
+    after_script:
+      - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/ci/after.sh | sh
+
+################################################################################
+# PHP 8.0
+quality:php-8.0:
+    image: registry.gitlab.com/badpixxel-projects/php-sdk:php-8.0
+    <<: *quality
+
+################################################################
+# Functional Tests
+################################################################
+
+functional:
+    image:      docker:stable
+    stage:      functional
+    retry:      2
+    tags:
+        - Dedicated
+    services:
+        - docker:dind
+    ################################################################################
+    # Install & Configure Environment
+    before_script:
+        # Install Git, Bash, Curl & Docker Compose
+        - apk add --no-cache curl bash git docker-compose
+        # Install & Build Docker Compose
+        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/toolkit/build.sh  | bash
+
+    ################################################################################
+    # Run Test Script
+    script:
+        # Wait for container to Start
+        - sleep 10
+        - docker-compose exec -T toolkit curl http://openapi/
+        # Execute PhpUnit Tests
+        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/toolkit/phpunit.sh  | bash
+        # Build Splash Manifest
+        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/toolkit/manifest.sh  | bash
+
+    ################################################################################
+    # Run After Script
+    after_script:
+        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/toolkit/after.sh  | bash
+    artifacts:
+        paths:
+            - logs
+            - manifest
+
+#################################################################
+## Build Documentation
+#################################################################
+pages:
+    image:    registry.gitlab.com/badpixxel-projects/php-sdk:jekyll
+    stage:    deploy
+    tags:
+        - Dedicated
+    services:
+        - docker:dind
+    ################################################################################
+    # Run Test Script
+    script:
+        # Run Composer to Build deps
+        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/ci/composer.sh  | bash
+        # Build Documentation
+        - php vendor/bin/grumphp run --tasks=build-docs
+    artifacts:
+        paths:
+            - public
