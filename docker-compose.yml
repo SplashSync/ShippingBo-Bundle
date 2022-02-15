@@ -42,7 +42,6 @@ services:
             - './docker/toolkit/splash.yml:/app/config/packages/splash.yml:ro'
             # Uncomment to use Local Sources instead of Release
             - './:/app/vendor/splash/shippingbo/:ro'
-            - '/mnt/data/WebDesign/GitHub/Splash/Php-OpenApi/src:/app/vendor/splash/openapi/src/:ro'
             - './tests/Controller:/app/tests/Controller/:ro'
             - './phpunit.xml.dist:/app/phpunit.xml.dist:ro'
         hostname:           toolkit.shipping-bo.local
