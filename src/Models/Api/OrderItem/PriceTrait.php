@@ -150,7 +150,7 @@ trait PriceTrait
      *
      * @return void
      */
-    public function setPrice(null|array|ArrayObject $unitPrice): void
+    public function setPrice($unitPrice): void
     {
         //====================================================================//
         // Store Unit Price
