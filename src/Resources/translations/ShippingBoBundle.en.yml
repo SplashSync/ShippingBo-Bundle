@@ -1,0 +1,45 @@
+
+## Node Variables 
+var:
+    apiurl:
+        label:  Webservice Url
+        desc:   "Your ShippingBo API Url to Use."
+
+    apiuser:
+        label:  API User | Account ID
+        desc:   "Your ShippingBo account ID or user email."
+
+    apikey:
+        label:  API Key | Token
+        desc:   "API keys provide full access to your account, so keep them safe."
+
+    minObjectDate:
+        label:  "Min Object Create Date"
+        desc:   "Minimum Origin Creation Date, previous objects are not exported."
+
+    carriers:
+        label:      "Known Shipping Method Names"
+        desc:       "Fill this list to change shipping method behavior on Splash."
+        default:    "Default - Send a it is."
+        rejected:   "REJECTED - Order must not be send."
+
+    origin:
+        label:      "Known Order Origins"
+        desc:       "Fill this list to filter orders by origin."
+        default:    "Default - Send this to ShippingBo."
+        rejected:   "REJECTED - Must not be send."
+
+## Node Profile
+profile:
+    connection:
+        title: API Connection
+    card:
+        title:  ShippingBo Open API V1
+        label:  Connect your Splash account with ShippingBo API
+
+### Node Api Actions
+admin:
+    selftest:   ShippingBo Connector Configuration
+    connect:    Connect to ShippingBo API
+    sandbox:
+        enabled:    Sandbox Mode is Enabled

@@ -1,0 +1,19 @@
+services:
+    
+    ################################################################################
+    # SPLASH ShippingBo Connector Service
+    splash.connectors.shippingbo:
+        class:      Splash\Connectors\ShippingBo\Services\ShippingBoConnector
+        autowire:   true
+        calls:
+            - setMetaDir: ["%kernel.cache_dir%"]
+        tags:
+            - { name: "splash.connector" }
+            
+    ################################################################################
+    # Enables Dependency Injection in Controller Actions
+    Splash\Connectors\ShippingBo\Controller\:
+        resource:   '../../Controller'
+        public:     true
+        tags:
+            - { name: 'controller.service_arguments' }

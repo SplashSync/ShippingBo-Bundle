@@ -1,0 +1,50 @@
+{% import _self as Macros %}
+{% trans_default_domain "ShippingBoBundle" %}
+
+<!-- Connection Block -->
+<ul class="list-unstyled">
+   
+    {{ Macros.result(connector.selfTest,  "admin.selftest") }}
+    {{ Macros.result(connector.connect,  "admin.connect") }}
+    
+    {% if connector.connect %}
+        {% set wsUrl = url("splash_connector_action", {"connectorName": "shippingbo", "webserviceId": connector.webserviceId}) %}
+    <li>
+        <h4 class="font-lg text-info">
+            <span class="badge badge-info label label-info text-white">
+                <i class="fa fa-external-link fas fa-external-link-alt"></i>
+                &nbsp;Url
+            </span>
+            <a href="{{ wsUrl }}" target="_blank">
+                {{ wsUrl }}
+            </a>
+        </h4>
+    </li>   
+    {% endif %}
+
+    {% if connector.sandbox %}
+        <li>
+            <h4 class="font-md text-warning">
+                <i class="fa fa-flask"></i>&nbsp;{{ 'admin.sandbox.enabled'| trans }}
+            </h4>
+        </li>
+    {% endif %}
+    
+</ul>
+
+{% macro Result(result, text) %}
+    
+    <li>
+        <h4 class="font-lg {% if result %}text-success{% else %}text-danger{% endif %}">
+            <span class="badge {% if result %}badge-success label-success {% else %}badge-danger label-danger{% endif %}">
+                <i class="fa {% if result %}fa-check{% else %}fa-times{% endif %}"></i>
+                &nbsp;{% if result %}Ok{% else %}Ko{% endif %}
+            </span>
+            &nbsp;{{ text| trans }}
+        </h4>
+    </li>    
+    
+{% endmacro %}
+
+<!-- End Connection Block -->
+

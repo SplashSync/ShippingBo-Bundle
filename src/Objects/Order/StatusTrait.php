@@ -1,0 +1,153 @@
+<?php
+
+/*
+ *  This file is part of SplashSync Project.
+ *
+ *  Copyright (C) 2015-2021 Splash Sync  <www.splashsync.com>
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ *  For the full copyright and license information, please view the LICENSE
+ *  file that was distributed with this source code.
+ */
+
+namespace Splash\Connectors\ShippingBo\Objects\Order;
+
+use Splash\Client\Splash;
+use Splash\Connectors\ShippingBo\DataTransformer\StatusTransformer;
+
+/**
+ * Order Status Trait
+ */
+trait StatusTrait
+{
+    /**
+     * Build Status Fields
+     *
+     * @return void
+     */
+    protected function buildStatusFields(): void
+    {
+        //====================================================================//
+        // ORDER STATUS
+        //====================================================================//
+
+        //====================================================================//
+        // Order Current Status
+        $this->fieldsFactory()->create(SPL_T_VARCHAR)
+            ->Identifier("splashStatut")
+            ->Name("Order status")
+            ->Description("Status of the order")
+            ->MicroData("http://schema.org/Order", "orderStatus")
+            ->addChoices(StatusTransformer::getAll())
+            ->isReadOnly()
+        ;
+
+        //====================================================================//
+        // ORDER STATUS FLAGS
+        //====================================================================//
+
+        //====================================================================//
+        // Is Validated
+        $this->fieldsFactory()->create(SPL_T_BOOL)
+            ->Identifier("isValidated")
+            ->Name("Is Valid")
+            ->MicroData("http://schema.org/OrderStatus", "OrderProcessing")
+            ->isNotTested()
+        ;
+
+        //====================================================================//
+        // Is Canceled
+        $this->fieldsFactory()->create(SPL_T_BOOL)
+            ->Identifier("isCanceled")
+            ->Name("Is Canceled")
+            ->MicroData("http://schema.org/OrderStatus", "OrderCancelled")
+            ->isNotTested()
+        ;
+    }
+
+    /**
+     * Read requested Field
+     *
+     * @param string $key       Input List Key
+     * @param string $fieldName Field Identifier / Name
+     */
+    protected function getStatusFields(string $key, string $fieldName): void
+    {
+        //====================================================================//
+        // READ Fields
+        switch ($fieldName) {
+            case 'splashStatut':
+                $this->out[$fieldName] = StatusTransformer::toSplash($this->object->state);
+
+                break;
+            case 'isValidated':
+                $this->out[$fieldName] = StatusTransformer::isValidated($this->object->state);
+
+                break;
+            case 'isCanceled':
+                $this->out[$fieldName] = StatusTransformer::isCanceled($this->object->state);
+
+                break;
+            default:
+                return;
+        }
+
+        unset($this->in[$key]);
+    }
+
+    /**
+     * Write Given Fields
+     *
+     * @param string $fieldName Field Identifier / Name
+     * @param mixed  $fieldData Field Data
+     */
+    protected function setStatusFields(string $fieldName, $fieldData): void
+    {
+        //====================================================================//
+        // WRITE Field
+        switch ($fieldName) {
+            case 'isValidated':
+                if (empty($fieldData) || StatusTransformer::isValidated($this->object->state)) {
+                    break;
+                }
+                //====================================================================//
+                // Check if Order VALIDATE as Allowed
+                if (!StatusTransformer::isAllowedValidate($this->object->state)) {
+                    Splash::log()->war(sprintf(
+                        "You cannot validate an order from %s status",
+                        $this->object->state
+                    ));
+
+                    break;
+                }
+                $this->object->state = "to_be_prepared";
+                $this->needUpdate();
+
+                break;
+            case 'isCanceled':
+                if (empty($fieldData) || StatusTransformer::isCanceled($this->object->state)) {
+                    break;
+                }
+                //====================================================================//
+                // Check if Order CANCEL as Allowed
+                if (!StatusTransformer::isAllowedCancel($this->object->state)) {
+                    Splash::log()->war(sprintf(
+                        "You cannot cancel an order from %s status",
+                        $this->object->state
+                    ));
+
+                    break;
+                }
+                $this->object->state = "canceled";
+                $this->needUpdate();
+
+                break;
+            default:
+                return;
+        }
+        unset($this->in[$fieldName]);
+    }
+}
