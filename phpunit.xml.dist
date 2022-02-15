@@ -17,7 +17,6 @@
 
     <testsuites>
         <testsuite name="All">
-            <file>tests/Controller/S00MinimalObjectsTest.php</file>
             <directory>vendor/splash/phpcore/Tests/*</directory>
             <directory>tests/*</directory>
         </testsuite>
@@ -28,7 +27,6 @@
 
     <filter>
         <whitelist>
-            <file>tests/Controller/S00MinimalObjectsTest.php</file>
             <directory>vendor/splash/phpcore</directory>
             <directory>tests</directory>
             <exclude>
