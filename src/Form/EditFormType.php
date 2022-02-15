@@ -27,11 +27,13 @@ class EditFormType extends AbstractShippingBoType
      *
      * @param FormBuilderInterface $builder
      * @param array                $options
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $this->addApiUserField($builder, $options);
-        $this->addApiKeyField($builder, $options);
+        $this->addApiUserField($builder);
+        $this->addApiKeyField($builder);
         $this->addMinObjectCreateDateField($builder);
         $this->addShippingMethodsField($builder);
         $this->addOriginFilterField($builder);
