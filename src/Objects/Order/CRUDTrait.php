@@ -36,7 +36,7 @@ trait CRUDTrait
      *
      * @param string $objectId Object id
      *
-     * @return false|Order
+     * @return bool|Order
      */
     public function load($objectId)
     {
