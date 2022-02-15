@@ -84,7 +84,13 @@ class S02OrderFiltersTest extends ObjectsCase
      *
      * @dataProvider orderDataProvider
      *
+     * @param string $fieldId
+     * @param string $value
+     * @param bool   $rejected
+     *
      * @throws Exception
+     *
+     * @return void
      */
     public function testOrderFiltered(string $fieldId, string $value, bool $rejected): void
     {
@@ -111,7 +117,7 @@ class S02OrderFiltersTest extends ObjectsCase
             //====================================================================//
             //   Verify Create Works
             $this->assertIsString(
-                $connector->setObject("Order", null, $dummyData)
+                $connector->setObject($objectType, null, $dummyData)
             );
 
             return;
@@ -120,7 +126,7 @@ class S02OrderFiltersTest extends ObjectsCase
         // verify Create is Rejected
         $this->assertEquals(
             "REJECTED",
-            $connector->setObject("Order", null, $dummyData)
+            $connector->setObject($objectType, null, $dummyData)
         );
     }
 

@@ -60,7 +60,7 @@ services:
             - './docker/sandbox/Serializer:/srv/api/src/Serializer:ro'
             - './docker/sandbox/Entity:/srv/api/src/Entity:ro'
             - './docker/sandbox/shippingbo.yml:/srv/api/config/packages/shippingbo.yml:ro'
-        hostname:           sandbox.recommerce.local
+        hostname:           sandbox.shipping-bo.local
         networks:
             recommerce:     { ipv4_address: 172.108.0.200, aliases: [ sandbox.shipping-bo.local ] }
             splashsync:     { aliases: [ sandbox.shipping-bo.local ] }
