@@ -111,7 +111,6 @@ abstract class AbstractShippingBoType extends AbstractType
         return $this;
     }
 
-
     /**
      * Add Order Min Created Date & Time Filter to FormBuilder
      *

@@ -54,7 +54,9 @@ trait CRUDTrait
     }
 
     /**
-     * {@inheritDoc}
+     * @throws Exception
+     *
+     * @return false|Order
      */
     public function create()
     {
@@ -75,7 +77,7 @@ trait CRUDTrait
         } elseif (!$this->isAllowedDeliveryService()) {
             // Filtered By Delivery Service Name
             $this->logFilteredMethod();
-        } elseif(!$this->isAllowedOrigin()) {
+        } elseif (!$this->isAllowedOrigin()) {
             // Filtered By Origin
             $this->logFilteredOrigin();
         } else {
@@ -86,7 +88,6 @@ trait CRUDTrait
 
         return $this->initRejected();
     }
-
 
     /**
      * {@inheritDoc}
@@ -137,7 +138,7 @@ trait CRUDTrait
     protected function updateShippingAddress(): bool
     {
         $address = $this->object->shippingAddress;
-        $addressId = $this->object->getShippingAddressId() ?? $address->id;
+        $addressId = $this->object->getShippingAddressId() ?? $address->id ?? null;
         //====================================================================//
         // Safety Check
         if (!$address || empty($addressId)) {

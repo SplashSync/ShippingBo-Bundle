@@ -15,7 +15,6 @@
 
 namespace Splash\Connectors\ShippingBo\Objects\Order;
 
-use DateTime;
 use Splash\Core\SplashCore      as Splash;
 
 /**
@@ -26,7 +25,7 @@ trait OriginFilterTrait
     /**
      * Check if this Object is Allowed Writing
      *
-     * @return bool|null
+     * @return null|bool
      */
     protected function isAllowedOrigin(): ?bool
     {
@@ -43,8 +42,8 @@ trait OriginFilterTrait
         }
         //====================================================================//
         // Identify Origin by Name
-        if (isset($knownOrigins[trim($this->in["origin"])])) {
-            if ("REJECTED" == $knownOrigins[trim($this->in["origin"])]) {
+        if (isset($knownOrigins[trim((string) $this->in["origin"])])) {
+            if ("REJECTED" == $knownOrigins[trim((string) $this->in["origin"])]) {
                 return false;
             }
         }

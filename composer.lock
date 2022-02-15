@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1a908106cfcfced65dd953dca4318471",
+    "content-hash": "9b39b188f08d145692f9f1d2d304ef09",
     "packages": [
         {
             "name": "burgov/key-value-form-bundle",
@@ -1325,12 +1325,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SplashSync/OpenApi.git",
-                "reference": "cc70efb5b1002ba85ce5ea23fdf42fdf3ca1874c"
+                "reference": "d263c1234002a23ce1b1071b7a2b0fbdac6401db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SplashSync/OpenApi/zipball/cc70efb5b1002ba85ce5ea23fdf42fdf3ca1874c",
-                "reference": "cc70efb5b1002ba85ce5ea23fdf42fdf3ca1874c",
+                "url": "https://api.github.com/repos/SplashSync/OpenApi/zipball/d263c1234002a23ce1b1071b7a2b0fbdac6401db",
+                "reference": "d263c1234002a23ce1b1071b7a2b0fbdac6401db",
                 "shasum": ""
             },
             "require": {
@@ -1375,7 +1375,7 @@
                 "issues": "https://github.com/SplashSync/OpenApi/issues",
                 "source": "https://github.com/SplashSync/OpenApi/tree/master"
             },
-            "time": "2022-02-08T19:23:02+00:00"
+            "time": "2022-02-15T16:14:52+00:00"
         },
         {
             "name": "splash/php-bundle",
@@ -1446,12 +1446,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SplashSync/Php-Core.git",
-                "reference": "4719ddce5d590c76eb4c4f9ce56be14db4895180"
+                "reference": "874df6fc714297ba63117f84d837f317f35254db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SplashSync/Php-Core/zipball/4719ddce5d590c76eb4c4f9ce56be14db4895180",
-                "reference": "4719ddce5d590c76eb4c4f9ce56be14db4895180",
+                "url": "https://api.github.com/repos/SplashSync/Php-Core/zipball/874df6fc714297ba63117f84d837f317f35254db",
+                "reference": "874df6fc714297ba63117f84d837f317f35254db",
                 "shasum": ""
             },
             "require": {
@@ -1493,9 +1493,9 @@
             "description": "Splash Foundation Module for All Php Applications",
             "support": {
                 "issues": "https://github.com/SplashSync/Php-Core/issues",
-                "source": "https://github.com/SplashSync/Php-Core/tree/1.7.11"
+                "source": "https://github.com/SplashSync/Php-Core/tree/1.7.12"
             },
-            "time": "2022-02-01T12:18:12+00:00"
+            "time": "2022-02-15T12:43:34+00:00"
         },
         {
             "name": "symfony/contracts",
@@ -8219,7 +8219,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.4|^8.0",
+        "php": "^8.0",
         "ext-json": "*"
     },
     "platform-dev": [],

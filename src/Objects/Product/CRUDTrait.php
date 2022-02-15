@@ -15,6 +15,8 @@
 
 namespace Splash\Connectors\ShippingBo\Objects\Product;
 
+use Exception;
+use Splash\Connectors\ShippingBo\Models\Api\Product;
 use Splash\OpenApi\Models\Objects\CRUDTrait as OpenApiCRUDTrait;
 
 /**
@@ -27,7 +29,9 @@ trait CRUDTrait
     }
 
     /**
-     * {@inheritDoc}
+     * @throws Exception
+     *
+     * @return false|Product
      */
     public function create()
     {

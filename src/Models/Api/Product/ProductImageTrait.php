@@ -45,9 +45,9 @@ trait ProductImageTrait
     public ?string $pictureUrl = null;
 
     /**
-     * Product Picture Url.
+     * Product Picture Definition.
      *
-     * @var null|string
+     * @var null|array
      * @Assert\Type("string")
      *
      * @JMS\Type("array")

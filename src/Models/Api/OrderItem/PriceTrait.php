@@ -146,7 +146,7 @@ trait PriceTrait
     /**
      * Set Order Item Unit Price
      *
-     * @param array|ArrayObject|null $unitPrice
+     * @param null|array|ArrayObject $unitPrice
      *
      * @return void
      */
@@ -188,9 +188,9 @@ trait PriceTrait
             return;
         }
 
-        $this->price_tax_included_cents = $this->toPricesInCents(self::prices()->taxIncluded($this->price));
-        $this->price_cents = $this->toPricesInCents(self::prices()->taxExcluded($this->price));
-        $this->tax_cents = $this->toPricesInCents(self::prices()->taxAmount($this->price));
+        $this->price_tax_included_cents = $this->toPricesInCents((float) self::prices()->taxIncluded($this->price));
+        $this->price_cents = $this->toPricesInCents((float) self::prices()->taxExcluded($this->price));
+        $this->tax_cents = $this->toPricesInCents((float) self::prices()->taxAmount($this->price));
         $this->price_tax_included_currency = $this->price['code'] ?? "EUR";
     }
 

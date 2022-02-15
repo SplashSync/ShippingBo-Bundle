@@ -28,7 +28,7 @@ trait DeliveryAddressTrait
     /**
      * Order Shipping Address ID.
      *
-     * @var string
+     * @var null|string
      *
      * @Assert\Type("string")
      *
@@ -93,7 +93,7 @@ trait DeliveryAddressTrait
     //====================================================================//
 
     /**
-     * @return null
+     * @return null|string
      */
     public function getNullAddress(): ?string
     {
@@ -101,25 +101,28 @@ trait DeliveryAddressTrait
     }
 
     /**
-     * @return int|null
+     * @return null|int
      */
     public function getShippingAddressId(): ?int
     {
         if ($this->shipping_address_id ?? null) {
-            return self::objects()->id($this->shipping_address_id);
+            return (int) self::objects()->id((string) $this->shipping_address_id);
         }
 
         return null;
     }
 
     /**
-     * @param int|null $shipping_address_id
+     * @param null|int $shippingAddressId
      *
      * @return self
      */
-    public function setShippingAddressId(?int $shipping_address_id): self
+    public function setShippingAddressId(?int $shippingAddressId): self
     {
-        $this->shipping_address_id = self::objects()->encode("Address", $shipping_address_id);
+        $this->shipping_address_id = $shippingAddressId
+            ? (string) self::objects()->encode("Address", (string) $shippingAddressId)
+            : null
+        ;
 
         return $this;
     }

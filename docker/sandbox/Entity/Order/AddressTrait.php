@@ -102,7 +102,7 @@ trait AddressTrait
     }
 
     /**
-     * @param int|null $shipping_address_id
+     * @param null|int $shipping_address_id
      *
      * @return self
      */

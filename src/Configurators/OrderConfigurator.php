@@ -71,6 +71,6 @@ class OrderConfigurator extends AbstractConfigurator
             "Order" => array("fields" => array_replace_recursive(
                 self::CONFIGURATION,
                 Splash::isDebugMode() ? self::DEBUG : array()
-       )));
+            )));
     }
 }

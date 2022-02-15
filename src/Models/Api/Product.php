@@ -37,6 +37,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class representing the Product model.
+ *
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class Product
 {

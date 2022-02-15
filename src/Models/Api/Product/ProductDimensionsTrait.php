@@ -137,7 +137,7 @@ trait ProductDimensionsTrait
     }
 
     /**
-     * @return null|int
+     * @return int
      */
     public function getApiLength(): int
     {

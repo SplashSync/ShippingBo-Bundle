@@ -89,6 +89,7 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
 
     /**
      * {@inheritdoc}
+     *
      * @throws Exception
      */
     public function ping() : bool
@@ -106,6 +107,7 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
 
     /**
      * {@inheritdoc}
+     *
      * @throws Exception
      */
     public function connect() : bool
@@ -154,11 +156,11 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
         //====================================================================//
         // Server Logo & Ico
         $informations->icoraw = Splash::file()->readFileContents(
-            dirname(__FILE__, 2) ."/Resources/public/img/ShippingBo-Icon.jpg"
+            dirname(__FILE__, 2)."/Resources/public/img/ShippingBo-Icon.jpg"
         );
         $informations->logourl = null;
         $informations->logoraw = Splash::file()->readFileContents(
-            dirname(__FILE__, 2) ."/Resources/public/img/ShippingBo-Logo.jpg"
+            dirname(__FILE__, 2)."/Resources/public/img/ShippingBo-Logo.jpg"
         );
         //====================================================================//
         // Server Informations
@@ -403,8 +405,9 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
     /**
      * Get ShippingBo User Information
      *
-     * @return bool
      * @throws Exception
+     *
+     * @return bool
      */
     private function fetchUserInformation(): bool
     {
@@ -437,5 +440,4 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
 
         return true;
     }
-
 }

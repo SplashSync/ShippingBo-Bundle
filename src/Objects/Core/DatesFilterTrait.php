@@ -38,7 +38,9 @@ trait DatesFilterTrait
         }
         //====================================================================//
         // Check If Received Order Date is Given
-        if (!isset($this->in["origin_created_at"]) || empty($this->in["origin_created_at"]) || !is_scalar($this->in["origin_created_at"])) {
+        if (!isset($this->in["origin_created_at"])
+            || empty($this->in["origin_created_at"])
+            || !is_scalar($this->in["origin_created_at"])) {
             return false;
         }
         //====================================================================//
@@ -46,7 +48,7 @@ trait DatesFilterTrait
         try {
             $receivedDate = new DateTime((string)$this->in["origin_created_at"]);
         } catch (\Exception $e) {
-            return Splash::log()->err(printf(
+            return Splash::log()->err(sprintf(
                 "Unable to parse origin_created_at: %s",
                 $this->in["createdAt"]
             ));

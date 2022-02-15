@@ -27,12 +27,12 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class WebHooksController extends AbstractController
 {
     /**
-     * @var string|null
+     * @var null|string
      */
     private ?string $objectType = null;
 
     /**
-     * @var string|null
+     * @var null|string
      */
     private ?string $objectId = null;
 
@@ -50,7 +50,7 @@ class WebHooksController extends AbstractController
     {
         //==============================================================================
         // Safety Check
-        $error = $this->verify($request, $connector);
+        $error = $this->verify($request);
         if ($error) {
             return $error;
         }
@@ -67,18 +67,17 @@ class WebHooksController extends AbstractController
             return $error;
         }
 
-        return $this->getResponse(JsonResponse::HTTP_OK,'Changes notified');
+        return $this->getResponse(JsonResponse::HTTP_OK, 'Changes notified');
     }
 
     /**
      * Verify Request is Valid
      *
-     * @param Request           $request
-     * @param AbstractConnector $connector
+     * @param Request $request
      *
      * @return null|JsonResponse
      */
-    private function verify(Request $request, AbstractConnector $connector) : ?JsonResponse
+    private function verify(Request $request) : ?JsonResponse
     {
         //====================================================================//
         // Verify Request is POST
@@ -124,8 +123,6 @@ class WebHooksController extends AbstractController
     /**
      * Execute Changes Commits
      *
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     *
      * @param AbstractConnector $connector
      *
      * @return null|JsonResponse
@@ -155,15 +152,13 @@ class WebHooksController extends AbstractController
         return null;
     }
 
-
-
     /**
-     * @param int   $code
-     * @param mixed $message
+     * @param int    $code
+     * @param string $message
      *
      * @return JsonResponse
      */
-    private function getResponse($code, $message): JsonResponse
+    private function getResponse(int $code, string $message): JsonResponse
     {
         return new JsonResponse(
             array(

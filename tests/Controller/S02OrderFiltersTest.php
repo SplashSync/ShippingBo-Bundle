@@ -19,7 +19,6 @@ use Exception;
 use Splash\Connectors\ShippingBo\Services\ShippingBoConnector;
 use Splash\Tests\Tools\ObjectsCase;
 use Splash\Tests\Tools\Traits\ObjectsSetTestsTrait;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Test of ShippingBo Connector Order Filters

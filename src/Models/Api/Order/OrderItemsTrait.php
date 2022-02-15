@@ -15,8 +15,8 @@
 
 namespace Splash\Connectors\ShippingBo\Models\Api\Order;
 
-use Splash\Connectors\ShippingBo\Models\Api\OrderItem;
 use JMS\Serializer\Annotation as JMS;
+use Splash\Connectors\ShippingBo\Models\Api\OrderItem;
 use Splash\OpenApi\Validator as SPL;
 use Symfony\Component\Validator\Constraints as Assert;
 
