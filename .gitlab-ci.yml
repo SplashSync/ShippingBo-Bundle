@@ -20,7 +20,7 @@
 variables:
   # Configure mysql environment variables (https://hub.docker.com/r/_/mysql/)
   MYSQL_DATABASE:               symfony
-  MYSQL_ROOT_PASSWORD:          ReCommerce-Bundle
+  MYSQL_ROOT_PASSWORD:          ShippingBo-Bundle
   COMPOSER_MEMORY_LIMIT:        -1
   SYMFONY_DEPRECATIONS_HELPER:  disabled
 
