@@ -1,0 +1,27 @@
+api_platform:
+    title:  ShippingBo API SandBox
+    formats:
+        json:
+            mime_types:
+                - application/json
+        html:
+            mime_types:
+                - text/html
+    swagger:
+        api_keys:
+            - { name: "X-API-USER", type: "header" }
+            - { name: "X-API-TOKEN", type: "header" }
+            - { name: "X-API-VERSION", type: "header" }
+    collection:
+        pagination:
+            client_items_per_page: true                     # Disabled by default
+            items_per_page_parameter_name: limit            # Default value
+
+services:
+
+    ########################################################################
+    # ShippingBo Normalizer
+    App\Serializer\ApiNormalizer:
+        decorates: 'api_platform.serializer.normalizer.item'
+        arguments:
+            $decorated: '@App\Serializer\ApiNormalizer.inner'
