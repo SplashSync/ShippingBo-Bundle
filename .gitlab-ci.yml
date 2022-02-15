@@ -70,6 +70,12 @@ quality:php-8.0:
     image: registry.gitlab.com/badpixxel-projects/php-sdk:php-8.0
     <<: *quality
 
+################################################################################
+# PHP 7.4
+quality:php-7.4:
+    image: registry.gitlab.com/badpixxel-projects/php-sdk:php-7.4
+    <<: *quality
+
 ################################################################
 # Functional Tests
 ################################################################
