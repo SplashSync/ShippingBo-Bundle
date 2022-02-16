@@ -82,7 +82,7 @@ trait OrderItemsCRUDTrait
         if (!$this->getVisitor()->getConnexion()->post($uri, array())) {
             return Splash::log()->err("An error occurred while computing Order Items");
         }
-        Splash::log()->war("Order Items Computed");
+        Splash::log()->msg("Order Items Computed");
 
         return true;
     }
@@ -100,10 +100,11 @@ trait OrderItemsCRUDTrait
     {
         //====================================================================//
         // Safety Check
-        if (!$item->isNew() || !$item->isValid()) {
-            return Splash::log()->err(
-                sprintf("Invalid New %s", $item)
-            );
+        if (!$item->isNew()) {
+            return Splash::log()->err(sprintf("Invalid New %s", $item));
+        }
+        if (!$item->isValid()) {
+            return Splash::log()->msg(sprintf("Skipped %s", $item));
         }
         //====================================================================//
         // Build Request Uri
@@ -139,9 +140,7 @@ trait OrderItemsCRUDTrait
         //====================================================================//
         // Safety Check
         if (!$item->isValid()) {
-            return Splash::log()->err(
-                sprintf("Invalid Order Item %s", $item->getId())
-            );
+            return Splash::log()->err(sprintf("Invalid %s", $item));
         }
         //====================================================================//
         // Extract Item Data
@@ -156,10 +155,10 @@ trait OrderItemsCRUDTrait
         );
         if (!$updateResponse) {
             return Splash::log()->err(
-                sprintf("Unable to update Order Item %s", $item->getId())
+                sprintf("Unable to update %s", $item)
             );
         }
 
-        return Splash::log()->msg(sprintf("Order Item %s Updated", $item->getId()));
+        return Splash::log()->msg(sprintf("%s Updated", $item));
     }
 }
