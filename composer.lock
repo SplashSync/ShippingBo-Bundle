@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b39b188f08d145692f9f1d2d304ef09",
+    "content-hash": "1a908106cfcfced65dd953dca4318471",
     "packages": [
         {
             "name": "burgov/key-value-form-bundle",
@@ -1325,12 +1325,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SplashSync/OpenApi.git",
-                "reference": "d263c1234002a23ce1b1071b7a2b0fbdac6401db"
+                "reference": "69ec03b4ac4e7789815cfe709e0290974ab3afa8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SplashSync/OpenApi/zipball/d263c1234002a23ce1b1071b7a2b0fbdac6401db",
-                "reference": "d263c1234002a23ce1b1071b7a2b0fbdac6401db",
+                "url": "https://api.github.com/repos/SplashSync/OpenApi/zipball/69ec03b4ac4e7789815cfe709e0290974ab3afa8",
+                "reference": "69ec03b4ac4e7789815cfe709e0290974ab3afa8",
                 "shasum": ""
             },
             "require": {
@@ -1375,7 +1375,7 @@
                 "issues": "https://github.com/SplashSync/OpenApi/issues",
                 "source": "https://github.com/SplashSync/OpenApi/tree/master"
             },
-            "time": "2022-02-15T16:14:52+00:00"
+            "time": "2022-02-16T18:02:10+00:00"
         },
         {
             "name": "splash/php-bundle",
@@ -8219,7 +8219,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.0",
+        "php": "^7.4|^8.0",
         "ext-json": "*"
     },
     "platform-dev": [],

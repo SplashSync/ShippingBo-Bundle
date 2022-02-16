@@ -59,7 +59,9 @@ class Order extends AbstractStandaloneObject
     use Order\RejectedTrait;
     use Order\DeliveryServiceTrait;
     use Order\OriginFilterTrait;
+    use Order\OrderItemsCRUDTrait;
     use Order\StatusTrait;
+    use Order\TrackingTrait;
 
     //====================================================================//
     // Object Definition Parameters
