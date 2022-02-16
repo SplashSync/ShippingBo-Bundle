@@ -15,8 +15,10 @@
 
 namespace Splash\Connectors\ShippingBo\Models\Api;
 
+use JMS\Serializer\Annotation as JMS;
 use Splash\Models\Objects\ObjectsTrait;
 use Splash\Models\Objects\PricesTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class representing the Order model.
@@ -42,6 +44,7 @@ class Order
     use Order\DatesTrait;
     use Order\DeliveryAddressTrait;
     use Order\DeliveryServiceTrait;
+    use Order\ShipmentsTrait;
     use Order\TotalsTrait;
     //====================================================================//
     // JSON PREFIXES
@@ -52,6 +55,7 @@ class Order
     // SPLASH EXCLUDED PROPS
     const EXCLUDED = array(
         "id",
+        "oldItems",
         // Grand Total Raw
         "total_price_cents",
         "total_without_tax_cents",
@@ -66,6 +70,19 @@ class Order
         "total_discount_tax_included_cents",
         "total_discount_tax_included_currency",
     );
+
+    /**
+     * Unique identifier.
+     *
+     * @var string
+     * @Assert\NotNull()
+     * @Assert\Type("string")
+     *
+     * @JMS\SerializedName("id")
+     * @JMS\Type("string")
+     * @JMS\Groups ({"Read", "List"})
+     */
+    public string $id;
 
     //====================================================================//
     // MAIN METHODS

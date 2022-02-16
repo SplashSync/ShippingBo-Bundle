@@ -49,16 +49,15 @@ trait PriceTrait
     /**
      * Order Line Items Price Tax Included.
      *
-     * @var int
+     * @var null|int
      *
-     * @Assert\NotNull()
      * @Assert\Type("integer")
      *
      * @JMS\SerializedName("price_tax_included_cents")
      * @JMS\Groups ({"Read", "Write"})
      * @JMS\Type("integer")
      */
-    protected int $price_tax_included_cents = 0;
+    protected ?int $price_tax_included_cents = 0;
 
     /**
      * Order Line Items Price Currency.

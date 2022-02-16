@@ -32,6 +32,19 @@ class Address
     const ITEMS_PROP = "address";
 
     /**
+     * Unique identifier.
+     *
+     * @var string
+     * @Assert\NotNull()
+     * @Assert\Type("string")
+     *
+     * @JMS\SerializedName("id")
+     * @JMS\Type("string")
+     * @JMS\Groups ({"Read", "List"})
+     */
+    public string $id;
+
+    /**
      * Client's full name.
      *
      * @var null|string

@@ -28,9 +28,19 @@ use Symfony\Component\Validator\Constraints as Assert;
  *          "normalization_context"={"groups"={"read"}},
  *          "denormalizationContext"={"groups"={"write"}}
  *     },
+ *     itemOperations={
+ *          "get":          {},
+ *          "patch":        {},
+ *          "delete":       {},
+ *     },
  *     subresourceOperations={
  *     },
  *     collectionOperations={
+ *          "create":      {
+ *              "method": "POST",
+ *              "path": "/orders/{id}/order_items",
+ *              "controller": {"App\Controller\OrderController", "addItemAction"}
+ *          },
  *          "post":      {
  *              "method": "POST",
  *              "path": "/orders/{id}/update_order_items",
@@ -97,7 +107,6 @@ class OrderItem implements SboObjectInterface
      *
      * @var null|string
      *
-     * @Assert\NotNull()
      * @Assert\Type("string")
      *
      * @ORM\Column(nullable=true)

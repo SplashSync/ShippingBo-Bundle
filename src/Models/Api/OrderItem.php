@@ -54,6 +54,19 @@ class OrderItem
         "price_tax_included_currency"
     );
 
+    /**
+     * Unique identifier.
+     *
+     * @var null|string
+     * @Assert\NotNull()
+     * @Assert\Type("string")
+     *
+     * @JMS\SerializedName("id")
+     * @JMS\Type("string")
+     * @JMS\Groups ({"Read", "Write", "List"})
+     */
+    public ?string $id = null;
+
     //====================================================================//
     // ORDER PRODUCT INFO
     //====================================================================//
@@ -125,4 +138,113 @@ class OrderItem
      * @SPL\Microdata({"http://schema.org/QuantitativeValue", "value"})
      */
     public int $quantity;
+
+    //====================================================================//
+    // ORDER ITEM MAIN METHODS
+    //====================================================================//
+
+    /**
+     * Convert to String
+     *
+     * @return string
+     */
+    public function __toString(): string
+    {
+        return 'Order Item '.$this->id ?? "NEW";
+    }
+
+    /**
+     * Get Order Item ID
+     *
+     * @return null|string
+     */
+    public function getId(): ?string
+    {
+        return $this->id ?? null;
+    }
+
+    /**
+     * Check if Order Item is to Create= on API
+     *
+     * @return bool
+     */
+    public function isNew(): bool
+    {
+        return empty($this->id ?? null);
+    }
+
+    /**
+     * Check if Order Item is Valid for Create/Update
+     *
+     * @return bool
+     */
+    public function isValid(): bool
+    {
+        return !empty($this->title ?? null)
+            && (!empty($this->product_ref ?? null) || !empty($this->product_ean ?? null))
+            && (($this->quantity ?? 0) >= 0)
+        ;
+    }
+
+    /**
+     * Check if Order Item is Considered as Deleted
+     *
+     * @return bool
+     */
+    public function isDeleted(): bool
+    {
+        return empty($this->quantity ?? 0);
+    }
+
+    /**
+     * Mark this Item as Deleted
+     *
+     * @return $this
+     */
+    public function setDeleted(): self
+    {
+        $this->title = "DELETED";
+        $this->quantity = 0;
+
+        return $this;
+    }
+
+    /**
+     * Compute Order Item Md5
+     *
+     * @return string
+     */
+    public function getMd5(): string
+    {
+        return md5(serialize(array(
+            $this->title ?? null,
+            $this->product_ref ?? null,
+            $this->product_ean ?? null,
+            $this->quantity ?? null,
+            $this->price_tax_included_cents ?? null,
+            $this->price_tax_included_currency ?? null,
+            $this->price_cents ?? null,
+            $this->tax_cents ?? null,
+        )));
+    }
+
+    //====================================================================//
+    // FAKE ORDER ITEM GENERATOR
+    //====================================================================//
+
+    /**
+     * @return OrderItem
+     */
+    public static function fake(): OrderItem
+    {
+        $orderItem = new self();
+        $orderItem->id = (string) rand(10, 1000);
+        $orderItem->title = "Fake me up";
+        $orderItem->product_ref = "FakeSKU".rand(1000, 9999);
+        $orderItem->quantity = rand(1, 10);
+        $orderItem->source = "SplashSync";
+        $orderItem->source_ref = $orderItem->product_ref."-".rand(1, 10);
+
+        return $orderItem;
+    }
 }

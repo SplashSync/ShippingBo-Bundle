@@ -13,41 +13,29 @@
  *  file that was distributed with this source code.
  */
 
-namespace Splash\Connectors\ShippingBo\Models\Api\Core;
+namespace Splash\Connectors\ShippingBo\Models\Api\Order;
 
-use DateTime;
 use JMS\Serializer\Annotation as JMS;
+use Splash\Connectors\ShippingBo\Models\Api\Shipment;
 use Splash\OpenApi\Validator as SPL;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * Object Source Trait
- */
-trait SboCoreTrait
+trait ShipmentsTrait
 {
     /**
-     * @var DateTime
+     * Order Shipments List.
      *
-     * @Assert\Type("DateTime")
+     * @var Shipment[]
      *
-     * @JMS\SerializedName("created_at")
+     * @JMS\SerializedName("shipments")
+     * @JMS\Type("array<Splash\Connectors\ShippingBo\Models\Api\Shipment>")
      * @JMS\Groups ({"Read"})
      *
-     * @SPL\Microdata({"http://schema.org/DataFeedItem", "dateCreated"})
-     * @SPL\Group("Meta")
+     * @Assert\All({
+     *   @Assert\Type("Splash\Connectors\ShippingBo\Models\Api\Shipment")
+     * })
+     *
+     * @SPL\Group("Shipments")
      */
-    public DateTime $createdAt;
-
-    /**
-     * @var DateTime
-     *
-     * @Assert\Type("DateTime")
-     *
-     * @JMS\SerializedName("created_at")
-     * @JMS\Groups ({"Read"})
-     *
-     * @SPL\Microdata({"http://schema.org/DataFeedItem", "dateUpdated"})
-     * @SPL\Group("Meta")
-     */
-    public DateTime $updatedAt;
+    public array $shipments = array();
 }

@@ -36,6 +36,40 @@ class OrderController extends AbstractController
      *
      * @return JsonResponse
      */
+    public function addItemAction(Request $request, int $id): JsonResponse
+    {
+        //====================================================================//
+        // Load Parent Order
+        /** @var null|Order $order */
+        $order = $this->getDoctrine()->getManager()->getRepository(Order::class)->find($id);
+        if (!$order) {
+            throw new NotFoundHttpException();
+        }
+        //====================================================================//
+        // Decode Received Item
+        $rawData = json_decode($request->getContent(), true, 512, \JSON_BIGINT_AS_STRING);
+        $orderItem = $this->get('serializer')->denormalize($rawData, OrderItem::class, "json");
+        $orderItem->order = $order;
+        $order->order_items[] = $orderItem;
+        //====================================================================//
+        // Persist Item
+        $this->getDoctrine()->getManager()->persist($order);
+        $this->getDoctrine()->getManager()->flush();
+
+        return new JsonResponse($this->get('serializer')->normalize($order, 'json', array(
+            "resource_class" => Order::class,
+            "operation_type" => "item"
+        )));
+    }
+
+    /**
+     * Update Order Items by ID for an Order
+     *
+     * @param Request $request
+     * @param int     $id
+     *
+     * @return JsonResponse
+     */
     public function itemsAction(Request $request, int $id): JsonResponse
     {
         //====================================================================//

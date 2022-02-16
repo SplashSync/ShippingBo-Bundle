@@ -51,6 +51,19 @@ class Product
     const ITEMS_PROP = "product";
 
     /**
+     * Unique identifier.
+     *
+     * @var string
+     * @Assert\NotNull()
+     * @Assert\Type("string")
+     *
+     * @JMS\SerializedName("id")
+     * @JMS\Type("string")
+     * @JMS\Groups ({"Read", "List"})
+     */
+    public string $id;
+
+    /**
      * Product SKU.
      *
      * @var string

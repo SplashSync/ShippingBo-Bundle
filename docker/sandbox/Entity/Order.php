@@ -99,6 +99,20 @@ class Order implements SboObjectInterface
      */
     public $order_items;
 
+    /**
+     * Order Shipments
+     *
+     * @var Shipment[]
+     *
+     * @Assert\All({
+     *   @Assert\Type("App\Entity\Shipment")
+     * })
+     * @Groups({"read"})
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Shipment", mappedBy="order", cascade={"all"})
+     */
+    public $shipments;
+
     //====================================================================//
     // MAIN METHODS
     //====================================================================//
@@ -130,6 +144,20 @@ class Order implements SboObjectInterface
         $this->total_shipping_tax_included_currency = $currency;
         $this->total_discount_tax_included_currency = $currency;
         $this->total_weight = $totalWeight;
+    }
+
+    /**
+     */
+    public function getShipments()
+    {
+        if ($this->shipments->isEmpty()) {
+            return array(
+                Shipment::fake($this),
+                Shipment::fake($this),
+            );
+        }
+
+        return $this->shipments;
     }
 
     //====================================================================//
