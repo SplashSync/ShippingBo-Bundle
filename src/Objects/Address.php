@@ -111,8 +111,15 @@ class Address extends AbstractStandaloneObject
      */
     public function description(): array
     {
+        //====================================================================//
+        // Default Configuration
+        self::$ENABLE_PULL_CREATED = false;
+        self::$ENABLE_PULL_DELETED = false;
+        self::$ENABLE_PUSH_DELETED = false;
+        //====================================================================//
+        // Production Configuration
         if (!$this->connector->isSandbox()) {
-            static::$ENABLE_PUSH_DELETED = false;
+            self::$ALLOW_PUSH_DELETED = false;
         }
 
         return parent::description();

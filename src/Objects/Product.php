@@ -112,6 +112,25 @@ class Product extends AbstractStandaloneObject
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function description(): array
+    {
+        //====================================================================//
+        // Default Configuration
+        self::$ENABLE_PULL_CREATED = false;
+        self::$ENABLE_PULL_DELETED = false;
+        self::$ENABLE_PUSH_DELETED = false;
+        //====================================================================//
+        // Production Configuration
+        if (!$this->connector->isSandbox()) {
+            self::$ALLOW_PUSH_DELETED = false;
+        }
+
+        return parent::description();
+    }
+
+    /**
      * Get Shipment API Visitor
      *
      * @throws Exception

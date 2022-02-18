@@ -37,7 +37,7 @@ trait CRUDTrait
     {
         //====================================================================//
         // Ensure Default Source
-        $this->in['source'] = $this->in['source'] ?? "SplashSync";
+        $this->in['source'] = $this->in['source'] ?? "Splash";
         //====================================================================//
         // Execute Core Action
         return $this->coreCreate();

@@ -126,11 +126,15 @@ class Order extends AbstractStandaloneObject
      */
     public function description(): array
     {
+        //====================================================================//
+        // Default Configuration
+        self::$ENABLE_PULL_CREATED = false;
+        self::$ENABLE_PULL_DELETED = false;
+        self::$ENABLE_PUSH_DELETED = false;
+        //====================================================================//
+        // Production Configuration
         if (!$this->connector->isSandbox()) {
-            static::$ALLOW_PUSH_CREATED = false;
-            static::$ALLOW_PUSH_DELETED = false;
-            static::$ENABLE_PUSH_CREATED = false;
-            static::$ENABLE_PUSH_DELETED = false;
+            self::$ALLOW_PUSH_DELETED = false;
         }
 
         return parent::description();
