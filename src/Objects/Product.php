@@ -118,9 +118,9 @@ class Product extends AbstractStandaloneObject
     {
         //====================================================================//
         // Default Configuration
+        self::$ENABLE_PUSH_DELETED = false;
         self::$ENABLE_PULL_CREATED = false;
         self::$ENABLE_PULL_DELETED = false;
-        self::$ENABLE_PUSH_DELETED = false;
         //====================================================================//
         // Production Configuration
         if (!$this->connector->isSandbox()) {

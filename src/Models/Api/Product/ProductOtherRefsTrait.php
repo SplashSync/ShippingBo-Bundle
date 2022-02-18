@@ -34,7 +34,9 @@ trait ProductOtherRefsTrait
      * @JMS\Type("string")
      * @JMS\Groups ({"Read", "Write"})
      *
+     * @SPL\Description("[Technical] Description")
      * @SPL\Group("Other Refs")
+     * @SPL\Microdata({"http://schema.org/Product", "description"})
      */
     public ?string $otherRef1 = null;
 

@@ -95,16 +95,16 @@ class Product
     /**
      * Product EAN13.
      *
-     * @var null|string
-     * @Assert\Type("string")
+     * @var null|int
+     * @Assert\Type("int")
      *
      * @JMS\SerializedName("ean13")
-     * @JMS\Type("string")
+     * @JMS\Type("int")
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Microdata({"http://schema.org/Product", "gtin13"})
      */
-    public ?string $ean13 = null;
+    public ?int $ean13 = null;
 
     /**
      * Title / Label.

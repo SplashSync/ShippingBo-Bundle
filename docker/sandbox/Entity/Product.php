@@ -70,14 +70,14 @@ class Product implements SboObjectInterface
     /**
      * Product EAN13.
      *
-     * @var null|string
-     * @Assert\Type("string")
+     * @var null|int
+     * @Assert\Type("int")
      *
      * @Groups({"read"})
      *
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="integer", nullable=true)
      */
-    public ?string $ean13;
+    public ?int $ean13;
 
     /**
      * Title / Label.

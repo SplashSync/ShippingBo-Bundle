@@ -39,15 +39,6 @@ trait CoreTrait
             ->setPreferNone()
             ->isNotTested()
         ;
-        //====================================================================//
-        // Description => Copy of Title
-        $this->fieldsFactory()->create(SPL_T_VARCHAR)
-            ->identifier("description")
-            ->name("[Technical] Description")
-            ->microData("http://schema.org/Product", "description")
-            ->setPreferNone()
-            ->isReadOnly()
-        ;
     }
 
     /**
@@ -65,10 +56,6 @@ trait CoreTrait
                 $this->out[$fieldName] = true;
 
                 break;
-            case 'description':
-                $this->out[$fieldName] = $this->object->title ?? "";
-
-                break;
             default:
                 return;
         }
@@ -83,6 +70,8 @@ trait CoreTrait
      * @param mixed  $fieldData Field Data
      *
      * @return void
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     private function setCoreFields(string $fieldName, $fieldData)
     {
@@ -90,8 +79,6 @@ trait CoreTrait
         // WRITE Field
         switch ($fieldName) {
             case 'enabled':
-                $this->out[$fieldName] = (bool) $fieldData;
-
                 break;
             default:
                 return;
