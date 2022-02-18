@@ -65,7 +65,7 @@ trait CRUDTrait
         Splash::log()->trace();
         //====================================================================//
         // Ensure Default Source
-        $this->in['source'] = $this->in['source'] ?? "SplashSync";
+        $this->in['source'] = $this->in['source'] ?? "Splashsync";
         //====================================================================//
         // Ensure Default State
         $this->in['state'] = $this->in['state'] ?? "rejected";

@@ -33,9 +33,9 @@ trait SboSourceTrait
      *
      * @JMS\SerializedName("source")
      * @JMS\Type("string")
-     * @JMS\Groups ({"Read", "Write", "List", "Required"})
+     * @JMS\Groups ({"Read", "Write", "List"})
      */
-    public string $source = "SplashSync";
+    public string $source = "Splashsync";
 
     /**
      * The order ID this shipment belongs to.
