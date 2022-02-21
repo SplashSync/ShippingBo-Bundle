@@ -33,7 +33,7 @@ trait SboSourceTrait
      *
      * @JMS\SerializedName("source")
      * @JMS\Type("string")
-     * @JMS\Groups ({"Read", "Write", "List"})
+     * @JMS\Groups ({"Read", "Write", "List", "Required"})
      */
     public string $source = "Splashsync";
 

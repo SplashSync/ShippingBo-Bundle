@@ -27,7 +27,7 @@ class ProductConfigurator extends AbstractConfigurator
         // System - Read Only
         //====================================================================//
 
-        "source" => array('read' => true, "write" => false),
+        "source" => array('read' => true, "write" => false, "required" => false),
 
         //====================================================================//
         // System - Excluded

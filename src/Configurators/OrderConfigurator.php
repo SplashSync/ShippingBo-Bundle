@@ -39,7 +39,7 @@ class OrderConfigurator extends AbstractConfigurator
         // System - Read Only
         //====================================================================//
 
-        "source" => array('read' => true, "write" => false),
+        "source" => array('read' => true, "write" => false, "required" => false),
         "state" => array('required' => false, "write" => false),
         "source@items" => array('read' => true, "write" => false),
         "source_ref@items" => array('read' => true, "write" => false),
