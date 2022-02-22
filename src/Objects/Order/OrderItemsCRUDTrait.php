@@ -38,7 +38,7 @@ trait OrderItemsCRUDTrait
         // Check if Order Items Updates are Allowed
         if (!StatusTransformer::isAllowedUpdates($this->object->state)) {
             if (!$this->connector->isSandbox()) {
-                return Splash::log()->err("Order Items are not allowed");
+                return Splash::log()->err("Update of Order Items not allowed");
             }
         }
         $result = true;

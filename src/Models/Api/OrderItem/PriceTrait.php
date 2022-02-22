@@ -115,7 +115,7 @@ trait PriceTrait
      *
      * @SPL\Microdata({"http://schema.org/PriceSpecification", "price"})
      * @SPL\Type("price")
-     * @SPL\Prefer ("export")
+     * @SPL\Prefer ("import")
      */
     private ?array $price = null;
 

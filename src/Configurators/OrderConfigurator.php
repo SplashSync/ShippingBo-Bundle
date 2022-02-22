@@ -27,12 +27,9 @@ class OrderConfigurator extends AbstractConfigurator
         //====================================================================//
         // System - Metadata
         //====================================================================//
-        "created_at" => array(
-            'write' => false,
-            'required' => false,
+        "createdAt" => array(
             "itemtype" => "http://schema.org/DataFeedItem",
             "itemprop" => "dateOrderCreated",
-            'group' => "Meta",
         ),
 
         //====================================================================//
@@ -41,16 +38,28 @@ class OrderConfigurator extends AbstractConfigurator
 
         "source" => array('read' => true, "write" => false, "required" => false),
         "state" => array('required' => false, "write" => false),
-        "source@items" => array('read' => true, "write" => false),
-        "source_ref@items" => array('read' => true, "write" => false),
         "shipping_address_id" => array("notest" => true),
 
         //====================================================================//
-        // System - Excluded
+        // Order Items
         //====================================================================//
+        "createdAt@items" => array("itemprop" => "dateItemCreated"),
+        "source@items" => array('read' => true, "write" => false, "required" => false),
+        "source_ref@items" => array('read' => true, "write" => false, "required" => false),
+        "price@items" => array("required" => false),
 
+        //====================================================================//
+        // Shipping Address
+        //====================================================================//
         "shippingAddress__id" => array('excluded' => true),
+        "shippingAddress__createdAt" => array('excluded' => true),
+
+        //====================================================================//
+        // Billing Address
+        //====================================================================//
         "billingAddress__id" => array('excluded' => true),
+        "billingAddress__createdAt" => array('excluded' => true),
+        "billingAddress__country" => array('required' => false),
     );
 
     const DEBUG = array(
