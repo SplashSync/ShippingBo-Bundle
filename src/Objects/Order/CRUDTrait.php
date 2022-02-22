@@ -117,10 +117,15 @@ trait CRUDTrait
         //====================================================================//
         // Update Order Items
         if ($this->isToUpdate("Items")) {
-            if (!$this->updateOrderItems()) {
+            $itemsUpdate = $this->updateOrderItems();
+            //====================================================================//
+            // Update Order Items Fail
+            if (false === $itemsUpdate) {
                 return false;
             }
-            if (!$this->computeOrderItems()) {
+            //====================================================================//
+            // Update Order Items Done
+            if ((true === $itemsUpdate) && (!$this->computeOrderItems())) {
                 return false;
             }
         }

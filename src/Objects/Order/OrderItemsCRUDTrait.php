@@ -30,38 +30,41 @@ trait OrderItemsCRUDTrait
      *
      * @throws Exception
      *
-     * @return bool
+     * @return null|bool
      */
-    protected function updateOrderItems(): bool
+    protected function updateOrderItems(): ?bool
     {
         //====================================================================//
         // Check if Order Items Updates are Allowed
         if (!StatusTransformer::isAllowedUpdates($this->object->state)) {
             if (!$this->connector->isSandbox()) {
-                return Splash::log()->err("Update of Order Items not allowed");
+                Splash::log()->err("Update of Order Items not allowed");
+
+                return null;
             }
         }
-        $result = true;
+        $expected = $success = 0;
         //====================================================================//
         // Update All Order Items Sources
         $this->object->updateItemsSources();
         //====================================================================//
         // Create All Inserted Order Items
         foreach ($this->object->getInsertedItems() as $newItem) {
-            $result = $result && $this->createOrderItem($newItem);
+            $expected++;
+            $success += (int) $this->createOrderItem($newItem);
         }
         //====================================================================//
         // Update All Modified Order Items
         foreach ($this->object->getUpdatedItems() as $upItem) {
-            $result = $result && $this->updateOrderItem($upItem);
+            $success += (int) $this->updateOrderItem($upItem);
         }
         //====================================================================//
         // Delete All Removed Order Items
         foreach ($this->object->getDeletedItems() as $delItem) {
-            $result = $result && $this->updateOrderItem($delItem->setDeleted());
+            $success += (int)  $this->updateOrderItem($delItem->setDeleted());
         }
 
-        return $result;
+        return $expected ? ($expected == $success) : null;
     }
 
     /**
