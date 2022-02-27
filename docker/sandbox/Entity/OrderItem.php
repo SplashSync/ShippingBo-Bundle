@@ -140,16 +140,15 @@ class OrderItem implements SboObjectInterface
     /**
      * Order Line Items Price Tax Included.
      *
-     * @var int
+     * @var null|int
      *
-     * @Assert\NotNull()
      * @Assert\Type("integer")
      *
      * @ORM\Column(type="integer", nullable=true)
      *
      * @Groups({"read", "write"})
      */
-    public int $price_tax_included_cents;
+    public ?int $price_tax_included_cents;
 
     /**
      * Order Line Items Price Currency.
