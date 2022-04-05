@@ -48,6 +48,7 @@ trait RejectedTrait
     {
         $this->object = new Order();
         $this->object->id = self::$rejectedId;
+        $this->object->state = "rejected";
 
         return $this->object;
     }

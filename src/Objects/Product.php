@@ -31,6 +31,8 @@ use Splash\OpenApi\Visitor\JsonVisitor;
 
 /**
  * ShippingBo Implementation of Products
+ *
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class Product extends AbstractStandaloneObject
 {

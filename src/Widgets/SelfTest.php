@@ -21,6 +21,8 @@ use Splash\Core\SplashCore      as Splash;
 
 /**
  * ShippingBo Config SelfTest
+ *
+ * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class SelfTest extends AbstractStandaloneWidget
 {
