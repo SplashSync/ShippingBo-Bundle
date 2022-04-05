@@ -314,7 +314,7 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
     public function getPublicActions() : array
     {
         return array(
-            "webhook" => "ShippingBoBundle:WebHooks:index",
+            "index" => "ShippingBoBundle:WebHooks:index",
         );
     }
 
