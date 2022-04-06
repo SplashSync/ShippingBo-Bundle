@@ -33,7 +33,7 @@ class S01WebHookTest extends TestCase
     /**
      * Connector Webhook Action
      */
-    const ACTION = 'webhook';
+    const ACTION = 'index';
 
     /**
      * Test Connector Loading
@@ -62,15 +62,16 @@ class S01WebHookTest extends TestCase
 
         //====================================================================//
         // PING -> OK
-        $this->assertPublicActionWorks($connector, null, array(), "POST");
+        $this->assertPublicActionWorks($connector, null, array(), "GET");
         $this->assertNotEmpty($this->getResponseContents());
+        $this->assertStringContainsString("Pong", $this->getResponseContents());
+        $this->assertPublicActionWorks($connector, self::ACTION, array(), "GET");
+        $this->assertNotEmpty($this->getResponseContents());
+        $this->assertStringContainsString("Pong", $this->getResponseContents());
+
         //====================================================================//
         // POST -> FORBIDDEN
         $this->assertPublicActionFail($connector, self::ACTION, array(), "POST");
-        $this->assertEquals(JsonResponse::HTTP_BAD_REQUEST, $this->getResponseCode());
-        //====================================================================//
-        // GET -> BAD_REQUEST
-        $this->assertPublicActionFail($connector, self::ACTION, array(), "GET");
         $this->assertEquals(JsonResponse::HTTP_BAD_REQUEST, $this->getResponseCode());
         //====================================================================//
         // PUT -> BAD_REQUEST

@@ -80,6 +80,11 @@ class WebHooksController extends AbstractController
     private function verify(Request $request) : ?JsonResponse
     {
         //====================================================================//
+        // Verify Request is GET => PING
+        if ($request->isMethod('GET')) {
+            return $this->getResponse(JsonResponse::HTTP_OK, 'Pong');
+        }
+        //====================================================================//
         // Verify Request is POST
         if (!$request->isMethod('POST')) {
             return $this->getResponse(JsonResponse::HTTP_BAD_REQUEST, 'Only POST method is supported');
