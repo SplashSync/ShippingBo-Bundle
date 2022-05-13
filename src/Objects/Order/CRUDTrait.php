@@ -68,7 +68,7 @@ trait CRUDTrait
         $this->in['source'] = $this->in['source'] ?? "Splashsync";
         //====================================================================//
         // Ensure Default State
-        $this->in['state'] = $this->in['state'] ?? "rejected";
+        $this->in['state'] = $this->in['state'] ?? "waiting_for_payment";
         //====================================================================//
         // Check if Order is Allowed for Creation
         if (!$this->isAllowedDate()) {
@@ -83,7 +83,12 @@ trait CRUDTrait
         } else {
             //====================================================================//
             // Execute Core Action
-            return $this->coreCreate();
+            $order = $this->coreCreate();
+            //====================================================================//
+            // Unset State to Prevent Already Validated/Cancelled Rollback
+            unset($this->in['state']);
+
+            return $order;
         }
 
         return $this->initRejected();
