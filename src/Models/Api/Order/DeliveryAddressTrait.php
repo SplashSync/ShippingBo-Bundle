@@ -51,8 +51,8 @@ trait DeliveryAddressTrait
      * @JMS\SerializedName("relay_ref")
      * @JMS\Type("string")
      * @JMS\Groups ({"Read", "Write"})
-     * @JMS\ReadOnlyProperty()
      *
+     * @SPL\Prefer("write")
      * @SPL\Microdata({"http://schema.org/PostalAddress", "description"})
      */
     public ?string $relayRef = null;

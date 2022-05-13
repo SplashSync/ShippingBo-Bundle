@@ -80,7 +80,10 @@ trait StatusTrait
         // READ Fields
         switch ($fieldName) {
             case 'splashStatut':
-                $this->out[$fieldName] = StatusTransformer::toSplash($this->object->state);
+                $this->out[$fieldName] = StatusTransformer::isValidated($this->object->state)
+                    ? StatusTransformer::toSplash($this->object->state)
+                    : null
+                ;
 
                 break;
             case 'isValidated':

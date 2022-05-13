@@ -97,7 +97,7 @@ class StatusTransformer
      */
     public static function isValidated(string $status): bool
     {
-        return Status::isValidated(self::toSplash($status));
+        return ("waiting_for_payment" != $status) && Status::isValidated(self::toSplash($status));
     }
 
     /**
