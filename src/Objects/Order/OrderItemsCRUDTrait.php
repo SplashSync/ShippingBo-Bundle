@@ -56,11 +56,13 @@ trait OrderItemsCRUDTrait
         //====================================================================//
         // Update All Modified Order Items
         foreach ($this->object->getUpdatedItems() as $upItem) {
+            $expected++;
             $success += (int) $this->updateOrderItem($upItem);
         }
         //====================================================================//
         // Delete All Removed Order Items
         foreach ($this->object->getDeletedItems() as $delItem) {
+            $expected++;
             $success += (int)  $this->updateOrderItem($delItem->setDeleted());
         }
 
