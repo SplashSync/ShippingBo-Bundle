@@ -38,15 +38,13 @@
     "require": {
         "php":                                          "^7.4|^8.0",
         "ext-json":                                     "*",
-        "splash/php-bundle":                            "dev-master",
-        "splash/openapi":                               "dev-master",
+        "splash/openapi":                               "~1.0",
         "burgov/key-value-form-bundle":                 "@stable"
     },
     
     "require-dev": {
         "splash/console":                               "dev-master",
-        "phpro/grumphp":                                "<1.3",
-        "badpixxel/php-sdk":                            "dev-main",
+        "badpixxel/php-sdk":                            "~1.0",
 
         "symfony/symfony":                              "^3.4|^4.4",
         "symfony/monolog-bundle":                       "*",
