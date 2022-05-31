@@ -111,7 +111,7 @@ trait CRUDTrait
         //====================================================================//
         // Execute Core Action
         $response = $this->coreUpdate($needed);
-        if (false == $response) {
+        if (!$response) {
             return false;
         }
         //====================================================================//

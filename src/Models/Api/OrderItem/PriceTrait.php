@@ -98,6 +98,33 @@ trait PriceTrait
      * @JMS\Type("integer")
      */
     protected ?int $tax_cents = null;
+
+//    /**
+//     * Order Line Items Price Tax Amount.
+//     *
+//     * @var null|int
+//     *
+//     * @Assert\Type("integer")
+//     *
+//     * @JMS\SerializedName("shipping_price_tax_included_cents")
+//     * @JMS\Groups ({"Read", "Write"})
+//     * @JMS\Type("integer")
+//     */
+//    protected ?int $shipping_price_tax_included_cents = null;
+//
+//    /**
+//     * Order Line Items Price Tax Amount.
+//     *
+//     * @var null|int
+//     *
+//     * @Assert\Type("integer")
+//     *
+//     * @JMS\SerializedName("shipping_price_tax_included_cents")
+//     * @JMS\Groups ({"Read", "Write"})
+//     * @JMS\Type("integer")
+//     */
+//    protected ?int $shipping_price_cents = null;
+
     //====================================================================//
     // SPLASH PRICE FIELDS
     //====================================================================//
@@ -191,6 +218,11 @@ trait PriceTrait
         $this->price_cents = $this->toPricesInCents((float) self::prices()->taxExcluded($this->price));
         $this->tax_cents = $this->toPricesInCents((float) self::prices()->taxAmount($this->price));
         $this->price_tax_included_currency = $this->price['code'] ?? "EUR";
+
+//        $this->shipping_price_tax_included_cents = 0;
+//        $this->shipping_price_cents = 0;
+//        $this->shipping_tax_cents = 0;
+//        $this->shipping_price_tax_included_currency = 0;
     }
 
     /**

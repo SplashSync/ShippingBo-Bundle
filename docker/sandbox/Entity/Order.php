@@ -118,35 +118,25 @@ class Order implements SboObjectInterface
     //====================================================================//
 
     /**
-     * Update Order Totals
+     * Update Order Total Weight
      *
      * @return void
      */
-    public function updateTotals(): void
+    public function updateTotalWeight(): void
     {
-        $totalHt = $totalTtc = $totalTax = $totalWeight = 0;
-        $currency = "EUR";
+        $totalWeight = 0;
         //====================================================================//
         // Walk on Products
         foreach ($this->order_items as $index => $item) {
-            $totalHt += $item->price_cents ?? 0;
-            $totalTtc += $item->price_tax_included_cents ?? 0;
-            $totalTax += $item->tax_cents ?? 0;
-            $currency = $item->price_tax_included_currency ?? "EUR";
             $totalWeight += $index * 250;
         }
         //====================================================================//
         // Update Order
-        $this->total_price_cents = $totalTtc;
-        $this->total_without_tax_cents = $totalHt;
-        $this->total_tax_cents = $totalTax;
-        $this->total_price_currency = $currency;
-        $this->total_shipping_tax_included_currency = $currency;
-        $this->total_discount_tax_included_currency = $currency;
         $this->total_weight = $totalWeight;
     }
 
     /**
+     * @return array
      */
     public function getShipments()
     {

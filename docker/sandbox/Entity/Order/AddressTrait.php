@@ -51,7 +51,33 @@ trait AddressTrait
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Address")
      */
-    public $shipping_address;
+    public ?Address $shipping_address;
+
+    /**
+     * Order Billing Address ID.
+     *
+     * @var null|int
+     *
+     * @Assert\Type("integer")
+     *
+     * @ORM\Column(nullable=true)
+     *
+     * @Groups({"read", "write"})
+     */
+    public ?int $billing_address_id;
+
+    /**
+     * Order Billing Address.
+     *
+     * @var null|Address
+     *
+     * @Assert\Type("App\Entity\Address")
+     *
+     * @Groups({"read"})
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Address")
+     */
+    public ?Address $billing_address;
 
     //====================================================================//
     // ADDRESS LINK UPDATE

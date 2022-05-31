@@ -121,8 +121,8 @@ class OrderController extends AbstractController
             throw new NotFoundHttpException();
         }
         //====================================================================//
-        // Update Order Totals
-        $order->updateTotals();
+        // Update Order Total Weight
+        $order->updateTotalWeight();
 
         $this->getDoctrine()->getManager()->flush();
 

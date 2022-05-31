@@ -34,7 +34,7 @@ trait TotalsTrait
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("total_price_cents")
-     * @JMS\Groups ({"Read"})
+     * @JMS\Groups ({"Read", "Write"})
      * @JMS\Type("integer")
      */
     public ?int $total_price_cents = 0;
@@ -45,7 +45,7 @@ trait TotalsTrait
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("total_without_tax_cents")
-     * @JMS\Groups ({"Read"})
+     * @JMS\Groups ({"Read", "Write"})
      * @JMS\Type("integer")
      */
     public ?int $total_without_tax_cents = 0;
@@ -56,7 +56,7 @@ trait TotalsTrait
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("total_tax_cents")
-     * @JMS\Groups ({"Read"})
+     * @JMS\Groups ({"Read", "Write"})
      * @JMS\Type("integer")
      */
     public ?int $total_tax_cents = 0;
@@ -67,7 +67,7 @@ trait TotalsTrait
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("total_price_currency")
-     * @JMS\Groups ({"Read"})
+     * @JMS\Groups ({"Read", "Write"})
      * @JMS\Type("string")
      */
     public ?string $total_price_currency = "EUR";
@@ -82,7 +82,7 @@ trait TotalsTrait
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("total_shipping_cents")
-     * @JMS\Groups ({"Read"})
+     * @JMS\Groups ({"Read", "Write"})
      * @JMS\Type("integer")
      */
     public ?int $total_shipping_cents = 0;
@@ -93,7 +93,7 @@ trait TotalsTrait
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("total_shipping_tax_included_cents")
-     * @JMS\Groups ({"Read"})
+     * @JMS\Groups ({"Read", "Write"})
      * @JMS\Type("integer")
      */
     public ?int $total_shipping_tax_included_cents = 0;
@@ -104,7 +104,7 @@ trait TotalsTrait
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("total_shipping_tax_cents")
-     * @JMS\Groups ({"Read"})
+     * @JMS\Groups ({"Read", "Write"})
      * @JMS\Type("integer")
      */
     public ?int $total_shipping_tax_cents = 0;
@@ -115,7 +115,7 @@ trait TotalsTrait
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("total_shipping_tax_included_currency")
-     * @JMS\Groups ({"Read"})
+     * @JMS\Groups ({"Read", "Write"})
      * @JMS\Type("string")
      */
     public ?string $total_shipping_tax_included_currency = "EUR";
@@ -130,10 +130,21 @@ trait TotalsTrait
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("total_discount_tax_included_cents")
-     * @JMS\Groups ({"Read"})
+     * @JMS\Groups ({"Read", "Write"})
      * @JMS\Type("integer")
      */
     public ?int $total_discount_tax_included_cents = 0;
+
+    /**
+     * @var null|int
+     *
+     * @Assert\Type("int")
+     *
+     * @JMS\SerializedName("total_discount_cents")
+     * @JMS\Groups ({"Read", "Write"})
+     * @JMS\Type("integer")
+     */
+    public ?int $total_discount_cents = 0;
 
     /**
      * @var null|string
@@ -141,7 +152,7 @@ trait TotalsTrait
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("total_discount_tax_included_currency")
-     * @JMS\Groups ({"Read"})
+     * @JMS\Groups ({"Read", "Write"})
      * @JMS\Type("string")
      */
     public ?string $total_discount_tax_included_currency = "EUR";
@@ -171,10 +182,12 @@ trait TotalsTrait
      * @Assert\Type("array")
      *
      * @JMS\SerializedName("total_price")
-     * @JMS\Groups ({"Read"})
+     * @JMS\Groups ({"Read", "Write"})
      * @JMS\Type("array")
      *
      * @SPL\Type("price")
+     * @SPL\Prefer("export")
+     * @SPL\Microdata({"http://schema.org/Invoice", "total"})
      */
     private ?array $totalPrice = null;
 
@@ -186,10 +199,11 @@ trait TotalsTrait
      * @Assert\Type("array")
      *
      * @JMS\SerializedName("total_shipping_price")
-     * @JMS\Groups ({"Read"})
+     * @JMS\Groups ({"Read", "Write"})
      * @JMS\Type("array")
      *
      * @SPL\Type("price")
+     * @SPL\Microdata({"http://schema.org/Invoice", "totalShipping"})
      */
     private ?array $totalShippingPrice = null;
 
@@ -201,10 +215,11 @@ trait TotalsTrait
      * @Assert\Type("array")
      *
      * @JMS\SerializedName("total_dicount_price")
-     * @JMS\Groups ({"Read"})
+     * @JMS\Groups ({"Read", "Write"})
      * @JMS\Type("array")
      *
      * @SPL\Type("price")
+     * @SPL\Microdata({"http://schema.org/Invoice", "totalDiscount"})
      */
     private ?array $totalDiscountPrice = null;
 
@@ -234,6 +249,25 @@ trait TotalsTrait
     }
 
     /**
+     * Set Order Grand Total Price
+     *
+     * @param null|array $totalPrice
+     *
+     * @return void
+     */
+    public function setTotalPrice($totalPrice): void
+    {
+        if (!is_iterable($totalPrice)) {
+            return;
+        }
+
+        $this->total_price_cents = (int) (100 * self::prices()->taxIncluded($totalPrice));
+        $this->total_without_tax_cents = (int) (100 * self::prices()->taxExcluded($totalPrice));
+        $this->total_tax_cents = (int) (100 * self::prices()->taxAmount($totalPrice));
+        $this->total_price_currency = $totalPrice['code'] ?? "EUR";
+    }
+
+    /**
      * Get Order Shipping Total Price
      *
      * @return null|array
@@ -255,20 +289,63 @@ trait TotalsTrait
     }
 
     /**
+     * Set Order Shipping Total Price
+     *
+     * @param null|array $shippingPrice
+     *
+     * @return void
+     */
+    public function setTotalShippingPrice($shippingPrice): void
+    {
+        if (!is_iterable($shippingPrice)) {
+            return;
+        }
+
+        $this->total_shipping_tax_included_cents = (int) (100 * self::prices()->taxIncluded($shippingPrice));
+        $this->total_shipping_cents = (int) (100 * self::prices()->taxExcluded($shippingPrice));
+        $this->total_shipping_tax_cents = (int) (100 * self::prices()->taxAmount($shippingPrice));
+        $this->total_shipping_tax_included_currency = $shippingPrice['code'] ?? "EUR";
+    }
+
+    /**
      * Get Order Discount Total Price
      *
      * @return null|array
      */
     public function getTotalDiscountPrice(): ?array
     {
+        $vatRate = (($this->total_discount_cents ?? 0) > 0)
+            ? 100 * (($this->total_discount_tax_included_cents - $this->total_discount_cents)
+                / $this->total_discount_cents)
+            : 0.0
+        ;
+
         $price = self::prices()->encode(
-            (float) ($this->total_discount_tax_included_cents ?? 0) / 100,
-            0.0,
             null,
+            (float) $vatRate,
+            (float) ($this->total_discount_tax_included_cents ?? 0) / 100,
             $this->total_discount_tax_included_currency ?? "EUR",
         );
 
         return is_array($price) ? $price : null;
+    }
+
+    /**
+     * Set Order Discount Total Price
+     *
+     * @param null|array $discountPrice
+     *
+     * @return void
+     */
+    public function setTotalDiscountPrice($discountPrice): void
+    {
+        if (!is_iterable($discountPrice)) {
+            return;
+        }
+
+        $this->total_discount_tax_included_cents = (int) (100 * self::prices()->taxIncluded($discountPrice));
+        $this->total_discount_cents = (int) (100 * self::prices()->taxExcluded($discountPrice));
+        $this->total_discount_tax_included_currency = $discountPrice['code'] ?? "EUR";
     }
 
     //====================================================================//

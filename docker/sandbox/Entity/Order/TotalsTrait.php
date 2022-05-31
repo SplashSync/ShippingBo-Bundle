@@ -34,7 +34,7 @@ trait TotalsTrait
      * @Assert\NotNull()
      * @Assert\Type("int")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="integer", options={"default" : 0})
      */
@@ -46,7 +46,7 @@ trait TotalsTrait
      * @Assert\NotNull()
      * @Assert\Type("int")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="integer", options={"default" : 0})
      */
@@ -58,7 +58,7 @@ trait TotalsTrait
      * @Assert\NotNull()
      * @Assert\Type("int")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="integer", options={"default" : 0})
      */
@@ -70,7 +70,7 @@ trait TotalsTrait
      * @Assert\NotNull()
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", options={"default" : "EUR"})
      */
@@ -143,6 +143,18 @@ trait TotalsTrait
      * @ORM\Column(type="integer", options={"default" : 0})
      */
     public int $total_discount_tax_included_cents = 0;
+
+    /**
+     * @var int
+     *
+     * @Assert\NotNull()
+     * @Assert\Type("int")
+     *
+     * @Groups({"read"})
+     *
+     * @ORM\Column(type="integer", options={"default" : 0})
+     */
+    public int $total_discount_cents = 0;
 
     /**
      * @var string

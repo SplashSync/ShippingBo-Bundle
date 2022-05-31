@@ -31,7 +31,7 @@ class Hydrator extends BaseHydrator
      */
     public function extract(object $object): array
     {
-        return array_filter(parent::extract($object));
+        return self::filter(parent::extract($object));
     }
 
     /**
@@ -43,7 +43,7 @@ class Hydrator extends BaseHydrator
      */
     public function extractRequired(object $object): array
     {
-        return array_filter(parent::extractRequired($object));
+        return self::filter(parent::extractRequired($object));
     }
 
     /**
@@ -76,5 +76,22 @@ class Hydrator extends BaseHydrator
             $data[constant($type."::COLLECTION_PROP")] ?? array(),
             $type
         );
+    }
+
+    /**
+     * Filter Output Data to Remove Nul Values
+     */
+    private static function filter(array $data): array
+    {
+        return array_filter($data, function ($value) {
+            if (is_null($value)) {
+                return false;
+            }
+            if (is_array($value) && empty($value)) {
+                return false;
+            }
+
+            return true;
+        });
     }
 }

@@ -49,7 +49,7 @@
 <!--        <const  name="SPLASH_TYPES" value="Product" />-->
 <!--        <const  name="SPLASH_TYPES" value="Order" />-->
 <!--        <const  name="SPLASH_FIELDS" value="shippingAddress__phone1" />-->
-<!--        <const  name="SPLASH_FIELDS" value="discount@items" />-->
+<!--        <const  name="SPLASH_FIELDS" value="totalPrice" />-->
     </php>
 
 </phpunit>

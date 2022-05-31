@@ -43,6 +43,23 @@ trait DeliveryAddressTrait
     public ?string $shipping_address_id;
 
     /**
+     * Order Billing Address ID.
+     *
+     * @var null|string
+     *
+     * @Assert\Type("string")
+     *
+     * @JMS\SerializedName("billing_address_id")
+     * @JMS\Type("integer")
+     * @JMS\Groups ({"Read", "Write"})
+     * @JMS\Accessor(getter="getBillingAddressId",setter="setBillingAddressId")
+     *
+     * @SPL\Type ("objectid::Address")
+     * @SPL\Microdata({"http://schema.org/Order", "billingAddress"})
+     */
+    public ?string $billing_address_id;
+
+    /**
      * Order Delivery Relay Code.
      *
      * @var null|string
@@ -81,6 +98,7 @@ trait DeliveryAddressTrait
      * @JMS\SerializedName("billing_address")
      * @JMS\Type("Splash\Connectors\ShippingBo\Models\Api\Address")
      * @JMS\Groups ({"Read"})
+     * @JMS\Accessor(setter="setBillingAddress")
      *
      * @Assert\Type("Splash\Connectors\ShippingBo\Models\Api\Address")
      *
@@ -123,6 +141,46 @@ trait DeliveryAddressTrait
             ? (string) self::objects()->encode("Address", (string) $shippingAddressId)
             : null
         ;
+
+        return $this;
+    }
+
+    /**
+     * @return null|int
+     */
+    public function getBillingAddressId(): ?int
+    {
+        if ($this->billing_address_id ?? null) {
+            return (int) self::objects()->id((string) $this->billing_address_id);
+        }
+
+        return null;
+    }
+
+    /**
+     * @param null|int $billingAddressId
+     *
+     * @return self
+     */
+    public function setBillingAddressId(?int $billingAddressId): self
+    {
+        $this->billing_address_id = $billingAddressId
+            ? (string) self::objects()->encode("Address", (string) $billingAddressId)
+            : null
+        ;
+
+        return $this;
+    }
+
+    /**
+     * @param null|Address $billingAddress
+     *
+     * @return self
+     */
+    public function setBillingAddress(?Address $billingAddress): self
+    {
+        $this->billingAddress = $billingAddress;
+        $this->setBillingAddressId(!empty($billingAddress->id) ? (int) $billingAddress->id : null);
 
         return $this;
     }
