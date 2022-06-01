@@ -67,6 +67,7 @@ class Order
         "total_shipping_tax_cents",
         "total_shipping_tax_included_currency",
         // Discounts Total
+        "total_discount_cents",
         "total_discount_tax_included_cents",
         "total_discount_tax_included_currency",
     );
