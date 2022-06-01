@@ -186,7 +186,6 @@ trait TotalsTrait
      * @JMS\Type("array")
      *
      * @SPL\Type("price")
-     * @SPL\Prefer("export")
      * @SPL\Microdata({"http://schema.org/Invoice", "total"})
      */
     private ?array $totalPrice = null;
