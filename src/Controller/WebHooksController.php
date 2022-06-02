@@ -19,6 +19,7 @@ use Splash\Bundle\Models\AbstractConnector;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
@@ -67,7 +68,7 @@ class WebHooksController extends AbstractController
             return $error;
         }
 
-        return $this->getResponse(JsonResponse::HTTP_OK, 'Changes notified');
+        return $this->getResponse(Response::HTTP_OK, 'Changes notified');
     }
 
     /**
@@ -82,12 +83,12 @@ class WebHooksController extends AbstractController
         //====================================================================//
         // Verify Request is GET => PING
         if ($request->isMethod('GET')) {
-            return $this->getResponse(JsonResponse::HTTP_OK, 'Pong');
+            return $this->getResponse(Response::HTTP_OK, 'Pong');
         }
         //====================================================================//
         // Verify Request is POST
         if (!$request->isMethod('POST')) {
-            return $this->getResponse(JsonResponse::HTTP_BAD_REQUEST, 'Only POST method is supported');
+            return $this->getResponse(Response::HTTP_BAD_REQUEST, 'Only POST method is supported');
         }
 
         return null;
@@ -105,6 +106,7 @@ class WebHooksController extends AbstractController
         $this->objectType = $this->objectId = null;
         //====================================================================//
         // Detect Posted Contents
+        /** @var array $rawData */
         $rawData = $request->getContent()
             ? json_decode((string) $request->getContent(), true)
             : $request->request->all()
@@ -112,13 +114,13 @@ class WebHooksController extends AbstractController
         //====================================================================//
         // Contents Include Object Class
         if (empty($rawData) || !isset($rawData["object_class"]) || !is_scalar($rawData["object_class"])) {
-            return $this->getResponse(JsonResponse::HTTP_BAD_REQUEST, 'Malformed or missing data...');
+            return $this->getResponse(Response::HTTP_BAD_REQUEST, 'Malformed or missing data...');
         }
         $this->objectType = (string) $rawData["object_class"];
         //====================================================================//
         // Contents Include Objects Infos
         if (!isset($rawData["object"]) || !is_array($rawData["object"]) || empty($rawData["object"]['id'])) {
-            return $this->getResponse(JsonResponse::HTTP_BAD_REQUEST, 'Malformed or missing data...');
+            return $this->getResponse(Response::HTTP_BAD_REQUEST, 'Malformed or missing data...');
         }
         $this->objectId = (string) $rawData["object"]['id'];
 
@@ -137,12 +139,12 @@ class WebHooksController extends AbstractController
         //====================================================================//
         // Validate Object Data Type
         if (!in_array($this->objectType, array("Order", "Product"), true)) {
-            return $this->getResponse(JsonResponse::HTTP_BAD_REQUEST, 'Wrong object type');
+            return $this->getResponse(Response::HTTP_BAD_REQUEST, 'Wrong object type');
         }
         //====================================================================//
         // Validate Object ID
         if (empty($this->objectId)) {
-            return $this->getResponse(JsonResponse::HTTP_BAD_REQUEST, 'Wrong object id');
+            return $this->getResponse(Response::HTTP_BAD_REQUEST, 'Wrong object id');
         }
         //==============================================================================
         // Commit Change for Object

@@ -1,3 +1,4 @@
+/.env
 /vendor/
 /.gh-pages/
 /public/

@@ -143,7 +143,9 @@ abstract class AbstractShippingBoType extends AbstractType
     protected function addShippingMethodsField(FormBuilderInterface $builder): self
     {
         try {
-            $choices = $builder->getData()["ShippingMethodChoices"];
+            /** @var array $data */
+            $data = $builder->getData();
+            $choices = $data["ShippingMethodChoices"] ?? array();
         } catch (Throwable $ex) {
             $choices = self::getStaticShippingMethodsChoices();
         }

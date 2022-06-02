@@ -31,15 +31,17 @@ trait CRUDTrait
     /**
      * @throws Exception
      *
-     * @return false|Product
+     * @return null|Product
      */
-    public function create()
+    public function create(): ?Product
     {
         //====================================================================//
         // Ensure Default Source
         $this->in['source'] = $this->in['source'] ?? "Splashsync";
         //====================================================================//
         // Execute Core Action
-        return $this->coreCreate();
+        $product = $this->coreCreate();
+
+        return ($product instanceof Product) ? $product : null;
     }
 }

@@ -36,15 +36,15 @@
     },
 
     "require": {
-        "php":                                          "^7.4|^8.0",
+        "php":                                          "^8.0",
         "ext-json":                                     "*",
-        "splash/openapi":                               "~1.0",
+        "splash/openapi":                               "dev-master",
         "burgov/key-value-form-bundle":                 "@stable"
     },
     
     "require-dev": {
         "splash/console":                               "dev-master",
-        "badpixxel/php-sdk":                            "~1.0",
+        "badpixxel/php-sdk":                            "~2.0",
 
         "symfony/symfony":                              "^3.4|^4.4",
         "symfony/monolog-bundle":                       "*",

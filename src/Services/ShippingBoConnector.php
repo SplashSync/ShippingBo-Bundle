@@ -56,7 +56,7 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
     /**
      * Widgets Type Class Map
      *
-     * @var array
+     * @var array<string, class-string>
      */
     protected static array $widgetsMap = array(
         "SelfTest" => Widgets\SelfTest::class,
@@ -211,18 +211,18 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
      *
      * @throws Exception
      */
-    public function getFile(string $filePath, string $fileMd5)
+    public function getFile(string $filePath, string $fileMd5): ?array
     {
         //====================================================================//
         // Safety Check => Verify Self-test Pass
         if (!$this->selfTest()) {
-            return false;
+            return null;
         }
         //====================================================================//
         // Read File Contents via Raw Get Request
         $rawResponse = $this->getConnexion()->getRaw($filePath);
         if (!$rawResponse || (md5($rawResponse) != $fileMd5)) {
-            return false;
+            return null;
         }
         //====================================================================//
         // Build File Array

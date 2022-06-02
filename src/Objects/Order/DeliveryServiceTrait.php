@@ -51,9 +51,9 @@ trait DeliveryServiceTrait
      * Write Given Fields
      *
      * @param string $fieldName Field Identifier / Name
-     * @param mixed  $fieldData Field Data
+     * @param string|null $fieldData Field Data
      */
-    protected function setDeliveryServiceFields(string $fieldName, $fieldData): void
+    protected function setDeliveryServiceFields(string $fieldName, ?string $fieldData): void
     {
         //====================================================================//
         // WRITE Field

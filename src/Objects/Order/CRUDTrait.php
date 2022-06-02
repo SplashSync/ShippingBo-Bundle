@@ -36,9 +36,9 @@ trait CRUDTrait
      *
      * @param string $objectId Object id
      *
-     * @return bool|Order
+     * @return null|Order
      */
-    public function load($objectId)
+    public function load(string $objectId): ?Order
     {
         //====================================================================//
         // Stack Trace
@@ -50,15 +50,17 @@ trait CRUDTrait
         }
         //====================================================================//
         // Execute Core Action
-        return $this->coreLoad($objectId);
+        $order = $this->coreLoad($objectId);
+
+        return ($order instanceof Order) ? $order : null;
     }
 
     /**
      * @throws Exception
      *
-     * @return false|Order
+     * @return null|Order
      */
-    public function create()
+    public function create(): ?Order
     {
         //====================================================================//
         // Stack Trace
@@ -88,7 +90,7 @@ trait CRUDTrait
             // Unset State to Prevent Already Validated/Cancelled Rollback
             unset($this->in['state']);
 
-            return $order;
+            return ($order instanceof Order) ? $order : null;
         }
 
         return $this->initRejected();
@@ -99,9 +101,9 @@ trait CRUDTrait
      *
      * @throws Exception
      *
-     * @return false|string Object ID of False if Failed to Update
+     * @return null|string Object ID of False if Failed to Update
      */
-    public function update(bool $needed)
+    public function update(bool $needed): ?string
     {
         //====================================================================//
         // Detect Rejected Order Id => Init Rejected Object
@@ -112,12 +114,12 @@ trait CRUDTrait
         // Execute Core Action
         $response = $this->coreUpdate($needed);
         if (!$response) {
-            return false;
+            return null;
         }
         //====================================================================//
         // Update Order Shipping Address
         if ($this->isToUpdate("ShippingAddress") && !$this->updateShippingAddress()) {
-            return false;
+            return null;
         }
         //====================================================================//
         // Update Order Items
@@ -126,12 +128,12 @@ trait CRUDTrait
             //====================================================================//
             // Update Order Items Fail
             if (false === $itemsUpdate) {
-                return false;
+                return null;
             }
             //====================================================================//
             // Update Order Items Done
             if ((true === $itemsUpdate) && (!$this->computeOrderItems())) {
-                return false;
+                return null;
             }
         }
 

@@ -31,8 +31,6 @@ use Splash\OpenApi\Visitor\JsonVisitor;
 
 /**
  * ShippingBo Implementation of Products
- *
- * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class Product extends AbstractStandaloneObject
 {
@@ -62,26 +60,26 @@ class Product extends AbstractStandaloneObject
     /**
      * {@inheritdoc}
      */
-    protected static $NAME = "Product";
+    protected static string $name = "Product";
 
     /**
      * {@inheritdoc}
      */
-    protected static $DESCRIPTION = "ShippingBo Product Object";
+    protected static string $description = "ShippingBo Product Object";
 
     /**
      * {@inheritdoc}
      */
-    protected static $ICO = "fa fa-product-hunt";
+    protected static string $ico = "fa fa-product-hunt";
 
     //====================================================================//
     // General Class Variables
     //====================================================================//
 
     /**
-     * @var Api\Product
+     * @phpstan-var  Api\Product
      */
-    protected $object;
+    protected object $object;
 
     /**
      * Open Api Shipment Visitor
@@ -120,13 +118,13 @@ class Product extends AbstractStandaloneObject
     {
         //====================================================================//
         // Default Configuration
-        self::$ENABLE_PUSH_DELETED = false;
-        self::$ENABLE_PULL_CREATED = false;
-        self::$ENABLE_PULL_DELETED = false;
+        self::$enablePushDeleted = false;
+        self::$enablePullCreated = false;
+        self::$enablePullDeleted = false;
         //====================================================================//
         // Production Configuration
         if (!$this->connector->isSandbox()) {
-            self::$ALLOW_PUSH_DELETED = false;
+            self::$allowPushDeleted = false;
         }
 
         return parent::description();

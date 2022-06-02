@@ -28,7 +28,7 @@ trait DatesFilterTrait
      *
      * @return bool
      */
-    protected function isAllowedDate(): ?bool
+    protected function isAllowedDate(): bool
     {
         //====================================================================//
         // Check If Min Date was Selected
@@ -50,7 +50,7 @@ trait DatesFilterTrait
         } catch (\Exception $e) {
             return Splash::log()->err(sprintf(
                 "Unable to parse origin_created_at: %s",
-                $this->in["createdAt"]
+                $this->in["origin_created_at"]
             ));
         }
         //====================================================================//

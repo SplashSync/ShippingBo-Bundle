@@ -31,8 +31,6 @@ use Splash\OpenApi\Visitor\JsonVisitor;
 
 /**
  * ShippingBo Implementation of Customers Orders
- *
- * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class Order extends AbstractStandaloneObject
 {
@@ -72,26 +70,26 @@ class Order extends AbstractStandaloneObject
     /**
      * {@inheritdoc}
      */
-    protected static $NAME = "Customer Order";
+    protected static string $name = "Customer Order";
 
     /**
      * {@inheritdoc}
      */
-    protected static $DESCRIPTION = "ShippingBo Order Object";
+    protected static string $description = "ShippingBo Order Object";
 
     /**
      * {@inheritdoc}
      */
-    protected static $ICO = "fa fa-shopping-cart";
+    protected static string $ico = "fa fa-shopping-cart";
 
     //====================================================================//
     // General Class Variables
     //====================================================================//
 
     /**
-     * @var Api\Order
+     * @phpstan-var  Api\Order
      */
-    protected $object;
+    protected object $object;
 
     /**
      * Open Api Shipment Visitor
@@ -130,13 +128,13 @@ class Order extends AbstractStandaloneObject
     {
         //====================================================================//
         // Default Configuration
-        self::$ENABLE_PULL_CREATED = false;
-        self::$ENABLE_PULL_DELETED = false;
-        self::$ENABLE_PUSH_DELETED = false;
+        self::$enablePullCreated = false;
+        self::$enablePullDeleted = false;
+        self::$enablePushDeleted = false;
         //====================================================================//
         // Production Configuration
         if (!$this->connector->isSandbox()) {
-            self::$ALLOW_PUSH_DELETED = false;
+            self::$allowPushDeleted = false;
         }
 
         return parent::description();

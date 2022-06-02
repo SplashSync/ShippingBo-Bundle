@@ -21,15 +21,13 @@ use Splash\Core\SplashCore      as Splash;
 
 /**
  * ShippingBo Config SelfTest
- *
- * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class SelfTest extends AbstractStandaloneWidget
 {
     /**
      * {@inheritdoc}
      */
-    public static $OPTIONS = array(
+    public static array $options = array(
         "Width" => self::SIZE_DEFAULT,
         'UseCache' => true,
         'CacheLifeTime' => 1,
@@ -38,17 +36,17 @@ class SelfTest extends AbstractStandaloneWidget
     /**
      * {@inheritdoc}
      */
-    protected static $NAME = "Server SelfTest";
+    protected static string $name = "Server SelfTest";
 
     /**
      * {@inheritdoc}
      */
-    protected static $DESCRIPTION = "Results of your Server SelfTests";
+    protected static string $description = "Results of your Server SelfTests";
 
     /**
      * {@inheritdoc}
      */
-    protected static $ICO = "fa fa-info-circle";
+    protected static string $ico = "fa fa-info-circle";
 
     /**
      * @var ShippingBoConnector
@@ -66,15 +64,11 @@ class SelfTest extends AbstractStandaloneWidget
     }
 
     /**
-     * Return requested Customer Data
-     *
-     * @param array $params Widget Inputs Parameters
-     *
-     * @return array
+     * {@inheritdoc}
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function get($params = null)
+    public function get(array $parameters = array()): array
     {
         //====================================================================//
         // Stack Trace

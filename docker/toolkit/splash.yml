@@ -27,7 +27,7 @@ splash:
             name:               ShippingBo Sandbox
             connector:          shippingbo
             ########################################################################
-            # FAKE CREDENTIALS : ASK YOURS TO YOUR MAIN RECOMMERCE CONTACT
+            # FAKE CREDENTIALS : ASK YOURS TO YOUR MAIN SHIPPING BO CONTACT
             ########################################################################
             config:
                 WsHost:             http://sandbox.shipping-bo.local
@@ -45,12 +45,12 @@ splash:
             name:               ShippingBo Staging
             connector:          shippingbo
             ########################################################################
-            # FAKE CREDENTIALS : ASK YOURS TO YOUR MAIN RECOMMERCE CONTACT
+            # FAKE CREDENTIALS : ASK YOURS TO YOUR MAIN SHIPPING BO CONTACT
             ########################################################################
             config:
                 WsHost:         https://app.shippingbo.com
-                ApiUser:        ThisIsApiUser
-                ApiKey:         ThisIsSecretApiKey
+                ApiUser:        '%env(resolve:SBO_STAGING_API_USER)%'
+                ApiKey:         '%env(resolve:SBO_STAGING_API_KEY)%'
 
     test:
         VAT: 0

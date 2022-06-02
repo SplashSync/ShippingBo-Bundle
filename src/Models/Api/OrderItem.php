@@ -150,7 +150,7 @@ class OrderItem
      */
     public function __toString(): string
     {
-        return 'Order Item '.$this->id ?? "NEW";
+        return 'Order Item '.($this->id ?? "NEW");
     }
 
     /**

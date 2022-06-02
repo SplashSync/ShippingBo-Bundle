@@ -31,8 +31,6 @@ use Splash\OpenApi\Visitor\JsonVisitor;
 
 /**
  * ShippingBo Implementation of Customers Addresses
- *
- * @SuppressWarnings(PHPMD.CamelCasePropertyName)
  */
 class Address extends AbstractStandaloneObject
 {
@@ -57,26 +55,26 @@ class Address extends AbstractStandaloneObject
     /**
      * {@inheritdoc}
      */
-    protected static $NAME = "Customer Address";
+    protected static string $name = "Customer Address";
 
     /**
      * {@inheritdoc}
      */
-    protected static $DESCRIPTION = "ShippingBo Address Object";
+    protected static string $description = "ShippingBo Address Object";
 
     /**
      * {@inheritdoc}
      */
-    protected static $ICO = "fa fa-envelope";
+    protected static string $ico = "fa fa-envelope";
 
     //====================================================================//
     // General Class Variables
     //====================================================================//
 
     /**
-     * @var Api\Address
+     * @phpstan-var  Api\Address
      */
-    protected $object;
+    protected object $object;
 
     /**
      * Open Api Shipment Visitor
@@ -116,13 +114,13 @@ class Address extends AbstractStandaloneObject
         //====================================================================//
         // Production Configuration
         if (!$this->connector->isSandbox()) {
-            self::$ALLOW_PUSH_DELETED = false;
+            self::$allowPushDeleted = false;
         }
         //====================================================================//
         // Default Configuration
-        self::$ENABLE_PULL_CREATED = false;
-        self::$ENABLE_PULL_DELETED = false;
-        self::$ENABLE_PUSH_DELETED = false;
+        self::$enablePullCreated = false;
+        self::$enablePullDeleted = false;
+        self::$enablePushDeleted = false;
 
         return parent::description();
     }
