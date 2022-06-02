@@ -45,6 +45,8 @@ services:
             - './tests/Controller:/app/tests/Controller/:ro'
             - './phpunit.xml.dist:/app/phpunit.xml.dist:ro'
         hostname:           toolkit.shipping-bo.local
+        env_file:
+            -   .env
         networks:
             shippingbo:     { ipv4_address: 172.108.0.100, aliases: [ toolkit.shipping-bo.local ] }
             splashsync:     { aliases: [ toolkit.shipping-bo.local ] }
