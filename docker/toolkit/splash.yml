@@ -53,5 +53,6 @@ splash:
                 ApiKey:         ThisIsSecretApiKey
 
     test:
+        VAT: 0
         DoublesPrecision:   1
         PricesPrecision:    2
