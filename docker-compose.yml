@@ -46,7 +46,7 @@ services:
             - './phpunit.xml.dist:/app/phpunit.xml.dist:ro'
         hostname:           toolkit.shipping-bo.local
         networks:
-            recommerce:     { ipv4_address: 172.108.0.100, aliases: [ toolkit.shipping-bo.local ] }
+            shippingbo:     { ipv4_address: 172.108.0.100, aliases: [ toolkit.shipping-bo.local ] }
             splashsync:     { aliases: [ toolkit.shipping-bo.local ] }
 
     ################################################################################
@@ -62,7 +62,7 @@ services:
             - './docker/sandbox/shippingbo.yml:/srv/api/config/packages/shippingbo.yml:ro'
         hostname:           sandbox.shipping-bo.local
         networks:
-            recommerce:     { ipv4_address: 172.108.0.200, aliases: [ sandbox.shipping-bo.local ] }
+            shippingbo:     { ipv4_address: 172.108.0.200, aliases: [ sandbox.shipping-bo.local ] }
             splashsync:     { aliases: [ sandbox.shipping-bo.local ] }
 
     ################################################################################
@@ -86,7 +86,7 @@ services:
 networks:
     ################################################################################
     # Default Private Network    
-    recommerce:
+    shippingbo:
         driver: bridge
         ipam:
             config:

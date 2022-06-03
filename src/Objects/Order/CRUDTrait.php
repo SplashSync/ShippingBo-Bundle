@@ -16,6 +16,8 @@
 namespace Splash\Connectors\ShippingBo\Objects\Order;
 
 use Exception;
+use Splash\Connectors\ShippingBo\DataTransformer\TotalsTransformer;
+use Splash\Connectors\ShippingBo\Hydrator\Hydrator;
 use Splash\Connectors\ShippingBo\Models\Api\Order;
 use Splash\Core\SplashCore as Splash;
 use Splash\OpenApi\Models\Objects\CRUDTrait as OpenApiCRUDTrait;
@@ -81,6 +83,11 @@ trait CRUDTrait
             // Filtered By Origin
             $this->logFilteredOrigin();
         } else {
+            //====================================================================//
+            // Complete Create Request with Items Attributes
+            /** @var Hydrator $hydrator */
+            $hydrator = $this->getVisitor()->getHydrator();
+            $hydrator->setExtractExtra(TotalsTransformer::getInitialValues($this->in));
             //====================================================================//
             // Execute Core Action
             $order = $this->coreCreate();

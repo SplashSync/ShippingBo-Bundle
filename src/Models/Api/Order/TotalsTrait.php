@@ -182,7 +182,7 @@ trait TotalsTrait
      * @Assert\Type("array")
      *
      * @JMS\SerializedName("total_price")
-     * @JMS\Groups ({"Read", "Write"})
+     * @JMS\Groups ({"Read", "Write", "Required"})
      * @JMS\Type("array")
      *
      * @SPL\Type("price")
@@ -198,7 +198,7 @@ trait TotalsTrait
      * @Assert\Type("array")
      *
      * @JMS\SerializedName("total_shipping_price")
-     * @JMS\Groups ({"Read", "Write"})
+     * @JMS\Groups ({"Read", "Write", "Required"})
      * @JMS\Type("array")
      *
      * @SPL\Type("price")
@@ -214,7 +214,7 @@ trait TotalsTrait
      * @Assert\Type("array")
      *
      * @JMS\SerializedName("total_dicount_price")
-     * @JMS\Groups ({"Read", "Write"})
+     * @JMS\Groups ({"Read", "Write", "Required"})
      * @JMS\Type("array")
      *
      * @SPL\Type("price")
