@@ -93,7 +93,8 @@ functional:
     before_script:
         # Install Git, Bash, Curl & Docker Compose
         - apk add --no-cache curl bash git docker-compose
-        - echo "# Nothing Here" > .env
+        - echo "SBO_STAGING_API_USER=None" > .env
+        - echo "SBO_STAGING_API_KEY=None" > .env
         # Install & Build Docker Compose
         - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/toolkit/build.sh  | bash
 
