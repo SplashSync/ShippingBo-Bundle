@@ -39,14 +39,13 @@ services:
         container_name: toolkit.shipping-bo.local
         volumes:
             # Specify Local Configuration File
+            - ./.env:/app/.env:ro
             - './docker/toolkit/splash.yml:/app/config/packages/splash.yml:ro'
             # Uncomment to use Local Sources instead of Release
             - './:/app/vendor/splash/shippingbo/:ro'
             - './tests/Controller:/app/tests/Controller/:ro'
             - './phpunit.xml.dist:/app/phpunit.xml.dist:ro'
         hostname:           toolkit.shipping-bo.local
-        env_file:
-            -   .env
         networks:
             shippingbo:     { ipv4_address: 172.108.0.100, aliases: [ toolkit.shipping-bo.local ] }
             splashsync:     { aliases: [ toolkit.shipping-bo.local ] }
