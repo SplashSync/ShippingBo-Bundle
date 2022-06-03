@@ -55,5 +55,20 @@
         "doctrine/orm":                                 "^2.6",
 
         "fzaninotto/faker":                             "^1.8"
+    },
+
+    "scripts": {
+        "auto-scripts": [
+            "rm -Rf vendor/splash/phpcore/Tests/Tools/TestCase.php",
+            "php tests/console cache:clear",
+            "cd var/cache/dev && ln -sf testsKernelDevDebugContainer.xml testContainer.xml"
+        ],
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ]
     }
+
 }
