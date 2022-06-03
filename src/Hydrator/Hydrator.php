@@ -23,6 +23,13 @@ use Splash\OpenApi\Hydrator\Hydrator as BaseHydrator;
 class Hydrator extends BaseHydrator
 {
     /**
+     * Additional Data for Extractor
+     *
+     * @var array
+     */
+    private array $extractExtras = array();
+
+    /**
      * Extracts data from an object.
      *
      * @param object $object
@@ -31,7 +38,13 @@ class Hydrator extends BaseHydrator
      */
     public function extract(object $object): array
     {
-        return self::filter(parent::extract($object));
+        $data = self::filter(array_merge(
+            parent::extract($object),
+            $this->extractExtras
+        ));
+        $this->extractExtras = array();
+
+        return $data;
     }
 
     /**
@@ -43,7 +56,13 @@ class Hydrator extends BaseHydrator
      */
     public function extractRequired(object $object): array
     {
-        return self::filter(parent::extractRequired($object));
+        $data = self::filter(array_merge(
+            parent::extractRequired($object),
+            $this->extractExtras
+        ));
+        $this->extractExtras = array();
+
+        return $data;
     }
 
     /**
@@ -76,6 +95,18 @@ class Hydrator extends BaseHydrator
             $data[constant($type."::COLLECTION_PROP")] ?? array(),
             $type
         );
+    }
+
+    /**
+     * Add Data to Next Extract from an object.
+     *
+     * @param array $extraData
+     *
+     * @return void
+     */
+    public function setExtractExtra(array $extraData): void
+    {
+        $this->extractExtras = $extraData;
     }
 
     /**
