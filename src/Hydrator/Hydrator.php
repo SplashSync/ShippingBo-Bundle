@@ -15,7 +15,6 @@
 
 namespace Splash\Connectors\ShippingBo\Hydrator;
 
-use Splash\Client\Splash;
 use Splash\OpenApi\Hydrator\Hydrator as BaseHydrator;
 
 /**
