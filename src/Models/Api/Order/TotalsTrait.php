@@ -16,6 +16,7 @@
 namespace Splash\Connectors\ShippingBo\Models\Api\Order;
 
 use JMS\Serializer\Annotation as JMS;
+use Splash\Connectors\ShippingBo\DataTransformer\PriceTransformer as PT;
 use Splash\OpenApi\Validator as SPL;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -260,9 +261,9 @@ trait TotalsTrait
             return;
         }
 
-        $this->total_price_cents = (int) (100 * self::prices()->taxIncluded($totalPrice));
-        $this->total_without_tax_cents = (int) (100 * self::prices()->taxExcluded($totalPrice));
-        $this->total_tax_cents = (int) (100 * self::prices()->taxAmount($totalPrice));
+        $this->total_price_cents = PT::toCents((float) self::prices()->taxIncluded($totalPrice));
+        $this->total_without_tax_cents = PT::toCents((float) self::prices()->taxExcluded($totalPrice));
+        $this->total_tax_cents = PT::toCents((float) self::prices()->taxAmount($totalPrice));
         $this->total_price_currency = $totalPrice['code'] ?? "EUR";
     }
 
@@ -278,7 +279,7 @@ trait TotalsTrait
             : 0
         ;
         $price = self::prices()->encode(
-            (float) ($this->total_shipping_cents ?? 0) / 100,
+            (float) (($this->total_shipping_cents ?? 0) / 100),
             (float) $vatRate,
             null,
             $this->total_shipping_tax_included_currency ?? "EUR",
@@ -300,9 +301,9 @@ trait TotalsTrait
             return;
         }
 
-        $this->total_shipping_tax_included_cents = (int) (100 * self::prices()->taxIncluded($shippingPrice));
-        $this->total_shipping_cents = (int) (100 * self::prices()->taxExcluded($shippingPrice));
-        $this->total_shipping_tax_cents = (int) (100 * self::prices()->taxAmount($shippingPrice));
+        $this->total_shipping_tax_included_cents = PT::toCents((float) self::prices()->taxIncluded($shippingPrice));
+        $this->total_shipping_cents = PT::toCents((float) self::prices()->taxExcluded($shippingPrice));
+        $this->total_shipping_tax_cents = PT::toCents((float) self::prices()->taxAmount($shippingPrice));
         $this->total_shipping_tax_included_currency = $shippingPrice['code'] ?? "EUR";
     }
 
@@ -342,8 +343,8 @@ trait TotalsTrait
             return;
         }
 
-        $this->total_discount_tax_included_cents = (int) (100 * self::prices()->taxIncluded($discountPrice));
-        $this->total_discount_cents = (int) (100 * self::prices()->taxExcluded($discountPrice));
+        $this->total_discount_tax_included_cents = PT::toCents((float) self::prices()->taxIncluded($discountPrice));
+        $this->total_discount_cents = PT::toCents((float) self::prices()->taxExcluded($discountPrice));
         $this->total_discount_tax_included_currency = $discountPrice['code'] ?? "EUR";
     }
 

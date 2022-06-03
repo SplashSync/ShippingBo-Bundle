@@ -17,6 +17,7 @@ namespace Splash\Connectors\ShippingBo\Models\Api\OrderItem;
 
 use ArrayObject;
 use JMS\Serializer\Annotation as JMS;
+use Splash\Connectors\ShippingBo\DataTransformer\PriceTransformer as PT;
 use Splash\OpenApi\Validator as SPL;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -204,15 +205,15 @@ trait PriceTrait
     private function toPricesInCents(float $amount): int
     {
         //====================================================================//
-        // Convert Price to Cents
-        $cents = 100 * ($this->quantity ?? 1) * $amount;
+        // Convert Unit to Total Price
+        $price = ($this->quantity ?? 1) * $amount;
         //====================================================================//
         // Apply Discount
         if ($this->discount > 0) {
-            $cents -= $this->discount * $cents / 100;
+            $price -= $this->discount * $price / 100;
         }
 
-        return (int) $cents;
+        return PT::toCents($price);
     }
 
     /**
