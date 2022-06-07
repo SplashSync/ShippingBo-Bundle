@@ -1313,12 +1313,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SplashSync/Php-Core.git",
-                "reference": "1349ffa8cedc2877e52aa9ca572d0f83e60a2180"
+                "reference": "3acf75a1c841f66499ac66e7e30b4aa7c17e2814"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SplashSync/Php-Core/zipball/1349ffa8cedc2877e52aa9ca572d0f83e60a2180",
-                "reference": "1349ffa8cedc2877e52aa9ca572d0f83e60a2180",
+                "url": "https://api.github.com/repos/SplashSync/Php-Core/zipball/3acf75a1c841f66499ac66e7e30b4aa7c17e2814",
+                "reference": "3acf75a1c841f66499ac66e7e30b4aa7c17e2814",
                 "shasum": ""
             },
             "require": {
@@ -1365,7 +1365,7 @@
                 "issues": "https://github.com/SplashSync/Php-Core/issues",
                 "source": "https://github.com/SplashSync/Php-Core/tree/master"
             },
-            "time": "2022-05-30T14:25:27+00:00"
+            "time": "2022-06-07T09:28:37+00:00"
         },
         {
             "name": "symfony/contracts",

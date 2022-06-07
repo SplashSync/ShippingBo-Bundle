@@ -16,6 +16,7 @@
 namespace Splash\Connectors\ShippingBo\Models\Api\Product;
 
 use JMS\Serializer\Annotation as JMS;
+use Splash\Models\Helpers\ImagesHelper;
 use Splash\Models\Objects\ImagesTrait;
 use Splash\OpenApi\Validator as SPL;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -26,6 +27,13 @@ use Symfony\Component\Validator\Constraints as Assert;
 trait ProductImageTrait
 {
     use ImagesTrait;
+
+    /**
+     * @var null|ImagesHelper
+     *
+     * @JMS\Exclude
+     */
+    private static ?ImagesHelper $imagesHelper = null;
 
     /**
      * Product Picture Url.

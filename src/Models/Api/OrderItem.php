@@ -16,6 +16,7 @@
 namespace Splash\Connectors\ShippingBo\Models\Api;
 
 use JMS\Serializer\Annotation as JMS;
+use Splash\Models\Helpers\PricesHelper;
 use Splash\Models\Objects\PricesTrait;
 use Splash\OpenApi\Validator as SPL;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -66,6 +67,13 @@ class OrderItem
      * @JMS\Groups ({"Read", "Write", "List"})
      */
     public ?string $id = null;
+
+    /**
+     * @var null|PricesHelper
+     *
+     * @JMS\Exclude
+     */
+    private static ?PricesHelper $pricesHelper = null;
 
     //====================================================================//
     // ORDER PRODUCT INFO
