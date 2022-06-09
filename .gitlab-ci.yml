@@ -132,6 +132,8 @@ pages:
     ################################################################################
     # Run Test Script
     script:
+        # Deploy Symfony Files
+        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/symfony/deploy.sh | sh
         # Run Composer to Build deps
         - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/ci/composer.sh  | bash
         # Build Documentation
