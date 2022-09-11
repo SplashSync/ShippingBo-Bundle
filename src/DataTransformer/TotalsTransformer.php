@@ -135,8 +135,8 @@ class TotalsTransformer
             $item["source_ref"] = sprintf("%s-%s", ($inputs['source_ref'] ?? ""), ((int) $index + 1));
             //====================================================================//
             // Set Item Price in Cent
-
-            if (is_iterable($item["price"] ?? null)) {
+            $item["price"] = $item["price"] ?? null;
+            if (($item["price"] instanceof ArrayObject) || is_array($item["price"])) {
                 $itemPrice = self::toItemPrice(
                     ($item["price"] instanceof ArrayObject) ? $item["price"]->getArrayCopy() : $item["price"],
                     $item['quantity'] ?? 1
