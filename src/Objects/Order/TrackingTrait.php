@@ -89,7 +89,7 @@ trait TrackingTrait
     {
         //====================================================================//
         // Safety Check
-        if (!isset($this->object->shipments) || !is_iterable($this->object->shipments)) {
+        if (!isset($this->object->shipments)) {
             return null;
         }
         //====================================================================//

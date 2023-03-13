@@ -35,7 +35,7 @@ services:
     ################################################################################
     # Splash Toolkit Container   
     toolkit:
-        image: 'splashsync/toolkit'
+        image: 'splashsync/toolkit:alpine'
         container_name: toolkit.shipping-bo.local
         volumes:
             # Specify Local Configuration File
