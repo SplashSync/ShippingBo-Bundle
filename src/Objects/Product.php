@@ -23,6 +23,7 @@ use Splash\Connectors\ShippingBo\Services\ShippingBoConnector;
 use Splash\Models\Objects\IntelParserTrait;
 use Splash\Models\Objects\ListsTrait;
 use Splash\Models\Objects\ObjectsTrait;
+use Splash\Models\Objects\PrimaryKeysAwareInterface;
 use Splash\Models\Objects\SimpleFieldsTrait;
 use Splash\OpenApi\Action\Json;
 use Splash\OpenApi\Models\Objects as ApiModels;
@@ -32,7 +33,7 @@ use Splash\OpenApi\Visitor\JsonVisitor;
 /**
  * ShippingBo Implementation of Products
  */
-class Product extends AbstractStandaloneObject
+class Product extends AbstractStandaloneObject implements PrimaryKeysAwareInterface
 {
     //====================================================================//
     // Splash Php Core Traits
@@ -51,6 +52,7 @@ class Product extends AbstractStandaloneObject
     // Products Traits
     use Product\CRUDTrait;
     use Product\CoreTrait;
+    use Product\PrimaryTrait;
     use Product\StockTrait;
 
     //====================================================================//

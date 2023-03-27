@@ -75,6 +75,7 @@ class Product
      * @JMS\Groups ({"Read", "Write", "List", "Required"})
      *
      * @SPL\Microdata({"http://schema.org/Product", "model"})
+     * @SPL\Primary
      */
     public string $user_ref;
 

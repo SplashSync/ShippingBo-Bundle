@@ -18,9 +18,11 @@ namespace Splash\Connectors\ShippingBo\Services;
 use ArrayObject;
 use Exception;
 use Httpful\Mime;
+use Splash\Bundle\Interfaces\Connectors\PrimaryKeysInterface;
 use Splash\Bundle\Interfaces\Connectors\TrackingInterface;
 use Splash\Bundle\Models\AbstractConnector;
 use Splash\Bundle\Models\Connectors\GenericObjectMapperTrait;
+use Splash\Bundle\Models\Connectors\GenericObjectPrimaryMapperTrait;
 use Splash\Bundle\Models\Connectors\GenericWidgetMapperTrait;
 use Splash\Connectors\ShippingBo\Form\DebugFormType;
 use Splash\Connectors\ShippingBo\Form\EditFormType;
@@ -37,9 +39,10 @@ use Splash\OpenApi\Models\Connexion\ConnexionInterface;
  *
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
-class ShippingBoConnector extends AbstractConnector implements TrackingInterface
+class ShippingBoConnector extends AbstractConnector implements TrackingInterface, PrimaryKeysInterface
 {
     use GenericObjectMapperTrait;
+    use GenericObjectPrimaryMapperTrait;
     use GenericWidgetMapperTrait;
 
     /**
