@@ -64,11 +64,11 @@ stages:
     after_script:
       - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/ci/after.sh | sh
 
-################################################################################
-# PHP 8.2
-quality:php-8.2:
-  image: registry.gitlab.com/badpixxel-projects/php-sdk:php-8.2
-  <<: *quality
+#################################################################################
+## PHP 8.2
+#quality:php-8.2:
+#  image: registry.gitlab.com/badpixxel-projects/php-sdk:php-8.2
+#  <<: *quality
 
 ################################################################################
 # PHP 8.1
