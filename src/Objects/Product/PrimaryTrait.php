@@ -15,6 +15,8 @@
 
 namespace Splash\Connectors\ShippingBo\Objects\Product;
 
+use Splash\OpenApi\Action\Json;
+
 /**
  * Search for Products by Primary Key
  */
@@ -31,6 +33,17 @@ trait PrimaryTrait
         if (!$userRef && is_string($userRef)) {
             return null;
         }
+        //====================================================================//
+        // Configure List Action for Primary Request
+        $this->visitor->setListAction(
+            Json\ListAction::class,
+            array(
+                "filterKey" => $this->connector->isSandbox()
+                    ? "user_ref"
+                    : "search[user_ref__eq][]"
+                ,
+            )
+        );
         //====================================================================//
         // Search by User Ref
         $productsList = $this->objectsList($userRef);

@@ -15,7 +15,7 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -25,17 +25,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class representing the Product Stock Variation model.
  *
- * @ApiResource(
- *     attributes={
- *          "normalization_context"={"groups"={"read"}},
- *          "denormalizationContext"={"groups"={"write"}}
- *     },
- * )
- *
  * @ORM\Entity()
  * @ORM\Table(name="`stock_variation`")
  * @ORM\HasLifecycleCallbacks()
  */
+#[ApiResource(
+    normalizationContext: array("groups" => array("read")),
+    denormalizationContext: array("groups" => array("write")),
+)]
 class StockVariation implements SboObjectInterface
 {
     //====================================================================//

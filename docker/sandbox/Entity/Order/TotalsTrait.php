@@ -86,7 +86,7 @@ trait TotalsTrait
      * @Assert\NotNull()
      * @Assert\Type("int")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="integer", options={"default" : 0})
      */
@@ -98,7 +98,7 @@ trait TotalsTrait
      * @Assert\NotNull()
      * @Assert\Type("int")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="integer", options={"default" : 0})
      */
@@ -110,7 +110,7 @@ trait TotalsTrait
      * @Assert\NotNull()
      * @Assert\Type("int")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="integer", options={"default" : 0})
      */
@@ -122,7 +122,7 @@ trait TotalsTrait
      * @Assert\NotNull()
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", options={"default" : "EUR"})
      */
@@ -138,7 +138,7 @@ trait TotalsTrait
      * @Assert\NotNull()
      * @Assert\Type("int")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="integer", options={"default" : 0})
      */
@@ -150,7 +150,7 @@ trait TotalsTrait
      * @Assert\NotNull()
      * @Assert\Type("int")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="integer", options={"default" : 0})
      */
@@ -162,7 +162,7 @@ trait TotalsTrait
      * @Assert\NotNull()
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", options={"default" : "EUR"})
      */

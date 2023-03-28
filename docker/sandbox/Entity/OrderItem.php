@@ -15,7 +15,8 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata as Meta;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -23,37 +24,19 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class representing the Product model.
  *
- * @ApiResource(
- *     attributes={
- *          "normalization_context"={"groups"={"read"}},
- *          "denormalizationContext"={"groups"={"write"}}
- *     },
- *     itemOperations={
- *          "get":          {},
- *          "patch":        {},
- *          "delete":       {},
- *     },
- *     subresourceOperations={
- *     },
- *     collectionOperations={
- *          "create":      {
- *              "method": "POST",
- *              "path": "/orders/{id}/order_items",
- *              "controller": {"App\Controller\OrderController", "addItemAction"}
- *          },
- *          "post":      {
- *              "method": "POST",
- *              "path": "/orders/{id}/update_order_items",
- *              "controller": {"App\Controller\OrderController", "itemsAction"},
- *              "validate": false
- *          },
- *     },
- * )
- *
  * @ORM\Entity()
  * @ORM\Table(name="order_items")
  * @ORM\HasLifecycleCallbacks()
  */
+#[ApiResource(
+    normalizationContext: array("groups" => array("read")),
+    denormalizationContext: array("groups" => array("write")),
+    operations: array(
+        new Meta\Get(),
+        new Meta\Patch(),
+        new Meta\Delete(),
+    )
+)]
 class OrderItem implements SboObjectInterface
 {
     //====================================================================//

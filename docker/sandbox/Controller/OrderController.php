@@ -18,6 +18,7 @@ namespace App\Controller;
 use App\Entity\Order;
 use App\Entity\OrderItem;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\UnitOfWork;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -54,6 +55,17 @@ class OrderController extends AbstractController
         //====================================================================//
         // Persist Item
         $this->getDoctrine()->getManager()->persist($order);
+        //====================================================================//
+        // FIX - Revert Source_Ref Changes
+        /** @var UnitOfWork $uow */
+        $uow = $this->getDoctrine()->getManager()->getUnitOfWork();
+        $uow->computeChangeSets();
+        $orderChangeSet = $uow->getEntityChangeSet($order);
+        if (!empty($orderChangeSet["source_ref"]["0"])) {
+            $order->source_ref = $orderChangeSet["source_ref"]["0"];
+        }
+        //====================================================================//
+        // Save Item
         $this->getDoctrine()->getManager()->flush();
 
         return new JsonResponse($this->get('serializer')->normalize($order, 'json', array(

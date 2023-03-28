@@ -15,7 +15,7 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Faker\Factory;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -24,11 +24,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class representing the Address model.
  *
- * @ApiResource()
- *
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
  */
+#[ApiResource()]
 class Address implements SboObjectInterface
 {
     use Core\SboCoreTrait;

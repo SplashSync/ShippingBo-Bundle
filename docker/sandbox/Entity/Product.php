@@ -15,7 +15,9 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -23,11 +25,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class representing the Product model.
  *
- * @ApiResource()
- *
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks()
  */
+#[ApiResource()]
+#[ApiFilter(SearchFilter::class, properties: array('user_ref' => 'exact'))]
 class Product implements SboObjectInterface
 {
     use Core\SboCoreTrait;

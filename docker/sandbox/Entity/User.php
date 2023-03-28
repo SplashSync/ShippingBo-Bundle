@@ -15,25 +15,20 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use App\Controller\UserProvider;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class representing the Product Stock Variation model.
- *
- * @ApiResource(
- *     collectionOperations={
- *          "get_user":      {
- *              "method": "GET",
- *              "path": "/users/me",
- *              "controller": {"App\Controller\UserController", "itemAction"}
- *          },
- *     },
- *     itemOperations={
- *     },
- * )
+ * Class representing the User model.
  */
+#[ApiResource(
+    operations: array(
+        new Get(provider: UserProvider::class),
+    )
+)]
 class User
 {
     /**

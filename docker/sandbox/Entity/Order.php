@@ -15,7 +15,8 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata as Meta;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -23,28 +24,34 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class representing the Product model.
  *
- * @ApiResource(
- *     attributes={
- *          "normalization_context"={"groups"={"read"}},
- *          "denormalizationContext"={"groups"={"write"}}
- *     },
- *     itemOperations={
- *          "get":      { "path": "/orders/{id}" },
- *          "put":      { "path": "/orders/{id}" },
- *          "patch":    { "path": "/orders/{id}" },
- *          "delete":   { "path": "/orders/{id}" },
- *          "compute":      {
- *              "method": "POST",
- *              "path": "/orders/{id}/recompute_mapped_products",
- *              "controller": {"App\Controller\OrderController", "computeAction"},
- *          },
- *     },
- * )
- *
  * @ORM\Entity()
  * @ORM\Table(name="`orders`")
  * @ORM\HasLifecycleCallbacks()
  */
+#[ApiResource(
+    normalizationContext: array("groups" => array("read")),
+    denormalizationContext: array("groups" => array("write")),
+    operations: array(
+        new Meta\GetCollection(),
+        new Meta\Get(),
+        new Meta\Put(),
+        new Meta\Patch(),
+        new Meta\Post(),
+        new Meta\Delete(),
+        new Meta\Post(
+            uriTemplate:    '/orders/{id}/recompute_mapped_products',
+            controller:     'App\Controller\OrderController::computeAction',
+        ),
+        new Meta\Post(
+            uriTemplate:    '/orders/{id}/order_items',
+            controller:     'App\Controller\OrderController::addItemAction',
+        ),
+        new Meta\Post(
+            uriTemplate:    '/orders/{id}/update_order_items',
+            controller:     'App\Controller\OrderController::itemsAction',
+        ),
+    )
+)]
 class Order implements SboObjectInterface
 {
     //====================================================================//
@@ -69,7 +76,7 @@ class Order implements SboObjectInterface
      *
      * @ORM\Column(type="string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      */
     public string $chosen_delivery_service;
 

@@ -16,7 +16,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
-use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Metadata\ApiResource;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -25,17 +25,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Class representing the Order Shipment model.
  *
- * @ApiResource(
- *     attributes={
- *          "normalization_context"={"groups"={"read"}},
- *          "denormalizationContext"={"groups"={"write"}}
- *     },
- * )
- *
  * @ORM\Entity()
  * @ORM\Table(name="`order_shipment`")
  * @ORM\HasLifecycleCallbacks()
  */
+#[ApiResource(
+    normalizationContext: array("groups" => array("read")),
+    denormalizationContext: array("groups" => array("write")),
+)]
 class Shipment implements SboObjectInterface
 {
     //====================================================================//

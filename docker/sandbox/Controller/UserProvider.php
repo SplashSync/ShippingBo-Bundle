@@ -15,26 +15,21 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use ApiPlatform\Metadata\Operation;
+use ApiPlatform\State\ProviderInterface;
 
-/**
- * Order Controller: Custom operations to work with Users
- */
-class UserController extends AbstractController
+class UserProvider implements ProviderInterface
 {
     /**
-     * Get Me User Sample
-     *
-     * @return JsonResponse
+     * {@inheritDoc}
      */
-    public function itemAction(): JsonResponse
+    public function provide(Operation $operation, array $uriVariables = array(), array $context = array())
     {
-        return new JsonResponse(array('user' => array(
-            "id" => 666,
+        return (object) array('user' => array(
+            "id" => $uriVariables['id'],
             "api_client_id" => 669,
             "email" => "sandbox@splashsync.com",
             "company_name" => "SplashSync - Sandbox"
-        )));
+        ));
     }
 }
