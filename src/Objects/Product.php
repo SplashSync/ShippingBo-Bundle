@@ -120,7 +120,7 @@ class Product extends AbstractStandaloneObject implements PrimaryKeysAwareInterf
     {
         //====================================================================//
         // Default Configuration
-        self::$enablePushDeleted = false;
+        self::$enablePushDeleted = true;
         self::$enablePullCreated = false;
         self::$enablePullDeleted = false;
 
