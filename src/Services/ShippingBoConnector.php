@@ -147,7 +147,7 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
         $informations->shortdesc = "ShippingBo API";
         $informations->longdesc = "Splash Integration for ShippingBo OpenApi V1";
         //====================================================================//
-        // Company Informations
+        // Company Information
         $informations->company = "ShippingBo";
         $informations->address = "3 Av. de l'Europe Bat D";
         $informations->zip = "31400";
@@ -166,11 +166,11 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
             dirname(__FILE__, 2)."/Resources/public/img/ShippingBo-Logo.jpg"
         );
         //====================================================================//
-        // Server Informations
+        // Server Information
         $informations->servertype = "ShippingBo Api V1";
         $informations->serverurl = "shippingbo.com";
         //====================================================================//
-        // Module Informations
+        // Module Information
         $informations->moduleauthor = "Splash Official <www.splashsync.com>";
         $informations->moduleversion = "master";
 
