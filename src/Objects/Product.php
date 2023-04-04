@@ -123,11 +123,6 @@ class Product extends AbstractStandaloneObject implements PrimaryKeysAwareInterf
         self::$enablePushDeleted = false;
         self::$enablePullCreated = false;
         self::$enablePullDeleted = false;
-        //====================================================================//
-        // Production Configuration
-        if (!$this->connector->isSandbox()) {
-            self::$allowPushDeleted = false;
-        }
 
         return parent::description();
     }
