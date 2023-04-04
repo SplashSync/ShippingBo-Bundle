@@ -75,6 +75,20 @@ class Product extends AbstractStandaloneObject implements PrimaryKeysAwareInterf
     protected static string $ico = "fa fa-product-hunt";
 
     //====================================================================//
+    // Object Synchronization Recommended Configuration
+    //====================================================================//
+
+    /**
+     * {@inheritdoc}
+     */
+    protected static bool $enablePullCreated = false;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected static bool $enablePullDeleted = false;
+
+    //====================================================================//
     // General Class Variables
     //====================================================================//
 
@@ -111,20 +125,6 @@ class Product extends AbstractStandaloneObject implements PrimaryKeysAwareInterf
         //====================================================================//
         // Prepare Api Visitor
         $this->getVisitor();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function description(): array
-    {
-        //====================================================================//
-        // Default Configuration
-        self::$enablePushDeleted = true;
-        self::$enablePullCreated = false;
-        self::$enablePullDeleted = false;
-
-        return parent::description();
     }
 
     /**
