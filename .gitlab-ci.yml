@@ -96,6 +96,7 @@ functional:
         - apk add --no-cache curl bash git docker-compose
         - echo "SBO_STAGING_API_USER=None"  >> .env
         - echo "SBO_STAGING_API_KEY=None"   >> .env
+        - echo "SHOPIFY_API_SECRET=None"    >> .env
         # Install & Build Docker Compose
         - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/toolkit/build.sh  | bash
 
