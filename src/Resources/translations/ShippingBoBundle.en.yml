@@ -13,6 +13,10 @@ var:
         label:  API Key | Token
         desc:   "API keys provide full access to your account, so keep them safe."
 
+    timezone:
+        label:  Dates Timezone
+        desc:   "Timezone to use for dates on ShippingBo."
+
     minObjectDate:
         label:  "Min Object Create Date"
         desc:   "Minimum Origin Creation Date, previous objects are not exported."

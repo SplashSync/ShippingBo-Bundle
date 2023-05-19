@@ -20,6 +20,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Throwable;
@@ -80,6 +81,30 @@ abstract class AbstractShippingBoType extends AbstractType
             ->add('ApiUser', TextType::class, array(
                 'label' => "var.apiuser.label",
                 'help' => "var.apiuser.desc",
+                'required' => true,
+                'translation_domain' => "ShippingBoBundle",
+            ))
+        ;
+
+        return $this;
+    }
+
+    /**
+     * Add Api User Field to FormBuilder
+     *
+     * @param FormBuilderInterface $builder
+     *
+     * @return $this
+     */
+    public function addTimezoneField(FormBuilderInterface $builder): self
+    {
+        $builder
+            //==============================================================================
+            // Optilog Api Key For Authentification
+            ->add('timezone', TimezoneType::class, array(
+                'label' => "var.timezone.label",
+                'help' => "var.timezone.desc",
+                'placeholder' => "Europe/Paris",
                 'required' => true,
                 'translation_domain' => "ShippingBoBundle",
             ))

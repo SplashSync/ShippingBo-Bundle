@@ -33,6 +33,7 @@ splash:
                 WsHost:             http://sandbox.shipping-bo.local
                 ApiUser:            ThisIsApiUser
                 ApiKey:             ThisIsSecretApiKey
+                timezone:           UTC
                 ShippingMethods:    { "DropShipping": "REJECTED", "Colissimo": "default" }
                 OrderOrigins:       { "AllowedWebsite": "pass", "RejectedWebsite": "REJECTED" }
                 isSandbox:          true
@@ -51,6 +52,7 @@ splash:
                 WsHost:         https://app.shippingbo.com
                 ApiUser:        '%env(resolve:SBO_STAGING_API_USER)%'
                 ApiKey:         '%env(resolve:SBO_STAGING_API_KEY)%'
+                timezone:       'Europe/Paris'
 
     test:
         VAT: 0

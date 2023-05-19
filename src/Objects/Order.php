@@ -174,6 +174,11 @@ class Order extends AbstractStandaloneObject
                 Api\OrderItem::class,
                 Api\OrderItem::EXCLUDED
             );
+            //====================================================================//
+            // Force Dates Timezone
+            /** @var string $connectorTimezone */
+            $connectorTimezone = $this->connector->getParameter("timezone", "Europe/Paris");
+            $this->visitor->setTimezone($connectorTimezone);
         }
 
         return $this->visitor;

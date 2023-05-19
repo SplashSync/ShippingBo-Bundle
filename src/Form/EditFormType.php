@@ -34,6 +34,7 @@ class EditFormType extends AbstractShippingBoType
     {
         $this->addApiUserField($builder);
         $this->addApiKeyField($builder);
+        $this->addTimezoneField($builder);
         $this->addMinObjectCreateDateField($builder);
         $this->addShippingMethodsField($builder);
         $this->addOriginFilterField($builder);
