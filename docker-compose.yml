@@ -40,7 +40,7 @@ services:
         volumes:
             # Specify Local Configuration File
             - ./.env:/app/.env:ro
-            - './docker/toolkit/splash.yml:/app/config/packages/splash.yml:ro'
+            - './docker/toolkit/splash.yaml:/app/config/packages/splash.yaml:ro'
             # Uncomment to use Local Sources instead of Release
             - './:/app/vendor/splash/shippingbo/:ro'
             - './tests/Controller:/app/tests/Controller/:ro'
