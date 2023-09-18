@@ -39,12 +39,14 @@ services:
         container_name: toolkit.shipping-bo.local
         volumes:
             # Specify Local Configuration File
-            - ./.env:/app/.env:ro
+#            - ./.env:/app/.env:ro
             - './docker/toolkit/splash.yaml:/app/config/packages/splash.yaml:ro'
             # Uncomment to use Local Sources instead of Release
-            - './:/app/vendor/splash/shippingbo/:ro'
+            - './src:/app/connectors/ShippingBo/:ro'
             - './tests/Controller:/app/tests/Controller/:ro'
             - './phpunit.xml.dist:/app/phpunit.xml.dist:ro'
+        env_file:
+            - .env
         hostname:           toolkit.shipping-bo.local
         networks:
             shippingbo:     { ipv4_address: 172.108.0.100, aliases: [ toolkit.shipping-bo.local ] }
@@ -75,15 +77,6 @@ services:
             - ./:/var/www/html
             - vendor-php81:/var/www/html/vendor
 
-    ################################################################################
-    # PHP 8.0
-    php-8.0:
-        image:          splashsync/php-sdk:php-8.0
-        container_name: shipping-bo-8.0
-        volumes:
-            - ./:/var/www/html
-            - vendor-php80:/var/www/html/vendor
-
 networks:
     ################################################################################
     # Default Private Network    
@@ -99,4 +92,3 @@ networks:
 
 volumes:
     vendor-php81: ~
-    vendor-php80: ~

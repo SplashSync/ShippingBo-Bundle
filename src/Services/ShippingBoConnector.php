@@ -24,6 +24,7 @@ use Splash\Bundle\Models\AbstractConnector;
 use Splash\Bundle\Models\Connectors\GenericObjectMapperTrait;
 use Splash\Bundle\Models\Connectors\GenericObjectPrimaryMapperTrait;
 use Splash\Bundle\Models\Connectors\GenericWidgetMapperTrait;
+use Splash\Connectors\ShippingBo\Controller\WebHooksController;
 use Splash\Connectors\ShippingBo\Form\DebugFormType;
 use Splash\Connectors\ShippingBo\Form\EditFormType;
 use Splash\Connectors\ShippingBo\Hydrator\Hydrator;
@@ -317,7 +318,7 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
     public function getPublicActions() : array
     {
         return array(
-            "index" => "ShippingBoBundle:WebHooks:index",
+            "index" => WebHooksController::class.":indexAction",
         );
     }
 

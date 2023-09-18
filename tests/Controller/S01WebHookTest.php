@@ -16,14 +16,15 @@
 namespace Splash\Connectors\ShippingBo\Test\Controller;
 
 use Exception;
+use Splash\Bundle\Tests\WebTestCase;
+use Splash\Client\Splash;
 use Splash\Connectors\ShippingBo\Services\ShippingBoConnector;
-use Splash\Tests\Tools\TestCase;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Test of ShippingBo Connector WebHook Controller
  */
-class S01WebHookTest extends TestCase
+class S01WebHookTest extends WebTestCase
 {
     /**
      * Connector Server ID

@@ -1,5 +1,8 @@
 services:
-    
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
     ################################################################################
     # SPLASH ShippingBo Connector Service
     splash.connectors.shippingbo:
@@ -14,6 +17,5 @@ services:
     # Enables Dependency Injection in Controller Actions
     Splash\Connectors\ShippingBo\Controller\:
         resource:   '../../Controller'
-        public:     true
         tags:
             - { name: 'controller.service_arguments' }
