@@ -110,6 +110,8 @@ functional:
         paths:
             - logs
             - manifest
+        reports:
+          junit: "*-report.xml"
 
 ################################################################
 # Build Documentation
