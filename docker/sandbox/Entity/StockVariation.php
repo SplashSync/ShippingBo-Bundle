@@ -26,7 +26,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class representing the Product Stock Variation model.
  *
  * @ORM\Entity()
+ *
  * @ORM\Table(name="`stock_variation`")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 #[ApiResource(
@@ -45,6 +47,7 @@ class StockVariation implements SboObjectInterface
      * @var int
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("integer")
      *
      * @ORM\Column(type="integer")
@@ -59,6 +62,7 @@ class StockVariation implements SboObjectInterface
      * @var null|int
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("integer")
      *
      * @Groups({"read"})

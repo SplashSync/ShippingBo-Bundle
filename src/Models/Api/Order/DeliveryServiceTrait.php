@@ -32,7 +32,9 @@ trait DeliveryServiceTrait
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("chosen_delivery_service")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write", "Required"})
      *
      * @SPL\Microdata({"http://schema.org/ParcelDelivery", "identifier"})

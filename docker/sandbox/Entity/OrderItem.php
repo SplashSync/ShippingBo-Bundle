@@ -25,7 +25,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class representing the Product model.
  *
  * @ORM\Entity()
+ *
  * @ORM\Table(name="order_items")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 #[ApiResource(
@@ -63,6 +65,7 @@ class OrderItem implements SboObjectInterface
      * @var string
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @ORM\Column()
@@ -77,6 +80,7 @@ class OrderItem implements SboObjectInterface
      * @var string
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @ORM\Column()
@@ -108,6 +112,7 @@ class OrderItem implements SboObjectInterface
      * @var int
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("integer")
      *
      * @ORM\Column(type="integer")
@@ -139,6 +144,7 @@ class OrderItem implements SboObjectInterface
      * @var string
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @ORM\Column(type="string", nullable=true)

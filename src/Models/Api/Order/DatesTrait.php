@@ -35,7 +35,9 @@ trait DatesTrait
      * @Assert\Type("DateTime")
      *
      * @JMS\SerializedName("shipped_at")
+     *
      * @JMS\Type("DateTime")
+     *
      * @JMS\Groups ({"Read"})
      *
      * @SPL\Group("Meta")
@@ -48,7 +50,9 @@ trait DatesTrait
      * @Assert\Type("DateTime")
      *
      * @JMS\SerializedName("closed_at")
+     *
      * @JMS\Type("DateTime")
+     *
      * @JMS\Groups ({"Read"})
      *
      * @SPL\Group("Meta")
@@ -61,7 +65,9 @@ trait DatesTrait
      * @Assert\Type("DateTime")
      *
      * @JMS\SerializedName("state_changed_at")
+     *
      * @JMS\Type("DateTime")
+     *
      * @JMS\Groups ({"Read"})
      *
      * @SPL\Group("Meta")
@@ -78,7 +84,9 @@ trait DatesTrait
      * @Assert\Type("DateTime")
      *
      * @JMS\SerializedName("latest_shipped_at")
+     *
      * @JMS\Type("DateTime")
+     *
      * @JMS\Groups ({"Read"})
      *
      * @SPL\Group("Meta")
@@ -91,7 +99,9 @@ trait DatesTrait
      * @Assert\Type("DateTime")
      *
      * @JMS\SerializedName("earliest_shipped_at")
+     *
      * @JMS\Type("DateTime")
+     *
      * @JMS\Groups ({"Read"})
      *
      * @SPL\Group("Meta")
@@ -108,7 +118,9 @@ trait DatesTrait
      * @Assert\Type("DateTime")
      *
      * @JMS\SerializedName("latest_delivery_at")
+     *
      * @JMS\Type("DateTime")
+     *
      * @JMS\Groups ({"Read"})
      *
      * @SPL\Group("Meta")
@@ -121,7 +133,9 @@ trait DatesTrait
      * @Assert\Type("DateTime")
      *
      * @JMS\SerializedName("earliest_delivery_at")
+     *
      * @JMS\Type("DateTime")
+     *
      * @JMS\Groups ({"Read"})
      *
      * @SPL\Group("Meta")

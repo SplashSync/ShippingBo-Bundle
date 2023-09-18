@@ -28,11 +28,15 @@ trait SboSourceTrait
      * The order ID this shipment belongs to.
      *
      * @var string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("source")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write", "List", "Required"})
      */
     public string $source = "Splashsync";
@@ -41,10 +45,13 @@ trait SboSourceTrait
      * The order ID this shipment belongs to.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("source_ref")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write", "List", "Required"})
      *
      * @SPL\Microdata({"http://splashync.com/schemas", "ObjectId"})

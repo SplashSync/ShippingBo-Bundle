@@ -28,15 +28,21 @@ trait ProductDimensionsTrait
      * Product Weight.
      *
      * @var null|float
+     *
      * @Assert\Type("float")
      *
      * @JMS\SerializedName("weight")
+     *
      * @JMS\Type("int")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Accessor(getter="getApiWeight",setter="setApiWeight")
      *
      * @SPL\Type("double")
+     *
      * @SPL\Prefer("write")
+     *
      * @SPL\Microdata({"http://schema.org/Product", "weight"})
      */
     public ?float $weight = null;
@@ -45,15 +51,21 @@ trait ProductDimensionsTrait
      * Product Height.
      *
      * @var null|float
+     *
      * @Assert\Type("float")
      *
      * @JMS\SerializedName("height")
+     *
      * @JMS\Type("int")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Accessor(getter="getApiHeight",setter="setApiHeight")
      *
      * @SPL\Type("double")
+     *
      * @SPL\Prefer("write")
+     *
      * @SPL\Microdata({"http://schema.org/Product", "height"})
      */
     public ?float $height = null;
@@ -62,15 +74,21 @@ trait ProductDimensionsTrait
      * Product Length.
      *
      * @var null|float
+     *
      * @Assert\Type("float")
      *
      * @JMS\SerializedName("length")
+     *
      * @JMS\Type("int")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Accessor(getter="getApiLength",setter="setApiLength")
      *
      * @SPL\Type("double")
+     *
      * @SPL\Prefer("write")
+     *
      * @SPL\Microdata({"http://schema.org/Product", "depth"})
      */
     public ?float $length = null;
@@ -79,15 +97,21 @@ trait ProductDimensionsTrait
      * Product Width.
      *
      * @var null|float
+     *
      * @Assert\Type("float")
      *
      * @JMS\SerializedName("width")
+     *
      * @JMS\Type("int")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Accessor(getter="getApiWidth",setter="setApiWidth")
      *
      * @SPL\Type("double")
+     *
      * @SPL\Prefer("write")
+     *
      * @SPL\Microdata({"http://schema.org/Product", "width"})
      */
     public ?float $width = null;

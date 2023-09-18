@@ -28,7 +28,9 @@ trait SboSourceTrait
      * Technical - API Source Name.
      *
      * @var string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @ORM\Column(type="string")
@@ -41,7 +43,9 @@ trait SboSourceTrait
      * Technical - API Source Object Reference.
      *
      * @var string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @ORM\Column(type="string")

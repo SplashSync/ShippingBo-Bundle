@@ -28,10 +28,13 @@ trait ShipmentsTrait
      * @var Shipment[]
      *
      * @JMS\SerializedName("shipments")
+     *
      * @JMS\Type("array<Splash\Connectors\ShippingBo\Models\Api\Shipment>")
+     *
      * @JMS\Groups ({"Read"})
      *
      * @Assert\All({
+     *
      *   @Assert\Type("Splash\Connectors\ShippingBo\Models\Api\Shipment")
      * })
      *

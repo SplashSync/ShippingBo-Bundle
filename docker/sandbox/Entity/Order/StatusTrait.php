@@ -28,8 +28,11 @@ trait StatusTrait
      * Current Order State.
      *
      * @var string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
+     *
      * @Assert\Choice({
      *     "in_trouble",
      *     "waiting_for_payment",
@@ -60,6 +63,7 @@ trait StatusTrait
      * Custom Order State.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @ORM\Column(type="string", nullable=true)

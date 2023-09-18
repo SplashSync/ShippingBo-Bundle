@@ -34,11 +34,15 @@ trait PriceTrait
      * @Assert\Type("float")
      *
      * @JMS\SerializedName("discount")
+     *
      * @JMS\Groups ({"Write"})
+     *
      * @JMS\Type("float")
+     *
      * @SPL\Prefer ("export")
      *
      * @SPL\Microdata({"http://schema.org/Order", "discount"})
+     *
      * @SPL\Type("double")
      */
     protected ?float $discount = 0.0;
@@ -55,7 +59,9 @@ trait PriceTrait
      * @Assert\Type("integer")
      *
      * @JMS\SerializedName("price_tax_included_cents")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Type("integer")
      */
     protected ?int $price_tax_included_cents = 0;
@@ -66,10 +72,13 @@ trait PriceTrait
      * @var string
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("price_tax_included_currency")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Type("string")
      */
     protected string $price_tax_included_currency = "EUR";
@@ -82,7 +91,9 @@ trait PriceTrait
      * @Assert\Type("integer")
      *
      * @JMS\SerializedName("price_cents")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Type("integer")
      */
     protected ?int $price_cents = null;
@@ -95,7 +106,9 @@ trait PriceTrait
      * @Assert\Type("integer")
      *
      * @JMS\SerializedName("tax_cents")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Type("integer")
      */
     protected ?int $tax_cents = null;
@@ -112,11 +125,15 @@ trait PriceTrait
      * @Assert\Type("array")
      *
      * @JMS\SerializedName("price")
+     *
      * @JMS\Groups ({"Read", "Write", "Required"})
+     *
      * @JMS\Type("array")
      *
      * @SPL\Microdata({"http://schema.org/PriceSpecification", "price"})
+     *
      * @SPL\Type("price")
+     *
      * @SPL\Prefer ("import")
      */
     private ?array $price = null;

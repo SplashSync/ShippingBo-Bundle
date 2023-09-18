@@ -28,14 +28,19 @@ trait ProductOtherRefsTrait
      * Other Ref 1.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("other_ref1")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Description("[Technical] Description")
+     *
      * @SPL\Group("Other Refs")
+     *
      * @SPL\Microdata({"http://schema.org/Product", "description"})
      */
     public ?string $otherRef1 = null;
@@ -44,10 +49,13 @@ trait ProductOtherRefsTrait
      * Other Ref 2.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("other_ref2")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Group("Other Refs")
@@ -58,10 +66,13 @@ trait ProductOtherRefsTrait
      * Other Ref 3.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("other_ref3")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Group("Other Refs")
@@ -72,10 +83,13 @@ trait ProductOtherRefsTrait
      * Other Ref 4.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("other_ref4")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Group("Other Refs")
@@ -86,10 +100,13 @@ trait ProductOtherRefsTrait
      * Other Ref 5.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("other_ref5")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Group("Other Refs")
@@ -100,10 +117,13 @@ trait ProductOtherRefsTrait
      * Other Ref 6.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("other_ref6")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Group("Other Refs")
@@ -114,10 +134,13 @@ trait ProductOtherRefsTrait
      * Other Ref 7.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("other_ref7")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Group("Other Refs")
@@ -128,10 +151,13 @@ trait ProductOtherRefsTrait
      * Other Ref 8.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("other_ref8")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Group("Other Refs")
@@ -142,10 +168,13 @@ trait ProductOtherRefsTrait
      * Other Ref 9.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("other_ref9")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Group("Other Refs")
@@ -156,10 +185,13 @@ trait ProductOtherRefsTrait
      * Other Ref 10.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("other_ref10")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Group("Other Refs")
@@ -170,10 +202,13 @@ trait ProductOtherRefsTrait
      * Other Ref 11.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("other_ref11")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Group("Other Refs")
@@ -184,10 +219,13 @@ trait ProductOtherRefsTrait
      * Other Ref 12.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("other_ref12")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Group("Other Refs")
@@ -198,10 +236,13 @@ trait ProductOtherRefsTrait
      * Other Ref 13.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("other_ref13")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Group("Other Refs")
@@ -212,10 +253,13 @@ trait ProductOtherRefsTrait
      * Other Ref 14.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("other_ref14")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Group("Other Refs")
@@ -226,10 +270,13 @@ trait ProductOtherRefsTrait
      * Other Ref 15.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("other_ref15")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Group("Other Refs")

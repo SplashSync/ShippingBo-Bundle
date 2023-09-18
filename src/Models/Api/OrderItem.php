@@ -58,11 +58,15 @@ class OrderItem
      * Unique identifier.
      *
      * @var null|string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("id")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write", "List"})
      */
     public ?string $id = null;
@@ -77,10 +81,13 @@ class OrderItem
      * @var string
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("title")
+     *
      * @JMS\Groups ({"Read", "Write", "Required"})
+     *
      * @JMS\Type("string")
      *
      * @SPL\Microdata({"http://schema.org/partOfInvoice", "description"})
@@ -93,10 +100,13 @@ class OrderItem
      * @var string
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("product_ref")
+     *
      * @JMS\Groups ({"Read", "Write", "Required"})
+     *
      * @JMS\Type("string")
      *
      * @SPL\Microdata({"http://schema.org/Product", "sku"})
@@ -109,10 +119,13 @@ class OrderItem
      * @var null|string
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("product_ean")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Type("string")
      *
      * @SPL\Microdata({"http://schema.org/Product", "gtin13"})
@@ -129,10 +142,13 @@ class OrderItem
      * @var int
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("integer")
      *
      * @JMS\SerializedName("quantity")
+     *
      * @JMS\Groups ({"Read", "Write", "Required"})
+     *
      * @JMS\Type("integer")
      *
      * @SPL\Microdata({"http://schema.org/QuantitativeValue", "value"})

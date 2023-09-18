@@ -29,11 +29,15 @@ trait SboOriginTrait
      * The order ID this shipment belongs to.
      *
      * @var string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("origin")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write", "Required"})
      *
      * @SPL\Microdata({"http://splashync.com/schemas", "SourceNodeName"})
@@ -44,11 +48,15 @@ trait SboOriginTrait
      * The order ID this shipment belongs to.
      *
      * @var string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("origin_ref")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write", "List", "Required"})
      *
      * @SPL\Microdata({"http://schema.org/Order", "orderNumber"})
@@ -59,10 +67,13 @@ trait SboOriginTrait
      * @var DateTime
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("DateTime")
      *
      * @JMS\SerializedName("origin_created_at")
+     *
      * @JMS\Groups ({"Read", "Write", "Required"})
+     *
      * @JMS\Type("DateTime<'Y-m-d\TH:i:sP','',['Y-m-d\TH:i:sP', 'Y-m-d H:i:s']>")
      *
      * @SPL\Microdata({"http://schema.org/DataFeedItem", "dateCreated"})

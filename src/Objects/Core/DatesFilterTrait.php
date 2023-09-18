@@ -43,6 +43,7 @@ trait DatesFilterTrait
             || !is_scalar($this->in["origin_created_at"])) {
             return false;
         }
+
         //====================================================================//
         // Convert Received Order date to Datetime
         try {
@@ -53,6 +54,7 @@ trait DatesFilterTrait
                 $this->in["origin_created_at"]
             ));
         }
+
         //====================================================================//
         // Check if Received date is After Selected Date
         return ($receivedDate > $minDate);

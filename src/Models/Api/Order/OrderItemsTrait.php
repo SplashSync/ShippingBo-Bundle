@@ -28,10 +28,13 @@ trait OrderItemsTrait
      * @var OrderItem[]
      *
      * @JMS\SerializedName("order_items")
+     *
      * @JMS\Type("array<Splash\Connectors\ShippingBo\Models\Api\OrderItem>")
+     *
      * @JMS\Groups ({"Read"})
      *
      * @Assert\All({
+     *
      *   @Assert\Type("Splash\Connectors\ShippingBo\Models\Api\OrderItem")
      * })
      *

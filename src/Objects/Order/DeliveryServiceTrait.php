@@ -113,6 +113,7 @@ trait DeliveryServiceTrait
             }
             Splash::log()->war("Delivery Service changed to : ".$serviceName);
         }
+
         //====================================================================//
         // Return Service Name
         return $serviceName;

@@ -31,15 +31,21 @@ trait ProductImageTrait
      * Product Picture Url.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("picture_url")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Type("url")
+     *
      * @SPL\Prefer("write")
+     *
      * @SPL\Group("Meta")
+     *
      * @SPL\Microdata({"http://schema.org/Product", "coverImageUrl"})
      */
     public ?string $pictureUrl = null;
@@ -48,14 +54,19 @@ trait ProductImageTrait
      * Product Picture Definition.
      *
      * @var null|array
+     *
      * @Assert\Type("string")
      *
      * @JMS\Type("array")
+     *
      * @JMS\Groups ({"Read"})
      *
      * @SPL\Type("image")
+     *
      * @SPL\Prefer("write")
+     *
      * @SPL\Group("Meta")
+     *
      * @SPL\Microdata({"http://schema.org/Product", "coverImage"})
      */
     public ?array $picture = null;
@@ -79,6 +90,7 @@ trait ProductImageTrait
         if (!self::images()->touchRemoteFile($this->pictureUrl)) {
             return null;
         }
+
         //====================================================================//
         // Encode Image Infos from Url
         return self::images()->encodeFromUrl(

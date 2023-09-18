@@ -30,7 +30,9 @@ trait StatusTrait
      * @var string
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
+     *
      * @Assert\Choice({
      *     "in_trouble":                "En erreur",
      *     "waiting_for_payment":       "Draft | En attente de paiement",
@@ -52,10 +54,13 @@ trait StatusTrait
      * })
      *
      * @JMS\SerializedName("state")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write", "List", "Required"})
      *
      * @SPL\Prefer("none")
+     *
      * @SPL\Logged
      */
     public string $state;

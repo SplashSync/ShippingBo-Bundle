@@ -25,7 +25,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class representing the Product model.
  *
  * @ORM\Entity()
+ *
  * @ORM\Table(name="`orders`")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 #[ApiResource(
@@ -71,7 +73,9 @@ class Order implements SboObjectInterface
      * Order Delivery Service.
      *
      * @var string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @ORM\Column(type="string")
@@ -84,6 +88,7 @@ class Order implements SboObjectInterface
      * Order Delivery Service.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @ORM\Column(type="string", nullable=true)
@@ -98,8 +103,10 @@ class Order implements SboObjectInterface
      * @var OrderItem[]
      *
      * @Assert\All({
+     *
      *   @Assert\Type("App\Entity\OrderItem")
      * })
+     *
      * @Groups({"read"})
      *
      * @ORM\OneToMany(targetEntity="App\Entity\OrderItem", mappedBy="order", cascade={"all"})
@@ -112,8 +119,10 @@ class Order implements SboObjectInterface
      * @var Shipment[]
      *
      * @Assert\All({
+     *
      *   @Assert\Type("App\Entity\Shipment")
      * })
+     *
      * @Groups({"read"})
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Shipment", mappedBy="order", cascade={"all"})

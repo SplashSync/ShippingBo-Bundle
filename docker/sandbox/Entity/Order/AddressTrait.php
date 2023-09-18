@@ -89,6 +89,7 @@ trait AddressTrait
      * @return void
      *
      * @ORM\PrePersist()
+     *
      * @ORM\PreUpdate()
      */
     public function updateShippingAddress(LifecycleEventArgs $event): void

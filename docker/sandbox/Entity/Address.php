@@ -25,6 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class representing the Address model.
  *
  * @ORM\Entity
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 #[ApiResource()]
@@ -36,6 +37,7 @@ class Address implements SboObjectInterface
      * Client's full name.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -48,6 +50,7 @@ class Address implements SboObjectInterface
      * Client's firstname.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -60,6 +63,7 @@ class Address implements SboObjectInterface
      * Client's lastname.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -72,6 +76,7 @@ class Address implements SboObjectInterface
      * Client's Company Name.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -84,6 +89,7 @@ class Address implements SboObjectInterface
      * Client's Email.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -96,6 +102,7 @@ class Address implements SboObjectInterface
      * Client's phone 1.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -108,6 +115,7 @@ class Address implements SboObjectInterface
      * Client's phone 2.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -120,6 +128,7 @@ class Address implements SboObjectInterface
      * Client's street 1.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -132,6 +141,7 @@ class Address implements SboObjectInterface
      * Client's street 2.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -144,6 +154,7 @@ class Address implements SboObjectInterface
      * Client's street 3.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -156,6 +167,7 @@ class Address implements SboObjectInterface
      * Client's street 4.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -168,6 +180,7 @@ class Address implements SboObjectInterface
      * Client's city.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -180,6 +193,7 @@ class Address implements SboObjectInterface
      * Client's zip.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -192,6 +206,7 @@ class Address implements SboObjectInterface
      * Client's state.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -204,7 +219,9 @@ class Address implements SboObjectInterface
      * Client's country.
      *
      * @var string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -217,6 +234,7 @@ class Address implements SboObjectInterface
      * Client's Building.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -229,6 +247,7 @@ class Address implements SboObjectInterface
      * Client's Apartment Number.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -241,6 +260,7 @@ class Address implements SboObjectInterface
      * Client's Instruction.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})

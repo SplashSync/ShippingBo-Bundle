@@ -32,6 +32,7 @@ trait TotalsTrait
      * @var int
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("int")
      *
      * @Groups({"read", "write"})
@@ -44,6 +45,7 @@ trait TotalsTrait
      * @var int
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("int")
      *
      * @Groups({"read", "write"})
@@ -56,6 +58,7 @@ trait TotalsTrait
      * @var int
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("int")
      *
      * @Groups({"read", "write"})
@@ -68,6 +71,7 @@ trait TotalsTrait
      * @var string
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read", "write"})
@@ -84,6 +88,7 @@ trait TotalsTrait
      * @var int
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("int")
      *
      * @Groups({"read", "write"})
@@ -96,6 +101,7 @@ trait TotalsTrait
      * @var int
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("int")
      *
      * @Groups({"read", "write"})
@@ -108,6 +114,7 @@ trait TotalsTrait
      * @var int
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("int")
      *
      * @Groups({"read", "write"})
@@ -120,6 +127,7 @@ trait TotalsTrait
      * @var string
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read", "write"})
@@ -136,6 +144,7 @@ trait TotalsTrait
      * @var int
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("int")
      *
      * @Groups({"read", "write"})
@@ -148,6 +157,7 @@ trait TotalsTrait
      * @var int
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("int")
      *
      * @Groups({"read", "write"})
@@ -160,6 +170,7 @@ trait TotalsTrait
      * @var string
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read", "write"})
@@ -176,6 +187,7 @@ trait TotalsTrait
      * @var int
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("int")
      *
      * @Groups({"read"})

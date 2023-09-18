@@ -35,11 +35,15 @@ class Address
      * Unique identifier.
      *
      * @var string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("id")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "List"})
      */
     public string $id;
@@ -48,10 +52,13 @@ class Address
      * Client's full name.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("fullname")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Microdata({"http://schema.org/PostalAddress", "alternateName"})
@@ -62,11 +69,15 @@ class Address
      * Client's firstname.
      *
      * @var null|string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("firstname")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write", "List"})
      *
      * @SPL\Microdata({"http://schema.org/Person", "familyName"})
@@ -77,11 +88,15 @@ class Address
      * Client's lastname.
      *
      * @var string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("lastname")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write", "List"})
      *
      * @SPL\Microdata({"http://schema.org/Person", "givenName"})
@@ -92,10 +107,13 @@ class Address
      * Client's Company Name.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("company_name")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Microdata({"http://schema.org/Organization", "legalName"})
@@ -106,13 +124,17 @@ class Address
      * Client's Email.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("email")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write", "List"})
      *
      * @SPL\Microdata({"http://schema.org/ContactPoint", "email"})
+     *
      * @SPL\Type ("email")
      */
     public ?string $email = null;
@@ -121,13 +143,17 @@ class Address
      * Client's Phone 1.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("phone1")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups({"Read", "Write"})
      *
      * @SPL\Microdata({"http://schema.org/PostalAddress", "telephone"})
+     *
      * @SPL\Type("phone")
      */
     public ?string $phone1 = null;
@@ -136,13 +162,17 @@ class Address
      * Client's Phone 2.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("phone2")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups({"Read", "Write"})
      *
      * @SPL\Microdata({"http://schema.org/Person", "telephone"})
+     *
      * @SPL\Type("phone")
      */
     public ?string $phone2 = null;
@@ -151,10 +181,13 @@ class Address
      * Client's Street 1.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("street1")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Microdata({"http://schema.org/PostalAddress", "streetAddress"})
@@ -165,10 +198,13 @@ class Address
      * Client's Street 2.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("street2")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Microdata({"http://schema.org/PostalAddress", "postOfficeBoxNumber"})
@@ -179,10 +215,13 @@ class Address
      * Client's Street 3.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("street3")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      */
     public ?string $street3 = null;
@@ -191,10 +230,13 @@ class Address
      * Client's Street 4.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("street4")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      */
     public ?string $street4 = null;
@@ -203,10 +245,13 @@ class Address
      * Client's City.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("city")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write", "List"})
      *
      * @SPL\Microdata({"http://schema.org/PostalAddress", "addressLocality"})
@@ -217,10 +262,13 @@ class Address
      * Client's Zip.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("zip")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Microdata({"http://schema.org/PostalAddress", "postalCode"})
@@ -231,10 +279,13 @@ class Address
      * Client's State.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("state")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Microdata({"http://schema.org/PostalAddress", "addressRegion"})
@@ -245,14 +296,19 @@ class Address
      * Client's Country.
      *
      * @var string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("country")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write", "Required"})
      *
      * @SPL\Microdata({"http://schema.org/PostalAddress", "addressCountry"})
+     *
      * @SPL\Type ("country")
      */
     public string $country;
@@ -261,10 +317,13 @@ class Address
      * Client's Building.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("building")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      */
     public ?string $building = null;
@@ -273,10 +332,13 @@ class Address
      * Client's Apartment Number.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("apartment_number")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      */
     public ?string $apartment = null;
@@ -285,10 +347,13 @@ class Address
      * Client's Instruction.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("instructions")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      */
     public ?string $instructions = null;

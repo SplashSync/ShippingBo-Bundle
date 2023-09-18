@@ -31,9 +31,11 @@ trait SboCoreTrait
      * @Assert\Type("DateTime")
      *
      * @JMS\SerializedName("created_at")
+     *
      * @JMS\Groups ({"Read"})
      *
      * @SPL\Microdata({"http://schema.org/DataFeedItem", "dateCreated"})
+     *
      * @SPL\Group("Meta")
      */
     public DateTime $createdAt;
@@ -44,9 +46,11 @@ trait SboCoreTrait
      * @Assert\Type("DateTime")
      *
      * @JMS\SerializedName("created_at")
+     *
      * @JMS\Groups ({"Read"})
      *
      * @SPL\Microdata({"http://schema.org/DataFeedItem", "dateUpdated"})
+     *
      * @SPL\Group("Meta")
      */
     public DateTime $updatedAt;

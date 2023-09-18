@@ -26,6 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class representing the Product model.
  *
  * @ORM\Entity
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 #[ApiResource()]
@@ -39,7 +40,9 @@ class Product implements SboObjectInterface
      * Product SKU.
      *
      * @var string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -52,6 +55,7 @@ class Product implements SboObjectInterface
      * Available Stock.
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("int")
      *
      * @Groups({"read"})
@@ -73,6 +77,7 @@ class Product implements SboObjectInterface
      * Product EAN13.
      *
      * @var null|int
+     *
      * @Assert\Type("int")
      *
      * @Groups({"read"})
@@ -85,6 +90,7 @@ class Product implements SboObjectInterface
      * Title / Label.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -97,6 +103,7 @@ class Product implements SboObjectInterface
      * Location.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -109,6 +116,7 @@ class Product implements SboObjectInterface
      * Customs HS Code.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -121,6 +129,7 @@ class Product implements SboObjectInterface
      * Supplier Name.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -133,6 +142,7 @@ class Product implements SboObjectInterface
      * Product Picture Url.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -149,6 +159,7 @@ class Product implements SboObjectInterface
      * Product Weight.
      *
      * @var null|int
+     *
      * @Assert\Type("int")
      *
      * @Groups({"read"})
@@ -161,6 +172,7 @@ class Product implements SboObjectInterface
      * Product Height.
      *
      * @var null|int
+     *
      * @Assert\Type("int")
      *
      * @Groups({"read"})
@@ -173,6 +185,7 @@ class Product implements SboObjectInterface
      * Product Length.
      *
      * @var null|int
+     *
      * @Assert\Type("int")
      *
      * @Groups({"read"})
@@ -185,6 +198,7 @@ class Product implements SboObjectInterface
      * Product Width.
      *
      * @var null|int
+     *
      * @Assert\Type("int")
      *
      * @Groups({"read"})
@@ -201,6 +215,7 @@ class Product implements SboObjectInterface
      * Other Ref 1.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -213,6 +228,7 @@ class Product implements SboObjectInterface
      * Other Ref 2.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -225,6 +241,7 @@ class Product implements SboObjectInterface
      * Other Ref 3.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -237,6 +254,7 @@ class Product implements SboObjectInterface
      * Other Ref 4.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -249,6 +267,7 @@ class Product implements SboObjectInterface
      * Other Ref 5.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -261,6 +280,7 @@ class Product implements SboObjectInterface
      * Other Ref 6.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -273,6 +293,7 @@ class Product implements SboObjectInterface
      * Other Ref 6.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -285,6 +306,7 @@ class Product implements SboObjectInterface
      * Other Ref 8.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -297,6 +319,7 @@ class Product implements SboObjectInterface
      * Other Ref 9.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -309,6 +332,7 @@ class Product implements SboObjectInterface
      * Other Ref 10.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -321,6 +345,7 @@ class Product implements SboObjectInterface
      * Other Ref 11.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -333,6 +358,7 @@ class Product implements SboObjectInterface
      * Other Ref 12.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -345,6 +371,7 @@ class Product implements SboObjectInterface
      * Other Ref 13.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -357,6 +384,7 @@ class Product implements SboObjectInterface
      * Other Ref 14.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -369,6 +397,7 @@ class Product implements SboObjectInterface
      * Other Ref 15.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})

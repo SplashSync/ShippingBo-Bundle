@@ -40,12 +40,17 @@ class Shipment
      * Unique identifier.
      *
      * @var null|string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("id")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read"})
+     *
      * @JMS\Exclude()
      */
     public ?string $id = null;
@@ -58,10 +63,13 @@ class Shipment
      * Carrier ID.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("carrier_id")
+     *
      * @JMS\Groups ({"Read"})
+     *
      * @JMS\Type("string")
      */
     public ?string $carrierId;
@@ -70,10 +78,13 @@ class Shipment
      * Carrier Name.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("carrier_name")
+     *
      * @JMS\Groups ({"Read"})
+     *
      * @JMS\Type("string")
      */
     public ?string $carrierName;
@@ -86,10 +97,13 @@ class Shipment
      * Shipping Method ID.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("shipping_method_id")
+     *
      * @JMS\Groups ({"Read"})
+     *
      * @JMS\Type("string")
      */
     public ?string $shippingMethodId = null;
@@ -98,10 +112,13 @@ class Shipment
      * Shipping Method NAme.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("shipping_method_name")
+     *
      * @JMS\Groups ({"Read"})
+     *
      * @JMS\Type("string")
      */
     public ?string $shippingMethodName = null;
@@ -110,10 +127,13 @@ class Shipment
      * Shipping Reference.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("shipping_ref")
+     *
      * @JMS\Groups ({"Read"})
+     *
      * @JMS\Type("string")
      */
     public ?string $shippingRef = null;
@@ -126,10 +146,13 @@ class Shipment
      * Tracking Url.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("tracking_url")
+     *
      * @JMS\Groups ({"Read"})
+     *
      * @JMS\Type("string")
      *
      * @SPL\Type("url")
@@ -142,7 +165,9 @@ class Shipment
      * @var null|DateTime
      *
      * @JMS\SerializedName("delivery_at")
+     *
      * @JMS\Groups ({"Read"})
+     *
      * @JMS\Type("datetime")
      */
     public ?DateTime $deliveryAt = null;

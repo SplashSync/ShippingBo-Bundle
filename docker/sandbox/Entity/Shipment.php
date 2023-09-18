@@ -26,7 +26,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Class representing the Order Shipment model.
  *
  * @ORM\Entity()
+ *
  * @ORM\Table(name="`order_shipment`")
+ *
  * @ORM\HasLifecycleCallbacks()
  */
 #[ApiResource(
@@ -67,6 +69,7 @@ class Shipment implements SboObjectInterface
      * Carrier ID.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -79,6 +82,7 @@ class Shipment implements SboObjectInterface
      * Carrier Name.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -91,6 +95,7 @@ class Shipment implements SboObjectInterface
      * Shipping Method ID.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -103,6 +108,7 @@ class Shipment implements SboObjectInterface
      * Shipping Method NAme.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -115,6 +121,7 @@ class Shipment implements SboObjectInterface
      * Shipping Reference.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})
@@ -127,6 +134,7 @@ class Shipment implements SboObjectInterface
      * Tracking Url.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @Groups({"read"})

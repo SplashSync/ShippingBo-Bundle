@@ -29,7 +29,9 @@ trait SboOriginTrait
      * Technical - Data Origin Source Name.
      *
      * @var string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @ORM\Column(type="string")
@@ -42,7 +44,9 @@ trait SboOriginTrait
      * Technical - Data Origin Source Name.
      *
      * @var string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @ORM\Column(type="string")
@@ -57,6 +61,7 @@ trait SboOriginTrait
      * @ORM\Column(type="datetime")
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("DateTime")
      *
      * @Groups({"read", "write"})

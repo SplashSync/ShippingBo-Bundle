@@ -33,11 +33,15 @@ trait DeliveryAddressTrait
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("shipping_address_id")
+     *
      * @JMS\Type("integer")
+     *
      * @JMS\Groups ({"Read", "Write", "Required"})
+     *
      * @JMS\Accessor(getter="getShippingAddressId",setter="setShippingAddressId")
      *
      * @SPL\Type ("objectid::Address")
+     *
      * @SPL\Microdata({"http://schema.org/Order", "orderDelivery"})
      */
     public ?string $shipping_address_id;
@@ -50,11 +54,15 @@ trait DeliveryAddressTrait
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("billing_address_id")
+     *
      * @JMS\Type("integer")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Accessor(getter="getBillingAddressId",setter="setBillingAddressId")
      *
      * @SPL\Type ("objectid::Address")
+     *
      * @SPL\Microdata({"http://schema.org/Order", "billingAddress"})
      */
     public ?string $billing_address_id;
@@ -63,13 +71,17 @@ trait DeliveryAddressTrait
      * Order Delivery Relay Code.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("relay_ref")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Prefer("write")
+     *
      * @SPL\Microdata({"http://schema.org/PostalAddress", "description"})
      */
     public ?string $relayRef = null;
@@ -80,8 +92,11 @@ trait DeliveryAddressTrait
      * @var null|Address
      *
      * @JMS\SerializedName("shipping_address")
+     *
      * @JMS\Type("Splash\Connectors\ShippingBo\Models\Api\Address")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Accessor(getter="getNullAddress")
      *
      * @Assert\Type("Splash\Connectors\ShippingBo\Models\Api\Address")
@@ -96,8 +111,11 @@ trait DeliveryAddressTrait
      * @var null|Address
      *
      * @JMS\SerializedName("billing_address")
+     *
      * @JMS\Type("Splash\Connectors\ShippingBo\Models\Api\Address")
+     *
      * @JMS\Groups ({"Read"})
+     *
      * @JMS\Accessor(setter="setBillingAddress")
      *
      * @Assert\Type("Splash\Connectors\ShippingBo\Models\Api\Address")

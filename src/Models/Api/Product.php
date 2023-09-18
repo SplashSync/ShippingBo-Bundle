@@ -54,11 +54,15 @@ class Product
      * Unique identifier.
      *
      * @var string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("id")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "List"})
      */
     public string $id;
@@ -67,14 +71,19 @@ class Product
      * Product SKU.
      *
      * @var string
+     *
      * @Assert\NotNull()
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("user_ref")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write", "List", "Required"})
      *
      * @SPL\Microdata({"http://schema.org/Product", "model"})
+     *
      * @SPL\Primary
      */
     public string $user_ref;
@@ -83,10 +92,13 @@ class Product
      * Available Stock.
      *
      * @Assert\NotNull()
+     *
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("stock")
+     *
      * @JMS\Type("int")
+     *
      * @JMS\Groups ({"Read", "Write", "List"})
      *
      * @SPL\Microdata({"http://schema.org/Offer", "inventoryLevel"})
@@ -97,10 +109,13 @@ class Product
      * Product EAN13.
      *
      * @var null|int
+     *
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("ean13")
+     *
      * @JMS\Type("int")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Microdata({"http://schema.org/Product", "gtin13"})
@@ -111,10 +126,13 @@ class Product
      * Title / Label.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("title")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Microdata({"http://schema.org/Product", "name"})
@@ -125,10 +143,13 @@ class Product
      * Location.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("location")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Microdata({"http://schema.org/Offer", "inventoryLevel"})
@@ -139,10 +160,13 @@ class Product
      * Customs HS Code.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("hs_code")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Microdata({"http://schema.org/Product", "customsHsCode"})
@@ -153,10 +177,13 @@ class Product
      * Supplier Name.
      *
      * @var null|string
+     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("supplier")
+     *
      * @JMS\Type("string")
+     *
      * @JMS\Groups ({"Read", "Write"})
      *
      * @SPL\Microdata({"http://schema.org/Product", "manufacturer"})

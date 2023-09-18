@@ -35,7 +35,9 @@ trait TotalsTrait
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("total_price_cents")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Type("integer")
      */
     public ?int $total_price_cents = 0;
@@ -46,7 +48,9 @@ trait TotalsTrait
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("total_without_tax_cents")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Type("integer")
      */
     public ?int $total_without_tax_cents = 0;
@@ -57,7 +61,9 @@ trait TotalsTrait
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("total_tax_cents")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Type("integer")
      */
     public ?int $total_tax_cents = 0;
@@ -68,7 +74,9 @@ trait TotalsTrait
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("total_price_currency")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Type("string")
      */
     public ?string $total_price_currency = "EUR";
@@ -83,7 +91,9 @@ trait TotalsTrait
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("total_shipping_cents")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Type("integer")
      */
     public ?int $total_shipping_cents = 0;
@@ -94,7 +104,9 @@ trait TotalsTrait
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("total_shipping_tax_included_cents")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Type("integer")
      */
     public ?int $total_shipping_tax_included_cents = 0;
@@ -105,7 +117,9 @@ trait TotalsTrait
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("total_shipping_tax_cents")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Type("integer")
      */
     public ?int $total_shipping_tax_cents = 0;
@@ -116,7 +130,9 @@ trait TotalsTrait
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("total_shipping_tax_included_currency")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Type("string")
      */
     public ?string $total_shipping_tax_included_currency = "EUR";
@@ -131,7 +147,9 @@ trait TotalsTrait
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("total_discount_tax_included_cents")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Type("integer")
      */
     public ?int $total_discount_tax_included_cents = 0;
@@ -142,7 +160,9 @@ trait TotalsTrait
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("total_discount_cents")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Type("integer")
      */
     public ?int $total_discount_cents = 0;
@@ -153,7 +173,9 @@ trait TotalsTrait
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("total_discount_tax_included_currency")
+     *
      * @JMS\Groups ({"Read", "Write"})
+     *
      * @JMS\Type("string")
      */
     public ?string $total_discount_tax_included_currency = "EUR";
@@ -168,7 +190,9 @@ trait TotalsTrait
      * @Assert\Type("int")
      *
      * @JMS\SerializedName("total_weight")
+     *
      * @JMS\Groups ({"Read"})
+     *
      * @JMS\Type("integer")
      *
      * @SPL\Type("double")
@@ -183,10 +207,13 @@ trait TotalsTrait
      * @Assert\Type("array")
      *
      * @JMS\SerializedName("total_price")
+     *
      * @JMS\Groups ({"Read", "Write", "Required"})
+     *
      * @JMS\Type("array")
      *
      * @SPL\Type("price")
+     *
      * @SPL\Microdata({"http://schema.org/Invoice", "total"})
      */
     private ?array $totalPrice = null;
@@ -199,10 +226,13 @@ trait TotalsTrait
      * @Assert\Type("array")
      *
      * @JMS\SerializedName("total_shipping_price")
+     *
      * @JMS\Groups ({"Read", "Write", "Required"})
+     *
      * @JMS\Type("array")
      *
      * @SPL\Type("price")
+     *
      * @SPL\Microdata({"http://schema.org/Invoice", "totalShipping"})
      */
     private ?array $totalShippingPrice = null;
@@ -215,10 +245,13 @@ trait TotalsTrait
      * @Assert\Type("array")
      *
      * @JMS\SerializedName("total_dicount_price")
+     *
      * @JMS\Groups ({"Read", "Write", "Required"})
+     *
      * @JMS\Type("array")
      *
      * @SPL\Type("price")
+     *
      * @SPL\Microdata({"http://schema.org/Invoice", "totalDiscount"})
      */
     private ?array $totalDiscountPrice = null;
