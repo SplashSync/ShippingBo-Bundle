@@ -111,7 +111,7 @@ functional:
             - logs
             - manifest
         reports:
-          junit: "*-report.xml"
+            junit: "*-report.xml"
 
 ################################################################
 # Build Documentation

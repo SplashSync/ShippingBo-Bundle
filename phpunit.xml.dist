@@ -12,7 +12,6 @@
         stopOnFailure               = "true"
         bootstrap                   = "vendor/autoload_runtime.php"
         verbose                     = "true"
-        testdox                     = "true"
         timeoutForLargeTests        = "10"
 >
 
