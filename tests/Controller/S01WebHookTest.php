@@ -17,7 +17,6 @@ namespace Splash\Connectors\ShippingBo\Test\Controller;
 
 use Exception;
 use Splash\Bundle\Tests\WebTestCase;
-use Splash\Client\Splash;
 use Splash\Connectors\ShippingBo\Services\ShippingBoConnector;
 use Symfony\Component\HttpFoundation\JsonResponse;
 

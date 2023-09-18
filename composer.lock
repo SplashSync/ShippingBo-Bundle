@@ -9734,12 +9734,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SplashSync/Toolkit.git",
-                "reference": "ab38f8e456ff8278c18af707b083e50e6260b605"
+                "reference": "a4bad0fd7a5935c0dae5fc4435f262dbba91c79a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SplashSync/Toolkit/zipball/ab38f8e456ff8278c18af707b083e50e6260b605",
-                "reference": "ab38f8e456ff8278c18af707b083e50e6260b605",
+                "url": "https://api.github.com/repos/SplashSync/Toolkit/zipball/a4bad0fd7a5935c0dae5fc4435f262dbba91c79a",
+                "reference": "a4bad0fd7a5935c0dae5fc4435f262dbba91c79a",
                 "shasum": ""
             },
             "require": {
@@ -9791,7 +9791,7 @@
                 "issues": "https://github.com/SplashSync/Toolkit/issues",
                 "source": "https://github.com/SplashSync/Toolkit/tree/master"
             },
-            "time": "2023-09-18T22:32:40+00:00"
+            "time": "2023-09-18T22:51:29+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",

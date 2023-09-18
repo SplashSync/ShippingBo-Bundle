@@ -47,13 +47,13 @@ stages:
     ################################################################################
     # Run Test Script
     script:
-      # Execute Grumphp Testsuite
-      - wall-e grumphp:quality
-      - wall-e grumphp:stan
+        # Execute Grumphp Testsuite
+        - wall-e grumphp:quality
+        - wall-e grumphp:stan
     ################################################################################
     # Run After Script
     after_script:
-      - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/ci/after.sh | sh
+        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/ci/after.sh | sh
 
 ################################################################################
 # PHP 8.2
