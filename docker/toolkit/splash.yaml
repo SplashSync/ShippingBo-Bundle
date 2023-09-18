@@ -1,3 +1,6 @@
+parameters:
+    env(SBO_STAGING_API_USER):  'none'
+    env(SBO_STAGING_API_KEY):   'none'
 
 splash:
 
