@@ -25,10 +25,7 @@
     },
     
     "autoload-dev": {
-        "files":    [
-            "vendor/splash/phpcore/inc/Splash.Inc.php"
-        ],
-        "psr-4": { 
+        "psr-4": {
             "Splash\\Connectors\\ShippingBo\\Test\\":     "tests/"
         }        
     },

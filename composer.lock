@@ -839,18 +839,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SplashSync/Php-Bundle.git",
-                "reference": "00ff380ed1ea6b956b82bd2790a3149466ec068f"
+                "reference": "cf1946ce8f043a18eabc66450116cdbc06b3bc65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SplashSync/Php-Bundle/zipball/00ff380ed1ea6b956b82bd2790a3149466ec068f",
-                "reference": "00ff380ed1ea6b956b82bd2790a3149466ec068f",
+                "url": "https://api.github.com/repos/SplashSync/Php-Bundle/zipball/cf1946ce8f043a18eabc66450116cdbc06b3bc65",
+                "reference": "cf1946ce8f043a18eabc66450116cdbc06b3bc65",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4|^8.0",
                 "psr/simple-cache": "^1.0 || ^2.0",
-                "splash/phpcore": "^2.0|dev-master"
+                "splash/phpcore": "^2.0"
             },
             "require-dev": {
                 "badpixxel/php-sdk": "~2.0",
@@ -878,8 +878,12 @@
                 "public-dir": "tests/public"
             },
             "autoload": {
+                "files": [
+                    "phpunit/Tools/TestCase.php"
+                ],
                 "psr-4": {
                     "Splash\\Local\\": "src/Local/",
+                    "Splash\\Tests\\": "phpunit/",
                     "Splash\\Bundle\\": "src/"
                 }
             },
@@ -902,20 +906,20 @@
                 "issues": "https://github.com/SplashSync/Php-Bundle/issues",
                 "source": "https://github.com/SplashSync/Php-Bundle/tree/master"
             },
-            "time": "2023-09-18T15:19:14+00:00"
+            "time": "2023-09-20T22:16:02+00:00"
         },
         {
             "name": "splash/phpcore",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SplashSync/Php-Core.git",
-                "reference": "9ff559141d75588ec7b289503ce8ba8e743dd9fe"
+                "reference": "898156d1c3ac287b2a76a8e89f66df68a379c31b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SplashSync/Php-Core/zipball/9ff559141d75588ec7b289503ce8ba8e743dd9fe",
-                "reference": "9ff559141d75588ec7b289503ce8ba8e743dd9fe",
+                "url": "https://api.github.com/repos/SplashSync/Php-Core/zipball/898156d1c3ac287b2a76a8e89f66df68a379c31b",
+                "reference": "898156d1c3ac287b2a76a8e89f66df68a379c31b",
                 "shasum": ""
             },
             "require": {
@@ -934,6 +938,9 @@
             },
             "type": "package",
             "autoload": {
+                "files": [
+                    "inc/Splash.Inc.php"
+                ],
                 "psr-4": {
                     "Splash\\": "",
                     "Splash\\Local\\": "../../../Resources"
@@ -959,9 +966,9 @@
             "description": "Splash Foundation Module for All Php Applications",
             "support": {
                 "issues": "https://github.com/SplashSync/Php-Core/issues",
-                "source": "https://github.com/SplashSync/Php-Core/tree/2.1.0"
+                "source": "https://github.com/SplashSync/Php-Core/tree/2.1.1"
             },
-            "time": "2023-09-18T09:35:29+00:00"
+            "time": "2023-09-20T22:04:30+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -2818,16 +2825,16 @@
         },
         {
             "name": "badpixxel/php-sdk",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BadPixxel/Php-Sdk.git",
-                "reference": "285d05785e4fb6eabd39b786cc5c95400feab15a"
+                "reference": "404b25c69c56b423ce9cea5d75f8434b836596ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BadPixxel/Php-Sdk/zipball/285d05785e4fb6eabd39b786cc5c95400feab15a",
-                "reference": "285d05785e4fb6eabd39b786cc5c95400feab15a",
+                "url": "https://api.github.com/repos/BadPixxel/Php-Sdk/zipball/404b25c69c56b423ce9cea5d75f8434b836596ca",
+                "reference": "404b25c69c56b423ce9cea5d75f8434b836596ca",
                 "shasum": ""
             },
             "require": {
@@ -2878,9 +2885,9 @@
             "description": "Development Kit for Php Packages",
             "support": {
                 "issues": "https://github.com/BadPixxel/Php-Sdk/issues",
-                "source": "https://github.com/BadPixxel/Php-Sdk/tree/2.1.0"
+                "source": "https://github.com/BadPixxel/Php-Sdk/tree/2.1.1"
             },
-            "time": "2023-09-18T21:15:54+00:00"
+            "time": "2023-09-20T22:05:01+00:00"
         },
         {
             "name": "badpixxel/widgets-bundle",
@@ -6316,16 +6323,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.34",
+            "version": "1.10.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "7f806b6f1403e6914c778140e2ba07c293cb4901"
+                "reference": "e730e5facb75ffe09dfb229795e8c01a459f26c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/7f806b6f1403e6914c778140e2ba07c293cb4901",
-                "reference": "7f806b6f1403e6914c778140e2ba07c293cb4901",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e730e5facb75ffe09dfb229795e8c01a459f26c3",
+                "reference": "e730e5facb75ffe09dfb229795e8c01a459f26c3",
                 "shasum": ""
             },
             "require": {
@@ -6374,7 +6381,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-09-13T09:49:47+00:00"
+            "time": "2023-09-19T15:27:56+00:00"
         },
         {
             "name": "phpstan/phpstan-doctrine",
@@ -6620,16 +6627,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.28",
+            "version": "9.2.29",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "7134a5ccaaf0f1c92a4f5501a6c9f98ac4dcc0ef"
+                "reference": "6a3a87ac2bbe33b25042753df8195ba4aa534c76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/7134a5ccaaf0f1c92a4f5501a6c9f98ac4dcc0ef",
-                "reference": "7134a5ccaaf0f1c92a4f5501a6c9f98ac4dcc0ef",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/6a3a87ac2bbe33b25042753df8195ba4aa534c76",
+                "reference": "6a3a87ac2bbe33b25042753df8195ba4aa534c76",
                 "shasum": ""
             },
             "require": {
@@ -6686,7 +6693,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
                 "security": "https://github.com/sebastianbergmann/php-code-coverage/security/policy",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.28"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.29"
             },
             "funding": [
                 {
@@ -6694,7 +6701,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-12T14:36:20+00:00"
+            "time": "2023-09-19T04:57:46+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -6939,16 +6946,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.6.12",
+            "version": "9.6.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a122c2ebd469b751d774aa0f613dc0d67697653f"
+                "reference": "f3d767f7f9e191eab4189abe41ab37797e30b1be"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a122c2ebd469b751d774aa0f613dc0d67697653f",
-                "reference": "a122c2ebd469b751d774aa0f613dc0d67697653f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/f3d767f7f9e191eab4189abe41ab37797e30b1be",
+                "reference": "f3d767f7f9e191eab4189abe41ab37797e30b1be",
                 "shasum": ""
             },
             "require": {
@@ -7022,7 +7029,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.12"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.13"
             },
             "funding": [
                 {
@@ -7038,7 +7045,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-09-12T14:39:31+00:00"
+            "time": "2023-09-19T05:39:22+00:00"
         },
         {
             "name": "psr/log",
@@ -9492,12 +9499,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SplashSync/Faker-Bundle.git",
-                "reference": "7b45e9ae2dd9d139b041096c04b39156dd8750d1"
+                "reference": "263ecb8c0b48d7ec72537e3ffb0b48a884f08dae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SplashSync/Faker-Bundle/zipball/7b45e9ae2dd9d139b041096c04b39156dd8750d1",
-                "reference": "7b45e9ae2dd9d139b041096c04b39156dd8750d1",
+                "url": "https://api.github.com/repos/SplashSync/Faker-Bundle/zipball/263ecb8c0b48d7ec72537e3ffb0b48a884f08dae",
+                "reference": "263ecb8c0b48d7ec72537e3ffb0b48a884f08dae",
                 "shasum": ""
             },
             "require": {
@@ -9533,7 +9540,7 @@
                 "issues": "https://github.com/SplashSync/Faker-Bundle/issues",
                 "source": "https://github.com/SplashSync/Faker-Bundle/tree/master"
             },
-            "time": "2023-09-18T15:12:55+00:00"
+            "time": "2023-09-20T22:22:33+00:00"
         },
         {
             "name": "splash/flat",
@@ -9600,32 +9607,28 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/BadPixxel/Soap-Bundle.git",
-                "reference": "09fddec47b0ac9f2339e366f928810bbe8d8feca"
+                "reference": "d8d09366062390e50ea2de35713a6ae591e525f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BadPixxel/Soap-Bundle/zipball/09fddec47b0ac9f2339e366f928810bbe8d8feca",
-                "reference": "09fddec47b0ac9f2339e366f928810bbe8d8feca",
+                "url": "https://api.github.com/repos/BadPixxel/Soap-Bundle/zipball/d8d09366062390e50ea2de35713a6ae591e525f8",
+                "reference": "d8d09366062390e50ea2de35713a6ae591e525f8",
                 "shasum": ""
             },
             "require": {
                 "ext-soap": "*",
-                "php": "^7.3|^8.0",
+                "php": "^8.0",
                 "splash/php-bundle": "dev-master"
             },
             "require-dev": {
                 "badpixxel/php-sdk": "~2.0",
-                "doctrine/doctrine-bundle": "^2.4",
-                "doctrine/orm": "^2.6",
-                "monolog/monolog": "^1.0",
-                "splash/console": "dev-master",
-                "splash/faker": "dev-master",
-                "symfony/monolog-bundle": "*",
-                "symfony/phpunit-bridge": "*",
-                "symfony/symfony": "^3.4|^4.4"
+                "splash/toolkit": "dev-master"
             },
             "default-branch": true,
             "type": "symfony-bundle",
+            "extra": {
+                "public-dir": "tests"
+            },
             "autoload": {
                 "psr-4": {
                     "Splash\\Connectors\\Soap\\": "src/"
@@ -9650,7 +9653,7 @@
                 "issues": "https://github.com/BadPixxel/Soap-Bundle/issues",
                 "source": "https://github.com/BadPixxel/Soap-Bundle/tree/master"
             },
-            "time": "2023-01-06T14:24:18+00:00"
+            "time": "2023-09-18T15:19:13+00:00"
         },
         {
             "name": "splash/sonata-admin",
@@ -9734,12 +9737,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SplashSync/Toolkit.git",
-                "reference": "a4bad0fd7a5935c0dae5fc4435f262dbba91c79a"
+                "reference": "f5bfa0d15d6c5562e404ba95aa297d75bc3c22ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SplashSync/Toolkit/zipball/a4bad0fd7a5935c0dae5fc4435f262dbba91c79a",
-                "reference": "a4bad0fd7a5935c0dae5fc4435f262dbba91c79a",
+                "url": "https://api.github.com/repos/SplashSync/Toolkit/zipball/f5bfa0d15d6c5562e404ba95aa297d75bc3c22ba",
+                "reference": "f5bfa0d15d6c5562e404ba95aa297d75bc3c22ba",
                 "shasum": ""
             },
             "require": {
@@ -9791,7 +9794,7 @@
                 "issues": "https://github.com/SplashSync/Toolkit/issues",
                 "source": "https://github.com/SplashSync/Toolkit/tree/master"
             },
-            "time": "2023-09-18T22:51:29+00:00"
+            "time": "2023-09-20T08:08:14+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",

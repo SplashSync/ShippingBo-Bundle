@@ -46,7 +46,6 @@ class S02OrderFiltersTest extends ObjectsCase
     {
         //====================================================================//
         // Load Connector
-        /** @phpstan-ignore-next-line  */
         $connector = $this->getConnector(self::CONNECTOR);
         $this->assertInstanceOf(ShippingBoConnector::class, $connector);
     }
@@ -60,7 +59,6 @@ class S02OrderFiltersTest extends ObjectsCase
     {
         //====================================================================//
         // Load Connector
-        /** @phpstan-ignore-next-line  */
         $connector = $this->getConnector(self::CONNECTOR);
         $this->assertInstanceOf(ShippingBoConnector::class, $connector);
         //====================================================================//
@@ -99,7 +97,6 @@ class S02OrderFiltersTest extends ObjectsCase
         $objectType = "Order";
         //====================================================================//
         // Load Connector
-        /** @phpstan-ignore-next-line  */
         $connector = $this->getConnector(self::CONNECTOR);
         $this->assertInstanceOf(ShippingBoConnector::class, $connector);
         //====================================================================//

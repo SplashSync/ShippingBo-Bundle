@@ -46,7 +46,6 @@ class S00MinimalObjectsTest extends ObjectsCase
     {
         //====================================================================//
         // Load Connector
-        /** @phpstan-ignore-next-line  */
         $connector = $this->getConnector(self::CONNECTOR);
         $this->assertInstanceOf(ShippingBoConnector::class, $connector);
     }
@@ -61,7 +60,6 @@ class S00MinimalObjectsTest extends ObjectsCase
         $objectType = "Address";
         //====================================================================//
         // Load Connector
-        /** @phpstan-ignore-next-line  */
         $connector = $this->getConnector(self::CONNECTOR);
         $this->assertInstanceOf(ShippingBoConnector::class, $connector);
         //====================================================================//
