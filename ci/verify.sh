@@ -35,7 +35,7 @@ for ID in $(echo $CONTAINERS | tr "," "\n")
 do
     echo "===> Checks $ID"
     # Ensure Git is Installed
-    docker-compose exec $ID composer update
+    docker-compose exec $ID composer update -q || composer update
     # Run Grumphp Test Suites
     docker-compose exec $ID php vendor/bin/grumphp run --testsuite=travis
     docker-compose exec $ID php vendor/bin/grumphp run --testsuite=csfixer
