@@ -39,8 +39,7 @@ services:
         container_name: toolkit.shipping-bo.local
         volumes:
             # Specify Local Configuration File
-#            - ./.env:/app/.env:ro
-            - './docker/toolkit/splash.yaml:/app/config/packages/splash.yaml:ro'
+            - './config/packages/splash.yaml:/app/config/packages/splash.yaml:ro'
             # Uncomment to use Local Sources instead of Release
             - './src:/app/connectors/ShippingBo/:ro'
             - './tests/Controller:/app/tests/Controller/:ro'

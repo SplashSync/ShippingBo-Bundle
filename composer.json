@@ -62,10 +62,14 @@
             "find var/cache/dev/*.xml | while read -r i; do cp \"$i\" var/cache/dev/testContainer.xml; done"
         ],
         "post-install-cmd": [
-            "@auto-scripts"
+            "@auto-scripts",
+            "php bin/console sonata:user:create Toolkit toolkit@splashsync.com toolkit --super-admin || exit 0"
         ],
         "post-update-cmd": [
             "@auto-scripts"
         ]
+    },
+    "extra": {
+        "public-dir": "tests/public"
     }
 }

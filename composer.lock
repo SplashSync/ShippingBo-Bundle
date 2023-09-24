@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "91127dde6e352c3ded181b65cfef64e8",
+    "content-hash": "191058fd2ae6d8788a17fe47016008f8",
     "packages": [
         {
             "name": "burgov/key-value-form-bundle",
@@ -839,12 +839,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SplashSync/Php-Bundle.git",
-                "reference": "cf1946ce8f043a18eabc66450116cdbc06b3bc65"
+                "reference": "1608eb1c57590e1d81a2f0b6dc61e24c246d349b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SplashSync/Php-Bundle/zipball/cf1946ce8f043a18eabc66450116cdbc06b3bc65",
-                "reference": "cf1946ce8f043a18eabc66450116cdbc06b3bc65",
+                "url": "https://api.github.com/repos/SplashSync/Php-Bundle/zipball/1608eb1c57590e1d81a2f0b6dc61e24c246d349b",
+                "reference": "1608eb1c57590e1d81a2f0b6dc61e24c246d349b",
                 "shasum": ""
             },
             "require": {
@@ -906,20 +906,20 @@
                 "issues": "https://github.com/SplashSync/Php-Bundle/issues",
                 "source": "https://github.com/SplashSync/Php-Bundle/tree/master"
             },
-            "time": "2023-09-20T22:16:02+00:00"
+            "time": "2023-09-22T16:31:48+00:00"
         },
         {
             "name": "splash/phpcore",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SplashSync/Php-Core.git",
-                "reference": "898156d1c3ac287b2a76a8e89f66df68a379c31b"
+                "reference": "5cb5b7e8b148edddb527e675136f90dce37a5f51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SplashSync/Php-Core/zipball/898156d1c3ac287b2a76a8e89f66df68a379c31b",
-                "reference": "898156d1c3ac287b2a76a8e89f66df68a379c31b",
+                "url": "https://api.github.com/repos/SplashSync/Php-Core/zipball/5cb5b7e8b148edddb527e675136f90dce37a5f51",
+                "reference": "5cb5b7e8b148edddb527e675136f90dce37a5f51",
                 "shasum": ""
             },
             "require": {
@@ -966,9 +966,9 @@
             "description": "Splash Foundation Module for All Php Applications",
             "support": {
                 "issues": "https://github.com/SplashSync/Php-Core/issues",
-                "source": "https://github.com/SplashSync/Php-Core/tree/2.1.1"
+                "source": "https://github.com/SplashSync/Php-Core/tree/2.1.2"
             },
-            "time": "2023-09-20T22:04:30+00:00"
+            "time": "2023-09-22T22:03:22+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -3869,16 +3869,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "3.6.6",
+            "version": "3.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "63646ffd71d1676d2f747f871be31b7e921c7864"
+                "reference": "8e0e268052b4a8974cb00215bb2892787021614f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/63646ffd71d1676d2f747f871be31b7e921c7864",
-                "reference": "63646ffd71d1676d2f747f871be31b7e921c7864",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/8e0e268052b4a8974cb00215bb2892787021614f",
+                "reference": "8e0e268052b4a8974cb00215bb2892787021614f",
                 "shasum": ""
             },
             "require": {
@@ -3894,9 +3894,9 @@
                 "doctrine/coding-standard": "12.0.0",
                 "fig/log-test": "^1",
                 "jetbrains/phpstorm-stubs": "2023.1",
-                "phpstan/phpstan": "1.10.29",
+                "phpstan/phpstan": "1.10.34",
                 "phpstan/phpstan-strict-rules": "^1.5",
-                "phpunit/phpunit": "9.6.9",
+                "phpunit/phpunit": "9.6.12",
                 "psalm/plugin-phpunit": "0.18.4",
                 "slevomat/coding-standard": "8.13.1",
                 "squizlabs/php_codesniffer": "3.7.2",
@@ -3962,7 +3962,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/3.6.6"
+                "source": "https://github.com/doctrine/dbal/tree/3.6.7"
             },
             "funding": [
                 {
@@ -3978,7 +3978,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-08-17T05:38:17+00:00"
+            "time": "2023-09-19T20:15:41+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -4599,16 +4599,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.27.0",
+            "version": "v3.28.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer.git",
-                "reference": "e73ccaae1208f017bb7860986eebb3da48bd25d6"
+                "reference": "113e09fea3d2306319ffaa2423fe3de768b28cff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/e73ccaae1208f017bb7860986eebb3da48bd25d6",
-                "reference": "e73ccaae1208f017bb7860986eebb3da48bd25d6",
+                "url": "https://api.github.com/repos/PHP-CS-Fixer/PHP-CS-Fixer/zipball/113e09fea3d2306319ffaa2423fe3de768b28cff",
+                "reference": "113e09fea3d2306319ffaa2423fe3de768b28cff",
                 "shasum": ""
             },
             "require": {
@@ -4682,7 +4682,7 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/issues",
-                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.27.0"
+                "source": "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/tree/v3.28.0"
             },
             "funding": [
                 {
@@ -4690,7 +4690,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-17T14:37:54+00:00"
+            "time": "2023-09-22T20:43:40+00:00"
         },
         {
             "name": "friendsoftwig/twigcs",
@@ -5781,16 +5781,16 @@
         },
         {
             "name": "pdepend/pdepend",
-            "version": "2.14.0",
+            "version": "2.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pdepend/pdepend.git",
-                "reference": "1121d4b04af06e33e9659bac3a6741b91cab1de1"
+                "reference": "0d4d8fb87aa74c358c1c4364514017f34b4a68b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pdepend/pdepend/zipball/1121d4b04af06e33e9659bac3a6741b91cab1de1",
-                "reference": "1121d4b04af06e33e9659bac3a6741b91cab1de1",
+                "url": "https://api.github.com/repos/pdepend/pdepend/zipball/0d4d8fb87aa74c358c1c4364514017f34b4a68b9",
+                "reference": "0d4d8fb87aa74c358c1c4364514017f34b4a68b9",
                 "shasum": ""
             },
             "require": {
@@ -5832,7 +5832,7 @@
             ],
             "support": {
                 "issues": "https://github.com/pdepend/pdepend/issues",
-                "source": "https://github.com/pdepend/pdepend/tree/2.14.0"
+                "source": "https://github.com/pdepend/pdepend/tree/2.15.0"
             },
             "funding": [
                 {
@@ -5840,7 +5840,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-05-26T13:15:18+00:00"
+            "time": "2023-09-22T02:30:39+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -9499,12 +9499,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SplashSync/Faker-Bundle.git",
-                "reference": "263ecb8c0b48d7ec72537e3ffb0b48a884f08dae"
+                "reference": "c74965c9f4bc6f0b8ce709e92604ef80560bbb78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SplashSync/Faker-Bundle/zipball/263ecb8c0b48d7ec72537e3ffb0b48a884f08dae",
-                "reference": "263ecb8c0b48d7ec72537e3ffb0b48a884f08dae",
+                "url": "https://api.github.com/repos/SplashSync/Faker-Bundle/zipball/c74965c9f4bc6f0b8ce709e92604ef80560bbb78",
+                "reference": "c74965c9f4bc6f0b8ce709e92604ef80560bbb78",
                 "shasum": ""
             },
             "require": {
@@ -9540,7 +9540,7 @@
                 "issues": "https://github.com/SplashSync/Faker-Bundle/issues",
                 "source": "https://github.com/SplashSync/Faker-Bundle/tree/master"
             },
-            "time": "2023-09-20T22:22:33+00:00"
+            "time": "2023-09-21T11:21:27+00:00"
         },
         {
             "name": "splash/flat",
@@ -9548,12 +9548,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SplashSync/Flat-Bundle.git",
-                "reference": "4faa8343f4b93cbd1c6404db43ac0f2d917f2073"
+                "reference": "b54333076c5d23e9fe9bed09d68730de755310de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SplashSync/Flat-Bundle/zipball/4faa8343f4b93cbd1c6404db43ac0f2d917f2073",
-                "reference": "4faa8343f4b93cbd1c6404db43ac0f2d917f2073",
+                "url": "https://api.github.com/repos/SplashSync/Flat-Bundle/zipball/b54333076c5d23e9fe9bed09d68730de755310de",
+                "reference": "b54333076c5d23e9fe9bed09d68730de755310de",
                 "shasum": ""
             },
             "require": {
@@ -9599,7 +9599,7 @@
                 "issues": "https://github.com/SplashSync/Flat-Bundle/issues",
                 "source": "https://github.com/SplashSync/Flat-Bundle/tree/master"
             },
-            "time": "2023-09-14T10:29:37+00:00"
+            "time": "2023-09-20T22:33:27+00:00"
         },
         {
             "name": "splash/soap",
@@ -9661,12 +9661,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SplashSync/SonataAdminSplashBundle.git",
-                "reference": "4a69062af8881625ec58d89365110fb395416d0c"
+                "reference": "05e1293012f87123188ff6a6fe54443d7d3284ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SplashSync/SonataAdminSplashBundle/zipball/4a69062af8881625ec58d89365110fb395416d0c",
-                "reference": "4a69062af8881625ec58d89365110fb395416d0c",
+                "url": "https://api.github.com/repos/SplashSync/SonataAdminSplashBundle/zipball/05e1293012f87123188ff6a6fe54443d7d3284ba",
+                "reference": "05e1293012f87123188ff6a6fe54443d7d3284ba",
                 "shasum": ""
             },
             "require": {
@@ -9729,7 +9729,7 @@
                 "issues": "https://github.com/SplashSync/SonataAdminSplashBundle/issues",
                 "source": "https://github.com/SplashSync/SonataAdminSplashBundle/tree/master"
             },
-            "time": "2023-09-12T14:21:15+00:00"
+            "time": "2023-09-22T22:45:48+00:00"
         },
         {
             "name": "splash/toolkit",
@@ -9737,12 +9737,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SplashSync/Toolkit.git",
-                "reference": "f5bfa0d15d6c5562e404ba95aa297d75bc3c22ba"
+                "reference": "2245565a819db600b1d861a27dd238d9fb918cad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SplashSync/Toolkit/zipball/f5bfa0d15d6c5562e404ba95aa297d75bc3c22ba",
-                "reference": "f5bfa0d15d6c5562e404ba95aa297d75bc3c22ba",
+                "url": "https://api.github.com/repos/SplashSync/Toolkit/zipball/2245565a819db600b1d861a27dd238d9fb918cad",
+                "reference": "2245565a819db600b1d861a27dd238d9fb918cad",
                 "shasum": ""
             },
             "require": {
@@ -9794,7 +9794,7 @@
                 "issues": "https://github.com/SplashSync/Toolkit/issues",
                 "source": "https://github.com/SplashSync/Toolkit/tree/master"
             },
-            "time": "2023-09-20T08:08:14+00:00"
+            "time": "2023-09-22T21:11:15+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
