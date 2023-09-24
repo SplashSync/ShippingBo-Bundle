@@ -16,6 +16,11 @@
 ################################################################################
 
 ################################################################
+# Include Pipeline Templates
+include:
+    - remote: 'https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/gitlab/pages.yaml'
+
+################################################################
 # Set any variables we need
 variables:
   # Configure mysql environment variables (https://hub.docker.com/r/_/mysql/)
@@ -27,16 +32,17 @@ variables:
 ################################################################
 # Defined Pipeline Stages
 stages:
-  - quality
-  - functional
-  - deploy
+  - Builds
+  - Quality
+  - Functional
+#  - Builds
 
 ################################################################
 # Functional Tests
 ################################################################
 
 .quality:    &quality
-    stage:      quality
+    stage:      Quality
     tags:
         - Dedicated
     ################################################################################
@@ -73,7 +79,7 @@ quality:php-8.1:
 ################################################################
 functional:
     image:      docker:stable
-    stage:      functional
+    stage:      Functional
     retry:      2
     tags:
         - Dedicated
@@ -113,19 +119,4 @@ functional:
             - reports
         reports:
             junit: "*-report.xml"
-
-################################################################
-# Build Documentation
-################################################################
-pages:
-    image:      jekyll/minimal:latest
-    stage:      deploy
-    tags:       [ Dedicated ]
-    ################################################################################
-    # Run Test Script
-    script:
-        - wget -qO - https://gitlab.com/badpixxel-robo/jekyll/-/raw/main/scripts/gitlab-pages.sh | sh
-    artifacts:
-        paths:
-          - public
 
