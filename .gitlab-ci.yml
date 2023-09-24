@@ -18,60 +18,24 @@
 ################################################################
 # Include Pipeline Templates
 include:
+    - remote: 'https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/gitlab/php/defaults.yaml'
     - remote: 'https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/gitlab/pages.yaml'
 
 ################################################################
-# Set any variables we need
-variables:
-  # Configure mysql environment variables (https://hub.docker.com/r/_/mysql/)
-  MYSQL_DATABASE:               symfony
-  MYSQL_ROOT_PASSWORD:          ShippingBo-Bundle
-  COMPOSER_MEMORY_LIMIT:        -1
-  SYMFONY_DEPRECATIONS_HELPER:  disabled
-
+# Quality Tests
 ################################################################
-# Defined Pipeline Stages
-stages:
-  - Quality
-  - Functional
-  - Builds
-
-################################################################
-# Functional Tests
-################################################################
-
-.quality:    &quality
-    stage:      Quality
-    tags:
-        - Dedicated
-    ################################################################################
-    # Install & Configure Environment
-    before_script:
-        # Install Symfony
-        - composer update
-    ################################################################################
-    # Run Test Script
-    script:
-        # Execute Grumphp Testsuite
-        - wall-e grumphp:quality
-        - wall-e grumphp:stan
-    ################################################################################
-    # Run After Script
-    after_script:
-        - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/ci/after.sh | sh
 
 ################################################################################
 # PHP 8.2
 quality:php-8.2:
-  image: registry.gitlab.com/badpixxel-projects/php-sdk:php-8.2
-  <<: *quality
+    extends:  .quality
+    image:    registry.gitlab.com/badpixxel-projects/php-sdk:php-8.2
 
 ################################################################################
 # PHP 8.1
 quality:php-8.1:
-  image: registry.gitlab.com/badpixxel-projects/php-sdk:php-8.1
-  <<: *quality
-
+    extends:  .quality
+    image: registry.gitlab.com/badpixxel-projects/php-sdk:php-8.1
 
 ################################################################
 # Functional Tests
@@ -79,7 +43,7 @@ quality:php-8.1:
 functional:
     image:      docker:stable
     stage:      Functional
-    retry:      2
+    retry:      1
     tags:
         - Dedicated
     services:
@@ -89,9 +53,6 @@ functional:
     before_script:
         # Install Git, Bash, Curl & Docker Compose
         - apk add --no-cache curl bash git docker-compose
-        - echo "SBO_STAGING_API_USER=None"  >> .env
-        - echo "SBO_STAGING_API_KEY=None"   >> .env
-        - echo "SHOPIFY_API_SECRET=None"    >> .env
         # Install & Build Docker Compose
         - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/toolkit/build.sh  | bash
 
