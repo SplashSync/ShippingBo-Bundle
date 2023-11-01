@@ -121,7 +121,7 @@ trait ProductDimensionsTrait
     //====================================================================//
 
     /**
-     * @return null|int
+     * Get Product Weight
      */
     public function getApiWeight(): ?int
     {
@@ -129,9 +129,7 @@ trait ProductDimensionsTrait
     }
 
     /**
-     * @param null|int $weight
-     *
-     * @return self
+     * Set Product Weight
      */
     public function setApiWeight(?int $weight): static
     {
@@ -141,7 +139,7 @@ trait ProductDimensionsTrait
     }
 
     /**
-     * @return null|int
+     * Get Product Height
      */
     public function getApiHeight(): ?int
     {
@@ -149,9 +147,7 @@ trait ProductDimensionsTrait
     }
 
     /**
-     * @param null|int $height
-     *
-     * @return self
+     * Set Product Height
      */
     public function setApiHeight(?int $height): self
     {
@@ -161,7 +157,7 @@ trait ProductDimensionsTrait
     }
 
     /**
-     * @return null|int
+     * Get Product Length
      */
     public function getApiLength(): ?int
     {
@@ -169,9 +165,7 @@ trait ProductDimensionsTrait
     }
 
     /**
-     * @param null|int $length
-     *
-     * @return self
+     * Set Product Length
      */
     public function setApiLength(?int $length): static
     {
@@ -181,7 +175,7 @@ trait ProductDimensionsTrait
     }
 
     /**
-     * @return null|int
+     * Get Product Width
      */
     public function getApiWidth(): ?int
     {
@@ -189,9 +183,7 @@ trait ProductDimensionsTrait
     }
 
     /**
-     * @param null|int $width
-     *
-     * @return self
+     * Set Product Width
      */
     public function setApiWidth(?int $width): static
     {
