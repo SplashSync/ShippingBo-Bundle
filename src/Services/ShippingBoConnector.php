@@ -180,6 +180,8 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws Exception
      */
     public function selfTest() : bool
     {
@@ -202,6 +204,11 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
 
             return false;
         }
+
+        //====================================================================//
+        // Create or Refresh Connexion
+        //====================================================================//
+        $this->getConnexion();
 
         return true;
     }
@@ -362,16 +369,17 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
     public function getConnexion() : ConnexionInterface
     {
         //====================================================================//
+        // Get Configuration
+        $config = $this->getConfiguration();
+        //====================================================================//
         // Connexion already created
         if (isset($this->connexion)) {
-            return $this->connexion;
+            //====================================================================//
+            // Connexion Unchanged
+            if ($this->connexion->getTemplate()->headers['X-API-USER'] == $config["ApiUser"]) {
+                return $this->connexion;
+            }
         }
-        //====================================================================//
-        // Safety check
-        if (!$this->selfTest()) {
-            throw new Exception("Self-test fails... Unable to create API Connexion!");
-        }
-        $config = $this->getConfiguration();
         //====================================================================//
         // Detect Api Url
         $url = $this->getParameter("isSandbox", false)

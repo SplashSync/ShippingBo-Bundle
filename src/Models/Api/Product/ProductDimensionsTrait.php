@@ -121,19 +121,17 @@ trait ProductDimensionsTrait
     //====================================================================//
 
     /**
-     * @return null|int
+     * Get Product Weight
      */
     public function getApiWeight(): ?int
     {
-        return (int) (1000 * $this->weight);
+        return ((int) (1000 * $this->weight)) ?: null;
     }
 
     /**
-     * @param null|int $weight
-     *
-     * @return self
+     * Set Product Weight
      */
-    public function setApiWeight(?int $weight): self
+    public function setApiWeight(?int $weight): static
     {
         $this->weight = ((float) $weight) / 1000;
 
@@ -141,17 +139,15 @@ trait ProductDimensionsTrait
     }
 
     /**
-     * @return null|int
+     * Get Product Height
      */
     public function getApiHeight(): ?int
     {
-        return (int) (100 * $this->height);
+        return ((int) (100 * $this->height)) ?: null;
     }
 
     /**
-     * @param null|int $height
-     *
-     * @return self
+     * Set Product Height
      */
     public function setApiHeight(?int $height): self
     {
@@ -161,19 +157,17 @@ trait ProductDimensionsTrait
     }
 
     /**
-     * @return int
+     * Get Product Length
      */
-    public function getApiLength(): int
+    public function getApiLength(): ?int
     {
-        return (int) (100 * $this->length);
+        return ((int) (100 * $this->length)) ?: null;
     }
 
     /**
-     * @param null|int $length
-     *
-     * @return self
+     * Set Product Length
      */
-    public function setApiLength(?int $length): self
+    public function setApiLength(?int $length): static
     {
         $this->length = ((float) $length) / 100;
 
@@ -181,19 +175,17 @@ trait ProductDimensionsTrait
     }
 
     /**
-     * @return null|int
+     * Get Product Width
      */
     public function getApiWidth(): ?int
     {
-        return (int) (100 * $this->width);
+        return ((int) (100 * $this->width)) ?: null;
     }
 
     /**
-     * @param null|int $width
-     *
-     * @return self
+     * Set Product Width
      */
-    public function setApiWidth(?int $width): self
+    public function setApiWidth(?int $width): static
     {
         $this->width = ((float) $width) / 100;
 
