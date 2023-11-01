@@ -180,6 +180,7 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
 
     /**
      * {@inheritdoc}
+     *
      * @throws Exception
      */
     public function selfTest() : bool

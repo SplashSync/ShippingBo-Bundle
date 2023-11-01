@@ -125,7 +125,7 @@ trait ProductDimensionsTrait
      */
     public function getApiWeight(): ?int
     {
-        return (int) (1000 * $this->weight);
+        return ((int) (1000 * $this->weight)) ?: null;
     }
 
     /**
@@ -133,7 +133,7 @@ trait ProductDimensionsTrait
      *
      * @return self
      */
-    public function setApiWeight(?int $weight): self
+    public function setApiWeight(?int $weight): static
     {
         $this->weight = ((float) $weight) / 1000;
 
@@ -145,7 +145,7 @@ trait ProductDimensionsTrait
      */
     public function getApiHeight(): ?int
     {
-        return (int) (100 * $this->height);
+        return ((int) (100 * $this->height)) ?: null;
     }
 
     /**
@@ -161,11 +161,11 @@ trait ProductDimensionsTrait
     }
 
     /**
-     * @return int
+     * @return null|int
      */
-    public function getApiLength(): int
+    public function getApiLength(): ?int
     {
-        return (int) (100 * $this->length);
+        return ((int) (100 * $this->length)) ?: null;
     }
 
     /**
@@ -173,7 +173,7 @@ trait ProductDimensionsTrait
      *
      * @return self
      */
-    public function setApiLength(?int $length): self
+    public function setApiLength(?int $length): static
     {
         $this->length = ((float) $length) / 100;
 
@@ -185,7 +185,7 @@ trait ProductDimensionsTrait
      */
     public function getApiWidth(): ?int
     {
-        return (int) (100 * $this->width);
+        return ((int) (100 * $this->width)) ?: null;
     }
 
     /**
@@ -193,7 +193,7 @@ trait ProductDimensionsTrait
      *
      * @return self
      */
-    public function setApiWidth(?int $width): self
+    public function setApiWidth(?int $width): static
     {
         $this->width = ((float) $width) / 100;
 
