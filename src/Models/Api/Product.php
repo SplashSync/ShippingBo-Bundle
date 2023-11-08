@@ -51,7 +51,7 @@ class Product
     const ITEMS_PROP = "product";
 
     /**
-     * Unique identifier.
+     * Unique Identifier.
      *
      * @var string
      *

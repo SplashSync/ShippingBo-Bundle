@@ -31,8 +31,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  */
 #[ApiResource(
-    normalizationContext: array("groups" => array("read")),
-    denormalizationContext: array("groups" => array("write")),
     operations: array(
         new Meta\GetCollection(),
         new Meta\Get(),
@@ -52,7 +50,9 @@ use Symfony\Component\Validator\Constraints as Assert;
             uriTemplate:    '/orders/{id}/update_order_items',
             controller:     'App\Controller\OrderController::itemsAction',
         ),
-    )
+    ),
+    normalizationContext: array("groups" => array("read")),
+    denormalizationContext: array("groups" => array("write"))
 )]
 class Order implements SboObjectInterface
 {
