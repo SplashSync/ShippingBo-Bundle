@@ -46,7 +46,11 @@ class Product extends AbstractStandaloneObject implements PrimaryKeysAwareInterf
     // OpenApi Traits
     use ApiModels\SimpleFieldsTrait;
     use ApiModels\ListFieldsGetTrait;
+    use ApiModels\ListFieldsSetTrait;
     use ApiModels\ObjectsListTrait;
+    //    use ApiModels\ObjectsListTrait {
+    //        objectsList as public coreObjectsList;
+    //    }
 
     //====================================================================//
     // Products Traits
@@ -54,6 +58,7 @@ class Product extends AbstractStandaloneObject implements PrimaryKeysAwareInterf
     use Product\CoreTrait;
     use Product\PrimaryTrait;
     use Product\StockTrait;
+    use Product\BarcodesTrait;
 
     //====================================================================//
     // Object Definition Parameters
@@ -105,20 +110,13 @@ class Product extends AbstractStandaloneObject implements PrimaryKeysAwareInterf
     protected Visitor $visitor;
 
     /**
-     * @var ShippingBoConnector
-     */
-    protected ShippingBoConnector $connector;
-
-    /**
      * Class Constructor
-     *
-     * @param ShippingBoConnector $parentConnector
      *
      * @throws Exception
      */
-    public function __construct(ShippingBoConnector $parentConnector)
-    {
-        $this->connector = $parentConnector;
+    public function __construct(
+        protected ShippingBoConnector $connector
+    ) {
         //====================================================================//
         //  Load Translation File
         Splash::translator()->load('local');
@@ -158,4 +156,16 @@ class Product extends AbstractStandaloneObject implements PrimaryKeysAwareInterf
 
         return $this->visitor;
     }
+
+    //    /**
+    //     * {@inheritdoc}
+    //     */
+    //    public function objectsList(?string $filter = null, array $params = array()): array
+    //    {
+    //        return array_replace_recursive($this->coreObjectsList($filter, $params), array(
+    //            "meta" => array(
+    //                "total" => 100000
+    //            )
+    //        ));
+    //    }
 }
