@@ -40,7 +40,7 @@ trait BarcodesTrait
         ;
         //====================================================================//
         // Product Multi-Ean Master Barcodes
-        $this->fieldsFactory()->create(SPL_T_VARCHAR)
+        $this->fieldsFactory()->create(SPL_T_INT)
             ->identifier("ean13_multi_master")
             ->name("Multi-Ean Master")
             ->isWriteOnly()
