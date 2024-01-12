@@ -18,6 +18,7 @@ namespace App\Entity;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -29,7 +30,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\HasLifecycleCallbacks()
  */
-#[ApiResource()]
+#[ApiResource(
+    normalizationContext: array("groups" => array("read")),
+    denormalizationContext: array("groups" => array("write"))
+)]
 #[ApiFilter(SearchFilter::class, properties: array('user_ref' => 'exact'))]
 class Product implements SboObjectInterface
 {
@@ -39,17 +43,13 @@ class Product implements SboObjectInterface
     /**
      * Product SKU.
      *
-     * @var string
-     *
-     * @Assert\NotNull()
-     *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string")
      */
-    public string $user_ref;
+    public ?string $user_ref;
 
     /**
      * Available Stock.
@@ -80,7 +80,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("int")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -93,7 +93,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -106,7 +106,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -119,7 +119,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -132,7 +132,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -145,7 +145,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -162,7 +162,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("int")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -175,7 +175,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("int")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -188,7 +188,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("int")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -201,7 +201,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("int")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="integer", nullable=true)
      */
@@ -218,7 +218,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -231,7 +231,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -244,7 +244,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -257,7 +257,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -270,7 +270,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -283,7 +283,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -296,7 +296,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -309,7 +309,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -322,7 +322,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -335,7 +335,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -348,7 +348,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -361,7 +361,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -374,7 +374,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -387,7 +387,7 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
@@ -400,11 +400,35 @@ class Product implements SboObjectInterface
      *
      * @Assert\Type("string")
      *
-     * @Groups({"read"})
+     * @Groups({"read", "write"})
      *
      * @ORM\Column(type="string", nullable=true)
      */
     public ?string $other_ref15;
+
+    /**
+     * Pack Components
+     *
+     * @var PackComponent[]
+     *
+     * @Assert\All({
+     *
+     *   @Assert\Type("App\Entity\PackComponent")
+     * })
+     *
+     * @Groups({"read"})
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\PackComponent", mappedBy="product", cascade={"all"})
+     */
+    public $pack_components;
+
+    public function __construct()
+    {
+        $this->pack_components = new ArrayCollection(array(
+            PackComponent::fake($this),
+            PackComponent::fake($this),
+        ));
+    }
 
     //====================================================================//
     // STOCKS READING

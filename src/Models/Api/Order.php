@@ -46,6 +46,7 @@ class Order
     use Order\DeliveryServiceTrait;
     use Order\ShipmentsTrait;
     use Order\TotalsTrait;
+    use Order\AdminUrlsTrait;
     //====================================================================//
     // JSON PREFIXES
     const COLLECTION_PROP = "orders";
@@ -73,7 +74,7 @@ class Order
     );
 
     /**
-     * Unique identifier.
+     * Unique Identifier.
      *
      * @var string
      *

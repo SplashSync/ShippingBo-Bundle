@@ -18,7 +18,7 @@
     <testsuites>
         <testsuite name="All">
             <directory>tests/Controller/S00MinimalObjectsTest.php</directory>
-<!--            <directory>vendor/splash/phpcore/Tests/*</directory>-->
+            <directory>vendor/splash/phpcore/Tests/*</directory>
 <!--            <directory>vendor/splash/php-bundle/phpunit/*</directory>-->
             <directory>tests/*</directory>
         </testsuite>

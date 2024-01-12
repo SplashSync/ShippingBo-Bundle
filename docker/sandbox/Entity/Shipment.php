@@ -15,7 +15,6 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
@@ -60,8 +59,6 @@ class Shipment implements SboObjectInterface
      * @Assert\Type("App\Entity\Order")
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Order", inversedBy="shipments")
-     *
-     * @ApiProperty(identifier=true)
      */
     public Order $order;
 

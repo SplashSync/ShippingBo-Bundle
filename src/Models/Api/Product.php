@@ -47,6 +47,9 @@ class Product
     use Product\ProductOtherRefsTrait;
     use Product\ProductDimensionsTrait;
     use Product\ProductImageTrait;
+    use Product\PackComponentsTrait;
+    use Product\AdminUrlsTrait;
+
     const COLLECTION_PROP = "products";
     const ITEMS_PROP = "product";
 
@@ -86,7 +89,7 @@ class Product
      *
      * @SPL\Primary
      */
-    public string $user_ref;
+    public ?string $user_ref = null;
 
     /**
      * Available Stock.
