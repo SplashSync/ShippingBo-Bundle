@@ -38,5 +38,6 @@ class EditFormType extends AbstractShippingBoType
         $this->addMinObjectCreateDateField($builder);
         $this->addShippingMethodsField($builder);
         $this->addOriginFilterField($builder);
+        $this->addWriteWarehouseSlotsField($builder);
     }
 }

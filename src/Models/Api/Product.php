@@ -193,6 +193,13 @@ class Product
      */
     public ?string $supplier = null;
 
+    /**
+     * Post Loading Storage for Product Warehouse Slots Stocks
+     *
+     * @var null|int[]
+     */
+    public ?array $warehouseStocks = null;
+
     //====================================================================//
     // MAIN METHODS
     //====================================================================//
