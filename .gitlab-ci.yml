@@ -41,7 +41,7 @@ quality:php-8.1:
 # Functional Tests
 ################################################################
 functional:
-    image:      docker:stable
+    image:      docker:latest
     stage:      Functional
     retry:      1
     tags:
@@ -51,8 +51,8 @@ functional:
     ################################################################################
     # Install & Configure Environment
     before_script:
-        # Install Git, Bash, Curl & Docker Compose
-        - apk add --no-cache curl bash git docker-compose
+        # Install Git, Bash, Curl
+        - apk add --no-cache curl bash git
         # Install & Build Docker Compose
         - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/toolkit/build.sh  | bash
 
@@ -61,9 +61,9 @@ functional:
     script:
         # Wait for container to Start
         - sleep 10
-        - docker-compose exec -T toolkit curl http://openapi/
+        - docker compose exec -T toolkit curl http://openapi/
         # Execute PhpUnit Tests
-        - docker-compose exec -T toolkit php vendor/bin/phpunit tests/Controller/S00MinimalObjectsTest.php
+        - docker compose exec -T toolkit php vendor/bin/phpunit tests/Controller/S00MinimalObjectsTest.php
         - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/toolkit/phpunit.sh  | bash
         # Build Splash Manifest
         - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/toolkit/manifest.sh  | bash
