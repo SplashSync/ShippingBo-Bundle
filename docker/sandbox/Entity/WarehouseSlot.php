@@ -115,6 +115,7 @@ class WarehouseSlot implements SboObjectInterface
      * @var SlotContents[]
      *
      * @Assert\All({
+     *
      *    @Assert\Type("App\Entity\SlotContents")
      * })
      *
