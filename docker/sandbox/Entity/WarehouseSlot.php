@@ -33,6 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ApiResource(
     operations: array(
         new Meta\GetCollection(),
+        new Meta\Post(),
         new Meta\Delete(),
     ),
     normalizationContext: array("groups" => array("read")),
