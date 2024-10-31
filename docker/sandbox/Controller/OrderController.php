@@ -49,7 +49,7 @@ class OrderController extends AbstractController
         //====================================================================//
         // Load Parent Order
         /** @var null|Order $order */
-        $order = $this - $this->entityManager->getRepository(Order::class)->find($id);
+        $order = $this->entityManager->getRepository(Order::class)->find($id);
         if (!$order) {
             throw new NotFoundHttpException();
         }

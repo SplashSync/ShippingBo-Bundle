@@ -72,7 +72,11 @@ final class ApiNormalizer implements NormalizerInterface, DenormalizerInterface,
         //  Collection Normalizer
         if ($object instanceof Paginator) {
             $data = array();
-            $parent = $context["resource_class"];
+            if (class_exists($context["resource_class"] ?? "")) {
+                $parent = $context["resource_class"]::getCollectionIndex();
+            } else {
+                $parent = "collection";
+            }
             /** @var SboObjectInterface $obj */
             foreach ($object as $index => $obj) {
                 $parent = $obj::getCollectionIndex();

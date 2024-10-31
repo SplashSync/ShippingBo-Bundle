@@ -108,7 +108,7 @@ class WarehouseSlotsManager
         if (!is_array($response)) {
             return false;
         }
-        if (!is_array($whSlots = $response['warehouse_slots'] ?? $response['App\Entity\WarehouseSlot'] ?? null)) {
+        if (!is_array($whSlots = $response['warehouse_slots'] ?? null)) {
             return false;
         }
         //====================================================================//
