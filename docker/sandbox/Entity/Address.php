@@ -303,7 +303,7 @@ class Address implements SboObjectInterface
     //====================================================================//
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public static function getItemIndex(): ?string
     {
@@ -311,7 +311,7 @@ class Address implements SboObjectInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public static function getCollectionIndex(): ?string
     {

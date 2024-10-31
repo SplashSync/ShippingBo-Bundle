@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 trait SboCoreTrait
 {
     /**
-     * Unique identifier.
+     * Unique Identifier.
      *
      * @var int
      *

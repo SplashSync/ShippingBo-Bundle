@@ -19,7 +19,6 @@ use App\Entity\Order;
 use App\Entity\OrderItem;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\UnitOfWork;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -50,7 +49,7 @@ class OrderController extends AbstractController
         //====================================================================//
         // Load Parent Order
         /** @var null|Order $order */
-        $order = $this-$this->entityManager->getRepository(Order::class)->find($id);
+        $order = $this - $this->entityManager->getRepository(Order::class)->find($id);
         if (!$order) {
             throw new NotFoundHttpException();
         }
