@@ -165,7 +165,7 @@ class WarehouseSlotsManager
         foreach ($whSlots["warehouse_slots"] as $whSlot) {
             //====================================================================//
             // Safety Check
-            if (!is_array($whSlot["slot_contents"]) || empty($whSlot["slot_contents"])) {
+            if (empty($whSlot["slot_contents"]) || !is_array($whSlot["slot_contents"])) {
                 continue;
             }
             //====================================================================//

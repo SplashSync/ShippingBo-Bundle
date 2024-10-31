@@ -8,3 +8,4 @@
 /var/
 /test-report.xml
 /tests/public/bundles/
+/.phpunit.result.cache

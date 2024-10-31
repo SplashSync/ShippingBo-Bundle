@@ -17,6 +17,7 @@ namespace Splash\Connectors\ShippingBo\Test\Controller;
 
 use Exception;
 use Splash\Connectors\ShippingBo\Services\ShippingBoConnector;
+use Splash\Connectors\ShippingBo\Services\WarehouseSlotsManager;
 use Splash\Tests\Tools\ObjectsCase;
 use Splash\Tests\Tools\Traits\ObjectsSetTestsTrait;
 
@@ -90,5 +91,45 @@ class S00MinimalObjectsTest extends ObjectsCase
             );
             $count++;
         }
+    }
+
+    /**
+     * Ensure at least Two Warehouse Slots are Created
+     *
+     * @throws Exception
+     */
+    public function testAtLeastTwoWarehouseSlots(): void
+    {
+        //====================================================================//
+        // Load Connector
+        $connector = $this->getConnector(self::CONNECTOR);
+        $this->assertInstanceOf(ShippingBoConnector::class, $connector);
+        //====================================================================//
+        // Count Number of Warehouses SLots
+        $activeSlots = $connector->getWarehouseSlotsManager()->getActiveSlots();
+        $count = count($activeSlots);
+        //====================================================================//
+        // Check Counter
+        if (count($activeSlots) <= 2) {
+            //====================================================================//
+            // Add Warehouses SLot
+            while ($count < 2) {
+                $count++;
+                $response = $connector->getConnexion()->post("/warehouse_slots", array(
+                    "name" => sprintf("TestSlot%d", $count)
+                ));
+                $this->assertIsArray($response);
+            }
+        }
+        //====================================================================//
+        // Register All Stocks as Writable
+        $this->assertTrue($connector->selfTest());
+        $activeSlots = $connector->getWarehouseSlotsManager()->getActiveSlots();
+        $this->assertNotEmpty($activeSlots);
+        $connector->setParameter(
+            WarehouseSlotsManager::WRITE,
+            array_map(fn (array $whSlot) => $whSlot["id"], $activeSlots)
+        );
+        $connector->updateConfiguration();
     }
 }

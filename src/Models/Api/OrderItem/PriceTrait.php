@@ -71,8 +71,6 @@ trait PriceTrait
      *
      * @var string
      *
-     * @Assert\NotNull()
-     *
      * @Assert\Type("string")
      *
      * @JMS\SerializedName("price_tax_included_currency")
@@ -81,7 +79,7 @@ trait PriceTrait
      *
      * @JMS\Type("string")
      */
-    protected string $price_tax_included_currency = "EUR";
+    protected ?string $price_tax_included_currency = "EUR";
 
     /**
      * Order Line Items Price Tax Excluded.

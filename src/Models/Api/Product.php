@@ -102,7 +102,7 @@ class Product
      *
      * @JMS\Type("int")
      *
-     * @JMS\Groups ({"Read", "Write", "List"})
+     * @JMS\Groups ({"Read", "Write", "List", "Required"})
      *
      * @SPL\Microdata({"http://schema.org/Offer", "inventoryLevel"})
      */
@@ -155,7 +155,9 @@ class Product
      *
      * @JMS\Groups ({"Read", "Write"})
      *
-     * @SPL\Microdata({"http://schema.org/Offer", "inventoryLevel"})
+     * @SPL\Microdata({"http://schema.org/Offer", "inventoryLocation"})
+     *
+     * @SPL\Prefer("export")
      */
     public ?string $location = null;
 

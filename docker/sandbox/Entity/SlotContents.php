@@ -16,6 +16,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata as Meta;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -23,28 +24,49 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class representing the Product Stock Variation model.
+ * Class representing Product Warehouse Slot Content model.
  *
  * @ORM\Entity()
  *
- * @ORM\Table(name="`stock_variation`")
+ * @ORM\Table(name="slot_contents")
  *
  * @ORM\HasLifecycleCallbacks()
  */
 #[ApiResource(
+    operations: array(
+        new Meta\GetCollection(),
+        new Meta\Get(),
+        new Meta\Post(),
+        new Meta\Post(
+            uriTemplate:    '/slot_stock_variations',
+            controller:     'App\Controller\SlotStockVariationController::createAction',
+        ),
+        new Meta\Delete(),
+    ),
     normalizationContext: array("groups" => array("read")),
-    denormalizationContext: array("groups" => array("write")),
+    denormalizationContext: array("groups" => array("write"))
 )]
-class StockVariation implements SboObjectInterface
+class SlotContents implements SboObjectInterface
 {
-    //====================================================================//
-    // SBO CORE DATA
-    use Core\SboCoreTrait;
-
     /**
-     * Stock Variation
+     * Unique Identifier.
      *
      * @var int
+     *
+     * @ORM\Id
+     *
+     * @ORM\GeneratedValue
+     *
+     * @ORM\Column(type="integer")
+     *
+     * @Assert\Type("integer")
+     *
+     * @Groups({"read"})
+     */
+    public int $id;
+
+    /**
+     * Product ID
      *
      * @Assert\NotNull()
      *
@@ -52,88 +74,74 @@ class StockVariation implements SboObjectInterface
      *
      * @ORM\Column(type="integer")
      *
-     * @Groups({"write"})
+     * @Groups({"read", "write"})
      */
-    public int $variation;
+    public int $product_id;
 
     /**
-     * New Product Stock
-     *
-     * @var null|int
+     * Warehouse Slot ID
      *
      * @Assert\NotNull()
      *
      * @Assert\Type("integer")
      *
-     * @Groups({"read"})
+     * @ORM\Column(type="integer")
+     *
+     * @Groups({"read", "write"})
      */
-    public ?int $stock = 0;
+    public int $warehouse_slot_id;
 
     /**
-     * Received Product ID.
+     * Quantity
      *
-     * @var null|int
+     * @Assert\NotNull()
+     *
+     * @ORM\Column(type="integer")
      *
      * @Assert\Type("integer")
      *
-     * @Groups({"write"})
+     * @Groups({"read", "write"})
      */
-    public ?int $product_id;
+    public int $stock = 0;
 
     /**
-     * Impacted Product.
+     * Parent Warehouse Slot
      *
-     * @var Product
-     *
-     * @Assert\Type("App\Entity\Product")
+     * @ORM\ManyToOne(targetEntity="App\Entity\WarehouseSlot", inversedBy="slot_contents")
      *
      * @Groups({"read"})
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product")
      */
-    public Product $product;
+    public WarehouseSlot $warehouse_slot;
 
     //====================================================================//
-    // MAIN METHODS
+    // Warehouse Slot LINK UPDATE
     //====================================================================//
 
     /**
-     * @param LifecycleEventArgs $event
-     *
-     * @return void
-     *
      * @ORM\PrePersist()
+     *
+     * @ORM\PreUpdate()
      */
-    public function linkToProduct(LifecycleEventArgs $event): void
+    public function updateWarehouseSlot(LifecycleEventArgs $event): void
     {
         //====================================================================//
-        // Check Received Product ID
-        if (($this->product_id ?? 0) <= 0) {
-            throw new NotFoundHttpException(
-                sprintf("Product ID must be given")
-            );
+        // Check if Changed
+        $current = $this->warehouse_slot->id ?? null;
+        $new = $this->warehouse_slot_id ?? 1;
+        if ($current && $new && ($current == $new)) {
+            return;
         }
         //====================================================================//
-        // Check Received Variation
-        if (($this->variation ?? 0) == 0) {
+        // Identify New
+        $warehouseSlot = $event->getObjectManager()->getRepository(WarehouseSlot::class)->find($new);
+        if (!$warehouseSlot) {
             throw new NotFoundHttpException(
-                sprintf("Variation must a non zéro signed int")
-            );
-        }
-        //====================================================================//
-        // Identify Product
-        /** @var null|Product $product */
-        $product = $event->getObjectManager()->getRepository(Product::class)->find($this->product_id);
-        if (!$product) {
-            throw new NotFoundHttpException(
-                sprintf("Target Product %s not found", $this->product_id)
+                sprintf("Target Warehouse Slot %s not found", $new)
             );
         }
         //====================================================================//
         // Update
-        $product->stockVariations[] = $this;
-        $this->product = $product;
-        $this->stock = $product->getStock();
+        $this->warehouse_slot = $warehouseSlot;
     }
 
     //====================================================================//
@@ -145,7 +153,7 @@ class StockVariation implements SboObjectInterface
      */
     public static function getItemIndex(): string
     {
-        return "stock_variation";
+        return "slot_contents";
     }
 
     /**
@@ -153,6 +161,6 @@ class StockVariation implements SboObjectInterface
      */
     public static function getCollectionIndex(): string
     {
-        return "stock_variations";
+        return "slot_contents";
     }
 }

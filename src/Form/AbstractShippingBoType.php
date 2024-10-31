@@ -243,7 +243,7 @@ abstract class AbstractShippingBoType extends AbstractType
     {
         /** @var array $config */
         $config = $builder->getData();
-        $whSlots = $config[WarehouseSlotsManager::STORAGE];
+        $whSlots = $config[WarehouseSlotsManager::STORAGE] ?? array();
         if (!is_array($whSlots) || empty($whSlots)) {
             return $this;
         }
