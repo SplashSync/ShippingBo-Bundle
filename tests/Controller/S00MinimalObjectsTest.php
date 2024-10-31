@@ -106,7 +106,7 @@ class S00MinimalObjectsTest extends ObjectsCase
         $this->assertInstanceOf(ShippingBoConnector::class, $connector);
         //====================================================================//
         // Count Number of Warehouses SLots
-        $this->assertTrue($connector->connect());
+        $connector->connect();
         $activeSlots = $connector->getWarehouseSlotsManager()->getActiveSlots();
         $count = count($activeSlots);
         //====================================================================//

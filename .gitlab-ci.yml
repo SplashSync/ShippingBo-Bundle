@@ -45,7 +45,7 @@ functional:
     stage:      Functional
     retry:      1
     tags:
-        - Dedicated-Ovh
+        - Dedicated-Docker
     services:
         - docker:dind
     ################################################################################

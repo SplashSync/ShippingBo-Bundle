@@ -105,14 +105,17 @@ class WarehouseSlotsManager
         } catch (\Exception $e) {
             return Splash::log()->report($e);
         }
-        if (!is_array($response) || !is_array($response['warehouse_slots'])) {
+        if (!is_array($response)) {
+            return false;
+        }
+        if (!is_array($whSlots = $response['warehouse_slots'] ?? $response['App\Entity\WarehouseSlot'] ?? null)) {
             return false;
         }
         //====================================================================//
         // Reformat results
         $slots = array_combine(
-            array_map(fn (array $slot) => $slot["id"], $response['warehouse_slots']),
-            array_map(fn (array $slot) => array_intersect_key($slot, self::SLOT_KEYS), $response['warehouse_slots'])
+            array_map(fn (array $slot) => $slot["id"], $whSlots),
+            array_map(fn (array $slot) => array_intersect_key($slot, self::SLOT_KEYS), $whSlots)
         );
         //====================================================================//
         // Store in Connector Settings
