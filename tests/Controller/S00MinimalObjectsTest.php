@@ -106,24 +106,21 @@ class S00MinimalObjectsTest extends ObjectsCase
         $this->assertInstanceOf(ShippingBoConnector::class, $connector);
         //====================================================================//
         // Count Number of Warehouses SLots
+        $this->assertTrue($connector->connect());
         $activeSlots = $connector->getWarehouseSlotsManager()->getActiveSlots();
         $count = count($activeSlots);
         //====================================================================//
-        // Check Counter
-        if (count($activeSlots) <= 2) {
-            //====================================================================//
-            // Add Warehouses SLot
-            while ($count < 2) {
-                $count++;
-                $response = $connector->getConnexion()->post("/warehouse_slots", array(
-                    "name" => sprintf("TestSlot%d", $count)
-                ));
-                $this->assertIsArray($response);
-            }
+        // Add Warehouses SLot
+        while ($count < 2) {
+            $count++;
+            $response = $connector->getConnexion()->post("/warehouse_slots", array(
+                "name" => sprintf("TestSlot%d", $count)
+            ));
+            $this->assertIsArray($response);
         }
         //====================================================================//
         // Register All Stocks as Writable
-        $this->assertTrue($connector->selfTest());
+        $this->assertTrue($connector->connect());
         $activeSlots = $connector->getWarehouseSlotsManager()->getActiveSlots();
         $this->assertNotEmpty($activeSlots);
         $connector->setParameter(
