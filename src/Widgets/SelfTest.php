@@ -17,7 +17,7 @@ namespace Splash\Connectors\ShippingBo\Widgets;
 
 use Splash\Bundle\Models\AbstractStandaloneWidget;
 use Splash\Connectors\ShippingBo\Services\ShippingBoConnector;
-use Splash\Core\SplashCore      as Splash;
+use Splash\Core\SplashCore as Splash;
 
 /**
  * ShippingBo Config SelfTest

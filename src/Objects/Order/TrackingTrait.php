@@ -13,7 +13,7 @@
  *  file that was distributed with this source code.
  */
 
-namespace   Splash\Connectors\ShippingBo\Objects\Order;
+namespace Splash\Connectors\ShippingBo\Objects\Order;
 
 use Splash\Connectors\ShippingBo\Models\Api\Shipment;
 

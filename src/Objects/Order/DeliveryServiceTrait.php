@@ -15,7 +15,7 @@
 
 namespace Splash\Connectors\ShippingBo\Objects\Order;
 
-use Splash\Core\SplashCore      as Splash;
+use Splash\Core\SplashCore as Splash;
 
 /**
  * Manage Order Delivery Services
