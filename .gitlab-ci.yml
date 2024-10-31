@@ -61,8 +61,7 @@ functional:
     script:
         # Wait for container to Start
         - sleep 10
-        - docker compose exec -T toolkit curl http://sandbox.shipping-bo.local
-#        - docker compose exec -T toolkit curl http://openapi/
+        - docker compose exec -T toolkit curl http://openapi/
         # Execute PhpUnit Tests
         - docker compose exec -T toolkit php vendor/bin/phpunit tests/Controller/S00MinimalObjectsTest.php
         - curl -s https://raw.githubusercontent.com/BadPixxel/Php-Sdk/main/toolkit/phpunit.sh  | bash
