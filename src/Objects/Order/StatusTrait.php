@@ -157,6 +157,23 @@ trait StatusTrait
                 $this->needUpdate();
 
                 break;
+            default:
+                return;
+        }
+        unset($this->in[$fieldName]);
+    }
+
+    /**
+     * Write Given Fields
+     *
+     * @param string $fieldName Field Identifier / Name
+     * @param mixed  $fieldData Field Data
+     */
+    protected function setStatusDeliveredFields(string $fieldName, $fieldData): void
+    {
+        //====================================================================//
+        // WRITE Field
+        switch ($fieldName) {
             case 'forceDelivered':
                 if (empty($fieldData) || !StatusTransformer::isValidated($this->object->state)) {
                     break;
