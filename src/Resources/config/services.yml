@@ -7,6 +7,8 @@ services:
     # SPLASH ShippingBo Connector Service
     splash.connectors.shippingbo:
         class:      Splash\Connectors\ShippingBo\Services\ShippingBoConnector
+        bind:
+            $metaDir: "%kernel.cache_dir%"
         tags:
             - { name: "splash.connector" }
 
