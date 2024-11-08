@@ -66,6 +66,15 @@ trait StatusTrait
             ->MicroData("http://schema.org/OrderStatus", "OrderCancelled")
             ->isNotTested()
         ;
+
+        //====================================================================//
+        // Force Order Status to Delivered
+        $this->fieldsFactory()->create(SPL_T_BOOL)
+            ->identifier("forceDelivered")
+            ->name("Force Delivered")
+            ->microData("http://schema.org/OrderStatus", "ForceDelivered")
+            ->isWriteOnly()
+        ;
     }
 
     /**
@@ -145,6 +154,42 @@ trait StatusTrait
                     break;
                 }
                 $this->object->state = "canceled";
+                $this->needUpdate();
+
+                break;
+            default:
+                return;
+        }
+        unset($this->in[$fieldName]);
+    }
+
+    /**
+     * Write Given Fields
+     *
+     * @param string $fieldName Field Identifier / Name
+     * @param mixed  $fieldData Field Data
+     */
+    protected function setStatusDeliveredFields(string $fieldName, $fieldData): void
+    {
+        //====================================================================//
+        // WRITE Field
+        switch ($fieldName) {
+            case 'forceDelivered':
+                if (empty($fieldData) || !StatusTransformer::isValidated($this->object->state)) {
+                    break;
+                }
+                //====================================================================//
+                // Compare Status
+                if (StatusTransformer::isDelivered($this->object->state)) {
+                    Splash::log()->war(sprintf(
+                        "You cannot close an order from %s status",
+                        $this->object->state
+                    ));
+
+                    break;
+                }
+
+                $this->object->state = "closed";
                 $this->needUpdate();
 
                 break;

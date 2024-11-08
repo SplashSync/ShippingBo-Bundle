@@ -33,6 +33,10 @@ var:
         default:    "Default - Send this to ShippingBo."
         rejected:   "REJECTED - Must not be send."
 
+    writeSlots:
+        label:      "Writable Warehouse Slots"
+        desc:       "Select warehouse slots that should be writable by splash."
+
 ## Node Profile
 profile:
     connection:

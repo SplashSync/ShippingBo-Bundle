@@ -18,6 +18,7 @@ namespace Splash\Connectors\ShippingBo\Services;
 use ArrayObject;
 use Exception;
 use Httpful\Mime;
+use Psr\Log\LoggerInterface;
 use Splash\Bundle\Interfaces\Connectors\PrimaryKeysInterface;
 use Splash\Bundle\Interfaces\Connectors\TrackingInterface;
 use Splash\Bundle\Models\AbstractConnector;
@@ -28,23 +29,31 @@ use Splash\Connectors\ShippingBo\Controller\WebHooksController;
 use Splash\Connectors\ShippingBo\Form\DebugFormType;
 use Splash\Connectors\ShippingBo\Form\EditFormType;
 use Splash\Connectors\ShippingBo\Hydrator\Hydrator;
+use Splash\Connectors\ShippingBo\Models\Connector\ConnectorWarehouseSlotsTrait;
 use Splash\Connectors\ShippingBo\Objects;
 use Splash\Connectors\ShippingBo\Widgets;
 use Splash\Core\SplashCore as Splash;
 use Splash\OpenApi\Action;
 use Splash\OpenApi\Connexion\JsonConnexion;
 use Splash\OpenApi\Models\Connexion\ConnexionInterface;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * ShippingBo REST API Connector for Splash
  *
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
+#[Autoconfigure(bind: array(
+    '$metaDir' => "%kernel.cache_dir%"
+))]
 class ShippingBoConnector extends AbstractConnector implements TrackingInterface, PrimaryKeysInterface
 {
     use GenericObjectMapperTrait;
     use GenericObjectPrimaryMapperTrait;
     use GenericWidgetMapperTrait;
+    use ConnectorWarehouseSlotsTrait;
 
     /**
      * Objects Type Class Map
@@ -83,11 +92,13 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
      */
     private string $metaDir;
 
-    /**
-     * Setup Cache Dir for Metadata
-     */
-    public function setMetaDir(string $metaDir) : void
-    {
+    public function __construct(
+        private readonly WarehouseSlotsManager $warehouseSlotsManager,
+        string $metaDir,
+        EventDispatcherInterface $eventDispatcher,
+        LoggerInterface $logger
+    ) {
+        parent::__construct($eventDispatcher, $logger);
         $this->metaDir = $metaDir."/metadata/shippingbo";
     }
 
@@ -129,6 +140,11 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
         //====================================================================//
         // Get Available Shipping Methods
         if (!$this->fetchLogisticServices()) {
+            return false;
+        }
+        //====================================================================//
+        // Get Available Warehouse Slots
+        if (!$this->fetchWarehouseSlots()) {
             return false;
         }
         //====================================================================//

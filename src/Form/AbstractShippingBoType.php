@@ -16,6 +16,7 @@
 namespace Splash\Connectors\ShippingBo\Form;
 
 use Burgov\Bundle\KeyValueFormBundle\Form\Type\KeyValueType;
+use Splash\Connectors\ShippingBo\Services\WarehouseSlotsManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -224,6 +225,41 @@ abstract class AbstractShippingBoType extends AbstractType
                     'label' => "Action",
                     'choices' => $choices,
                 ),
+                'translation_domain' => "ShippingBoBundle",
+            ))
+        ;
+
+        return $this;
+    }
+
+    /**
+     * Add Write Warehouse Slots Field to FormBuilder
+     *
+     * @param FormBuilderInterface $builder
+     *
+     * @return $this
+     */
+    protected function addWriteWarehouseSlotsField(FormBuilderInterface $builder): self
+    {
+        /** @var array $config */
+        $config = $builder->getData();
+        $whSlots = $config[WarehouseSlotsManager::STORAGE] ?? array();
+        if (!is_array($whSlots) || empty($whSlots)) {
+            return $this;
+        }
+
+        $choices = array_combine(
+            array_map(fn (array $whSlot) => sprintf("[%s] %s", $whSlot["id"], $whSlot["name"]), $whSlots),
+            array_keys($whSlots),
+        );
+
+        $builder
+            ->add(WarehouseSlotsManager::WRITE, ChoiceType::class, array(
+                'label' => "var.writeSlots.label",
+                'help' => "var.writeSlots.desc",
+                'required' => false,
+                'multiple' => true,
+                'choices' => $choices,
                 'translation_domain' => "ShippingBoBundle",
             ))
         ;

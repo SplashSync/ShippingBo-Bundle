@@ -113,6 +113,18 @@ class StatusTransformer
     }
 
     /**
+     * Check if Order Status Code is Delivered
+     *
+     * @param string $status Order Status Code
+     *
+     * @return bool
+     */
+    public static function isDelivered(string $status): bool
+    {
+        return Status::isDelivered(self::toSplash($status));
+    }
+
+    /**
      * Check if Order Status Code is Updated by Splash
      *
      * @param string $status Order Status Code

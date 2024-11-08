@@ -39,6 +39,9 @@ trait CRUDTrait
         // Ensure Default Source
         $this->in['source'] = $this->in['source'] ?? "Splashsync";
         //====================================================================//
+        // Ensure Empty Stock on Create
+        $this->in['stock'] ??= 0;
+        //====================================================================//
         // Execute Core Action
         $product = $this->coreCreate();
 

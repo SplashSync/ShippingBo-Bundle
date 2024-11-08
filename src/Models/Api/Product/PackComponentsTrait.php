@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 trait PackComponentsTrait
 {
     /**
-     * Product Pack Components  List.
+     * Product Pack Components List.
      *
      * @var PackComponent[]
      *

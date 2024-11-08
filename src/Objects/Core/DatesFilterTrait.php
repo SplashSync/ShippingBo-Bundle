@@ -16,7 +16,7 @@
 namespace Splash\Connectors\ShippingBo\Objects\Core;
 
 use DateTime;
-use Splash\Core\SplashCore      as Splash;
+use Splash\Core\SplashCore as Splash;
 
 /**
  * Filter Sbo Object Creation by Created Dates

@@ -9,9 +9,9 @@ splash:
 # Cache is Enabled by Default to Store Custom Connectors Configuration
 # If disabled, configuration must be store in Static, on connections section
 ################################################################################    
-#    cache: 
-#        enabled: false    
-#        lifetime: 10
+    cache:
+        enabled:    true
+        lifetime:   3600
 
     # Allow Notifications for Generic Users   
     notify: ["ROLE_USER"]

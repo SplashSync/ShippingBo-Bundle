@@ -18,17 +18,24 @@ namespace App\Controller;
 use App\Entity\Order;
 use App\Entity\OrderItem;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\UnitOfWork;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Serializer\SerializerInterface;
 
 /**
  * Order Controller: Custom operations to work with Orders
  */
 class OrderController extends AbstractController
 {
+    public function __construct(
+        private readonly EntityManagerInterface $entityManager,
+        private readonly SerializerInterface $serializer
+    ) {
+    }
+
     /**
      * Update Order Items by ID for an Order
      *
@@ -42,23 +49,22 @@ class OrderController extends AbstractController
         //====================================================================//
         // Load Parent Order
         /** @var null|Order $order */
-        $order = $this->getDoctrine()->getManager()->getRepository(Order::class)->find($id);
+        $order = $this->entityManager->getRepository(Order::class)->find($id);
         if (!$order) {
             throw new NotFoundHttpException();
         }
         //====================================================================//
         // Decode Received Item
         $rawData = json_decode($request->getContent(), true, 512, \JSON_BIGINT_AS_STRING);
-        $orderItem = $this->get('serializer')->denormalize($rawData, OrderItem::class, "json");
+        $orderItem = $this->serializer->denormalize($rawData, OrderItem::class, "json");
         $orderItem->order = $order;
         $order->order_items[] = $orderItem;
         //====================================================================//
         // Persist Item
-        $this->getDoctrine()->getManager()->persist($order);
+        $this->entityManager->persist($order);
         //====================================================================//
         // FIX - Revert Source_Ref Changes
-        /** @var UnitOfWork $uow */
-        $uow = $this->getDoctrine()->getManager()->getUnitOfWork();
+        $uow = $this->entityManager->getUnitOfWork();
         $uow->computeChangeSets();
         $orderChangeSet = $uow->getEntityChangeSet($order);
         if (!empty($orderChangeSet["source_ref"]["0"])) {
@@ -66,9 +72,9 @@ class OrderController extends AbstractController
         }
         //====================================================================//
         // Save Item
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->flush();
 
-        return new JsonResponse($this->get('serializer')->normalize($order, 'json', array(
+        return new JsonResponse($this->serializer->normalize($order, 'json', array(
             "resource_class" => Order::class,
             "operation_type" => "item"
         )));
@@ -87,7 +93,7 @@ class OrderController extends AbstractController
         //====================================================================//
         // Load Parent Order
         /** @var null|Order $order */
-        $order = $this->getDoctrine()->getManager()->getRepository(Order::class)->find($id);
+        $order = $this->entityManager->getRepository(Order::class)->find($id);
         if (!$order) {
             throw new NotFoundHttpException();
         }
@@ -95,22 +101,22 @@ class OrderController extends AbstractController
         // Clear Order Items
         $order->order_items = $order->order_items ?? new ArrayCollection();
         foreach ($order->order_items as $orderItem) {
-            $this->getDoctrine()->getManager()->remove($orderItem);
+            $this->entityManager->remove($orderItem);
         }
         $order->order_items->clear();
         //====================================================================//
         // Decode Received Items
         $rawData = json_decode($request->getContent(), true, 512, \JSON_BIGINT_AS_STRING);
         foreach ($rawData['order_items'] ?? array() as $index => $rawItem) {
-            $orderItem = $this->get('serializer')
+            $orderItem = $this->serializer
                 ->denormalize($rawItem, OrderItem::class, "json")
             ;
             $orderItem->order = $order;
             $order->order_items[] = $orderItem;
         }
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->flush();
 
-        return new JsonResponse($this->get('serializer')->normalize($order, 'json', array(
+        return new JsonResponse($this->serializer->normalize($order, 'json', array(
             "resource_class" => Order::class,
             "operation_type" => "item"
         )));
@@ -128,7 +134,7 @@ class OrderController extends AbstractController
         //====================================================================//
         // Load Order
         /** @var null|Order $order */
-        $order = $this->getDoctrine()->getManager()->getRepository(Order::class)->find($id);
+        $order = $this->entityManager->getRepository(Order::class)->find($id);
         if (!$order) {
             throw new NotFoundHttpException();
         }
@@ -136,9 +142,9 @@ class OrderController extends AbstractController
         // Update Order Total Weight
         $order->updateTotalWeight();
 
-        $this->getDoctrine()->getManager()->flush();
+        $this->entityManager->flush();
 
-        return new JsonResponse($this->get('serializer')->normalize($order, 'json', array(
+        return new JsonResponse($this->serializer->normalize($order, 'json', array(
             "resource_class" => Order::class,
             "operation_type" => "item"
         )));
