@@ -17,6 +17,7 @@ namespace Splash\Connectors\ShippingBo\Services;
 
 use Splash\Client\Splash;
 use Splash\OpenApi\Models\Connexion\ConnexionInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  *
@@ -106,7 +107,7 @@ class WarehouseSlotsManager
             return Splash::log()->report($e);
         }
         if (!is_array($response)) {
-            return false;
+            return (Response::HTTP_FORBIDDEN == $this->connexion->getLastResponse()?->code);
         }
         if (!is_array($whSlots = $response['warehouse_slots'] ?? null)) {
             return false;
