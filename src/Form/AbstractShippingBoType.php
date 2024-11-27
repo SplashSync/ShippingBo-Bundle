@@ -160,6 +160,35 @@ abstract class AbstractShippingBoType extends AbstractType
     }
 
     /**
+     * Add Origin Filters Field to FormBuilder
+     *
+     * @param FormBuilderInterface $builder
+     *
+     * @return $this
+     */
+    protected function addDefaultShippingMethodField(FormBuilderInterface $builder): self
+    {
+        $choices = array();
+        /** @var array $data */
+        $data = $builder->getData();
+        foreach ($data["ShippingMethodsList"] ?? array() as $method) {
+            $choices[$method["name"]] = $method["id"];
+        }
+
+        $builder
+            ->add('DefaultShippingMethod', ChoiceType::class, array(
+                'label' => "var.shipping.default.label",
+                'help' => "var.shipping.default.desc",
+                'required' => true,
+                'choices' => $choices,
+                'translation_domain' => "ShippingBoBundle",
+            ))
+        ;
+
+        return $this;
+    }
+
+    /**
      * Add Shipping Methods Names Field to FormBuilder
      *
      * @param FormBuilderInterface $builder

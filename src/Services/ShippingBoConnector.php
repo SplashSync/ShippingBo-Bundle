@@ -139,6 +139,11 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
         }
         //====================================================================//
         // Get Available Shipping Methods
+        if (!$this->fetchShippingMethods()) {
+            return false;
+        }
+        //====================================================================//
+        // Get Available Shipping Methods
         if (!$this->fetchLogisticServices()) {
             return false;
         }
@@ -448,6 +453,28 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
         //====================================================================//
         // Store in Connector Settings
         $this->setParameter("UserInformations", $response["user"]);
+
+        return true;
+    }
+
+    /**
+     * Get List of Configured Shipping Methods
+     *
+     * @throws Exception
+     *
+     * @return bool
+     */
+    private function fetchShippingMethods(): bool
+    {
+        //====================================================================//
+        // Get Shipping Methods from Api
+        $response = $this->getConnexion()->get("/shipping_methods");
+        if (!isset($response["shipping_methods"]) || !is_array($response["shipping_methods"])) {
+            return false;
+        }
+        //====================================================================//
+        // Store in Connector Settings
+        $this->setParameter("ShippingMethodsList", $response["shipping_methods"]);
 
         return true;
     }

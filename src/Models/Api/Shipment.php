@@ -37,7 +37,7 @@ class Shipment
     );
 
     /**
-     * Unique identifier.
+     * Unique Identifier.
      *
      * @var null|string
      *

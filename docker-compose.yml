@@ -58,6 +58,7 @@ services:
 #             # Specify API Entities to Use
             - './docker/sandbox/Controller:/srv/api/src/Controller:ro'
             - './docker/sandbox/Serializer:/srv/api/src/Serializer:ro'
+            - './docker/sandbox/Migrations:/srv/api/migrations:ro'
             - './docker/sandbox/Entity:/srv/api/src/Entity:ro'
             - './docker/sandbox/shippingbo.yml:/srv/api/config/packages/shippingbo.yml:ro'
         hostname:           sandbox.shipping-bo.local

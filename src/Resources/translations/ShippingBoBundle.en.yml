@@ -27,6 +27,11 @@ var:
         default:    "Default - Send a it is."
         rejected:   "REJECTED - Order must not be send."
 
+    shipping:
+        default:
+            label:      "Default Shipping Method"
+            desc:       "Default shipping method used by Splash."
+
     origin:
         label:      "Known Order Origins"
         desc:       "Fill this list to filter orders by origin."

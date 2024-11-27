@@ -37,6 +37,7 @@ class DebugFormType extends AbstractShippingBoType
         $this->addApiKeyField($builder);
         $this->addTimezoneField($builder);
         $this->addMinObjectCreateDateField($builder);
+        $this->addDefaultShippingMethodField($builder);
         $this->addShippingMethodsField($builder);
         $this->addOriginFilterField($builder);
         $this->addWriteWarehouseSlotsField($builder);

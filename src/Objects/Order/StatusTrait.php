@@ -17,6 +17,7 @@ namespace Splash\Connectors\ShippingBo\Objects\Order;
 
 use Splash\Client\Splash;
 use Splash\Connectors\ShippingBo\DataTransformer\StatusTransformer;
+use Splash\Connectors\ShippingBo\Models\Api\Order;
 
 /**
  * Order Status Trait
@@ -188,6 +189,13 @@ trait StatusTrait
 
                     break;
                 }
+                //====================================================================//
+                // Register a Default Shipment
+                if (empty($this->object->shipments) && !$this->addDefaultShipment($this->object)) {
+                    Splash::log()->err("Unable to register default shipment");
+
+                    break;
+                }
 
                 $this->object->state = "closed";
                 $this->needUpdate();
@@ -197,5 +205,32 @@ trait StatusTrait
                 return;
         }
         unset($this->in[$fieldName]);
+    }
+
+    /**
+     * Register a Default Shipment to this Order
+     */
+    private function addDefaultShipment(Order $order): bool
+    {
+        //====================================================================//
+        // Collect Order Items to Ship
+        $shipment = array(
+            "order_id" => (int) $order->id,
+            "order_items" => array(),
+            "shipping_method_id" => (int) $this->getParameter('DefaultShippingMethod', 1),
+            "shipping_ref" => "Forced Delivery",
+            "tracking_url" => "none",
+            "ship_order" => 1,
+        );
+        //====================================================================//
+        // Collect Order Items to Ship
+        foreach ($order->items as $item) {
+            $shipment["order_items"][] = array(
+                "order_item_id" => (int) $item->id,
+                "item_quantity" => (int) $item->quantity,
+            );
+        }
+
+        return !empty($this->visitor->getConnexion()->post("/shipments", $shipment));
     }
 }
