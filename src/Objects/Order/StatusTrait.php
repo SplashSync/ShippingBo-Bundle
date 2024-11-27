@@ -212,12 +212,14 @@ trait StatusTrait
      */
     private function addDefaultShipment(Order $order): bool
     {
+        /** @var scalar $defaultMethod */
+        $defaultMethod = $this->getParameter('DefaultShippingMethod', 1);
         //====================================================================//
         // Collect Order Items to Ship
         $shipment = array(
             "order_id" => (int) $order->id,
             "order_items" => array(),
-            "shipping_method_id" => (int) $this->getParameter('DefaultShippingMethod', 1),
+            "shipping_method_id" => (int) $defaultMethod,
             "shipping_ref" => "Forced Delivery",
             "tracking_url" => "none",
             "ship_order" => 1,

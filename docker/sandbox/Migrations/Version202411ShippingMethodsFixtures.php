@@ -38,7 +38,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-
 class Version202411ShippingMethodsFixtures extends AbstractMigration implements ContainerAwareInterface
 {
     private ContainerInterface $container;
