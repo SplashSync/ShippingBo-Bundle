@@ -38,6 +38,11 @@ var:
         default:    "Default - Send this to ShippingBo."
         rejected:   "REJECTED - Must not be send."
 
+    products:
+        forcedCounter:
+            label:      "Force Product Count"
+            desc:       "Force Product count when Splash is reading products lists."
+
     writeSlots:
         label:      "Writable Warehouse Slots"
         desc:       "Select warehouse slots that should be writable by splash."

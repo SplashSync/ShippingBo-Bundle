@@ -20,6 +20,7 @@ use Splash\Connectors\ShippingBo\Services\WarehouseSlotsManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimezoneType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
@@ -254,6 +255,27 @@ abstract class AbstractShippingBoType extends AbstractType
                     'label' => "Action",
                     'choices' => $choices,
                 ),
+                'translation_domain' => "ShippingBoBundle",
+            ))
+        ;
+
+        return $this;
+    }
+
+    /**
+     * Add Write Warehouse Slots Field to FormBuilder
+     *
+     * @param FormBuilderInterface $builder
+     *
+     * @return $this
+     */
+    protected function addItemsCountersField(FormBuilderInterface $builder): self
+    {
+        $builder
+            ->add("ForceProductCount", IntegerType::class, array(
+                'label' => "var.products.forcedCounter.label",
+                'help' => "var.products.forcedCounter.desc",
+                'required' => false,
                 'translation_domain' => "ShippingBoBundle",
             ))
         ;

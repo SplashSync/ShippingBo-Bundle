@@ -18,6 +18,7 @@ namespace Splash\Connectors\ShippingBo\Objects;
 use Exception;
 use Splash\Bundle\Models\AbstractStandaloneObject;
 use Splash\Client\Splash;
+use Splash\Connectors\ShippingBo\Models\Actions\ProductListAction;
 use Splash\Connectors\ShippingBo\Models\Api;
 use Splash\Connectors\ShippingBo\Services\ShippingBoConnector;
 use Splash\Models\Objects\IntelParserTrait;
@@ -25,7 +26,6 @@ use Splash\Models\Objects\ListsTrait;
 use Splash\Models\Objects\ObjectsTrait;
 use Splash\Models\Objects\PrimaryKeysAwareInterface;
 use Splash\Models\Objects\SimpleFieldsTrait;
-use Splash\OpenApi\Action\Json;
 use Splash\OpenApi\Models\Objects as ApiModels;
 use Splash\OpenApi\Visitor\AbstractVisitor as Visitor;
 use Splash\OpenApi\Visitor\JsonVisitor;
@@ -48,9 +48,6 @@ class Product extends AbstractStandaloneObject implements PrimaryKeysAwareInterf
     use ApiModels\ListFieldsGetTrait;
     use ApiModels\ListFieldsSetTrait;
     use ApiModels\ObjectsListTrait;
-    //    use ApiModels\ObjectsListTrait {
-    //        objectsList as public coreObjectsList;
-    //    }
 
     //====================================================================//
     // Products Traits
@@ -146,27 +143,31 @@ class Product extends AbstractStandaloneObject implements PrimaryKeysAwareInterf
                 array("id", "stock")
             );
             $this->visitor->setListAction(
-                Json\ListAction::class,
-                array(
-                    "filterKey" => "search[user_ref__contains][]",
-                    "pageKey" => null,
-                    "offsetKey" => "offset"
-                )
+                ProductListAction::class,
             );
         }
 
         return $this->visitor;
     }
 
-    //    /**
-    //     * {@inheritdoc}
-    //     */
-    //    public function objectsList(?string $filter = null, array $params = array()): array
-    //    {
-    //        return array_replace_recursive($this->coreObjectsList($filter, $params), array(
-    //            "meta" => array(
-    //                "total" => 100000
-    //            )
-    //        ));
-    //    }
+    /**
+     * {@inheritdoc}
+     */
+    public function configure(string $type, string $webserviceId, array $configuration): self
+    {
+        parent::configure($type, $webserviceId, $configuration);
+
+        try {
+            $this->getVisitor()->setListAction(
+                ProductListAction::class,
+                array(
+                    "forceCounter" => $this->getParameter("ForceProductCount", 0),
+                )
+            );
+        } catch (Exception) {
+            Splash::log()->errTrace("Unable to configure products listing action");
+        }
+
+        return $this;
+    }
 }
