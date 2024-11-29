@@ -72,8 +72,6 @@ class ProductListAction extends AbstractListAction
             }
         }
 
-        dump($this);
-
         return new ApiResponse($this->visitor, true, $results, $meta);
     }
 
