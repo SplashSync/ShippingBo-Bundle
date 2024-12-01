@@ -194,7 +194,7 @@ trait StatusTrait
                 if (empty($this->object->shipments) && !$this->addDefaultShipment($this->object)) {
                     Splash::log()->err("Unable to register default shipment");
 
-                    break;
+                    return;
                 }
 
                 $this->object->state = "closed";
