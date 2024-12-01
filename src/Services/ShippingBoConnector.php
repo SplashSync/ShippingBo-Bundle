@@ -36,7 +36,6 @@ use Splash\Core\SplashCore as Splash;
 use Splash\OpenApi\Action;
 use Splash\OpenApi\Connexion\JsonConnexion;
 use Splash\OpenApi\Models\Connexion\ConnexionInterface;
-use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
@@ -45,9 +44,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-#[Autoconfigure(bind: array(
-    '$metaDir' => "%kernel.cache_dir%"
-))]
 class ShippingBoConnector extends AbstractConnector implements TrackingInterface, PrimaryKeysInterface
 {
     use GenericObjectMapperTrait;
@@ -93,7 +89,7 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
     private string $metaDir;
 
     public function __construct(
-        private readonly WarehouseSlotsManager $warehouseSlotsManager,
+        private WarehouseSlotsManager $warehouseSlotsManager,
         string $metaDir,
         EventDispatcherInterface $eventDispatcher,
         LoggerInterface $logger
