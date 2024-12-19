@@ -153,5 +153,4 @@ trait StatusTrait
         }
         unset($this->in[$fieldName]);
     }
-
 }

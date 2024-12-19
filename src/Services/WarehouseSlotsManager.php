@@ -62,7 +62,6 @@ class WarehouseSlotsManager
      */
     const BY_PRODUCT_ID = "search[product_id__eq]";
 
-
     /**
      * Current Connexion
      */
@@ -172,26 +171,26 @@ class WarehouseSlotsManager
         //====================================================================//
         // Fetch a Slots by ID
         $rawSlots = $this->connexion->get("/warehouse_slots", array(self::BY_SLOT_ID => (string) $slotId));
-        if (!is_array($rawSlots)) {
+        if (!$rawSlots) {
             return array();
         }
         //====================================================================//
         // Extract First Slot
         $whSlots = $rawSlots["warehouse_slots"] ?? array();
-        if (!is_array($whSlots) || (count($whSlots) != 1)) {
+        if (!is_array($whSlots) || (1 != count($whSlots))) {
             return array();
         }
         $whSlot = array_shift($whSlots);
         //====================================================================//
         // Safety Check
-        if (!$whSlot || empty($whSlot["slot_contents"]) || !is_array($whSlot["slot_contents"])) {
+        if (!$whSlot || !is_array($whSlot["slot_contents"])) {
             return array();
         }
         //====================================================================//
         // Walk on Warehouse Slot Contents
         foreach ($whSlot["slot_contents"] as $whSlotContent) {
-            $productRef = (string) $whSlotContent["product_ref"] ?? null;
-            $productStock = (int) $whSlotContent["stock"] ?? null;
+            $productRef = (string) ($whSlotContent["product_ref"] ?? null);
+            $productStock = (int) ($whSlotContent["stock"] ?? null);
             //====================================================================//
             // Register Product Stock
             if ($productRef && $productStock > 0) {
@@ -290,8 +289,12 @@ class WarehouseSlotsManager
     /**
      * Update Warehouse Slots Stocks for a Given Product by Reference
      */
-    public function updateSlotContentForProductRef(int $slotId, int $productRef, int $variation, string $reason = null): bool
-    {
+    public function updateSlotContentForProductRef(
+        int $slotId,
+        string $productRef,
+        int $variation,
+        string $reason = null
+    ): bool {
         $slotName = $this->getSlotName($slotId);
         //====================================================================//
         // Prepare Request Parameters

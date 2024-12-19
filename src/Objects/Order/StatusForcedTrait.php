@@ -88,7 +88,7 @@ trait StatusForcedTrait
     {
         //====================================================================//
         // Safety Check => All Items are in Default Stock
-        if(!$this->hasAllItemsInDefaultSlot()) {
+        if (!$this->hasAllItemsInDefaultSlot()) {
             return false;
         }
         $whSlotsManager = $this->connector->getWarehouseSlotsManager();
@@ -124,7 +124,7 @@ trait StatusForcedTrait
         foreach ($this->object->items as $item) {
             //====================================================================//
             // Item is in Default Stock
-            if(!array_key_exists($item->product_ref, $whSlotStocks)) {
+            if (!array_key_exists($item->product_ref, $whSlotStocks)) {
                 return Splash::log()->err(sprintf(
                     "Product %s not found on default warehouse slot",
                     $item->product_ref
@@ -133,7 +133,7 @@ trait StatusForcedTrait
             //====================================================================//
             // Item Stock is sufficient in Default Stock
             $available = $whSlotStocks[$item->product_ref];
-            if(empty($available) || ($available < $item->quantity)) {
+            if (empty($available) || ($available < $item->quantity)) {
                 return Splash::log()->err(sprintf(
                     "Not enough stock for %s on default warehouse slot",
                     $item->product_ref
@@ -155,12 +155,11 @@ trait StatusForcedTrait
             return array();
         }
         $whSlotsManager = $this->connector->getWarehouseSlotsManager();
+
         //====================================================================//
         // Get All Product Stocks for this Slot
         return $whSlotsManager->getSlotProducts($dfSlotId);
     }
-
-
 
     /**
      * Get Default Warehouse Slot ID
