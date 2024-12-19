@@ -30,6 +30,11 @@ class WarehouseSlotsManager
     const STORAGE = "WarehouseSlots";
 
     /**
+     * Default Slot Storage Key
+     */
+    const DEFAULT = "DefaultWarehouseSlot";
+
+    /**
      * Write Slots Storage Key
      */
     const WRITE = "WriteWarehouseSlots";
@@ -48,9 +53,15 @@ class WarehouseSlotsManager
     );
 
     /**
+     * Search by Slot ID
+     */
+    const BY_SLOT_ID = "search[id__eq]";
+
+    /**
      * Search by Product ID
      */
-    const BY_ID = "search[product_id__eq]";
+    const BY_PRODUCT_ID = "search[product_id__eq]";
+
 
     /**
      * Current Connexion
@@ -151,6 +162,47 @@ class WarehouseSlotsManager
     }
 
     /**
+     * Get Products Stocks on a Given Warehouse Slot
+     *
+     * @return array<int|string, int>
+     */
+    public function getSlotProducts(int $slotId): array
+    {
+        $productStocks = array();
+        //====================================================================//
+        // Fetch a Slots by ID
+        $rawSlots = $this->connexion->get("/warehouse_slots", array(self::BY_SLOT_ID => (string) $slotId));
+        if (!is_array($rawSlots)) {
+            return array();
+        }
+        //====================================================================//
+        // Extract First Slot
+        $whSlots = $rawSlots["warehouse_slots"] ?? array();
+        if (!is_array($whSlots) || (count($whSlots) != 1)) {
+            return array();
+        }
+        $whSlot = array_shift($whSlots);
+        //====================================================================//
+        // Safety Check
+        if (!$whSlot || empty($whSlot["slot_contents"]) || !is_array($whSlot["slot_contents"])) {
+            return array();
+        }
+        //====================================================================//
+        // Walk on Warehouse Slot Contents
+        foreach ($whSlot["slot_contents"] as $whSlotContent) {
+            $productRef = (string) $whSlotContent["product_ref"] ?? null;
+            $productStock = (int) $whSlotContent["stock"] ?? null;
+            //====================================================================//
+            // Register Product Stock
+            if ($productRef && $productStock > 0) {
+                $productStocks[$productRef] = $productStock;
+            }
+        }
+
+        return $productStocks;
+    }
+
+    /**
      * Get List of Warehouse Slots Stocks for a Given Product
      *
      * @return array<int|string, int>
@@ -160,7 +212,7 @@ class WarehouseSlotsManager
         $this->lastSlotsContentsIds = $stocks = array();
         //====================================================================//
         // Fetch List of Slots with this ID
-        $whSlots = $this->connexion->get("/warehouse_slots", array(self::BY_ID => (string) $productId));
+        $whSlots = $this->connexion->get("/warehouse_slots", array(self::BY_PRODUCT_ID => (string) $productId));
         if (empty($whSlots["warehouse_slots"]) || !is_array($whSlots["warehouse_slots"])) {
             return $stocks;
         }
@@ -225,6 +277,30 @@ class WarehouseSlotsManager
             "warehouse_slot_id" => $slotId,
             "warehouse_slot_name" => (string) $slotName,
             "variation" => $variation,
+        );
+        //====================================================================//
+        // Request Stock Variation on this Slot Content
+        if (null === $this->connexion->post("/slot_stock_variations", $request)) {
+            return Splash::log()->err(sprintf("Unable to update stock on Slot %s", $slotName));
+        }
+
+        return true;
+    }
+
+    /**
+     * Update Warehouse Slots Stocks for a Given Product by Reference
+     */
+    public function updateSlotContentForProductRef(int $slotId, int $productRef, int $variation, string $reason = null): bool
+    {
+        $slotName = $this->getSlotName($slotId);
+        //====================================================================//
+        // Prepare Request Parameters
+        $request = array(
+            "product_ref" => $productRef,
+            "warehouse_slot_id" => $slotId,
+            "warehouse_slot_name" => (string) $slotName,
+            "variation" => $variation,
+            "reason" => $reason ?: "Updated by Splash",
         );
         //====================================================================//
         // Request Stock Variation on this Slot Content

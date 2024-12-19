@@ -17,7 +17,6 @@ namespace Splash\Connectors\ShippingBo\Objects\Order;
 
 use Splash\Client\Splash;
 use Splash\Connectors\ShippingBo\DataTransformer\StatusTransformer;
-use Splash\Connectors\ShippingBo\Models\Api\Order;
 
 /**
  * Order Status Trait
@@ -66,15 +65,6 @@ trait StatusTrait
             ->Name("Is Canceled")
             ->MicroData("http://schema.org/OrderStatus", "OrderCancelled")
             ->isNotTested()
-        ;
-
-        //====================================================================//
-        // Force Order Status to Delivered
-        $this->fieldsFactory()->create(SPL_T_BOOL)
-            ->identifier("forceDelivered")
-            ->name("Force Delivered")
-            ->microData("http://schema.org/OrderStatus", "ForceDelivered")
-            ->isWriteOnly()
         ;
     }
 
@@ -164,75 +154,4 @@ trait StatusTrait
         unset($this->in[$fieldName]);
     }
 
-    /**
-     * Write Given Fields
-     *
-     * @param string $fieldName Field Identifier / Name
-     * @param mixed  $fieldData Field Data
-     */
-    protected function setStatusDeliveredFields(string $fieldName, $fieldData): void
-    {
-        //====================================================================//
-        // WRITE Field
-        switch ($fieldName) {
-            case 'forceDelivered':
-                if (empty($fieldData) || !StatusTransformer::isValidated($this->object->state)) {
-                    break;
-                }
-                //====================================================================//
-                // Compare Status
-                if (StatusTransformer::isDelivered($this->object->state)) {
-                    Splash::log()->war(sprintf(
-                        "You cannot close an order from %s status",
-                        $this->object->state
-                    ));
-
-                    break;
-                }
-                //====================================================================//
-                // Register a Default Shipment
-                if (empty($this->object->shipments) && !$this->addDefaultShipment($this->object)) {
-                    Splash::log()->err("Unable to register default shipment");
-
-                    return;
-                }
-
-                $this->object->state = "closed";
-                $this->needUpdate();
-
-                break;
-            default:
-                return;
-        }
-        unset($this->in[$fieldName]);
-    }
-
-    /**
-     * Register a Default Shipment to this Order
-     */
-    private function addDefaultShipment(Order $order): bool
-    {
-        /** @var scalar $defaultMethod */
-        $defaultMethod = $this->getParameter('DefaultShippingMethod', 1);
-        //====================================================================//
-        // Collect Order Items to Ship
-        $shipment = array(
-            "order_id" => (int) $order->id,
-            "order_items" => array(),
-            "shipping_method_id" => (int) $defaultMethod,
-            "shipping_ref" => "Forced Delivery",
-            "tracking_url" => "none",
-            "ship_order" => 1,
-        );
-        //====================================================================//
-        // Collect Order Items to Ship
-        foreach ($order->items as $item) {
-            $shipment["order_items"][] = array(
-                "order_item_id" => (int) $item->id,
-                "item_quantity" => (int) $item->quantity,
-            );
-        }
-
-        return !empty($this->visitor->getConnexion()->post("/shipments", $shipment));
-    }
 }

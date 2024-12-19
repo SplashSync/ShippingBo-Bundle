@@ -284,6 +284,40 @@ abstract class AbstractShippingBoType extends AbstractType
     }
 
     /**
+     * Add Default Warehouse Slots Field to FormBuilder
+     *
+     * @param FormBuilderInterface $builder
+     *
+     * @return $this
+     */
+    protected function addDefaultWarehouseSlotsField(FormBuilderInterface $builder): self
+    {
+        /** @var array $config */
+        $config = $builder->getData();
+        $whSlots = $config[WarehouseSlotsManager::STORAGE] ?? array();
+        if (!is_array($whSlots) || empty($whSlots)) {
+            return $this;
+        }
+
+        $choices = array_combine(
+            array_map(fn (array $whSlot) => sprintf("[%s] %s", $whSlot["id"], $whSlot["name"]), $whSlots),
+            array_keys($whSlots),
+        );
+
+        $builder
+            ->add(WarehouseSlotsManager::DEFAULT, ChoiceType::class, array(
+                'label' => "var.defaultSlot.label",
+                'help' => "var.defaultSlot.desc",
+                'required' => false,
+                'choices' => $choices,
+                'translation_domain' => "ShippingBoBundle",
+            ))
+        ;
+
+        return $this;
+    }
+
+    /**
      * Add Write Warehouse Slots Field to FormBuilder
      *
      * @param FormBuilderInterface $builder

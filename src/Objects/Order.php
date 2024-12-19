@@ -61,6 +61,7 @@ class Order extends AbstractStandaloneObject
     use Order\OriginFilterTrait;
     use Order\OrderItemsCRUDTrait;
     use Order\StatusTrait;
+    use Order\StatusForcedTrait;
     use Order\TrackingTrait;
 
     //====================================================================//
