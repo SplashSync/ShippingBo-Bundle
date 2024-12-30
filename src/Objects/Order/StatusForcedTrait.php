@@ -100,12 +100,22 @@ trait StatusForcedTrait
         //====================================================================//
         // Decrease All Items Stocks in Default Stock
         foreach ($this->object->items as $item) {
-            $whSlotsManager->updateSlotContentForProductRef(
+            //====================================================================//
+            // Skip non valid Items
+            if (!$item->isValid()) {
+                continue;
+            }
+            //====================================================================//
+            // Update Items Stock on Warehouse Slot
+            $result = $whSlotsManager->updateSlotContentForProductRef(
                 $dfSlotId,
                 $item->product_ref,
                 (-1) * $item->quantity,
                 sprintf("Forced Delivery of order %s", $this->object->id)
             );
+            if (!$result) {
+                return false;
+            }
         }
 
         return true;
@@ -122,6 +132,11 @@ trait StatusForcedTrait
         //====================================================================//
         // Walk on Order Items
         foreach ($this->object->items as $item) {
+            //====================================================================//
+            // Skip non valid Items
+            if (!$item->isValid()) {
+                continue;
+            }
             //====================================================================//
             // Item is in Default Stock
             if (!array_key_exists($item->product_ref, $whSlotStocks)) {

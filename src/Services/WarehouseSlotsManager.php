@@ -109,25 +109,20 @@ class WarehouseSlotsManager
      */
     public function fetchWarehouseSlots(ShippingBoConnector $connector): bool
     {
+        $page = 0;
+        $slots = array();
         //====================================================================//
-        // Get Lists of Available Slots from Api
-        try {
-            $response = $this->connexion->get("/warehouse_slots");
-        } catch (\Exception $e) {
-            return Splash::log()->report($e);
-        }
-        if (!is_array($response)) {
-            return (Response::HTTP_FORBIDDEN == $this->connexion->getLastResponse()?->code);
-        }
-        if (!is_array($whSlots = $response['warehouse_slots'] ?? null)) {
-            return false;
-        }
-        //====================================================================//
-        // Reformat results
-        $slots = array_combine(
-            array_map(fn (array $slot) => $slot["id"], $whSlots),
-            array_map(fn (array $slot) => array_intersect_key($slot, self::SLOT_KEYS), $whSlots)
-        );
+        // Loop on Warehouse Slots Pages
+        do {
+            $slotsPage = $this->fetchWarehouseSlotsPage($page);
+            //====================================================================//
+            // Reading of Warehouse Slots Failed
+            if (null === $slotsPage) {
+                return false;
+            }
+            $page++;
+            $slots = array_replace_recursive($slots, $slotsPage);
+        } while (!empty($slotsPage));
         //====================================================================//
         // Store in Connector Settings
         $connector->setParameter(self::STORAGE, $slots);
@@ -329,6 +324,38 @@ class WarehouseSlotsManager
         }
 
         return true;
+    }
+
+    /**
+     * Fetch List of Customer Warehouse Slots from API
+     */
+    private function fetchWarehouseSlotsPage(int $page = 0, int $limit = 50): ?array
+    {
+        //====================================================================//
+        // Get Lists of Available Slots from Api
+        try {
+            $response = $this->connexion->get("/warehouse_slots", array(
+                "offset" => (string) ($page * $limit),
+                "limit" => (string) $limit,
+            ));
+        } catch (\Exception $e) {
+            Splash::log()->report($e);
+
+            return null;
+        }
+        if (!is_array($response)) {
+            return (Response::HTTP_FORBIDDEN == $this->connexion->getLastResponse()?->code) ? array() : null;
+        }
+        if (!is_array($whSlots = $response['warehouse_slots'] ?? null)) {
+            return null;
+        }
+
+        //====================================================================//
+        // Reformat results
+        return array_combine(
+            array_map(fn (array $slot) => $slot["id"], $whSlots),
+            array_map(fn (array $slot) => array_intersect_key($slot, self::SLOT_KEYS), $whSlots)
+        );
     }
 
     /**
