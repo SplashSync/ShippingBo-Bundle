@@ -15,7 +15,7 @@
 
 namespace Splash\Connectors\ShippingBo\Objects\Product;
 
-use Splash\OpenApi\Action\Json;
+use Splash\Connectors\ShippingBo\Models\Actions\ProductListAction;
 
 /**
  * Search for Products by Primary Key
@@ -36,7 +36,7 @@ trait PrimaryTrait
         //====================================================================//
         // Configure List Action for Primary Request
         $this->visitor->setListAction(
-            Json\ListAction::class,
+            ProductListAction::class,
             array(
                 "filterKey" => $this->connector->isSandbox()
                     ? "user_ref"
