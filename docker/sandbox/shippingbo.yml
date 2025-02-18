@@ -16,8 +16,16 @@ api_platform:
         pagination:
             client_items_per_page: true                     # Disabled by default
             items_per_page_parameter_name: limit            # Default value
+            page_parameter_name: offset
+
+    ########################################################################
+    # Enable CamelCase To SnakeCase Conversion
+    name_converter: 'Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter'
 
 services:
+    ########################################################################
+    # Register CamelCase To SnakeCase Conversion
+    Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter: ~
 
     ########################################################################
     # ShippingBo Normalizer

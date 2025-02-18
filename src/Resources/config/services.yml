@@ -13,13 +13,13 @@ services:
             - { name: "splash.connector" }
 
     ################################################################################
+    # Auto-wiring for Actions
+    Splash\Connectors\ShippingBo\Actions\:
+        resource:   '../../Actions'
+        tags:
+            - { name: 'controller.service_arguments' }
+
+    ################################################################################
     # Autowire for Services
     Splash\Connectors\ShippingBo\Services\:
         resource:   '../../Services'
-
-    ################################################################################
-    # Enables Dependency Injection in Controller Actions
-    Splash\Connectors\ShippingBo\Controller\:
-        resource:   '../../Controller'
-        tags:
-            - { name: 'controller.service_arguments' }

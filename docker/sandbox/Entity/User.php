@@ -32,13 +32,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User
 {
     /**
-     * Unique identifier.
-     *
-     * @var string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
+     * Unique Identifier.
      */
+    #[Assert\Type(type: "string")]
+    #[Groups(groups: array("read"))]
     public int $id;
 }

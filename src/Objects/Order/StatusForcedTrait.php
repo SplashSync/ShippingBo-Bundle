@@ -91,7 +91,7 @@ trait StatusForcedTrait
         if (!$this->hasAllItemsInDefaultSlot()) {
             return false;
         }
-        $whSlotsManager = $this->connector->getWarehouseSlotsManager();
+        $whSlotsManager = $this->connector->getLocator()->getWarehouseSlotsManager();
         //====================================================================//
         // Get default Warehouse Stock Slot
         if (!$dfSlotId = $this->getDefaultSlotId()) {
@@ -169,7 +169,7 @@ trait StatusForcedTrait
         if (!$dfSlotId = $this->getDefaultSlotId()) {
             return array();
         }
-        $whSlotsManager = $this->connector->getWarehouseSlotsManager();
+        $whSlotsManager = $this->connector->getLocator()->getWarehouseSlotsManager();
 
         //====================================================================//
         // Get All Product Stocks for this Slot

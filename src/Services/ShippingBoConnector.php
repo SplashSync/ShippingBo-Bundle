@@ -25,14 +25,13 @@ use Splash\Bundle\Models\AbstractConnector;
 use Splash\Bundle\Models\Connectors\GenericObjectMapperTrait;
 use Splash\Bundle\Models\Connectors\GenericObjectPrimaryMapperTrait;
 use Splash\Bundle\Models\Connectors\GenericWidgetMapperTrait;
-use Splash\Connectors\ShippingBo\Controller\WebHooksController;
-use Splash\Connectors\ShippingBo\Form\DebugFormType;
 use Splash\Connectors\ShippingBo\Form\EditFormType;
 use Splash\Connectors\ShippingBo\Hydrator\Hydrator;
-use Splash\Connectors\ShippingBo\Models\Connector\ConnectorWarehouseSlotsTrait;
+use Splash\Connectors\ShippingBo\Models\Connector\ConfigurationTrait;
 use Splash\Connectors\ShippingBo\Objects;
 use Splash\Connectors\ShippingBo\Widgets;
 use Splash\Core\SplashCore as Splash;
+use Splash\Metadata\Services\MetadataAdapter;
 use Splash\OpenApi\Action;
 use Splash\OpenApi\Connexion\JsonConnexion;
 use Splash\OpenApi\Models\Connexion\ConnexionInterface;
@@ -49,7 +48,7 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
     use GenericObjectMapperTrait;
     use GenericObjectPrimaryMapperTrait;
     use GenericWidgetMapperTrait;
-    use ConnectorWarehouseSlotsTrait;
+    use ConfigurationTrait;
 
     /**
      * Objects Type Class Map
@@ -60,6 +59,8 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
         "Order" => Objects\Order::class,
         "Product" => Objects\Product::class,
         "Address" => Objects\Address::class,
+        "SupplierOrder" => Objects\SupplierOrder::class,
+        "Webhook" => Objects\Webhook::class,
     );
 
     /**
@@ -89,7 +90,8 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
     private string $metaDir;
 
     public function __construct(
-        private WarehouseSlotsManager $warehouseSlotsManager,
+        private readonly MetadataAdapter   $metadataAdapter,
+        private ShippingBoLocator $locator,
         string $metaDir,
         EventDispatcherInterface $eventDispatcher,
         LoggerInterface $logger
@@ -144,11 +146,6 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
             return false;
         }
         //====================================================================//
-        // Get Available Warehouse Slots
-        if (!$this->fetchWarehouseSlots()) {
-            return false;
-        }
-        //====================================================================//
         // Update Connector Settings
         $this->updateConfiguration();
 
@@ -197,8 +194,6 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @throws Exception
      */
     public function selfTest() : bool
     {
@@ -266,95 +261,6 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
     }
 
     //====================================================================//
-    // Profile Interfaces
-    //====================================================================//
-
-    /**
-     * Get Connector Profile Information
-     *
-     * @return array
-     */
-    public function getProfile() : array
-    {
-        return array(
-            'enabled' => true,                                      // is Connector Enabled
-            'beta' => false,                                        // is this a Beta release
-            'type' => self::TYPE_HIDDEN,                            // Connector Type or Mode
-            'name' => 'shippingbo',                                 // Connector code (lowercase, no space allowed)
-            'connector' => 'splash.connectors.shippingbo',          // Connector Symfony Service
-            'title' => 'profile.card.title',                        // Public short name
-            'label' => 'profile.card.label',                        // Public long name
-            'domain' => 'ShippingBoBundle',                         // Translation domain for names
-            'ico' => '/bundles/shippingbo/img/ShippingBo-Icon.jpg', // Public Icon path
-            'www' => 'https://shippingbo.com',                      // Website Url
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getConnectedTemplate() : string
-    {
-        return "@ShippingBo/Profile/connected.html.twig";
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOfflineTemplate() : string
-    {
-        return "@ShippingBo/Profile/offline.html.twig";
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getNewTemplate() : string
-    {
-        return "@ShippingBo/Profile/new.html.twig";
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFormBuilderName() : string
-    {
-        $this->selfTest();
-
-        if ($this->getParameter("isSandbox", false)) {
-            return DebugFormType::class;
-        }
-
-        return EditFormType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMasterAction(): ?string
-    {
-        return null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPublicActions() : array
-    {
-        return array(
-            "index" => WebHooksController::class.":indexAction",
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSecuredActions() : array
-    {
-        return array();
-    }
-
-    //====================================================================//
     // ReCommerce Connector Specific
     //====================================================================//
 
@@ -378,8 +284,6 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
 
     /**
      * Get Connector Api Connexion
-     *
-     * @throws Exception
      *
      * @return ConnexionInterface
      */
@@ -429,6 +333,22 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
         }
 
         return $this->hydrator;
+    }
+
+    /**
+     * Get Splash Metadata Adapter
+     */
+    public function getMetadataAdapter(): MetadataAdapter
+    {
+        return $this->metadataAdapter;
+    }
+
+    /**
+     * Get Services Locator
+     */
+    public function getLocator(): ShippingBoLocator
+    {
+        return $this->locator->configure($this);
     }
 
     /**

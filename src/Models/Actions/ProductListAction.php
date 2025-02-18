@@ -40,14 +40,20 @@ class ProductListAction extends AbstractListAction
             return $this->getErrorResponse();
         }
         //====================================================================//
-        // Add Packs Filter to Params
-        $params['extraArgs']["is_pack"] = "true" ;
-        //====================================================================//
-        // Execute Get Request
-        $rawPackResponse = $this->visitor->getConnexion()->get(
-            $this->visitor->getCollectionUri(),
-            $this->getQueryParameters($filter, $params)
-        );
+        // Execute Get Request for Packs
+        if (empty($this->options['isSandBox'])) {
+            //====================================================================//
+            // Add Packs Filter to Params
+            $params['extraArgs']["is_pack"] = "true" ;
+            //====================================================================//
+            // Execute Get Request
+            $rawPackResponse = $this->visitor->getConnexion()->get(
+                $this->visitor->getCollectionUri(),
+                $this->getQueryParameters($filter, $params)
+            );
+        } else {
+            $rawPackResponse = array();
+        }
         //====================================================================//
         // Extract Results
         $results = array_merge(

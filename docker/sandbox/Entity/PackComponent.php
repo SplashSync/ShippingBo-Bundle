@@ -16,66 +16,42 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class representing the Product Pack Component model.
- *
- * @ORM\Entity()
- *
- * @ORM\Table(name="product_component")
- *
- * @ORM\HasLifecycleCallbacks()
  */
 #[ApiResource(
     operations: array(),
     normalizationContext: array("groups" => array("read")),
     denormalizationContext: array("groups" => array("write")),
 )]
+#[ORM\Entity]
+#[ORM\Table(name: "product_component")]
+#[ORM\HasLifecycleCallbacks]
 class PackComponent implements SboObjectInterface
 {
     //====================================================================//
     // SBO CORE DATA
     use Core\SboCoreTrait;
 
-    /**
-     * Parent Product
-     *
-     * @Assert\Type("App\Entity\Product")
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="packComponents")
-     */
+    #[Assert\Type(Product::class)]
+    #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: "packComponents")]
     public Product $product;
 
-    /**
-     * Products Quantities.
-     *
-     * @var int
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("integer")
-     *
-     * @ORM\Column(type="integer")
-     *
-     * @Groups({"read", "write"})
-     */
+    #[Assert\NotNull]
+    #[Assert\Type("integer")]
+    #[ORM\Column(type: Types::INTEGER)]
+    #[Groups(array("read", "write"))]
     public int $quantity;
 
-    /**
-     * Child Product Unique Identifier.
-     *
-     * @var int
-     *
-     * @Assert\Type("integer")
-     *
-     * @ORM\Column()
-     *
-     * @Groups({"read"})
-     */
-    public int $component_product_id;
+    #[Assert\Type("integer")]
+    #[ORM\Column]
+    #[Groups(array("read"))]
+    public int $componentProductId;
 
     //====================================================================//
     // DATA FAKER
@@ -89,7 +65,7 @@ class PackComponent implements SboObjectInterface
         $packComponent = new self();
         $packComponent->product = $product;
         $packComponent->quantity = rand(1, 10);
-        $packComponent->component_product_id = rand(1000, 10000);
+        $packComponent->componentProductId = rand(1000, 10000);
 
         return $packComponent;
     }

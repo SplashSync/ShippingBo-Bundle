@@ -17,19 +17,17 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata as Meta;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class representing Product Warehouse Slot model.
- *
- * @ORM\Entity()
- *
- * @ORM\Table(name="warehouse_slot")
- *
- * @ORM\HasLifecycleCallbacks()
  */
+#[ORM\Entity]
+#[ORM\Table(name: "warehouse_slot")]
+#[ORM\HasLifecycleCallbacks]
 #[ApiResource(
     operations: array(
         new Meta\GetCollection(),
@@ -47,84 +45,57 @@ class WarehouseSlot implements SboObjectInterface
 
     /**
      * Slot Name
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("string")
-     *
-     * @ORM\Column(type="string")
-     *
-     * @Groups({"read", "write"})
      */
+    #[Assert\NotNull]
+    #[Assert\Type("string")]
+    #[ORM\Column(type: Types::STRING, length: 255, nullable: false)]
+    #[Groups(array("read", "write"))]
     public string $name;
 
     /**
      * Picking Disabled Flag
-     *
-     * @var bool
-     *
-     * @ORM\Column(type="boolean")
-     *
-     * @Assert\Type("boolean")
-     *
-     * @Groups({"read", "write"})
      */
-    public bool $picking_disabled = false;
+    #[ORM\Column(type: Types::BOOLEAN)]
+    #[Assert\Type("boolean")]
+    #[Groups(array("read", "write"))]
+    public bool $pickingDisabled = false;
 
     /**
      * Slot Priority
-     *
-     * @var null|int
-     *
-     * @Assert\NotNull()
-     *
-     * @ORM\Column(type="integer")
-     *
-     * @Assert\Type("integer")
-     *
-     * @Groups({"read", "write"})
      */
+    #[Assert\NotNull]
+    #[ORM\Column(type: Types::INTEGER)]
+    #[Assert\Type("integer")]
+    #[Groups(array("read", "write"))]
     public ?int $priority = 0;
 
     /**
      * Stock Disabled Flag
-     *
-     * @var bool
-     *
-     * @ORM\Column(type="boolean")
-     *
-     * @Assert\Type("boolean")
-     *
-     * @Groups({"read", "write"})
      */
-    public bool $stock_disabled = false;
+    #[ORM\Column(type: Types::BOOLEAN)]
+    #[Assert\Type("boolean")]
+    #[Groups(array("read", "write"))]
+    public bool $stockDisabled = false;
 
     /**
      * Zone Name
-     *
-     * @Assert\Type("string")
-     *
-     * @ORM\Column(type="string", nullable=true)
-     *
-     * @Groups({"read", "write"})
      */
-    public ?string $warehouse_zone_name;
+    #[Assert\Type("string")]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    #[Groups(array("read", "write"))]
+    public ?string $warehouseZoneName;
 
     /**
      * Warehouse Slot Contents
      *
      * @var SlotContents[]
-     *
-     * @Assert\All({
-     *
-     *    @Assert\Type("App\Entity\SlotContents")
-     * })
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\SlotContents", mappedBy="warehouse_slot", cascade={"all"})
-     *
-     * @Groups({"read"})
      */
-    public $slot_contents;
+    #[Assert\All(array(
+        new Assert\Type(SlotContents::class),
+    ))]
+    #[ORM\OneToMany(mappedBy: "warehouseSlot", targetEntity: SlotContents::class, cascade: array("all"))]
+    #[Groups(array("read"))]
+    public $slotContents;
 
     //====================================================================//
     // JSON SERIALIZER

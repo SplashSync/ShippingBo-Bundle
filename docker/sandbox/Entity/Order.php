@@ -17,19 +17,17 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata as Meta;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Class representing the Product model.
- *
- * @ORM\Entity()
- *
- * @ORM\Table(name="`orders`")
- *
- * @ORM\HasLifecycleCallbacks()
+ * Class representing the Order model.
  */
+#[ORM\Entity]
+#[ORM\Table(name: '`orders`')]
+#[ORM\HasLifecycleCallbacks]
 #[ApiResource(
     operations: array(
         new Meta\GetCollection(),
@@ -39,20 +37,20 @@ use Symfony\Component\Validator\Constraints as Assert;
         new Meta\Post(),
         new Meta\Delete(),
         new Meta\Post(
-            uriTemplate:    '/orders/{id}/recompute_mapped_products',
-            controller:     'App\Controller\OrderController::computeAction',
+            uriTemplate: '/orders/{id}/recompute_mapped_products',
+            controller: 'App\Controller\OrderController::computeAction',
         ),
         new Meta\Post(
-            uriTemplate:    '/orders/{id}/order_items',
-            controller:     'App\Controller\OrderController::addItemAction',
+            uriTemplate: '/orders/{id}/order_items',
+            controller: 'App\Controller\OrderController::addItemAction',
         ),
         new Meta\Post(
-            uriTemplate:    '/orders/{id}/update_order_items',
-            controller:     'App\Controller\OrderController::itemsAction',
+            uriTemplate: '/orders/{id}/update_order_items',
+            controller: 'App\Controller\OrderController::itemsAction',
         ),
     ),
-    normalizationContext: array("groups" => array("read")),
-    denormalizationContext: array("groups" => array("write"))
+    normalizationContext: array('groups' => array('read')),
+    denormalizationContext: array('groups' => array('write'))
 )]
 class Order implements SboObjectInterface
 {
@@ -71,62 +69,32 @@ class Order implements SboObjectInterface
 
     /**
      * Order Delivery Service.
-     *
-     * @var string
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("string")
-     *
-     * @ORM\Column(type="string")
-     *
-     * @Groups({"read", "write"})
      */
-    public string $chosen_delivery_service;
+    #[Assert\NotNull]
+    #[Assert\Type('string')]
+    #[ORM\Column(type: Types::STRING)]
+    #[Groups(array('read', 'write'))]
+    public string $chosenDeliveryService;
+
+    #[Assert\Type('string')]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    #[Groups(array('read', 'write'))]
+    public ?string $relayRef;
 
     /**
-     * Order Delivery Service.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @ORM\Column(type="string", nullable=true)
-     *
-     * @Groups({"read", "write"})
+     * @var OrderItem[] List of order items.
      */
-    public ?string $relay_ref;
+    #[Assert\All(array(new Assert\Type(OrderItem::class)))]
+    #[Groups(array('read'))]
+    #[ORM\OneToMany(mappedBy: 'order', targetEntity: OrderItem::class, cascade: array('all'))]
+    public $orderItems;
 
     /**
-     * Order Items.
-     *
-     * @var OrderItem[]
-     *
-     * @Assert\All({
-     *
-     *   @Assert\Type("App\Entity\OrderItem")
-     * })
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\OrderItem", mappedBy="order", cascade={"all"})
+     * @var Shipment[] List of shipments.
      */
-    public $order_items;
-
-    /**
-     * Order Shipments
-     *
-     * @var Shipment[]
-     *
-     * @Assert\All({
-     *
-     *   @Assert\Type("App\Entity\Shipment")
-     * })
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\OneToMany(targetEntity="App\Entity\Shipment", mappedBy="order", cascade={"all"})
-     */
+    #[Assert\All(array(new Assert\Type(Shipment::class)))]
+    #[Groups(array('read'))]
+    #[ORM\OneToMany(mappedBy: 'order', targetEntity: Shipment::class, cascade: array('all'))]
     public $shipments;
 
     //====================================================================//
@@ -143,12 +111,12 @@ class Order implements SboObjectInterface
         $totalWeight = 0;
         //====================================================================//
         // Walk on Products
-        foreach ($this->order_items as $index => $item) {
+        foreach ($this->orderItems as $index => $item) {
             $totalWeight += $index * 250;
         }
         //====================================================================//
         // Update Order
-        $this->total_weight = $totalWeight;
+        $this->totalWeight = $totalWeight;
     }
 
     /**
@@ -175,7 +143,7 @@ class Order implements SboObjectInterface
      */
     public static function getItemIndex(): string
     {
-        return "order";
+        return 'order';
     }
 
     /**
@@ -183,6 +151,6 @@ class Order implements SboObjectInterface
      */
     public static function getCollectionIndex(): string
     {
-        return "orders";
+        return 'orders';
     }
 }

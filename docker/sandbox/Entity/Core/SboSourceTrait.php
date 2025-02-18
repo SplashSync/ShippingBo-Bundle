@@ -15,6 +15,7 @@
 
 namespace App\Entity\Core;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -26,31 +27,20 @@ trait SboSourceTrait
 {
     /**
      * Technical - API Source Name.
-     *
-     * @var string
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("string")
-     *
-     * @ORM\Column(type="string")
-     *
-     * @Groups({"read", "write"})
      */
+    #[Assert\NotNull]
+    #[Assert\Type('string')]
+    #[ORM\Column(type: Types::STRING)]
+    #[Groups(array('read', 'write'))]
     public string $source;
 
     /**
      * Technical - API Source Object Reference.
-     *
-     * @var string
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("string")
-     *
-     * @ORM\Column(type="string")
-     *
-     * @Groups({"read", "write"})
      */
-    public string $source_ref;
+
+    #[Assert\NotNull]
+    #[Assert\Type('string')]
+    #[ORM\Column(type: Types::STRING)]
+    #[Groups(array('read', 'write'))]
+    public string $sourceRef;
 }

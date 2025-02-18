@@ -15,6 +15,7 @@
 
 namespace App\Entity\Order;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -26,49 +27,37 @@ trait StatusTrait
 {
     /**
      * Current Order State.
-     *
-     * @var string
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("string")
-     *
-     * @Assert\Choice({
-     *     "in_trouble",
-     *     "waiting_for_payment",
-     *     "waiting_for_stock",
-     *     "merged",
-     *     "sent_to_logistics",
-     *     "dispatched",
-     *     "splitted",
-     *     "to_be_prepared",
-     *     "in_preparation",
-     *     "partially_shipped",
-     *     "shipped",
-     *     "handed_to_carrier",
-     *     "at_pickup_location",
-     *     "closed",
-     *     "back_from_client",
-     *     "rejected",
-     *     "canceled",
-     * })
-     *
-     * @ORM\Column(type="string")
-     *
-     * @Groups({"read", "write"})
      */
+    #[Assert\NotNull]
+    #[Assert\Type('string')]
+    #[Assert\Choice(array(
+        'in_trouble',
+        'waiting_for_payment',
+        'waiting_for_stock',
+        'merged',
+        'sent_to_logistics',
+        'dispatched',
+        'splitted',
+        'to_be_prepared',
+        'in_preparation',
+        'partially_shipped',
+        'shipped',
+        'handed_to_carrier',
+        'at_pickup_location',
+        'closed',
+        'back_from_client',
+        'rejected',
+        'canceled',
+    ))]
+    #[ORM\Column(type: Types::STRING)]
+    #[Groups(array('read', 'write'))]
     public string $state;
 
     /**
      * Custom Order State.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @ORM\Column(type="string", nullable=true)
-     *
-     * @Groups({"read", "write"})
      */
-    public string $custom_state;
+    #[Assert\Type('string')]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    #[Groups(array('read', 'write'))]
+    public string $customState;
 }

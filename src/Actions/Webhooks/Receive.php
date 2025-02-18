@@ -13,7 +13,7 @@
  *  file that was distributed with this source code.
  */
 
-namespace Splash\Connectors\ShippingBo\Controller;
+namespace Splash\Connectors\ShippingBo\Actions\Webhooks;
 
 use Splash\Bundle\Models\AbstractConnector;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,17 +25,22 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 /**
  * Splash ShippingBo Connector WebHooks Controller
  */
-class WebHooksController extends AbstractController
+class Receive extends AbstractController
 {
     /**
-     * @var null|string
+     * Splash Object Type
      */
     private ?string $objectType = null;
 
     /**
-     * @var null|string
+     * ShippingBo Object ID
      */
     private ?string $objectId = null;
+
+    /**
+     * Splash Action
+     */
+    private string $objectAction = SPL_A_UPDATE;
 
     /**
      * Execute WebHook Public Action
@@ -47,7 +52,7 @@ class WebHooksController extends AbstractController
      *
      * @return JsonResponse
      */
-    public function indexAction(Request $request, AbstractConnector $connector): JsonResponse
+    public function __invoke(Request $request, AbstractConnector $connector): JsonResponse
     {
         //==============================================================================
         // Safety Check
@@ -123,6 +128,12 @@ class WebHooksController extends AbstractController
             return $this->getResponse(Response::HTTP_BAD_REQUEST, 'Malformed or missing data...');
         }
         $this->objectId = (string) $rawData["object"]['id'];
+        //====================================================================//
+        // Detect Objects Event Type
+        $this->objectAction = SPL_A_UPDATE;
+        if (!empty($rawData["additional_data"]['deleted'])) {
+            $this->objectAction = SPL_A_DELETE;
+        }
 
         return null;
     }
@@ -146,14 +157,24 @@ class WebHooksController extends AbstractController
         if (empty($this->objectId)) {
             return $this->getResponse(Response::HTTP_BAD_REQUEST, 'Wrong object id');
         }
+        //====================================================================//
+        // Detect Object Delete
+        if (empty($this->objectAction)) {
+            return $this->getResponse(Response::HTTP_BAD_REQUEST, 'Wrong object action');
+        }
         //==============================================================================
         // Commit Change for Object
         $connector->commit(
             $this->objectType,
             $this->objectId,
-            SPL_A_UPDATE,
+            $this->objectAction,
             'ShippingBo API',
-            sprintf("%s modified on ShippingBo", $this->objectType)
+            sprintf(
+                (SPL_A_DELETE == $this->objectAction)
+                    ? "%s deleted on ShippingBo"
+                    : "%s modified on ShippingBo",
+                $this->objectType
+            )
         );
 
         return null;

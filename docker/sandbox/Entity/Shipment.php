@@ -17,22 +17,20 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use DateTime;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class representing the Order Shipment model.
- *
- * @ORM\Entity()
- *
- * @ORM\Table(name="`order_shipment`")
- *
- * @ORM\HasLifecycleCallbacks()
  */
+#[ORM\Entity]
+#[ORM\Table(name: 'order_shipment')]
+#[ORM\HasLifecycleCallbacks]
 #[ApiResource(
     normalizationContext: array("groups" => array("read")),
-    denormalizationContext: array("groups" => array("write")),
+    denormalizationContext: array("groups" => array("write"))
 )]
 class Shipment implements SboObjectInterface
 {
@@ -42,116 +40,73 @@ class Shipment implements SboObjectInterface
 
     /**
      * Order ID.
-     *
-     * @var null|int
-     *
-     * @Assert\Type("integer")
-     *
-     * @Groups({"read"})
      */
-    public ?int $order_id;
+    #[Assert\Type('integer')]
+    #[Groups(array('read'))]
+    public ?int $orderId;
 
     /**
      * Shipped Order.
-     *
-     * @var Order
-     *
-     * @Assert\Type("App\Entity\Order")
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Order", inversedBy="shipments")
      */
+    #[Assert\Type(Order::class)]
+    #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: 'shipments')]
     public Order $order;
 
     /**
      * Carrier ID.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
-    public ?string $carrier_id;
+    #[Assert\Type('string')]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    public ?string $carrierId;
 
     /**
      * Carrier Name.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
-    public ?string $carrier_name;
+    #[Assert\Type('string')]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    public ?string $carrierName;
 
     /**
      * Shipping Method ID.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
-    public ?string $shipping_method_id = null;
+    #[Assert\Type('string')]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    public ?string $shippingMethodId = null;
 
     /**
-     * Shipping Method NAme.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(type="string", nullable=true)
+     * Shipping Method Name.
      */
-    public ?string $shipping_method_name = null;
+    #[Assert\Type('string')]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    public ?string $shippingMethodName = null;
 
     /**
      * Shipping Reference.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
-    public ?string $shipping_ref = null;
+    #[Assert\Type('string')]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    public ?string $shippingRef = null;
 
     /**
      * Tracking Url.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(type="string", nullable=true)
      */
-    public ?string $tracking_url = null;
+    #[Assert\Type('string')]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    public ?string $trackingUrl = null;
 
     /**
      * Delivery Date.
-     *
-     * @var null|DateTime
-     *
-     * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Assert\Type("DateTime")
-     *
-     * @Groups({"read"})
      */
-    public ?DateTime $delivery_at = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Assert\Type(DateTime::class)]
+    #[Groups(array('read'))]
+    public ?DateTime $deliveryAt = null;
 
     //====================================================================//
     // DATA FAKER
@@ -169,14 +124,14 @@ class Shipment implements SboObjectInterface
         $shipment = new self();
         $shipment->id = 12;
         $shipment->order = $order;
-        $shipment->order_id = $order->id;
-        $shipment->carrier_id = rand(10, 100);
-        $shipment->carrier_name = "My Carrier Name";
-        $shipment->shipping_method_id = rand(10, 100);
-        $shipment->shipping_method_name = $order->chosen_delivery_service;
-        $shipment->shipping_ref = "TRACKING".rand(10000, 99999);
-        $shipment->tracking_url = "https://tracking.url?".$shipment->shipping_ref;
-        $shipment->delivery_at = new DateTime("-10 days");
+        $shipment->orderId = $order->id;
+        $shipment->carrierId = rand(10, 100);
+        $shipment->carrierName = "My Carrier Name";
+        $shipment->shippingMethodId = rand(10, 100);
+        $shipment->shippingMethodName = $order->chosenDeliveryService;
+        $shipment->shippingRef = "TRACKING".rand(10000, 99999);
+        $shipment->trackingUrl = "https://tracking.url?".$shipment->shippingRef;
+        $shipment->deliveryAt = new DateTime("-10 days");
 
         return $shipment;
     }

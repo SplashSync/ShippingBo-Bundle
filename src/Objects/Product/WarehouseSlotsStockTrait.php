@@ -25,10 +25,15 @@ trait WarehouseSlotsStockTrait
      */
     protected function buildWarehouseSlotsStockFields(): void
     {
-        $whSlotsManager = $this->connector->getWarehouseSlotsManager();
+        $whSlotsManager = $this->connector->getLocator()->getWarehouseSlotsManager();
         //====================================================================//
         // Walk on Active Warehouse Slots
         foreach ($whSlotsManager->getActiveSlots() as $slotId => $activeSlot) {
+            //====================================================================//
+            // Filter Unused Slots
+            if (!$whSlotsManager->isReadableSlots($slotId) && !$whSlotsManager->isWritableSlots($slotId)) {
+                continue;
+            }
             //====================================================================//
             // Build Warehouse Slot Name
             $slotName = !empty($activeSlot['name']) ? $activeSlot['name'] : sprintf("Slot%d", $slotId);
@@ -74,7 +79,7 @@ trait WarehouseSlotsStockTrait
         if (!$slotId = $this->getWarehouseSlotId($fieldName)) {
             return;
         }
-        $whSlotsManager = $this->connector->getWarehouseSlotsManager();
+        $whSlotsManager = $this->connector->getLocator()->getWarehouseSlotsManager();
         //====================================================================//
         // READ Current Slot Stock
         $current = $this->getWarehouseSlotStocks($slotId);
@@ -111,6 +116,7 @@ trait WarehouseSlotsStockTrait
         //====================================================================//
         // Ensure Loading only Once by Product
         $this->object->warehouseStocks ??= $this->connector
+            ->getLocator()
             ->getWarehouseSlotsManager()
             ->getSlotsForProduct((int) $this->object->id)
         ;

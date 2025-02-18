@@ -16,14 +16,16 @@
 namespace Splash\Connectors\ShippingBo\Services;
 
 use Splash\Client\Splash;
-use Splash\OpenApi\Models\Connexion\ConnexionInterface;
+use Splash\Connectors\ShippingBo\Models\Connector\ShippingBoConnectorAwareTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- *
+ * Manage Shipping Bo Warehouse Slots
  */
 class WarehouseSlotsManager
 {
+    use ShippingBoConnectorAwareTrait;
+
     /**
      * Parameters Storage Key
      */
@@ -33,6 +35,11 @@ class WarehouseSlotsManager
      * Default Slot Storage Key
      */
     const DEFAULT = "DefaultWarehouseSlot";
+
+    /**
+     * Read Slots Storage Key
+     */
+    const READ = "ReadWarehouseSlots";
 
     /**
      * Write Slots Storage Key
@@ -63,25 +70,6 @@ class WarehouseSlotsManager
     const BY_PRODUCT_ID = "search[product_id__eq]";
 
     /**
-     * Current Connexion
-     */
-    private ConnexionInterface $connexion;
-
-    /**
-     * List of Writable Slots IDs
-     *
-     * @var string[]
-     */
-    private array $writeSlots = array();
-
-    /**
-     * List of Warehouse Slots Definitions
-     *
-     * @var array[]
-     */
-    private array $whSlots = array();
-
-    /**
      * Temporary Storage for Last Fetched Warehouse Slots Content IDs
      *
      * @var array<string, int>
@@ -89,25 +77,9 @@ class WarehouseSlotsManager
     private array $lastSlotsContentsIds = array();
 
     /**
-     * Configure with Current API Connexion Settings
-     */
-    public function configure(ShippingBoConnector $connector): static
-    {
-        $warehouseSlots = $connector->getParameter(self::STORAGE, array());
-        $this->whSlots = is_array($warehouseSlots) ? $warehouseSlots : array();
-
-        $writableSlots = $connector->getParameter(self::WRITE, array());
-        $this->writeSlots = is_array($writableSlots) ? $writableSlots : array();
-
-        $this->connexion = $connector->getConnexion();
-
-        return $this;
-    }
-
-    /**
      * Fetch List of Customer Warehouse Slots from API
      */
-    public function fetchWarehouseSlots(ShippingBoConnector $connector): bool
+    public function fetchWarehouseSlots(): bool
     {
         $page = 0;
         $slots = array();
@@ -125,7 +97,8 @@ class WarehouseSlotsManager
         } while (!empty($slotsPage));
         //====================================================================//
         // Store in Connector Settings
-        $connector->setParameter(self::STORAGE, $slots);
+        $this->connector->setParameter(self::STORAGE, $slots);
+        $this->connector->updateConfiguration();
 
         return true;
     }
@@ -138,7 +111,7 @@ class WarehouseSlotsManager
         $slots = array();
         //====================================================================//
         // Walk on Defined Slots
-        foreach ($this->whSlots as $warehouseSlot) {
+        foreach ($this->getAllSlots() as $warehouseSlot) {
             if (empty($warehouseSlot["stock_disabled"])) {
                 $slots[$warehouseSlot["id"]] = $warehouseSlot;
             }
@@ -148,11 +121,19 @@ class WarehouseSlotsManager
     }
 
     /**
+     * Check if a Warehouse Slot should be Read
+     */
+    public function isReadableSlots(int $slotId): bool
+    {
+        return in_array($slotId, $this->getReadableSlots(), false);
+    }
+
+    /**
      * Check if a Warehouse Slot can be Updated
      */
     public function isWritableSlots(int $slotId): bool
     {
-        return in_array($slotId, $this->writeSlots, false);
+        return in_array($slotId, $this->getWritableSlots(), false);
     }
 
     /**
@@ -165,7 +146,10 @@ class WarehouseSlotsManager
         $productStocks = array();
         //====================================================================//
         // Fetch a Slots by ID
-        $rawSlots = $this->connexion->get("/warehouse_slots", array(self::BY_SLOT_ID => (string) $slotId));
+        $rawSlots = $this->connector->getConnexion()->get(
+            "/warehouse_slots",
+            array(self::BY_SLOT_ID => (string) $slotId)
+        );
         if (!$rawSlots) {
             return array();
         }
@@ -206,7 +190,10 @@ class WarehouseSlotsManager
         $this->lastSlotsContentsIds = $stocks = array();
         //====================================================================//
         // Fetch List of Slots with this ID
-        $whSlots = $this->connexion->get("/warehouse_slots", array(self::BY_PRODUCT_ID => (string) $productId));
+        $whSlots = $this->connector->getConnexion()->get(
+            "/warehouse_slots",
+            array(self::BY_PRODUCT_ID => (string) $productId)
+        );
         if (empty($whSlots["warehouse_slots"]) || !is_array($whSlots["warehouse_slots"])) {
             return $stocks;
         }
@@ -249,7 +236,7 @@ class WarehouseSlotsManager
         );
         //====================================================================//
         // Create Stock Slot Content
-        if (null === $this->connexion->post("/slot_contents", $request)) {
+        if (null === $this->connector->getConnexion()->post("/slot_contents", $request)) {
             Splash::log()->err("Is this warehouse slot a multi-product slot?");
 
             return Splash::log()->err(sprintf("Unable to create stock on Slot %s", $this->getSlotName($slotId)));
@@ -274,7 +261,7 @@ class WarehouseSlotsManager
         );
         //====================================================================//
         // Request Stock Variation on this Slot Content
-        if (null === $this->connexion->post("/slot_stock_variations", $request)) {
+        if (null === $this->connector->getConnexion()->post("/slot_stock_variations", $request)) {
             return Splash::log()->err(sprintf("Unable to update stock on Slot %s", $slotName));
         }
 
@@ -302,7 +289,7 @@ class WarehouseSlotsManager
         );
         //====================================================================//
         // Request Stock Variation on this Slot Content
-        if (null === $this->connexion->post("/slot_stock_variations", $request)) {
+        if (null === $this->connector->getConnexion()->post("/slot_stock_variations", $request)) {
             return Splash::log()->err(sprintf("Unable to update stock on Slot %s", $slotName));
         }
 
@@ -319,11 +306,50 @@ class WarehouseSlotsManager
         }
         //====================================================================//
         // Delete Stock Slot Content
-        if (null === $this->connexion->delete(sprintf("/slot_contents/%d", $slotContentId))) {
+        if (null === $this->connector->getConnexion()->delete(sprintf("/slot_contents/%d", $slotContentId))) {
             return Splash::log()->err(sprintf("Unable to delete stock on Slot %s", $this->getSlotName($slotId)));
         }
 
         return true;
+    }
+
+    /**
+     * Get List of All Warehouse Slots
+     *
+     * @return array[]
+     */
+    public function getAllSlots(): array
+    {
+        return is_array($slots = $this->connector->getParameter(self::STORAGE, array()))
+            ? $slots :
+            array()
+        ;
+    }
+
+    /**
+     * Get List of All Readable Warehouse Slots
+     *
+     * @return int[]
+     */
+    public function getReadableSlots(): array
+    {
+        return is_array($slots = $this->connector->getParameter(self::READ, array()))
+            ? $slots :
+            array()
+        ;
+    }
+
+    /**
+     * Get List of All Writable Warehouse Slots
+     *
+     * @return int[]
+     */
+    public function getWritableSlots(): array
+    {
+        return is_array($slots = $this->connector->getParameter(self::WRITE, array()))
+            ? $slots :
+            array()
+        ;
     }
 
     /**
@@ -334,8 +360,9 @@ class WarehouseSlotsManager
         //====================================================================//
         // Get Lists of Available Slots from Api
         try {
-            $response = $this->connexion->get("/warehouse_slots", array(
-                "offset" => (string) ($page * $limit),
+            $sandbox = $this->connector->isSandbox();
+            $response = $this->connector->getConnexion()->get("/warehouse_slots", array(
+                "offset" => $sandbox ? (string) ($page + 1) : (string) ($page * $limit),
                 "limit" => (string) $limit,
             ));
         } catch (\Exception $e) {
@@ -344,7 +371,10 @@ class WarehouseSlotsManager
             return null;
         }
         if (!is_array($response)) {
-            return (Response::HTTP_FORBIDDEN == $this->connexion->getLastResponse()?->code) ? array() : null;
+            return (Response::HTTP_FORBIDDEN == $this->connector->getConnexion()->getLastResponse()?->code)
+                ? array()
+                : null
+            ;
         }
         if (!is_array($whSlots = $response['warehouse_slots'] ?? null)) {
             return null;

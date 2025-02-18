@@ -15,26 +15,25 @@
 
 namespace Splash\Connectors\ShippingBo\Models\Connector;
 
-use Splash\Connectors\ShippingBo\Services\WarehouseSlotsManager;
+use Splash\Connectors\ShippingBo\Services\ShippingBoConnector;
 
 /**
- * Manage Access to Customer Warehouse Slots Stocks
+ * Makes a Service Aware of ShippingBo Connector
  */
-trait ConnectorWarehouseSlotsTrait
+trait ShippingBoConnectorAwareTrait
 {
     /**
-     * Get Sellsy Taxes Manager
+     * Currently Used Connector
      */
-    public function getWarehouseSlotsManager(): WarehouseSlotsManager
-    {
-        return $this->warehouseSlotsManager->configure($this);
-    }
+    private ShippingBoConnector $connector;
 
     /**
-     * Get List of SBO Warehouse Slots from API
+     * Configure with Current API Connexion Settings
      */
-    public function fetchWarehouseSlots(): bool
+    public function configure(ShippingBoConnector $connector): static
     {
-        return $this->getWarehouseSlotsManager()->fetchWarehouseSlots($this);
+        $this->connector = $connector;
+
+        return $this;
     }
 }

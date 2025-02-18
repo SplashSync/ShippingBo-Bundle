@@ -1,0 +1,25 @@
+{% trans_default_domain "ShippingBoBundle" %}
+
+{% set WhSlotsCount = configuration.WarehouseSlots|default([])|length %}
+
+{% if WhSlotsCount %}
+    <h4 class="font-md">
+        <i class="fa fa-check text-success"></i>&nbsp;{{ 'admin.warehouse.count'|trans({"%WhSlotsCount%": WhSlotsCount}) }}
+    </h4>
+{% else %}
+    <h4 class="font-md">
+        <i class="fa fa-question text-warning"></i>&nbsp;{{ 'admin.warehouse.empty'|trans }}
+    </h4>
+{% endif %}
+
+<a
+        id="node-warehouse-btn" class="btn-lg btn-block btn-primary text-center"
+        href="{{ path('splash_connector_secured_action', {
+            "connectorName" :   connector.profile.name,
+            "webserviceId" :    connector.WebserviceId,
+            "action" :          "update-wh-slots"
+        }) }}"
+>
+    <i class="fab fa-searchengin"></i>
+    {{ 'admin.warehouse.update' | trans }}
+</a>

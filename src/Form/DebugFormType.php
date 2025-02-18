@@ -41,6 +41,6 @@ class DebugFormType extends AbstractShippingBoType
         $this->addShippingMethodsField($builder);
         $this->addOriginFilterField($builder);
         $this->addItemsCountersField($builder);
-        $this->addWriteWarehouseSlotsField($builder);
+        $this->addReadWriteWarehouseSlotsField($builder);
     }
 }

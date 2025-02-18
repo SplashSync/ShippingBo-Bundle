@@ -39,9 +39,10 @@ trait PrimaryTrait
             ProductListAction::class,
             array(
                 "filterKey" => $this->connector->isSandbox()
-                    ? "user_ref"
+                    ? "userRef"
                     : "search[user_ref__eq][]"
                 ,
+                "isSandBox" => $this->connector->isSandbox(),
             )
         );
         //====================================================================//

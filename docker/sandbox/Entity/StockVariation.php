@@ -16,6 +16,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -24,17 +25,14 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class representing the Product Stock Variation model.
- *
- * @ORM\Entity()
- *
- * @ORM\Table(name="`stock_variation`")
- *
- * @ORM\HasLifecycleCallbacks()
  */
 #[ApiResource(
     normalizationContext: array("groups" => array("read")),
     denormalizationContext: array("groups" => array("write")),
 )]
+#[ORM\Entity]
+#[ORM\Table(name: 'stock_variation')]
+#[ORM\HasLifecycleCallbacks]
 class StockVariation implements SboObjectInterface
 {
     //====================================================================//
@@ -43,92 +41,69 @@ class StockVariation implements SboObjectInterface
 
     /**
      * Stock Variation
-     *
-     * @var int
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("integer")
-     *
-     * @ORM\Column(type="integer")
-     *
-     * @Groups({"write"})
      */
+    #[Assert\NotNull]
+    #[Assert\Type('integer')]
+    #[ORM\Column(type: Types::INTEGER)]
+    #[Groups(array('write'))]
     public int $variation;
 
     /**
      * New Product Stock
-     *
-     * @var null|int
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("integer")
-     *
-     * @Groups({"read"})
      */
+    #[Assert\NotNull]
+    #[Assert\Type('integer')]
+    #[Groups(array('read'))]
     public ?int $stock = 0;
 
     /**
      * Received Product ID.
-     *
-     * @var null|int
-     *
-     * @Assert\Type("integer")
-     *
-     * @Groups({"write"})
      */
-    public ?int $product_id;
+    #[Assert\Type('integer')]
+    #[Groups(array('write'))]
+    public ?int $productId;
 
     /**
      * Impacted Product.
-     *
-     * @var Product
-     *
-     * @Assert\Type("App\Entity\Product")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product")
      */
+    #[Assert\Type(Product::class)]
+    #[Groups(array('read'))]
+    #[ORM\ManyToOne(targetEntity: Product::class)]
     public Product $product;
 
     //====================================================================//
     // MAIN METHODS
     //====================================================================//
 
-    /**
-     * @param LifecycleEventArgs $event
-     *
-     * @return void
-     *
-     * @ORM\PrePersist()
-     */
+    #[ORM\PrePersist]
     public function linkToProduct(LifecycleEventArgs $event): void
     {
         //====================================================================//
         // Check Received Product ID
-        if (($this->product_id ?? 0) <= 0) {
+        if (($this->productId ?? 0) <= 0) {
             throw new NotFoundHttpException(
-                sprintf("Product ID must be given")
+                sprintf('Product ID must be given')
             );
         }
+
         //====================================================================//
         // Check Received Variation
         if (($this->variation ?? 0) == 0) {
             throw new NotFoundHttpException(
-                sprintf("Variation must a non zéro signed int")
+                sprintf('Variation must be a non-zero signed int')
             );
         }
+
         //====================================================================//
         // Identify Product
         /** @var null|Product $product */
-        $product = $event->getObjectManager()->getRepository(Product::class)->find($this->product_id);
+        $product = $event->getObjectManager()->getRepository(Product::class)->find($this->productId);
         if (!$product) {
             throw new NotFoundHttpException(
-                sprintf("Target Product %s not found", $this->product_id)
+                sprintf('Target Product %s not found', $this->productId)
             );
         }
+
         //====================================================================//
         // Update
         $product->stockVariations[] = $this;
@@ -145,7 +120,7 @@ class StockVariation implements SboObjectInterface
      */
     public static function getItemIndex(): string
     {
-        return "stock_variation";
+        return 'stock_variation';
     }
 
     /**
@@ -153,6 +128,6 @@ class StockVariation implements SboObjectInterface
      */
     public static function getCollectionIndex(): string
     {
-        return "stock_variations";
+        return 'stock_variations';
     }
 }

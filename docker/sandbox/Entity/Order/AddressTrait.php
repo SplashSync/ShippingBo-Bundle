@@ -16,6 +16,7 @@
 namespace App\Entity\Order;
 
 use App\Entity\Address;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -27,80 +28,59 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 trait AddressTrait
 {
+    #[Assert\Type(Types::INTEGER)]
+    #[ORM\Column(type: Types::INTEGER)]
+    #[Groups(array("read", "write"))]
     /**
      * Order Shipping Address ID.
-     *
-     * @var null|int
-     *
-     * @Assert\Type("integer")
-     *
-     * @ORM\Column()
-     *
-     * @Groups({"read", "write"})
      */
-    public ?int $shipping_address_id;
+    public ?int $shippingAddressId;
 
+    #[Assert\Type(Address::class)]
+    #[Groups(array("read"))]
+    #[ORM\ManyToOne(targetEntity: Address::class)]
     /**
      * Order Shipping Address.
-     *
-     * @var null|Address
-     *
-     * @Assert\Type("App\Entity\Address")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Address")
      */
-    public ?Address $shipping_address;
+    public ?Address $shippingAddress;
 
+    #[Assert\Type(Types::INTEGER)]
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    #[Groups(array("read", "write"))]
     /**
      * Order Billing Address ID.
-     *
-     * @var null|int
-     *
-     * @Assert\Type("integer")
-     *
-     * @ORM\Column(nullable=true)
-     *
-     * @Groups({"read", "write"})
      */
-    public ?int $billing_address_id;
+    public ?int $billingAddressId;
 
+    #[Assert\Type(Address::class)]
+    #[Groups(array("read"))]
+    #[ORM\ManyToOne(targetEntity: Address::class)]
     /**
      * Order Billing Address.
-     *
-     * @var null|Address
-     *
-     * @Assert\Type("App\Entity\Address")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Address")
      */
-    public ?Address $billing_address;
+    public ?Address $billingAddress;
 
     //====================================================================//
     // ADDRESS LINK UPDATE
     //====================================================================//
 
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
     /**
      * @param LifecycleEventArgs $event
      *
      * @return void
-     *
-     * @ORM\PrePersist()
-     *
-     * @ORM\PreUpdate()
      */
     public function updateShippingAddress(LifecycleEventArgs $event): void
     {
         //====================================================================//
         // Check if Changed
-        $current = $this->shipping_address->id ?? null;
-        $new = $this->shipping_address_id ?? 1;
+        $current = $this->shippingAddress->id ?? null;
+        $new = $this->shippingAddressId ?? 1;
         if ($current && $new && ($current == $new)) {
             return;
         }
+
         //====================================================================//
         // Identify New
         $address = $event->getObjectManager()->getRepository(Address::class)->find($new);
@@ -109,9 +89,10 @@ trait AddressTrait
                 sprintf("Target Address %s not found", $new)
             );
         }
+
         //====================================================================//
         // Update
-        $this->shipping_address = $address;
+        $this->shippingAddress = $address;
     }
 
     //====================================================================//
@@ -123,19 +104,17 @@ trait AddressTrait
      */
     public function getShippingAddressId(): int
     {
-        $this->shipping_address_id = $this->shipping_address_id ?? $this->shipping_address->id;
+        $this->shippingAddressId = $this->shippingAddressId ?? $this->shippingAddress->id;
 
-        return $this->shipping_address_id;
+        return $this->shippingAddressId;
     }
 
     /**
-     * @param null|int $shipping_address_id
-     *
-     * @return self
+     * @param null|int $shippingAddressId
      */
-    public function setShippingAddressId(?int $shipping_address_id): self
+    public function setShippingAddressId(?int $shippingAddressId): static
     {
-        $this->shipping_address_id = $shipping_address_id;
+        $this->shippingAddressId = $shippingAddressId;
 
         return $this;
     }
