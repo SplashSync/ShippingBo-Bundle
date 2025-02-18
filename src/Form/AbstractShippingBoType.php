@@ -324,7 +324,7 @@ abstract class AbstractShippingBoType extends AbstractType
      *
      * @return $this
      */
-    protected function addWriteWarehouseSlotsField(FormBuilderInterface $builder): self
+    protected function addReadWriteWarehouseSlotsField(FormBuilderInterface $builder): self
     {
         /** @var array $config */
         $config = $builder->getData();
@@ -339,6 +339,14 @@ abstract class AbstractShippingBoType extends AbstractType
         );
 
         $builder
+            ->add(WarehouseSlotsManager::READ, ChoiceType::class, array(
+                'label' => "var.readSlots.label",
+                'help' => "var.readSlots.desc",
+                'required' => false,
+                'multiple' => true,
+                'choices' => $choices,
+                'translation_domain' => "ShippingBoBundle",
+            ))
             ->add(WarehouseSlotsManager::WRITE, ChoiceType::class, array(
                 'label' => "var.writeSlots.label",
                 'help' => "var.writeSlots.desc",

@@ -58,7 +58,7 @@ class OrderController extends AbstractController
         $rawData = json_decode($request->getContent(), true, 512, \JSON_BIGINT_AS_STRING);
         $orderItem = $this->serializer->denormalize($rawData, OrderItem::class, "json");
         $orderItem->order = $order;
-        $order->order_items[] = $orderItem;
+        $order->orderItems[] = $orderItem;
         //====================================================================//
         // Persist Item
         $this->entityManager->persist($order);
@@ -67,8 +67,8 @@ class OrderController extends AbstractController
         $uow = $this->entityManager->getUnitOfWork();
         $uow->computeChangeSets();
         $orderChangeSet = $uow->getEntityChangeSet($order);
-        if (!empty($orderChangeSet["source_ref"]["0"])) {
-            $order->source_ref = $orderChangeSet["source_ref"]["0"];
+        if (!empty($orderChangeSet["sourceRef"]["0"])) {
+            $order->sourceRef = $orderChangeSet["sourceRef"]["0"];
         }
         //====================================================================//
         // Save Item
@@ -99,11 +99,11 @@ class OrderController extends AbstractController
         }
         //====================================================================//
         // Clear Order Items
-        $order->order_items = $order->order_items ?? new ArrayCollection();
-        foreach ($order->order_items as $orderItem) {
+        $order->orderItems = $order->orderItems ?? new ArrayCollection();
+        foreach ($order->orderItems as $orderItem) {
             $this->entityManager->remove($orderItem);
         }
-        $order->order_items->clear();
+        $order->orderItems->clear();
         //====================================================================//
         // Decode Received Items
         $rawData = json_decode($request->getContent(), true, 512, \JSON_BIGINT_AS_STRING);
@@ -112,7 +112,7 @@ class OrderController extends AbstractController
                 ->denormalize($rawItem, OrderItem::class, "json")
             ;
             $orderItem->order = $order;
-            $order->order_items[] = $orderItem;
+            $order->orderItems[] = $orderItem;
         }
         $this->entityManager->flush();
 

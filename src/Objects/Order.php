@@ -25,6 +25,7 @@ use Splash\Models\Objects\ListsTrait;
 use Splash\Models\Objects\ObjectsTrait;
 use Splash\Models\Objects\SimpleFieldsTrait;
 use Splash\OpenApi\Action\Json;
+use Splash\OpenApi\Fields\Descriptor;
 use Splash\OpenApi\Models\Objects as ApiModels;
 use Splash\OpenApi\Visitor\AbstractVisitor as Visitor;
 use Splash\OpenApi\Visitor\JsonVisitor;
@@ -149,6 +150,8 @@ class Order extends AbstractStandaloneObject
     public function getVisitor(): Visitor
     {
         if (!isset($this->visitor)) {
+            $isSandbox = $this->connector->isSandbox();
+
             $this->visitor = new JsonVisitor(
                 $this->connector->getConnexion(),
                 $this->connector->getHydrator(),
@@ -164,13 +167,13 @@ class Order extends AbstractStandaloneObject
                 Json\ListAction::class,
                 array(
                     "filterKey" => "search[origin_ref__contains][]",
-                    "pageKey" => null,
-                    "offsetKey" => "offset"
+                    "pageKey" => $isSandbox ? "offset" : null,
+                    "offsetKey" => $isSandbox ? null : "offset",
                 )
             );
             //====================================================================//
             // Force Loading of Order Items Metadata
-            \Splash\OpenApi\Fields\Descriptor::load(
+            Descriptor::load(
                 $this->connector->getHydrator(),
                 Api\OrderItem::class,
                 Api\OrderItem::EXCLUDED

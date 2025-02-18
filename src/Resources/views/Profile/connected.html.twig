@@ -1,3 +1,41 @@
+{% trans_default_domain "ShippingBoBundle" %}
+
+<div class="panel-group" id="accordion">
+
+    <!-- Warehouse Slots Configuration Block -->
+    <div class="panel panel-default card">
+        <div class="panel-heading card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseWhSlots" aria-expanded="false">
+            <h3 class="panel-title card-title text-primary">
+                <i class="fa fa-fw fa-warehouse"></i>
+                {{ 'admin.warehouse.title'|trans }}
+            </h3>
+        </div>
+        <div id="collapseWhSlots" class="panel-collapse collapse" aria-expanded="false">
+            <div class="panel-body card-body">
+                {% include '@ShippingBo/Blocks/warehouse.html.twig'  %}
+            </div>
+        </div>
+    </div>
+    <!-- End Warehouse Slots Configuration Block -->
+
+    <!-- Webhooks Configuration Block -->
+    <div class="panel panel-default card">
+        <div class="panel-heading card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseWebhooks" aria-expanded="false">
+            <h3 class="panel-title card-title text-primary">
+                <i class="fa fa-fw fa-rss"></i>
+                {{ 'admin.webhooks.title'|trans }}
+            </h3>
+        </div>
+        <div id="collapseWebhooks" class="panel-collapse collapse" aria-expanded="false">
+            <div class="panel-body card-body">
+                {% include '@ShippingBo/Blocks/webhooks.html.twig'  %}
+            </div>
+        </div>
+    </div>
+    <!-- End Webhooks Configuration Block -->
+
+</div>
+
 <div class="well well-sm">
     {% include '@ShippingBo/Blocks/connection.html.twig'  %}
 </div>

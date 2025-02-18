@@ -43,6 +43,15 @@ var:
             label:      "Force Product Count"
             desc:       "Force Product count when Splash is reading products lists."
 
+    defaultSlot:
+        label:      "Default Warehouse Slots"
+        desc:       "Select warehouse slots used when order is manually closed by Splash. 
+                    Only used with advanced stock management."
+
+    readSlots:
+        label:      "Readable Warehouse Slots"
+        desc:       "Select warehouse slots that should be tracked by splash."
+
     writeSlots:
         label:      "Writable Warehouse Slots"
         desc:       "Select warehouse slots that should be writable by splash."
@@ -61,3 +70,19 @@ admin:
     connect:    Connect to ShippingBo API
     sandbox:
         enabled:    Sandbox Mode is Enabled
+
+    warehouse:
+        title:      "Warehouse Slots"
+        count:      "%WhSlotsCount% Warehouse Slots Detected"
+        empty:      "No Warehouse Slots Detected"
+        update:     "Refresh Warehouse Slots List"
+        msg:        "Warehouse Slots Updated"
+        err:        "Unable to update warehouse slots list"
+
+    webhooks:
+        title:      Webhooks Configuration
+        update:     "Refresh Webhooks Configuration"
+        valid:      "Webhooks Configuration is OK !"
+        invalid:    "Webhooks Configuration in incomplete"
+        msg:        "Webhooks Configuration Updated"
+        err:        "Unable to update webhooks configuration"

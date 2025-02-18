@@ -17,6 +17,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata as Meta;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -25,23 +26,20 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class representing Product Warehouse Slot Content model.
- *
- * @ORM\Entity()
- *
- * @ORM\Table(name="slot_contents")
- *
- * @ORM\HasLifecycleCallbacks()
  */
+#[ORM\Entity]
+#[ORM\Table(name: "slot_contents")]
+#[ORM\HasLifecycleCallbacks]
 #[ApiResource(
     operations: array(
         new Meta\GetCollection(),
         new Meta\Get(),
         new Meta\Post(),
         new Meta\Post(
-            uriTemplate:    '/slot_stock_variations',
-            controller:     'App\Controller\SlotStockVariationController::createAction',
+            uriTemplate: '/slot_stock_variations',
+            controller: 'App\Controller\SlotStockVariationController::createAction',
         ),
-        new Meta\Delete(),
+        new Meta\Delete()
     ),
     normalizationContext: array("groups" => array("read")),
     denormalizationContext: array("groups" => array("write"))
@@ -50,88 +48,64 @@ class SlotContents implements SboObjectInterface
 {
     /**
      * Unique Identifier.
-     *
-     * @var int
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     *
-     * @Assert\Type("integer")
-     *
-     * @Groups({"read"})
      */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    #[Assert\Type("integer")]
+    #[Groups(array("read"))]
     public int $id;
 
     /**
      * Product ID
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("integer")
-     *
-     * @ORM\Column(type="integer")
-     *
-     * @Groups({"read", "write"})
      */
-    public int $product_id;
+    #[Assert\NotNull]
+    #[Assert\Type("integer")]
+    #[ORM\Column(type: Types::INTEGER)]
+    #[Groups(array("read", "write"))]
+    public int $productId;
 
     /**
      * Warehouse Slot ID
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("integer")
-     *
-     * @ORM\Column(type="integer")
-     *
-     * @Groups({"read", "write"})
      */
-    public int $warehouse_slot_id;
+    #[Assert\NotNull]
+    #[Assert\Type("integer")]
+    #[ORM\Column(type: Types::INTEGER)]
+    #[Groups(array("read", "write"))]
+    public int $warehouseSlotId;
 
     /**
      * Quantity
-     *
-     * @Assert\NotNull()
-     *
-     * @ORM\Column(type="integer")
-     *
-     * @Assert\Type("integer")
-     *
-     * @Groups({"read", "write"})
      */
+    #[Assert\NotNull]
+    #[ORM\Column(type: Types::INTEGER)]
+    #[Assert\Type("integer")]
+    #[Groups(array("read", "write"))]
     public int $stock = 0;
 
     /**
      * Parent Warehouse Slot
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\WarehouseSlot", inversedBy="slot_contents")
-     *
-     * @Groups({"read"})
      */
-    public WarehouseSlot $warehouse_slot;
+    #[ORM\ManyToOne(targetEntity: WarehouseSlot::class, inversedBy: "slotContents")]
+    #[Groups(array("read"))]
+    public WarehouseSlot $warehouseSlot;
 
     //====================================================================//
     // Warehouse Slot LINK UPDATE
     //====================================================================//
 
-    /**
-     * @ORM\PrePersist()
-     *
-     * @ORM\PreUpdate()
-     */
+    #[ORM\PrePersist]
+    #[ORM\PreUpdate]
     public function updateWarehouseSlot(LifecycleEventArgs $event): void
     {
         //====================================================================//
         // Check if Changed
-        $current = $this->warehouse_slot->id ?? null;
-        $new = $this->warehouse_slot_id ?? 1;
+        $current = $this->warehouseSlot->id ?? null;
+        $new = $this->warehouseSlotId ?? 1;
         if ($current && $new && ($current == $new)) {
             return;
         }
-        //====================================================================//
+
         // Identify New
         $warehouseSlot = $event->getObjectManager()->getRepository(WarehouseSlot::class)->find($new);
         if (!$warehouseSlot) {
@@ -141,7 +115,7 @@ class SlotContents implements SboObjectInterface
         }
         //====================================================================//
         // Update
-        $this->warehouse_slot = $warehouseSlot;
+        $this->warehouseSlot = $warehouseSlot;
     }
 
     //====================================================================//

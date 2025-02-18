@@ -108,15 +108,15 @@ class Version202411ShippingMethodsFixtures extends AbstractMigration implements 
     {
         $default = new ShippingMethod();
         $default->name = 'Collissimo';
-        $default->carrier_id = 1;
+        $default->carrierId = 1;
 
         $gls = new ShippingMethod();
         $gls->name = 'GLS';
-        $gls->carrier_id = 2;
+        $gls->carrierId = 2;
 
         $chrono = new ShippingMethod();
         $chrono->name = 'Chronopost';
-        $chrono->carrier_id = 3;
+        $chrono->carrierId = 3;
 
         return array($default, $gls, $chrono);
     }

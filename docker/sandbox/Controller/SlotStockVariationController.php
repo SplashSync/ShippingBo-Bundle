@@ -54,8 +54,8 @@ class SlotStockVariationController extends AbstractController
         // Load Slot Contents
         /** @var null|SlotContents $order */
         $slotContents = $this->entityManager->getRepository(SlotContents::class)->findOneBy(array(
-            "product_id" => $productId,
-            "warehouse_slot_id" => $whSlotId,
+            "productId" => $productId,
+            "warehouseSlotId" => $whSlotId,
         ));
         if (!$slotContents) {
             throw new NotFoundHttpException();

@@ -18,23 +18,19 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata as Meta;
 use App\Entity\Core\SboCoreTrait;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Type;
 
-/**
- * Class representing Product Warehouse Slot Content model.
- *
- * @ORM\Entity()
- *
- * @ORM\Table(name="shipping_methods")
- *
- * @ORM\HasLifecycleCallbacks()
- */
+#[ORM\Entity]
+#[ORM\Table(name: 'shipping_methods')]
+#[ORM\HasLifecycleCallbacks]
 #[ApiResource(
     operations: array(
         new Meta\GetCollection(
-            uriTemplate:    '/shipping_methods',
+            uriTemplate: '/shipping_methods',
         ),
     ),
     normalizationContext: array("groups" => array("read")),
@@ -46,29 +42,21 @@ class ShippingMethod implements SboObjectInterface
 
     /**
      * Shipping Method Name
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("string")
-     *
-     * @ORM\Column(type="string")
-     *
-     * @Groups({"read", "write"})
      */
+    #[NotNull]
+    #[Type('string')]
+    #[ORM\Column(type: Types::STRING)]
+    #[Groups(array("read", "write"))]
     public string $name;
 
     /**
      * Carrier ID
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("integer")
-     *
-     * @ORM\Column(type="integer")
-     *
-     * @Groups({"read", "write"})
      */
-    public int $carrier_id;
+    #[NotNull]
+    #[Type('integer')]
+    #[ORM\Column(type: Types::INTEGER)]
+    #[Groups(array("read", "write"))]
+    public int $carrierId;
 
     //====================================================================//
     // JSON SERIALIZER

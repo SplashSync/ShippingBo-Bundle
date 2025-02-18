@@ -16,6 +16,7 @@
 namespace App\Entity\Core;
 
 use DateTime;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -23,64 +24,45 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Object Source Trait
  */
+#[ORM\HasLifecycleCallbacks]
 trait SboCoreTrait
 {
-    /**
-     * Unique Identifier.
-     *
-     * @var int
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     *
-     * @Assert\Type("integer")
-     *
-     * @Groups({"read"})
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    #[Assert\Type('integer')]
+    #[Groups(array('read'))]
     public int $id;
 
     /**
-     * @var DateTime
-     *
-     * @ORM\Column(type="datetime")
-     *
-     * @Assert\Type("DateTime")
-     *
-     * @Groups({"read"})
+     * The creation timestamp of the entity.
      */
-    public DateTime $created_at;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\Type(DateTime::class)]
+    #[Groups(array('read'))]
+    public DateTime $createdAt;
 
     /**
-     * @var DateTime
-     *
-     * @ORM\Column(type="datetime")
-     *
-     * @Assert\Type("DateTime")
-     *
-     * @Groups({"read"})
+     * The update timestamp of the entity.
      */
-    public DateTime $updated_at;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\Type(DateTime::class)]
+    #[Groups(array('read'))]
+    public DateTime $updatedAt;
 
     //====================================================================//
     // ORM EVENTS
     //====================================================================//
 
-    /**
-     * @ORM\PrePersist()
-     */
+    #[ORM\PrePersist]
     public function onPrePersist(): void
     {
-        $this->created_at = $this->updated_at = new DateTime();
+        $this->createdAt = $this->updatedAt = new DateTime();
     }
 
-    /**
-     * @ORM\PreUpdate()
-     */
+    #[ORM\PreUpdate]
     public function onPreUpdate(): void
     {
-        $this->updated_at = new DateTime();
+        $this->updatedAt = new DateTime();
     }
 }

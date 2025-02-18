@@ -131,6 +131,8 @@ class Product extends AbstractStandaloneObject implements PrimaryKeysAwareInterf
     public function getVisitor(): Visitor
     {
         if (!isset($this->visitor)) {
+            $isSandbox = $this->connector->isSandbox();
+
             $this->visitor = new JsonVisitor(
                 $this->connector->getConnexion(),
                 $this->connector->getHydrator(),
@@ -144,6 +146,10 @@ class Product extends AbstractStandaloneObject implements PrimaryKeysAwareInterf
             );
             $this->visitor->setListAction(
                 ProductListAction::class,
+                array(
+                    "pageKey" => $isSandbox ? "offset" : null,
+                    "offsetKey" => $isSandbox ? null : "offset",
+                )
             );
         }
 

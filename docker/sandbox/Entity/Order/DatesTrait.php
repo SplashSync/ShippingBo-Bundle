@@ -16,6 +16,7 @@
 namespace App\Entity\Order;
 
 use DateTime;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -29,88 +30,46 @@ trait DatesTrait
     // STATUS DATES - READ ONLY
     //====================================================================//
 
-    /**
-     * @var null|DateTime
-     *
-     * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Assert\Type("DateTime")
-     *
-     * @Groups({"read"})
-     */
-    public ?DateTime $shipped_at = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Assert\Type(DateTime::class)]
+    #[Groups(array("read"))]
+    public ?DateTime $shippedAt = null;
 
-    /**
-     * @var null|DateTime
-     *
-     * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Assert\Type("DateTime")
-     *
-     * @Groups({"read"})
-     */
-    public ?DateTime $closed_at = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Assert\Type(DateTime::class)]
+    #[Groups(array("read"))]
+    public ?DateTime $closedAt = null;
 
-    /**
-     * @var null|DateTime
-     *
-     * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Assert\Type("DateTime")
-     *
-     * @Groups({"read"})
-     */
-    public ?DateTime $state_changed_at = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Assert\Type(DateTime::class)]
+    #[Groups(array("read"))]
+    public ?DateTime $stateChangedAt = null;
 
     //====================================================================//
     // SHIPPING DATES - READ ONLY
     //====================================================================//
 
-    /**
-     * @var null|DateTime
-     *
-     * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Assert\Type("DateTime")
-     *
-     * @Groups({"read"})
-     */
-    public ?DateTime $latest_shipped_at = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Assert\Type(DateTime::class)]
+    #[Groups(array("read"))]
+    public ?DateTime $latestShippedAt = null;
 
-    /**
-     * @var null|DateTime
-     *
-     * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Assert\Type("DateTime")
-     *
-     * @Groups({"read"})
-     */
-    public ?DateTime $earliest_shipped_at = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Assert\Type(DateTime::class)]
+    #[Groups(array("read"))]
+    public ?DateTime $earliestShippedAt = null;
 
     //====================================================================//
     // DELIVERY DATES - READ ONLY
     //====================================================================//
 
-    /**
-     * @var null|DateTime
-     *
-     * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Assert\Type("DateTime")
-     *
-     * @Groups({"read"})
-     */
-    public ?DateTime $latest_delivery_at = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Assert\Type(DateTime::class)]
+    #[Groups(array("read"))]
+    public ?DateTime $latestDeliveryAt = null;
 
-    /**
-     * @var null|DateTime
-     *
-     * @ORM\Column(type="datetime", nullable=true)
-     *
-     * @Assert\Type("DateTime")
-     *
-     * @Groups({"read"})
-     */
-    public ?DateTime $earliest_delivery_at = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Assert\Type(DateTime::class)]
+    #[Groups(array("read"))]
+    public ?DateTime $earliestDeliveryAt = null;
 }

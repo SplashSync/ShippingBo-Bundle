@@ -104,10 +104,12 @@ class S00MinimalObjectsTest extends ObjectsCase
         // Load Connector
         $connector = $this->getConnector(self::CONNECTOR);
         $this->assertInstanceOf(ShippingBoConnector::class, $connector);
+        $warehouseSlotManager = $connector->getLocator()->getWarehouseSlotsManager();
         //====================================================================//
         // Count Number of Warehouses SLots
         $connector->connect();
-        $activeSlots = $connector->getWarehouseSlotsManager()->getActiveSlots();
+        $this->assertTrue($warehouseSlotManager->fetchWarehouseSlots());
+        $activeSlots = $warehouseSlotManager->getActiveSlots();
         $count = count($activeSlots);
         //====================================================================//
         // Add Warehouses SLot
@@ -121,7 +123,8 @@ class S00MinimalObjectsTest extends ObjectsCase
         //====================================================================//
         // Register All Stocks as Writable
         $this->assertTrue($connector->connect());
-        $activeSlots = $connector->getWarehouseSlotsManager()->getActiveSlots();
+        $this->assertTrue($warehouseSlotManager->fetchWarehouseSlots());
+        $activeSlots = $warehouseSlotManager->getActiveSlots();
         $this->assertNotEmpty($activeSlots);
         $connector->setParameter(
             WarehouseSlotsManager::WRITE,

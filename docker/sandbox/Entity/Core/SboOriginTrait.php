@@ -16,6 +16,7 @@
 namespace App\Entity\Core;
 
 use DateTime;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -25,46 +26,21 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 trait SboOriginTrait
 {
-    /**
-     * Technical - Data Origin Source Name.
-     *
-     * @var string
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("string")
-     *
-     * @ORM\Column(type="string")
-     *
-     * @Groups({"read", "write"})
-     */
+    #[Assert\NotNull]
+    #[Assert\Type('string')]
+    #[ORM\Column(type: Types::STRING)]
+    #[Groups(array('read', 'write'))]
     public string $origin;
 
-    /**
-     * Technical - Data Origin Source Name.
-     *
-     * @var string
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("string")
-     *
-     * @ORM\Column(type="string")
-     *
-     * @Groups({"read", "write"})
-     */
-    public string $origin_ref;
+    #[Assert\NotNull]
+    #[Assert\Type('string')]
+    #[ORM\Column(type: Types::STRING)]
+    #[Groups(array('read', 'write'))]
+    public string $originRef;
 
-    /**
-     * @var DateTime
-     *
-     * @ORM\Column(type="datetime")
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("DateTime")
-     *
-     * @Groups({"read", "write"})
-     */
-    public DateTime $origin_created_at;
+    #[Assert\NotNull]
+    #[Assert\Type(DateTime::class)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(array('read', 'write'))]
+    public DateTime $originCreatedAt;
 }

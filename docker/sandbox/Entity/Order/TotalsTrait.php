@@ -15,6 +15,7 @@
 
 namespace App\Entity\Order;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -28,171 +29,87 @@ trait TotalsTrait
     // GRAND TOTALS
     //====================================================================//
 
-    /**
-     * @var int
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("int")
-     *
-     * @Groups({"read", "write"})
-     *
-     * @ORM\Column(type="integer", options={"default" : 0})
-     */
-    public int $total_price_cents = 0;
+    #[Assert\NotNull]
+    #[Assert\Type("int")]
+    #[Groups(array("read", "write"))]
+    #[ORM\Column(type: Types::INTEGER, options: array("default" => 0))]
+    public int $totalPriceCents = 0;
 
-    /**
-     * @var int
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("int")
-     *
-     * @Groups({"read", "write"})
-     *
-     * @ORM\Column(type="integer", options={"default" : 0})
-     */
-    public int $total_without_tax_cents = 0;
+    #[Assert\NotNull]
+    #[Assert\Type("int")]
+    #[Groups(array("read", "write"))]
+    #[ORM\Column(type: Types::INTEGER, options: array("default" => 0))]
+    public int $totalWithoutTaxCents = 0;
 
-    /**
-     * @var int
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("int")
-     *
-     * @Groups({"read", "write"})
-     *
-     * @ORM\Column(type="integer", options={"default" : 0})
-     */
-    public int $total_tax_cents = 0;
+    #[Assert\NotNull]
+    #[Assert\Type("int")]
+    #[Groups(array("read", "write"))]
+    #[ORM\Column(type: Types::INTEGER, options: array("default" => 0))]
+    public int $totalTaxCents = 0;
 
-    /**
-     * @var string
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read", "write"})
-     *
-     * @ORM\Column(type="string", options={"default" : "EUR"})
-     */
-    public string $total_price_currency = "EUR";
+    #[Assert\NotNull]
+    #[Assert\Type("string")]
+    #[Groups(array("read", "write"))]
+    #[ORM\Column(type: Types::STRING, options: array("default" => "EUR"))]
+    public string $totalPriceCurrency = "EUR";
 
     //====================================================================//
     // SHIPPING TOTALS
     //====================================================================//
 
-    /**
-     * @var int
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("int")
-     *
-     * @Groups({"read", "write"})
-     *
-     * @ORM\Column(type="integer", options={"default" : 0})
-     */
-    public int $total_shipping_cents = 0;
+    #[Assert\NotNull]
+    #[Assert\Type("int")]
+    #[Groups(array("read", "write"))]
+    #[ORM\Column(type: Types::INTEGER, options: array("default" => 0))]
+    public int $totalShippingCents = 0;
 
-    /**
-     * @var int
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("int")
-     *
-     * @Groups({"read", "write"})
-     *
-     * @ORM\Column(type="integer", options={"default" : 0})
-     */
-    public int $total_shipping_tax_included_cents = 0;
+    #[Assert\NotNull]
+    #[Assert\Type("int")]
+    #[Groups(array("read", "write"))]
+    #[ORM\Column(type: Types::INTEGER, options: array("default" => 0))]
+    public int $totalShippingTaxIncludedCents = 0;
 
-    /**
-     * @var int
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("int")
-     *
-     * @Groups({"read", "write"})
-     *
-     * @ORM\Column(type="integer", options={"default" : 0})
-     */
-    public int $total_shipping_tax_cents = 0;
+    #[Assert\NotNull]
+    #[Assert\Type("int")]
+    #[Groups(array("read", "write"))]
+    #[ORM\Column(type: Types::INTEGER, options: array("default" => 0))]
+    public int $totalShippingTaxCents = 0;
 
-    /**
-     * @var string
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read", "write"})
-     *
-     * @ORM\Column(type="string", options={"default" : "EUR"})
-     */
-    public string $total_shipping_tax_included_currency = "EUR";
+    #[Assert\NotNull]
+    #[Assert\Type("string")]
+    #[Groups(array("read", "write"))]
+    #[ORM\Column(type: Types::STRING, options: array("default" => "EUR"))]
+    public string $totalShippingTaxIncludedCurrency = "EUR";
 
     //====================================================================//
     // DISCOUNT TOTALS
     //====================================================================//
 
-    /**
-     * @var int
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("int")
-     *
-     * @Groups({"read", "write"})
-     *
-     * @ORM\Column(type="integer", options={"default" : 0})
-     */
-    public int $total_discount_tax_included_cents = 0;
+    #[Assert\NotNull]
+    #[Assert\Type("int")]
+    #[Groups(array("read", "write"))]
+    #[ORM\Column(type: Types::INTEGER, options: array("default" => 0))]
+    public int $totalDiscountTaxIncludedCents = 0;
 
-    /**
-     * @var int
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("int")
-     *
-     * @Groups({"read", "write"})
-     *
-     * @ORM\Column(type="integer", options={"default" : 0})
-     */
-    public int $total_discount_cents = 0;
+    #[Assert\NotNull]
+    #[Assert\Type("int")]
+    #[Groups(array("read", "write"))]
+    #[ORM\Column(type: Types::INTEGER, options: array("default" => 0))]
+    public int $totalDiscountCents = 0;
 
-    /**
-     * @var string
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read", "write"})
-     *
-     * @ORM\Column(type="string", options={"default" : "EUR"})
-     */
-    public string $total_discount_tax_included_currency = "EUR";
+    #[Assert\NotNull]
+    #[Assert\Type("string")]
+    #[Groups(array("read", "write"))]
+    #[ORM\Column(type: Types::STRING, options: array("default" => "EUR"))]
+    public string $totalDiscountTaxIncludedCurrency = "EUR";
 
     //====================================================================//
     // WEIGHT TOTALS
     //====================================================================//
 
-    /**
-     * @var int
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("int")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(type="integer", options={"default" : 0})
-     */
-    public int $total_weight = 0;
+    #[Assert\NotNull]
+    #[Assert\Type("int")]
+    #[Groups(array("read"))]
+    #[ORM\Column(type: Types::INTEGER, options: array("default" => 0))]
+    public int $totalWeight = 0;
 }

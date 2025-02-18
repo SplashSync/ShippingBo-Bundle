@@ -1,0 +1,25 @@
+{% trans_default_domain "ShippingBoBundle" %}
+
+{% set WebhooksConfig = connector.locator.WebhooksManager.verifyWebHooks %}
+
+{% if WebhooksConfig %}
+    <h4 class="font-md">
+        <i class="fa fa-check text-success"></i>&nbsp;{{ 'admin.webhooks.valid'|trans }}
+    </h4>
+{% else %}
+    <h4 class="font-md">
+        <i class="fa fa-times text-danger"></i>&nbsp;{{ 'admin.webhooks.invalid'|trans }}
+    </h4>
+{% endif %}
+
+<a
+        id="node-webhooks-btn" class="btn-lg btn-block btn-primary text-center"
+        href="{{ path('splash_connector_secured_action', {
+            "connectorName" :   connector.profile.name,
+            "webserviceId" :    connector.WebserviceId,
+            "action" :          "update-webhooks"
+        }) }}"
+>
+    <i class="fab fa-searchengin"></i>
+    {{ 'admin.webhooks.update' | trans }}
+</a>

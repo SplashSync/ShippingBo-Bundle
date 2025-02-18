@@ -17,6 +17,7 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata as Meta;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -31,28 +32,26 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  */
 #[ApiResource(
-    normalizationContext: array("groups" => array("read")),
-    denormalizationContext: array("groups" => array("write")),
     operations: array(
         new Meta\Get(),
         new Meta\Patch(),
         new Meta\Delete(),
-    )
+    ),
+    normalizationContext: array("groups" => array("read")),
+    denormalizationContext: array("groups" => array("write"))
 )]
+#[ORM\Entity]
+#[ORM\Table(name: "order_items")]
+#[ORM\HasLifecycleCallbacks]
 class OrderItem implements SboObjectInterface
 {
-    //====================================================================//
-    // SBO CORE DATA
     use Core\SboCoreTrait;
     use Core\SboSourceTrait;
 
     /**
      * Parent Order
-     *
-     * @var Order
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Order", inversedBy="order_items")
      */
+    #[ORM\ManyToOne(targetEntity: Order::class, inversedBy: "orderItems")]
     public Order $order;
 
     //====================================================================//
@@ -61,46 +60,29 @@ class OrderItem implements SboObjectInterface
 
     /**
      * Product Name.
-     *
-     * @var string
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("string")
-     *
-     * @ORM\Column()
-     *
-     * @Groups({"read", "write"})
      */
+    #[Assert\NotNull]
+    #[Assert\Type("string")]
+    #[ORM\Column]
+    #[Groups(array("read", "write"))]
     public string $title;
 
     /**
      * Product SKU.
-     *
-     * @var string
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("string")
-     *
-     * @ORM\Column()
-     *
-     * @Groups({"read", "write"})
      */
-    public string $product_ref;
+    #[Assert\NotNull]
+    #[Assert\Type("string")]
+    #[ORM\Column]
+    #[Groups(array("read", "write"))]
+    public string $productRef;
 
     /**
      * Product EAN 13.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @ORM\Column(nullable=true)
-     *
-     * @Groups({"read", "write"})
      */
-    public ?string $product_ean = null;
+    #[Assert\Type("string")]
+    #[ORM\Column(nullable: true)]
+    #[Groups(array("read", "write"))]
+    public ?string $productEan = null;
 
     //====================================================================//
     // ORDER ITEM QTY
@@ -108,17 +90,11 @@ class OrderItem implements SboObjectInterface
 
     /**
      * Ordered Quantities.
-     *
-     * @var int
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("integer")
-     *
-     * @ORM\Column(type="integer")
-     *
-     * @Groups({"read", "write"})
      */
+    #[Assert\NotNull]
+    #[Assert\Type("integer")]
+    #[ORM\Column(type: Types::INTEGER)]
+    #[Groups(array("read", "write"))]
     public int $quantity;
 
     //====================================================================//
@@ -127,57 +103,36 @@ class OrderItem implements SboObjectInterface
 
     /**
      * Order Line Items Price Tax Included.
-     *
-     * @var null|int
-     *
-     * @Assert\Type("integer")
-     *
-     * @ORM\Column(type="integer", nullable=true)
-     *
-     * @Groups({"read", "write"})
      */
-    public ?int $price_tax_included_cents;
+    #[Assert\Type("integer")]
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    #[Groups(array("read", "write"))]
+    public ?int $priceTaxIncludedCents = null;
 
     /**
      * Order Line Items Price Currency.
-     *
-     * @var string
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("string")
-     *
-     * @ORM\Column(type="string", nullable=true)
-     *
-     * @Groups({"read", "write"})
      */
-    public string $price_tax_included_currency;
+    #[Assert\NotNull]
+    #[Assert\Type("string")]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    #[Groups(array("read", "write"))]
+    public string $priceTaxIncludedCurrency;
 
     /**
      * Order Line Items Price Tax Excluded.
-     *
-     * @var null|int
-     *
-     * @Assert\Type("integer")
-     *
-     * @ORM\Column(type="integer", nullable=true)
-     *
-     * @Groups({"read", "write"})
      */
-    public ?int $price_cents = null;
+    #[Assert\Type("integer")]
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    #[Groups(array("read", "write"))]
+    public ?int $priceCents = null;
 
     /**
      * Order Line Items Price Tax Amount.
-     *
-     * @var null|int
-     *
-     * @Assert\Type("integer")
-     *
-     * @ORM\Column(type="integer", nullable=true)
-     *
-     * @Groups({"read", "write"})
      */
-    public ?int $tax_cents = null;
+    #[Assert\Type("integer")]
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
+    #[Groups(array("read", "write"))]
+    public ?int $taxCents = null;
 
     //====================================================================//
     // JSON SERIALIZER

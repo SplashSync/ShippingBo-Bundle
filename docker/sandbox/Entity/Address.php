@@ -16,6 +16,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Faker\Factory;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -23,250 +24,157 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class representing the Address model.
- *
- * @ORM\Entity
- *
- * @ORM\HasLifecycleCallbacks()
  */
-#[ApiResource()]
+#[ApiResource]
+#[ORM\Entity]
+#[ORM\HasLifecycleCallbacks]
 class Address implements SboObjectInterface
 {
     use Core\SboCoreTrait;
 
     /**
      * Client's full name.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(nullable=true)
      */
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     public ?string $fullname = null;
 
     /**
      * Client's firstname.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(nullable=true)
      */
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     public ?string $firstname = null;
 
     /**
      * Client's lastname.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(nullable=true)
      */
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     public ?string $lastname = null;
 
     /**
      * Client's Company Name.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(nullable=true)
      */
-    public ?string $company_name = null;
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    public ?string $companyName = null;
 
     /**
      * Client's Email.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(nullable=true)
      */
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     public ?string $email = null;
 
     /**
      * Client's phone 1.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(nullable=true)
      */
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     public ?string $phone1 = null;
 
     /**
      * Client's phone 2.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(nullable=true)
      */
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     public ?string $phone2 = null;
 
     /**
      * Client's street 1.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(nullable=true)
      */
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     public ?string $street1 = null;
 
     /**
      * Client's street 2.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(nullable=true)
      */
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     public ?string $street2 = null;
 
     /**
      * Client's street 3.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(nullable=true)
      */
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     public ?string $street3 = null;
 
     /**
      * Client's street 4.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(nullable=true)
      */
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     public ?string $street4 = null;
 
     /**
      * Client's city.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(nullable=true)
      */
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     public ?string $city = null;
 
     /**
      * Client's zip.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(nullable=true)
      */
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     public ?string $zip = null;
 
     /**
      * Client's state.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(nullable=true)
      */
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     public ?string $state = null;
 
     /**
      * Client's country.
-     *
-     * @var string
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column
      */
+    #[Assert\NotNull]
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING)]
     public string $country;
 
     /**
      * Client's Building.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(nullable=true)
      */
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     public ?string $building = null;
 
     /**
      * Client's Apartment Number.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(nullable=true)
      */
-    public ?string $apartment_number = null;
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
+    public ?string $apartmentNumber = null;
 
     /**
      * Client's Instruction.
-     *
-     * @var null|string
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read"})
-     *
-     * @ORM\Column(nullable=true)
      */
+    #[Assert\Type(Types::STRING)]
+    #[Groups(array('read'))]
+    #[ORM\Column(type: Types::STRING, nullable: true)]
     public ?string $instructions = null;
 
     //====================================================================//
@@ -285,7 +193,7 @@ class Address implements SboObjectInterface
         $address = new self();
         $address->firstname = $faker->firstName;
         $address->lastname = $faker->lastName;
-        $address->company_name = $faker->company;
+        $address->companyName = $faker->company;
         $address->email = $faker->companyEmail;
         $address->phone1 = $faker->e164PhoneNumber;
         $address->phone2 = $faker->e164PhoneNumber;

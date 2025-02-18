@@ -19,23 +19,20 @@ use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata as Meta;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class representing the Product Barcode model.
- *
- * @ORM\Entity()
- *
- * @ORM\Table(name="product_barcodes")
- *
- * @ORM\HasLifecycleCallbacks()
  */
+#[ORM\Entity]
+#[ORM\Table(name: "product_barcodes")]
+#[ORM\HasLifecycleCallbacks]
 #[ApiResource(
     operations: array(
-        new Meta\GetCollection(
-        ),
+        new Meta\GetCollection(),
         new Meta\Post(),
         new Meta\Patch(),
         new Meta\Delete(),
@@ -47,34 +44,23 @@ class ProductBarcode implements SboObjectInterface
 {
     /**
      * Unique Identifier.
-     *
-     * @var int
-     *
-     * @ORM\Id
-     *
-     * @ORM\GeneratedValue
-     *
-     * @ORM\Column(type="integer")
-     *
-     * @Assert\Type("integer")
-     *
-     * @Groups({"read"})
      */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: Types::INTEGER)]
+    #[Assert\Type("integer")]
+    #[Groups(array("read"))]
     public int $id;
 
     /**
      * Parent Product
-     *
-     * @ORM\Column()
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("int")
-     *
-     * @Groups({"read", "write"})
      */
+    #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\Type("int")]
+    #[Groups(array("read", "write"))]
     #[ApiFilter(SearchFilter::class, strategy: 'exact')]
-    public int $product_id;
+    public int $productId;
 
     //====================================================================//
     // PRODUCT BARCODE INFO
@@ -82,34 +68,20 @@ class ProductBarcode implements SboObjectInterface
 
     /**
      * Attribute Key.
-     *
-     * @var string
-     *
-     * @ORM\Column()
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("string")
-     *
-     * @Groups({"read", "write"})
      */
+    #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\Type("string")]
+    #[Groups(array("read", "write"))]
     public string $key = "ean";
 
     /**
      * Attribute Value.
-     *
-     * @var string
-     *
-     * @ORM\Column()
-     *
-     * @Assert\NotNull()
-     *
-     * @Assert\Type("string")
-     *
-     * @ORM\Column()
-     *
-     * @Groups({"read", "write"})
      */
+    #[ORM\Column]
+    #[Assert\NotNull]
+    #[Assert\Type("string")]
+    #[Groups(array("read", "write"))]
     public string $value;
 
     //====================================================================//
