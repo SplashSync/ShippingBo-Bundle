@@ -33,7 +33,7 @@ services:
     ################################################################################
     # Splash Toolkit Container   
     toolkit:
-        image: 'splashsync/toolkit:alpine'
+        image:          'splashsync/toolkit'
         container_name: toolkit.shipping-bo.local
         volumes:
             # Specify Local Configuration File
@@ -52,7 +52,7 @@ services:
     ################################################################################
     # Splash OpenApi Faker
     openapi:
-        image: 'splashsync/openapi-sandbox'
+        image:          'splashsync/openapi-sandbox'
         container_name: sandbox.shipping-bo.local
         volumes:
 #             # Specify API Entities to Use

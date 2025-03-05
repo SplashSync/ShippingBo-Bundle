@@ -39,7 +39,7 @@
     
     "require-dev": {
         "badpixxel/php-sdk":                            "~2.0",
-        "splash/toolkit":                               "dev-master",
+        "splash/toolkit":                               "3.0.x-dev",
 
         "fzaninotto/faker":                             "^1.8"
     },
