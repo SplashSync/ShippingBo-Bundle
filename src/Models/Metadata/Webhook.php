@@ -55,7 +55,6 @@ class Webhook
     public bool $activated = true;
 
     #[
-        Assert\NotNull,
         Assert\Type("bool"),
         JMS\Groups(array("Read", "Write")),
         JMS\Type("bool"),
@@ -64,7 +63,7 @@ class Webhook
             desc: "Is this Webhook Visible"
         ),
     ]
-    public bool $visible = true;
+    public ?bool $visible = true;
 
     #[
         Assert\NotNull,
@@ -80,7 +79,6 @@ class Webhook
     public bool $triggerOnDestroy = true;
 
     #[
-        Assert\NotNull,
         Assert\Type("string"),
         JMS\SerializedName("endpoint_url"),
         JMS\Groups(array("Read", "Write", "List", "Required")),
@@ -93,7 +91,7 @@ class Webhook
         SPL\Flags(listed: true),
         SPL\IsRequired,
     ]
-    public string $endpoint_url = "";
+    public ?string $endpoint_url = "";
 
     #[
         Assert\Type("string"),
