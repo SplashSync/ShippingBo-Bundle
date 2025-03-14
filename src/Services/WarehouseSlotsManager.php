@@ -393,7 +393,7 @@ class WarehouseSlotsManager
      */
     private function getSlotById(int $slotId): ?array
     {
-        return $this->whSlots[$slotId] ?? null;
+        return $this->getAllSlots()[$slotId] ?? null;
     }
 
     /**
