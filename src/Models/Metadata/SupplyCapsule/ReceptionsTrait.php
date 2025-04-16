@@ -45,7 +45,7 @@ trait ReceptionsTrait
         $this->receptions = array();
 
         foreach ($this->oldSupplyCapsuleItems as $capsuleItem) {
-            if (!empty($capsuleItem->receptions)) {
+            if (!empty($capsuleItem->receivedQuantity)) {
                 $this->receptions[] = new SupplyCapsuleReception($capsuleItem);
             }
         }

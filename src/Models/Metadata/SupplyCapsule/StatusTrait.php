@@ -33,7 +33,7 @@ trait StatusTrait
         Assert\Type("string"),
         Assert\Choice(SupplyCapsuleState::ALL),
         JMS\SerializedName("state"),
-        JMS\Groups(array("Read", "Write", "List")),
+        JMS\Groups(array("Read", "Write", "List", "Required")),
         JMS\Type("string"),
         SPL\Field(
             name: "Raw Status",

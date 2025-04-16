@@ -58,6 +58,7 @@ class SupplyCapsuleItem
         JMS\Type("integer"),
         SPL\Microdata("http://schema.org/QuantitativeValue", "value"),
         SPL\IsRequired,
+        SPL\PreferWrite,
     ]
     public int $quantity = 0;
 
@@ -70,7 +71,6 @@ class SupplyCapsuleItem
         JMS\SerializedName("received_quantity"),
         JMS\Groups(array("Read")),
         JMS\Type("integer"),
-        SPL\Microdata("http://schema.org/QuantitativeValue", "value"),
         SPL\IsReadOnly,
     ]
     public int $receivedQuantity = 0;

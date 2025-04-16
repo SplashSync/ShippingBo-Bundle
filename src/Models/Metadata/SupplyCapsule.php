@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @SuppressWarnings(CamelCasePropertyName)
  */
 #[SPL\SplashObject(
-    name: "SupplierOrder",
+    name: "Supplier Order",
     description: "ShippingBo Supply Capsule Object",
     ico: "fa fa-truck",
 )]
