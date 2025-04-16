@@ -62,6 +62,15 @@ class Product implements SboObjectInterface
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: StockVariation::class)]
     public $stockVariations;
 
+    /**
+     * Additional References.
+     *
+     * @var OrderItemProductMapping[]
+     */
+    #[Groups(array('read'))]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: OrderItemProductMapping::class)]
+    public $additionalReferences;
+
     #[Assert\Type('int')]
     #[Groups(array('read', 'write'))]
     #[ORM\Column(type: Types::INTEGER, nullable: true)]

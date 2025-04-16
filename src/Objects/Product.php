@@ -56,6 +56,7 @@ class Product extends AbstractStandaloneObject implements PrimaryKeysAwareInterf
     use Product\PrimaryTrait;
     use Product\StockTrait;
     use Product\BarcodesTrait;
+    use Product\AdditionalReferencesTrait;
     use Product\WarehouseSlotsStockTrait;
 
     //====================================================================//
