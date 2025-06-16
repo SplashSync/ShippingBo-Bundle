@@ -33,13 +33,13 @@
     "require": {
         "php":                                          "^8.1",
         "ext-json":                                     "*",
-        "splash/openapi":                               "dev-master",
+        "splash/openapi":                               "2.5.x-dev",
         "burgov/key-value-form-bundle":                 "@stable"
     },
     
     "require-dev": {
-        "badpixxel/php-sdk":                            "~2.0",
-        "splash/toolkit":                               "3.0.x-dev",
+        "badpixxel/php-sdk":                            "^2.0",
+        "splash/toolkit":                               "2.5.x-dev",
 
         "fzaninotto/faker":                             "^1.8"
     },
