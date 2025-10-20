@@ -18,6 +18,7 @@ namespace Splash\Connectors\ShippingBo\Models\Api\Product;
 use JMS\Serializer\Annotation as JMS;
 use Splash\OpenApi\Validator as SPL;
 use Symfony\Component\Validator\Constraints as Assert;
+use Splash\Components\UnitConverter;
 
 /**
  * Product Dimensions Models
@@ -143,7 +144,7 @@ trait ProductDimensionsTrait
      */
     public function getApiHeight(): ?int
     {
-        return ((int) (100 * $this->height)) ?: null;
+        return ((int) (UnitConverter::LENGTH_MILIMETER * $this->height)) ?: null;
     }
 
     /**
@@ -151,7 +152,7 @@ trait ProductDimensionsTrait
      */
     public function setApiHeight(?int $height): self
     {
-        $this->height = ((float) $height) / 100;
+        $this->height = ((float) $height) / UnitConverter::LENGTH_MILIMETER;
 
         return $this;
     }
@@ -161,7 +162,7 @@ trait ProductDimensionsTrait
      */
     public function getApiLength(): ?int
     {
-        return ((int) (100 * $this->length)) ?: null;
+        return ((int) (UnitConverter::LENGTH_MILIMETER * $this->length)) ?: null;
     }
 
     /**
@@ -169,7 +170,7 @@ trait ProductDimensionsTrait
      */
     public function setApiLength(?int $length): static
     {
-        $this->length = ((float) $length) / 100;
+        $this->length = ((float) $length) / UnitConverter::LENGTH_MILIMETER;
 
         return $this;
     }
@@ -179,7 +180,7 @@ trait ProductDimensionsTrait
      */
     public function getApiWidth(): ?int
     {
-        return ((int) (100 * $this->width)) ?: null;
+        return ((int) (UnitConverter::LENGTH_MILIMETER * $this->width)) ?: null;
     }
 
     /**
@@ -187,7 +188,7 @@ trait ProductDimensionsTrait
      */
     public function setApiWidth(?int $width): static
     {
-        $this->width = ((float) $width) / 100;
+        $this->width = ((float) $width) / UnitConverter::LENGTH_MILIMETER;
 
         return $this;
     }
