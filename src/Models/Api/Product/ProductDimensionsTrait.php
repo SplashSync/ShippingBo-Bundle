@@ -16,9 +16,9 @@
 namespace Splash\Connectors\ShippingBo\Models\Api\Product;
 
 use JMS\Serializer\Annotation as JMS;
+use Splash\Components\UnitConverter;
 use Splash\OpenApi\Validator as SPL;
 use Symfony\Component\Validator\Constraints as Assert;
-use Splash\Components\UnitConverter;
 
 /**
  * Product Dimensions Models
@@ -131,10 +131,12 @@ trait ProductDimensionsTrait
 
     /**
      * Set Product Weight
+     *
+     * TODO: Tester l'envoi de null pour pouvoir utiliser les poids par defaut
      */
     public function setApiWeight(?int $weight): static
     {
-        $this->weight = ((float) $weight) / 1000;
+        $this->weight = (((float) $weight) / 1000) ?: null;
 
         return $this;
     }
