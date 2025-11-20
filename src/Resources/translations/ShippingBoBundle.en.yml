@@ -39,6 +39,12 @@ var:
         rejected:   "REJECTED - Must not be send."
 
     products:
+        supplierFilter:
+            label:      "Filter Supplier's Products"
+            desc:       "Disable Synchronization for Product with Supplier Codes not in this list."
+            sync:       "Synchronize Products from this Supplier."
+            block:      "Block Products from this Supplier."
+
         forcedCounter:
             label:      "Force Product Count"
             desc:       "Force Product count when Splash is reading products lists."

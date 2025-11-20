@@ -16,6 +16,7 @@
 namespace Splash\Connectors\ShippingBo\Form;
 
 use Burgov\Bundle\KeyValueFormBundle\Form\Type\KeyValueType;
+use Splash\Connectors\ShippingBo\Dictionary\SupplierFilterModes;
 use Splash\Connectors\ShippingBo\Services\WarehouseSlotsManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -353,6 +354,36 @@ abstract class AbstractShippingBoType extends AbstractType
                 'required' => false,
                 'multiple' => true,
                 'choices' => $choices,
+                'translation_domain' => "ShippingBoBundle",
+            ))
+        ;
+
+        return $this;
+    }
+
+    /**
+     * Add Product Supplier Filters Field to FormBuilder
+     *
+     * @param FormBuilderInterface $builder
+     *
+     * @return $this
+     */
+    protected function addProductSupplierFilterField(FormBuilderInterface $builder): self
+    {
+        $builder
+            ->add(SupplierFilterModes::KEY, KeyValueType::class, array(
+                'label' => SupplierFilterModes::toTransKey("label"),
+                'help' => SupplierFilterModes::toTransKey("desc"),
+                'required' => false,
+                'key_type' => TextType::class,
+                'key_options' => array(
+                    'label' => "Supplier Name",
+                ),
+                'value_type' => ChoiceType::class,
+                'value_options' => array(
+                    'label' => "Action",
+                    'choices' => SupplierFilterModes::getChoices(),
+                ),
                 'translation_domain' => "ShippingBoBundle",
             ))
         ;
