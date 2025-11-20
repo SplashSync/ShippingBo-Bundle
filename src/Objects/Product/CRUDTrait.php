@@ -90,6 +90,7 @@ trait CRUDTrait
         }
         //====================================================================//
         // Load Remote Object
+        /** @var null|Product $object */
         $object = $this->load($objectId);
         if (empty($object)) {
             return Splash::log()->warTrace("Trying to Delete an Unknown Object (".$objectId.").");
