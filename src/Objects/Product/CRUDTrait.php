@@ -96,7 +96,7 @@ trait CRUDTrait
         }
         //====================================================================//
         // Check if Product Delete is Allowed for Supplier
-        if ($this->isFilteredBySupplier($this->object->supplier)) {
+        if ($this->isFilteredBySupplier($object->supplier)) {
             //====================================================================//
             // Skip the Delete and return an Error
             return (bool) $this->logFilteredBySupplier();
