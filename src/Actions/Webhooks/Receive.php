@@ -27,6 +27,10 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
  */
 class Receive extends AbstractController
 {
+    const KNOWN_CLASSES = array(
+        "SupplyCapsule" => "SupplierOrder"
+    );
+
     /**
      * Splash Object Type
      */
@@ -121,7 +125,8 @@ class Receive extends AbstractController
         if (empty($rawData) || !isset($rawData["object_class"]) || !is_scalar($rawData["object_class"])) {
             return $this->getResponse(Response::HTTP_BAD_REQUEST, 'Malformed or missing data...');
         }
-        $this->objectType = (string) $rawData["object_class"];
+        $objectClass = (string) $rawData["object_class"];
+        $this->objectType = self::KNOWN_CLASSES[$objectClass] ?? $objectClass;
         //====================================================================//
         // Contents Include Objects Infos
         if (!isset($rawData["object"]) || !is_array($rawData["object"]) || empty($rawData["object"]['id'])) {
@@ -149,7 +154,7 @@ class Receive extends AbstractController
     {
         //====================================================================//
         // Validate Object Data Type
-        if (!in_array($this->objectType, array("Order", "Product"), true)) {
+        if (!in_array($this->objectType, array("Order", "Product", "SupplierOrder"), true)) {
             return $this->getResponse(Response::HTTP_BAD_REQUEST, 'Wrong object type');
         }
         //====================================================================//
