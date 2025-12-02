@@ -49,6 +49,7 @@ class Product
     use Product\ProductImageTrait;
     use Product\PackComponentsTrait;
     use Product\AdditionalReferencesTrait;
+    use Product\AdditionalFieldsTrait;
     use Product\AdminUrlsTrait;
 
     const COLLECTION_PROP = "products";
