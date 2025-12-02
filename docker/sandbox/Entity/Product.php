@@ -19,6 +19,7 @@ use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -220,12 +221,25 @@ class Product implements SboObjectInterface
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: PackComponent::class, cascade: array('all'))]
     public $packComponents;
 
+    /**
+     * Additional Fields
+     *
+     * @var Collection<ProductAdditionalField>
+     */
+    #[Assert\All(array(
+        new Assert\Type(ProductAdditionalField::class)
+    ))]
+    #[Groups(array('read'))]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductAdditionalField::class)]
+    public Collection $productAdditionalFields;
+
     public function __construct()
     {
         $this->packComponents = new ArrayCollection(array(
             PackComponent::fake($this),
             PackComponent::fake($this),
         ));
+        $this->productAdditionalFields = new ArrayCollection();
     }
 
     //====================================================================//
