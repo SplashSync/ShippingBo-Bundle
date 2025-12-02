@@ -36,37 +36,52 @@ class ShippingBoLocator implements ServiceSubscriberInterface
     public static function getSubscribedServices(): array
     {
         return array(
-            WarehouseSlotsManager::class,
-            WebhooksManager::class,
+            //====================================================================//
+            // Product Data Managers
+            Product\WarehouseSlotsManager::class,
+            Product\AdditionalFieldsManager::class,
+            //====================================================================//
+            // Supplier Orders Managers
             SupplyCapsuleItemsManager::class,
+            //====================================================================//
+            // Other Managers
+            WebhooksManager::class,
         );
     }
+
+    //====================================================================//
+    // Product Data Managers
+    //====================================================================//
 
     /**
      * Get Warehouse Slots Manager
      */
-    public function getWarehouseSlotsManager(): WarehouseSlotsManager
+    public function getWarehouseSlotsManager(): Product\WarehouseSlotsManager
     {
         Assert::isInstanceOf(
-            $service = $this->locator->get(WarehouseSlotsManager::class),
-            WarehouseSlotsManager::class
+            $service = $this->locator->get(Product\WarehouseSlotsManager::class),
+            Product\WarehouseSlotsManager::class
         );
 
         return $service->configure($this->connector);
     }
 
     /**
-     * Get Webhooks Manager
+     * Get Additional Fields Manager
      */
-    public function getWebhooksManager(): WebhooksManager
+    public function getAdditionalFieldsManager(): Product\AdditionalFieldsManager
     {
         Assert::isInstanceOf(
-            $service = $this->locator->get(WebhooksManager::class),
-            WebhooksManager::class
+            $service = $this->locator->get(Product\AdditionalFieldsManager::class),
+            Product\AdditionalFieldsManager::class
         );
 
         return $service->configure($this->connector);
     }
+
+    //====================================================================//
+    // Supplier Orders Managers
+    //====================================================================//
 
     /**
      * Get Webhooks Manager
@@ -76,6 +91,23 @@ class ShippingBoLocator implements ServiceSubscriberInterface
         Assert::isInstanceOf(
             $service = $this->locator->get(SupplyCapsuleItemsManager::class),
             SupplyCapsuleItemsManager::class
+        );
+
+        return $service->configure($this->connector);
+    }
+
+    //====================================================================//
+    // Other Managers
+    //====================================================================//
+
+    /**
+     * Get Webhooks Manager
+     */
+    public function getWebhooksManager(): WebhooksManager
+    {
+        Assert::isInstanceOf(
+            $service = $this->locator->get(WebhooksManager::class),
+            WebhooksManager::class
         );
 
         return $service->configure($this->connector);

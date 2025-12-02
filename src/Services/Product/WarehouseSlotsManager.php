@@ -13,7 +13,7 @@
  *  file that was distributed with this source code.
  */
 
-namespace Splash\Connectors\ShippingBo\Services;
+namespace Splash\Connectors\ShippingBo\Services\Product;
 
 use Splash\Client\Splash;
 use Splash\Connectors\ShippingBo\Models\Connector\ShippingBoConnectorAwareTrait;

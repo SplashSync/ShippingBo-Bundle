@@ -17,7 +17,7 @@ namespace Splash\Connectors\ShippingBo\Objects\Order;
 
 use Splash\Client\Splash;
 use Splash\Connectors\ShippingBo\DataTransformer\StatusTransformer;
-use Splash\Connectors\ShippingBo\Services\WarehouseSlotsManager;
+use Splash\Connectors\ShippingBo\Services\Product\WarehouseSlotsManager;
 
 /**
  * Order Forced Status Trait

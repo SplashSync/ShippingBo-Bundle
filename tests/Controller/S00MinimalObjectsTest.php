@@ -16,8 +16,8 @@
 namespace Splash\Connectors\ShippingBo\Test\Controller;
 
 use Exception;
+use Splash\Connectors\ShippingBo\Services\Product\WarehouseSlotsManager;
 use Splash\Connectors\ShippingBo\Services\ShippingBoConnector;
-use Splash\Connectors\ShippingBo\Services\WarehouseSlotsManager;
 use Splash\Tests\Tools\ObjectsCase;
 use Splash\Tests\Tools\Traits\ObjectsSetTestsTrait;
 
