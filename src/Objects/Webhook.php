@@ -56,9 +56,6 @@ class Webhook extends AbstractApiMetadataObject
         //====================================================================//
         // Only Visible on Sandbox
         $isSandbox = $this->connector->isSandbox();
-        if (!$isSandbox && !Splash::isDebugMode()) {
-            self::$disabled = true;
-        }
         //====================================================================//
         // Prepare Api Visitor
         $this->visitor->setModel(
@@ -75,5 +72,13 @@ class Webhook extends AbstractApiMetadataObject
                 "offsetKey" => $isSandbox ? null : "offset",
             )
         );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function isDisabled(): bool
+    {
+        return !Splash::isDebugMode();
     }
 }
