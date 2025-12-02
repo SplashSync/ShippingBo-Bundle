@@ -16,6 +16,7 @@
 namespace Splash\Connectors\ShippingBo\Objects\Product;
 
 use Exception;
+use Splash\Connectors\ShippingBo\Dictionary\ProductAdditionalFields;
 use Splash\Connectors\ShippingBo\Models\Api\Product;
 use Splash\Core\SplashCore as Splash;
 use Splash\OpenApi\Models\Objects\CRUDTrait as OpenApiCRUDTrait;
@@ -74,7 +75,19 @@ trait CRUDTrait
 
         //====================================================================//
         // Execute Core Action
-        return $this->coreUpdate($needed);
+        $objectIdentifier = $this->coreUpdate($needed);
+
+        //====================================================================//
+        // Update Additional Fields
+        if ($this->isToUpdate(ProductAdditionalFields::KEY)) {
+            $this->connector
+                ->getLocator()
+                ->getAdditionalFieldsManager()
+                ->updateFields($this->object)
+            ;
+        }
+
+        return $objectIdentifier;
     }
 
     /**
