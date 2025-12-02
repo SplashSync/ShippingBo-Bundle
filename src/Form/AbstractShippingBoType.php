@@ -16,8 +16,9 @@
 namespace Splash\Connectors\ShippingBo\Form;
 
 use Burgov\Bundle\KeyValueFormBundle\Form\Type\KeyValueType;
+use Splash\Connectors\ShippingBo\Dictionary\ProductAdditionalFields;
 use Splash\Connectors\ShippingBo\Dictionary\SupplierFilterModes;
-use Splash\Connectors\ShippingBo\Services\WarehouseSlotsManager;
+use Splash\Connectors\ShippingBo\Services\Product\WarehouseSlotsManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -354,6 +355,36 @@ abstract class AbstractShippingBoType extends AbstractType
                 'required' => false,
                 'multiple' => true,
                 'choices' => $choices,
+                'translation_domain' => "ShippingBoBundle",
+            ))
+        ;
+
+        return $this;
+    }
+
+    /**
+     * Add Product Additional Fields Names to FormBuilder
+     *
+     * @param FormBuilderInterface $builder
+     *
+     * @return $this
+     */
+    protected function addProductAdditionalField(FormBuilderInterface $builder): self
+    {
+        $builder
+            ->add(ProductAdditionalFields::KEY, KeyValueType::class, array(
+                'label' => ProductAdditionalFields::toTransKey("label"),
+                'help' => ProductAdditionalFields::toTransKey("desc"),
+                'required' => false,
+                'key_type' => TextType::class,
+                'key_options' => array(
+                    'label' => "Field Name",
+                ),
+                'value_type' => ChoiceType::class,
+                'value_options' => array(
+                    'label' => "Action",
+                    'choices' => ProductAdditionalFields::getChoices(),
+                ),
                 'translation_domain' => "ShippingBoBundle",
             ))
         ;
