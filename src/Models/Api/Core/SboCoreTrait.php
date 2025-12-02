@@ -45,7 +45,7 @@ trait SboCoreTrait
      *
      * @Assert\Type("DateTime")
      *
-     * @JMS\SerializedName("created_at")
+     * @JMS\SerializedName("updated_at")
      *
      * @JMS\Groups ({"Read"})
      *
