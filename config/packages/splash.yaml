@@ -39,6 +39,7 @@ splash:
                 timezone:           UTC
                 ShippingMethods:    { "DropShipping": "REJECTED", "Colissimo": "default" }
                 OrderOrigins:       { "AllowedWebsite": "pass", "RejectedWebsite": "REJECTED" }
+                ProductAdditionalFields:       { "tstVarchar": "varchar", "Plusieurs Môts": "varchar", "tstBool": "bool" }
                 isSandbox:          true
 
         ########################################################################
@@ -56,6 +57,7 @@ splash:
                 ApiUser:        '%env(resolve:SBO_STAGING_API_USER)%'
                 ApiKey:         '%env(resolve:SBO_STAGING_API_KEY)%'
                 timezone:       'Europe/Paris'
+                ProductAdditionalFields:       { "tstVarchar": "varchar", "Plusieurs Môts": "varchar", "tstBool": "bool" }
 
     test:
         VAT: 0
