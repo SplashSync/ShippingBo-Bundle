@@ -70,6 +70,7 @@ trait AdditionalFieldsTrait
 
         //====================================================================//
         // Walk on Additional Fields
+        $this->out[$fieldName] = null;
         foreach ($this->object->additionalFields ?? array() as $additionalField) {
             //====================================================================//
             // This is Searched Field
