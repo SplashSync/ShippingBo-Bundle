@@ -39,6 +39,11 @@ var:
         rejected:   "REJECTED - Must not be send."
 
     products:
+        additionalFields:
+            label:      "Products Additional Fields"
+            bool:       "Boolean"
+            varchar:    "String"
+
         supplierFilter:
             label:      "Filter Supplier's Products"
             desc:       "Disable Synchronization for Product with Supplier Codes not in this list."

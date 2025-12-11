@@ -382,7 +382,7 @@ abstract class AbstractShippingBoType extends AbstractType
                 ),
                 'value_type' => ChoiceType::class,
                 'value_options' => array(
-                    'label' => "Action",
+                    'label' => "Format",
                     'choices' => ProductAdditionalFields::getChoices(),
                 ),
                 'translation_domain' => "ShippingBoBundle",
