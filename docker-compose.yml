@@ -52,7 +52,7 @@ services:
     ################################################################################
     # Splash OpenApi Faker
     openapi:
-        image:              'splashsync/openapi-sandbox'
+        image:              'splashsync/openapi-sandbox:2.0'
         container_name:     sandbox.shipping-bo.local
         volumes:
 #             # Specify API Entities to Use
