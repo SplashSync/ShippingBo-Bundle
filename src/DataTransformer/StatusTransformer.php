@@ -28,7 +28,7 @@ class StatusTransformer
     const SPLASH = array(
         //====================================================================//
         // Real ReCommerce Statuses
-        "in_trouble" => Status::PROBLEM,                // In Error
+        "in_trouble" => Status::UNKNOWN,                // In Error
         "waiting_for_payment" => Status::PAYMENT_DUE,   // Draft | Waiting for Payment
         "waiting_for_stock" => Status::OUT_OF_STOCK,    // Waiting for Stock
 
@@ -175,6 +175,7 @@ class StatusTransformer
             "waiting_for_payment",  // Order waiting for Payment.
             "waiting_for_stock",    // Order waiting for Stocks.
             "to_be_prepared",       // Order is to be Prepared.
+            "dispatched",           // Order is dispatched but not yet prepared.
             "rejected",             // Order was Rejected.
         ), true);
     }
