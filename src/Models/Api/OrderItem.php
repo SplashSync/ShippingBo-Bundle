@@ -111,7 +111,7 @@ class OrderItem
      *
      * @SPL\Microdata({"http://schema.org/Product", "sku"})
      */
-    public string $product_ref;
+    public ?string $product_ref;
 
     /**
      * Product EAN 13.
