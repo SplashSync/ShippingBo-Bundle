@@ -83,7 +83,7 @@ functional:
 ################################################################
 # Build PHAR via Bridge Builder
 build:phar:
-    image:          registry.gitlab.com/badpixxel-projects/php-sdk:php-8.1
+    image:          registry.gitlab.com/badpixxel-projects/php-sdk:php-8.3
     stage:          Builds
     tags:
         - Dedicated
