@@ -17,6 +17,7 @@ namespace Splash\Connectors\ShippingBo\Actions;
 
 use Exception;
 use Splash\Bundle\Models\Local\ActionsTrait;
+use Splash\Client\Splash;
 use Splash\Connectors\ShippingBo\Services\ShippingBoConnector;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -49,14 +50,10 @@ class FetchWarehouseSlots extends AbstractController
         }
         //====================================================================//
         // Inform User
-        $this->addFlash(
-            $result ? "success" : "danger",
-            $translator->trans(
-                $result ? "admin.warehouse.msg" : "admin.warehouse.err",
-                array(),
-                "ShippingBoBundle"
-            )
-        );
+        $result
+            ? Splash::log()->err($translator->trans("admin.warehouse.err", array(), "ShippingBoBundle"))
+            : Splash::log()->msg($translator->trans("admin.warehouse.msg", array(), "ShippingBoBundle"))
+        ;
         //====================================================================//
         // Redirect Response
         /** @var string $referer */
