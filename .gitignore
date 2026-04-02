@@ -10,4 +10,4 @@
 /test-report.xml
 /tests/public/bundles/
 /.phpunit.result.cache
-/bridges/shippingbo
+/bridges/*.phar

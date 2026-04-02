@@ -80,3 +80,18 @@ functional:
         reports:
             junit: "*-report.xml"
 
+################################################################
+# Build PHAR via Bridge Builder
+build:phar:
+    image:          registry.gitlab.com/badpixxel-projects/php-sdk:php-8.1
+    stage:          Builds
+    tags:
+        - Dedicated
+    before_script:
+        - composer update
+    script:
+        - php -d phar.readonly=0 vendor/bin/bridge-builder
+    artifacts:
+        paths:
+            - bridges/
+        expire_in:  1 week

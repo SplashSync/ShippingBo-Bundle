@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "480fb9fbfd1712fa1a9ab1c74cba5adf",
+    "content-hash": "02d5c767c04dfe3b46571a15a51cd501",
     "packages": [
         {
             "name": "burgov/key-value-form-bundle",
@@ -617,12 +617,12 @@
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/SplashTools/Metadata.git",
-                "reference": "467156589916c863284f7745a81134ebd60b2258"
+                "reference": "20ef3121ec5597b97177e8f68542513a21db7218"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/SplashTools%2FMetadata/repository/archive.zip?sha=467156589916c863284f7745a81134ebd60b2258",
-                "reference": "467156589916c863284f7745a81134ebd60b2258",
+                "url": "https://gitlab.com/api/v4/projects/SplashTools%2FMetadata/repository/archive.zip?sha=20ef3121ec5597b97177e8f68542513a21db7218",
+                "reference": "20ef3121ec5597b97177e8f68542513a21db7218",
                 "shasum": ""
             },
             "require": {
@@ -661,7 +661,7 @@
             "support": {
                 "source": "https://gitlab.com/SplashTools/Metadata/-/tree/2.0"
             },
-            "time": "2025-08-02T18:43:07+00:00"
+            "time": "2026-04-02T19:04:39+00:00"
         },
         {
             "name": "splash/openapi",
@@ -723,12 +723,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/SplashSync/Php-Bundle.git",
-                "reference": "346acb5a4ecfbbd15000e76c76f5f0c616c6eb49"
+                "reference": "7675d1a94b3e9a284c57a8416d172d5364b8a208"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SplashSync/Php-Bundle/zipball/346acb5a4ecfbbd15000e76c76f5f0c616c6eb49",
-                "reference": "346acb5a4ecfbbd15000e76c76f5f0c616c6eb49",
+                "url": "https://api.github.com/repos/SplashSync/Php-Bundle/zipball/7675d1a94b3e9a284c57a8416d172d5364b8a208",
+                "reference": "7675d1a94b3e9a284c57a8416d172d5364b8a208",
                 "shasum": ""
             },
             "require": {
@@ -791,7 +791,7 @@
                 "issues": "https://github.com/SplashSync/Php-Bundle/issues",
                 "source": "https://github.com/SplashSync/Php-Bundle/tree/2.0"
             },
-            "time": "2025-05-19T10:06:18+00:00"
+            "time": "2026-04-02T21:06:54+00:00"
         },
         {
             "name": "splash/phpcore",
@@ -10734,6 +10734,70 @@
                 }
             ],
             "time": "2024-10-18T08:14:07+00:00"
+        },
+        {
+            "name": "splash/bridge-builder",
+            "version": "3.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/SplashTools/bridge-builder.git",
+                "reference": "6c50a9eb21f51338d0d20474f52613f37d5ae193"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/SplashTools%2Fbridge-builder/repository/archive.zip?sha=6c50a9eb21f51338d0d20474f52613f37d5ae193",
+                "reference": "6c50a9eb21f51338d0d20474f52613f37d5ae193",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1",
+                "splash/php-bundle": "^2.0|^3.0"
+            },
+            "require-dev": {
+                "badpixxel/php-sdk": "^3.0",
+                "symfony/config": "^5.4|^6.4|^7.0",
+                "symfony/console": "^5.4|^6.4|^7.0",
+                "symfony/dependency-injection": "^5.4|^6.4|^7.0",
+                "symfony/finder": "^5.4|^6.4|^7.0",
+                "symfony/flex": "^1.0|^2.0|^7.0",
+                "symfony/form": "^5.4|^6.4|^7.0",
+                "symfony/framework-bundle": "^5.4|^6.4|^7.0",
+                "symfony/http-kernel": "^5.4|^6.4|^7.0",
+                "symfony/monolog-bundle": "^2.0|^3.0",
+                "symfony/twig-bundle": "^5.4|^6.4|^7.0",
+                "symfony/yaml": "^5.4|^6.4|^7.0"
+            },
+            "default-branch": true,
+            "bin": [
+                "bin/bridge-builder"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Splash\\BridgeWorker\\": "stubs/bridge/",
+                    "Splash\\BridgeBuilder\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Splash Sync",
+                    "email": "contact@splashsync.com"
+                },
+                {
+                    "name": "Bernard Paquier",
+                    "email": "eshop.bpaquier@gmail.com"
+                }
+            ],
+            "description": "Splash Bridge Builder - Package Connectors as Isolated PHAR Workers",
+            "support": {
+                "issues": "https://gitlab.com/SplashTools/bridge-builder/-/issues",
+                "source": "https://gitlab.com/SplashTools/bridge-builder/-/tree/3.0"
+            },
+            "time": "2026-04-03T00:27:00+00:00"
         },
         {
             "name": "splash/console",
