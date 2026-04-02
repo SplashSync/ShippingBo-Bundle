@@ -20,7 +20,7 @@
 
     "autoload": {
         "psr-4": { 
-            "Splash\\Connectors\\ShippingBo\\":     "src/"
+            "Splash\\Connectors\\ShippingBo\\":            "src/"
         }
     },
     

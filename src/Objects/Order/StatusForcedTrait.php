@@ -109,7 +109,7 @@ trait StatusForcedTrait
             // Update Items Stock on Warehouse Slot
             $result = $whSlotsManager->updateSlotContentForProductRef(
                 $dfSlotId,
-                $item->product_ref,
+                (string) $item->product_ref,
                 (-1) * $item->quantity,
                 sprintf("Forced Delivery of order %s", $this->object->id)
             );
@@ -139,7 +139,7 @@ trait StatusForcedTrait
             }
             //====================================================================//
             // Item is in Default Stock
-            if (!array_key_exists($item->product_ref, $whSlotStocks)) {
+            if (!array_key_exists((string) $item->product_ref, $whSlotStocks)) {
                 return Splash::log()->err(sprintf(
                     "Product %s not found on default warehouse slot",
                     $item->product_ref
