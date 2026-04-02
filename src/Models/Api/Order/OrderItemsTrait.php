@@ -136,7 +136,9 @@ trait OrderItemsTrait
         //====================================================================//
         // Walk on All Order Items
         foreach ($this->items as $item) {
-            $existing[] = $item->getId();
+            if ($item->isValid()) {
+                $existing[] = $item->getId();
+            }
         }
         //====================================================================//
         // Walk on All Original Order Items
