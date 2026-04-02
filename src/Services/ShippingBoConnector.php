@@ -97,7 +97,19 @@ class ShippingBoConnector extends AbstractConnector implements TrackingInterface
         LoggerInterface $logger
     ) {
         parent::__construct($eventDispatcher, $logger);
+
         $this->metaDir = $metaDir."/metadata/shippingbo";
+        //====================================================================//
+        // Safety Check => Ensure Metadata Directory is Writable
+        // This is Required for Splash Bridge Connectors
+        if (!is_dir($this->metaDir) || !is_writable($this->metaDir)) {
+            $this->metaDir = sprintf(
+                "%s/%s/%s",
+                sys_get_temp_dir(),
+                "splash/metadata-shippingbo",
+                md5(__FILE__)
+            );
+        }
     }
 
     /**
