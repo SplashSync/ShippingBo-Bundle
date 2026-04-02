@@ -1,0 +1,45 @@
+parameters:
+    env(SBO_STAGING_API_USER):  'none'
+    env(SBO_STAGING_API_KEY):   'none'
+
+splash:
+
+################################################################################    
+# Configure Splash Bundle Parameters Cache    
+# Cache is Enabled by Default to Store Custom Connectors Configuration
+# If disabled, configuration must be store in Static, on connections section
+################################################################################    
+    cache:
+        enabled:    true
+        lifetime:   3600
+
+    # Allow Notifications for Generic Users   
+    notify: ["ROLE_USER"]
+    
+################################################################################    
+# List of Available Connector Connections
+################################################################################    
+
+    connections:
+        
+        ########################################################################
+        # ShippingBo Bridge
+        bridge:
+            id:                 ThisIsBridgeWsId
+            key:                ThisIsNotASecretKeyForBridge
+            name:               "[2.0] SBO Bridge Staging"
+            connector:          2.0@shippingbo
+            ########################################################################
+            # FAKE CREDENTIALS : ASK YOURS TO YOUR MAIN SHIPPING BO CONTACT
+            ########################################################################
+            config:
+                WsHost:         https://app.shippingbo.com
+                ApiUser:        '%env(resolve:SBO_STAGING_API_USER)%'
+                ApiKey:         '%env(resolve:SBO_STAGING_API_KEY)%'
+                timezone:       'Europe/Paris'
+                ProductAdditionalFields:       { "tstVarchar": "varchar", "Plusieurs Môts": "varchar", "tstBool": "bool" }
+
+    test:
+        VAT: 0
+        DoublesPrecision:   1
+        PricesPrecision:    2

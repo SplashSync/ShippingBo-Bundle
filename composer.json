@@ -40,6 +40,7 @@
     "require-dev": {
         "badpixxel/php-sdk":                            "^2.0",
         "splash/toolkit":                               "2.5.x-dev",
+        "splash/bridge-builder":                        "^3.0",
 
         "fzaninotto/faker":                             "^1.8"
     },
@@ -59,7 +60,7 @@
         "auto-scripts": [
             "php bin/console cache:clear",
             "php bin/console doctrine:schema:update --force --complete --no-interaction --no-debug",
-            "find var/cache/dev/*.xml | while read -r i; do cp \"$i\" var/cache/dev/testContainer.xml; done"
+            "find var/cache/dev/*.xml -not -name \"testContainer.xml\" | while read -r i; do cp \"$i\" var/cache/dev/testContainer.xml; done"
         ],
         "post-install-cmd": [
             "@auto-scripts",
@@ -67,9 +68,43 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "post-build-cmd": [
+            "php bin/console cache:clear --env=prod --no-debug"
         ]
     },
+
     "extra": {
-        "public-dir": "tests/public"
+        "public-dir": "tests/public",
+        "splash-bridge": {
+            "name":             "shippingbo",
+            "version":          "2.0",
+            "output":           "bridges/shippingbo-2.0.phar",
+            "connector":        "Splash\\Connectors\\ShippingBo\\Services\\ShippingBoConnector",
+            "sources": {
+                "connector/ShippingBo":                 "src",
+                "config":                               "stubs/config/"
+            },
+            "require": {
+                "ext-json":                             "*",
+                "splash/php-bundle":                    "2.0.x-dev",
+                "splash/openapi":                       "2.5.x-dev",
+                "burgov/key-value-form-bundle":         "@stable",
+                "symfony/console":                      "^5.4",
+                "symfony/http-kernel":                  "^5.4",
+                "symfony/framework-bundle":             "^5.4",
+                "symfony/twig-bundle":                  "^5.4",
+                "symfony/translation":                  "^5.4",
+                "symfony/routing":                      "^5.4",
+                "symfony/form":                         "^5.4",
+                "symfony/yaml":                         "^5.4",
+                "symfony/runtime":                      "^5.4",
+                "symfony/validator":                    "^5.4",
+                "symfony/monolog-bundle":               "*",
+                "monolog/monolog":                      "^2.0|^3.0",
+                "doctrine/annotations":                 "^2.0"
+            }
+        }
+
     }
 }

@@ -50,6 +50,21 @@ services:
             splashsync:     { aliases: [ toolkit.shipping-bo.local ] }
 
     ################################################################################
+    # Splash Toolkit 3.0 Container
+    toolkit-3.0:
+        image:              'splashsync/toolkit:3.0'
+        container_name:     toolkit-3.0.shipping-bo.local
+        volumes:
+            # Specify Local Configuration File
+            - './docker/toolkit/3.0/splash.yaml:/app/config/packages/splash.yaml:ro'
+            # Inject Compiled Connector
+            - './bridges:/app/bridges/:ro'
+        env_file:
+            - .env
+        networks:
+            shippingbo:     { ipv4_address: 172.108.0.103, aliases: [ toolkit-3.0.shipping-bo.local ] }
+
+    ################################################################################
     # Splash OpenApi Faker
     openapi:
         image:              'splashsync/openapi-sandbox:2.0'

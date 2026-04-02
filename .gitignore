@@ -5,7 +5,9 @@
 /.php-cs-fixer.cache
 /.idea/
 /tests/config/parameters.yml
+/dist/
 /var/
 /test-report.xml
 /tests/public/bundles/
 /.phpunit.result.cache
+/bridges/shippingbo
