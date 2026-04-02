@@ -187,4 +187,22 @@ class Order extends AbstractStandaloneObject
 
         return $this->visitor;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function objectsList(?string $filter = null, array $params = array()): array
+    {
+        $params = array_merge_recursive(
+            array(
+                "extraArgs" => array(
+                    'sort[id]' => 'desc',
+                )
+            ),
+            $params,
+        );
+        $results = $this->getVisitor()->list($filter, $params)->getResults();
+
+        return is_array($results) ? $results : array();
+    }
 }
