@@ -11,7 +11,7 @@
         {% set wsUrl = url("splash_connector_action", {"connectorName": "shippingbo", "webserviceId": connector.webserviceId}) %}
     <li>
         <h4 class="font-lg text-info">
-            <span class="badge badge-info label label-info text-white">
+            <span class="badge badge-info label label-info bg-info text-white">
                 <i class="fa fa-external-link fas fa-external-link-alt"></i>
                 &nbsp;Url
             </span>
@@ -36,7 +36,7 @@
     
     <li>
         <h4 class="font-lg {% if result %}text-success{% else %}text-danger{% endif %}">
-            <span class="badge {% if result %}badge-success label-success {% else %}badge-danger label-danger{% endif %}">
+            <span class="badge {% if result %}badge-success label-success bg-success {% else %}badge-danger label-danger bg-danger{% endif %}">
                 <i class="fa {% if result %}fa-check{% else %}fa-times{% endif %}"></i>
                 &nbsp;{% if result %}Ok{% else %}Ko{% endif %}
             </span>

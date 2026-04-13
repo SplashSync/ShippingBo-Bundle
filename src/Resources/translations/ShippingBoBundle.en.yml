@@ -70,9 +70,9 @@ var:
 ## Node Profile
 profile:
     connection:
-        title: API Connection
+        title:  API Connection
     card:
-        title:  ShippingBo Open API V1
+        title:  ShippingBo API V1
         label:  Connect your Splash account with ShippingBo API
 
 ### Node Api Actions

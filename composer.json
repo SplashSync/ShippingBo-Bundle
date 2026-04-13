@@ -70,7 +70,8 @@
             "@auto-scripts"
         ],
         "post-build-cmd": [
-            "php bin/console cache:clear --env=prod --no-debug"
+            "php bin/console cache:clear --env=prod --no-debug",
+            "php bin/console assets:install"
         ]
     },
 
@@ -102,6 +103,7 @@
                 "symfony/validator":                    "^5.4",
                 "symfony/monolog-bundle":               "*",
                 "monolog/monolog":                      "^2.0|^3.0",
+                "doctrine/collections":                 "^2.0",
                 "doctrine/annotations":                 "^2.0"
             }
         }

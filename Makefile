@@ -25,4 +25,4 @@ test: 	## Execute Functional Test
 
 .PHONY: bridge
 bridge: 	## Execute Functional Test
-	php vendor/bin/bridge-builder
+	php vendor/bin/bridge-builder --native --dev
