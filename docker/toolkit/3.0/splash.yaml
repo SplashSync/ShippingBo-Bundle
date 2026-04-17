@@ -28,7 +28,7 @@ splash:
             id:                 ThisIsBridgeWsId
             key:                ThisIsNotASecretKeyForBridge
             name:               "[2.0] SBO Bridge Staging"
-            connector:          2.0@shippingbo
+            connector:          shippingbo
             ########################################################################
             # FAKE CREDENTIALS : ASK YOURS TO YOUR MAIN SHIPPING BO CONTACT
             ########################################################################

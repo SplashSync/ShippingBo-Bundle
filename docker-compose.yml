@@ -58,7 +58,7 @@ services:
             # Specify Local Configuration File
             - './docker/toolkit/3.0/splash.yaml:/app/config/packages/splash.yaml:ro'
             # Inject Compiled Connector
-            - './bridges:/app/bridges/:ro'
+            - './dist:/app/bridges/'
         env_file:
             - .env
         networks:

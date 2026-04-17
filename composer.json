@@ -80,6 +80,7 @@
         "splash-bridge": {
             "name":             "shippingbo",
             "version":          "2.0",
+            "php-version":      "8.3.30",
             "output":           "bridges/shippingbo-2.0.phar",
             "connector":        "Splash\\Connectors\\ShippingBo\\Services\\ShippingBoConnector",
             "sources": {
