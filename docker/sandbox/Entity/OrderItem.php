@@ -18,7 +18,9 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata as Meta;
 use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -137,6 +139,18 @@ class OrderItem implements SboObjectInterface
     //====================================================================//
     // JSON SERIALIZER
     //====================================================================//
+
+    #[ORM\PreUpdate]
+    public function rejectSourceRefUpdate(PreUpdateEventArgs $event): void
+    {
+        if ($event->hasChangedField('sourceRef')) {
+            throw new BadRequestHttpException(sprintf(
+                'source_ref is a protected field. Updating its value from: "%s" to "%s", is therefore not allowed.',
+                (string) $event->getOldValue('sourceRef'),
+                (string) $event->getNewValue('sourceRef')
+            ));
+        }
+    }
 
     /**
      * {@inheritDoc}
