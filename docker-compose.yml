@@ -56,7 +56,7 @@ services:
         container_name:     toolkit-3.0.shipping-bo.local
         volumes:
             # Specify Local Configuration File
-            - './docker/toolkit/3.0/splash.yaml:/app/config/packages/splash.yaml:ro'
+            - './config/packages/splash.yaml:/app/config/packages/splash.yaml:ro'
             # Inject Compiled Connector
             - './dist:/app/bridges/'
         env_file:

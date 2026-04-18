@@ -21,10 +21,30 @@ splash:
 ################################################################################    
 
     connections:
-        
+
         ########################################################################
-        # ShippingBo Bridge
-        bridge:
+        # ShippingBo Bridge SandBox
+        sandbox:
+            id:                 ThisIsSandBoxWsId
+            key:                ThisIsNotASecretKeyForSandBox
+            name:               "[2.0] SBO Bridge Sandbox"
+            connector:          shippingbo
+            ########################################################################
+            # FAKE CREDENTIALS : ASK YOURS TO YOUR MAIN SHIPPING BO CONTACT
+            ########################################################################
+            config:
+                WsHost:             http://sandbox.shipping-bo.local
+                ApiUser:            ThisIsApiUser
+                ApiKey:             ThisIsSecretApiKey
+                timezone:           UTC
+                ShippingMethods:    { "DropShipping": "REJECTED", "Colissimo": "default" }
+                OrderOrigins:       { "AllowedWebsite": "pass", "RejectedWebsite": "REJECTED" }
+                ProductAdditionalFields:       { "tstVarchar": "varchar", "Plusieurs Môts": "varchar", "tstBool": "bool" }
+                isSandbox:          true
+
+        ########################################################################
+        # ShippingBo Bridge Staging
+        staging:
             id:                 ThisIsBridgeWsId
             key:                ThisIsNotASecretKeyForBridge
             name:               "[2.0] SBO Bridge Staging"
