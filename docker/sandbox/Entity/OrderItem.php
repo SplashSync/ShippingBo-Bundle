@@ -152,6 +152,26 @@ class OrderItem implements SboObjectInterface
         }
     }
 
+    #[ORM\PrePersist]
+    public function rejectDuplicateSourceRef(): void
+    {
+        if (empty($this->sourceRef) || !isset($this->order)) {
+            return;
+        }
+        foreach ($this->order->orderItems as $sibling) {
+            if ($sibling === $this) {
+                continue;
+            }
+            if ($sibling->sourceRef === $this->sourceRef) {
+                throw new BadRequestHttpException(sprintf(
+                    'source_ref "%s" is already used by another item on order %d.',
+                    $this->sourceRef,
+                    $this->order->id ?? 0
+                ));
+            }
+        }
+    }
+
     /**
      * {@inheritDoc}
      */
