@@ -82,6 +82,8 @@ functional:
 
 ################################################################
 # Build Bridge Connector via Bridge Builder
+# --publish uploads .splx/.phar to the GitLab Generic Package Registry
+# (skipped on scheduled pipelines, non-protected branches, or missing CI env)
 build:bridge:
     image:          registry.gitlab.com/badpixxel-projects/php-sdk:php-8.3
     stage:          Builds
@@ -90,23 +92,10 @@ build:bridge:
     before_script:
         - composer update
     script:
-        ################################################################
-        # Build native + 2.0 versions into dist/
-        - php -d phar.readonly=0 vendor/bin/bridge-builder --native
-        - php -d phar.readonly=0 vendor/bin/bridge-builder
-        ################################################################
-        # Publish all .splx to GitLab Generic Package Registry
-        # Version = git tag if present, else branch name
-        - |
-            VERSION="${CI_COMMIT_TAG:-$CI_COMMIT_REF_NAME}"
-            for SPLX in dist/*.splx; do
-              FILE=$(basename "$SPLX")
-              echo "▶ Uploading $FILE (version=$VERSION)"
-              curl --fail \
-                   --header "JOB-TOKEN: $CI_JOB_TOKEN" \
-                   --upload-file "$SPLX" \
-                   "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/connector/${VERSION}/${FILE}"
-            done
+        # Build native version + publish
+        - php -d phar.readonly=0 vendor/bin/bridge-builder --native --publish
+        # Build versioned (2.0) + publish
+        - php -d phar.readonly=0 vendor/bin/bridge-builder --publish
     artifacts:
         paths:
             - dist/
