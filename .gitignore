@@ -11,3 +11,4 @@
 /tests/public/bundles/
 /.phpunit.result.cache
 /bridges/*.phar
+/bridges/*.splx

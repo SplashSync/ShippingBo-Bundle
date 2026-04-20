@@ -81,8 +81,8 @@ functional:
             junit: "*-report.xml"
 
 ################################################################
-# Build PHAR via Bridge Builder
-build:phar:
+# Build Bridge Connector via Bridge Builder
+build:bridge:
     image:          registry.gitlab.com/badpixxel-projects/php-sdk:php-8.3
     stage:          Builds
     tags:
@@ -90,8 +90,9 @@ build:phar:
     before_script:
         - composer update
     script:
+        - php -d phar.readonly=0 vendor/bin/bridge-builder --native
         - php -d phar.readonly=0 vendor/bin/bridge-builder
     artifacts:
         paths:
-            - bridges/
+            - dist/
         expire_in:  1 week
