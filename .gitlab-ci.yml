@@ -92,9 +92,9 @@ build:bridge:
     before_script:
         - composer update
     script:
-        # Build native version + publish
-        - php -d phar.readonly=0 vendor/bin/bridge-builder --native --publish
-        # Build versioned (2.0) + publish
+        # Build native variant (produces shippingbo.splx)
+        - php -d phar.readonly=0 vendor/bin/bridge-builder --native
+        # Build versioned variant (produces shippingbo-2.0.splx) and publish all dist/*.splx at once
         - php -d phar.readonly=0 vendor/bin/bridge-builder --publish
     artifacts:
         paths:
