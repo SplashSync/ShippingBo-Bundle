@@ -15,7 +15,10 @@
 
 namespace Splash\Connectors\ShippingBo\Services;
 
+use Exception;
+use Splash\Client\Splash;
 use Splash\Connectors\ShippingBo\Models\Connector\ShippingBoConnectorAwareTrait;
+use Splash\Connectors\ShippingBo\Objects\Webhook;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
@@ -133,7 +136,7 @@ class WebhooksManager
             //====================================================================//
             // Update WebHook Configuration
             Assert::stringNotEmpty($webHook["id"]);
-            $this->connector->setObject("Webhook", $webHook["id"], $config);
+            $this->getWebHooksMapper()->set($webHook["id"], $config);
         }
         //====================================================================//
         // Splash WebHooks was Found
@@ -143,7 +146,7 @@ class WebhooksManager
 
         //====================================================================//
         // Add Splash WebHooks
-        return (false !== $this->connector->setObject("Webhook", null, $config));
+        return (false !== $this->getWebHooksMapper()->set(null, $config));
     }
 
     /**
@@ -158,7 +161,7 @@ class WebhooksManager
         do {
             //====================================================================//
             // Fetch WebHooks List
-            $rawWebHooks = $this->connector->getObjectList("Webhook", null, array(
+            $rawWebHooks = $this->getWebHooksMapper()->objectsList(null, array(
                 "offset" => $offset,
                 "max" => 25
             ));
@@ -209,6 +212,18 @@ class WebhooksManager
     }
 
     /**
+     * Generate a Local WebHooks Mapper
+     *
+     * In Production WebHooks are DisaBled
+     *
+     * @throws Exception
+     */
+    private function getWebHooksMapper(): Webhook
+    {
+        return new Webhook($this->connector);
+    }
+
+    /**
      * Get HostName for Webhooks
      */
     private function getHostname(): string
@@ -227,7 +242,7 @@ class WebhooksManager
         //====================================================================//
         // Detect Server Aliases
         foreach ($hostAliases as $source => $target) {
-            if (str_contains($source, $hostName)) {
+            if (str_contains($hostName, $source)) {
                 $hostName = $target;
             }
         }
