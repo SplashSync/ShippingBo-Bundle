@@ -20,8 +20,36 @@ namespace Splash\Connectors\ShippingBo\DataTransformer;
  */
 class PriceTransformer
 {
+    /**
+     * Maximum value accepted by Shipping Bo for Prices in Cents (Signed 4 Bytes Integer)
+     *
+     * @var int
+     */
+    const MAX_CENTS = 2147483647;
+
+    /**
+     * Minimum value accepted by Shipping Bo for Prices in Cents (Signed 4 Bytes Integer)
+     *
+     * @var int
+     */
+    const MIN_CENTS = -self::MAX_CENTS - 1;
+
+    /**
+     * Convert a Float Price to Cents, clamped to a Signed 4 Bytes Integer
+     */
     public static function toCents(float $price): int
     {
-        return (int) (round(100 * $price));
+        $cents = round(100 * $price);
+
+        //====================================================================//
+        // Ensure Value Fits in a Signed 4 Bytes Integer
+        if ($cents >= self::MAX_CENTS) {
+            return self::MAX_CENTS;
+        }
+        if ($cents <= self::MIN_CENTS) {
+            return self::MIN_CENTS;
+        }
+
+        return (int) $cents;
     }
 }
