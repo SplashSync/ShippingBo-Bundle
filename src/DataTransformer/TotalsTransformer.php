@@ -16,6 +16,7 @@
 namespace Splash\Connectors\ShippingBo\DataTransformer;
 
 use ArrayObject;
+use Splash\Connectors\ShippingBo\DataTransformer\PriceTransformer as PT;
 use Splash\Models\Objects\PricesTrait;
 
 /**
@@ -59,9 +60,9 @@ class TotalsTransformer
         }
 
         return array(
-            "total_price_cents" => (int) (100 * self::prices()->taxIncluded($price)),
-            "total_without_tax_cents" => (int) (100 * self::prices()->taxExcluded($price)),
-            "total_tax_cents" => (int) (100 * self::prices()->taxAmount($price)),
+            "total_price_cents" => PT::toCents((float) self::prices()->taxIncluded($price)),
+            "total_without_tax_cents" => PT::toCents((float) self::prices()->taxExcluded($price)),
+            "total_tax_cents" => PT::toCents((float) self::prices()->taxAmount($price)),
             "total_price_currency" => $price['code'] ?? "EUR",
         );
     }
@@ -81,9 +82,9 @@ class TotalsTransformer
         }
 
         return array(
-            "total_shipping_tax_included_cents" => (int) (100 * self::prices()->taxIncluded($price)),
-            "total_shipping_cents" => (int) (100 * self::prices()->taxExcluded($price)),
-            "total_shipping_tax_cents" => (int) (100 * self::prices()->taxAmount($price)),
+            "total_shipping_tax_included_cents" => PT::toCents((float) self::prices()->taxIncluded($price)),
+            "total_shipping_cents" => PT::toCents((float) self::prices()->taxExcluded($price)),
+            "total_shipping_tax_cents" => PT::toCents((float) self::prices()->taxAmount($price)),
             "total_shipping_tax_included_currency" => $price['code'] ?? "EUR",
         );
     }
@@ -103,8 +104,8 @@ class TotalsTransformer
         }
 
         return array(
-            "total_discount_tax_included_cents" => (int) (100 * self::prices()->taxIncluded($price)),
-            "total_discount_cents" => (int) (100 * self::prices()->taxExcluded($price)),
+            "total_discount_tax_included_cents" => PT::toCents((float) self::prices()->taxIncluded($price)),
+            "total_discount_cents" => PT::toCents((float) self::prices()->taxExcluded($price)),
             "total_discount_tax_included_currency" => $price['code'] ?? "EUR",
         );
     }
@@ -165,9 +166,9 @@ class TotalsTransformer
     private static function toItemPrice(array $price, int $quantity): array
     {
         return array(
-            "price_tax_included_cents" => (int) (100 * $quantity * self::prices()->taxIncluded($price)),
-            "price_cents" => (int) (100 * $quantity * self::prices()->taxExcluded($price)),
-            "tax_cents" => (int) (100 * $quantity * self::prices()->taxAmount($price)),
+            "price_tax_included_cents" => PT::toCents((float) ($quantity * self::prices()->taxIncluded($price))),
+            "price_cents" => PT::toCents((float) ($quantity * self::prices()->taxExcluded($price))),
+            "tax_cents" => PT::toCents((float) ($quantity * self::prices()->taxAmount($price))),
             "price_tax_included_currency" => $price['code'] ?? "EUR",
             "tax_currency" => $price['code'] ?? "EUR",
         );
