@@ -45,7 +45,7 @@ trait ConfigurationTrait
             'title' => 'profile.card.title',                        // Public short name
             'label' => 'profile.card.label',                        // Public long name
             'domain' => 'ShippingBoBundle',                         // Translation domain for names
-            'ico' => '/bundles/shippingbo/img/ShippingBo-Icon.jpg', // Public Icon path
+            'ico' => '/bundles/shippingbo/img/ShippingBo-Icon.png', // Public Icon path
             'www' => 'https://shippingbo.com',                      // Website Url
         );
     }
