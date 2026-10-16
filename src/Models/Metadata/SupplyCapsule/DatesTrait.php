@@ -23,7 +23,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 trait DatesTrait
 {
     /**
-     * The Expected Delivery Date.
+     * The Expected Arrival Date of the goods.
+     *
+     * Exposed as a Splash date, as the standard ArrivalDate template: the
+     * time part sent by ShippingBo is dropped on read and set to midnight
+     * on write.
      */
     #[
         Assert\Type("DateTime"),
@@ -32,8 +36,9 @@ trait DatesTrait
         JMS\Type("DateTime<'Y-m-d\\TH:i:s.v\\Z','',['Y-m-d\\TH:i:s.v\\Z', 'Y-m-d H:i:s']>"),
         SPL\Microdata("https://schema.org/ParcelDelivery", "expectedArrivalFrom"),
         SPL\Field(
+            type: SPL_T_DATE,
             name: "Expected At",
-            desc: "Expected Delivery Date.",
+            desc: "Expected arrival date of the goods.",
         )
     ]
     public ?DateTime $expectedDeliveryDate = null;
