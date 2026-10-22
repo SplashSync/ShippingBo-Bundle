@@ -138,6 +138,7 @@ class StatusTransformer
             "waiting_for_payment",  // Order waiting for Payment.
             "waiting_for_stock",    // Order waiting for Stocks.
             "to_be_prepared",       // Order is to be Prepared.
+            "dispatched",           // Order is dispatched but not yet prepared.
             "rejected",             // Order was Rejected.
             "canceled",             // Cancelled.
         ), true);
